@@ -1,0 +1,99 @@
+SCENE RTV1
+	OBJECTS		10
+	LIGHTS		2
+	MATERIALS	10
+
+	CAMERA
+		LOC	0 0 -10
+		DIR	0 0 1
+		UP	0 1 0
+
+	LIGHT
+		LOC			5 5 1
+		COLOUR		FFFFFF
+		INTENSITY	1.0
+
+	LIGHT
+		LOC			-3 5 -3
+		COLOUR		FFFFFF
+		INTENSITY	1.0
+
+	MATERIAL
+		NAME		red
+		COLOUR		FF0000
+		DIFFUSE		1.0
+		SPECULAR	0
+
+	MATERIAL
+		NAME		green
+		COLOUR		00FF00
+		DIFFUSE		1.0
+		SPECULAR	0
+
+	MATERIAL
+		NAME		blue
+		COLOUR		0000FF
+		DIFFUSE		1.0
+		SPECULAR	0
+
+	MATERIAL
+		NAME		orange
+		COLOUR		FF5000
+		DIFFUSE		1.0
+		SPECULAR	0
+
+	MATERIAL
+		NAME		cyan
+		COLOUR		00FFFF
+		DIFFUSE		1.0
+		SPECULAR	0
+
+	MATERIAL
+		NAME		yellow
+		COLOUR		FFFF00
+		DIFFUSE		1.0
+		SPECULAR	0
+
+	OBJECT
+		TYPE		sphere
+		LOC			0 0 9
+		RADIUS		1
+		MATERIAL	red
+
+	OBJECT
+		TYPE		sphere
+		LOC			1 1 11
+		RADIUS		2
+		MATERIAL	green
+
+	OBJECT
+		TYPE		sphere
+		LOC			-2 1 7
+		RADIUS		1
+		MATERIAL	blue
+
+	OBJECT
+		TYPE		plane
+		LOC			0 -2 0
+		NORMAL		0 1 0
+		MATERIAL	orange
+
+	OBJECT
+		TYPE		plane
+		LOC			0 0 15
+		NORMAL		0 0 -1
+		MATERIAL	orange
+
+	OBJECT
+		TYPE		cylinder
+		LOC			0 0 13
+		DIR			0 1 0
+		RADIUS		1
+		MATERIAL	yellow
+
+	OBJECT
+		TYPE		cone
+		LOC			-5 -1 5
+		DIR			-1 1 0
+		ANGLE		22.5
+		MATERIAL	cyan
