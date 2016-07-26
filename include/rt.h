@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_split_strings.c                               :+:      :+:    :+:   */
+/*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
+/*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/09 09:58:17 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/16 17:00:34 by adippena         ###   ########.fr       */
+/*   Created: 2016/07/26 14:47:44 by adippena          #+#    #+#             */
+/*   Updated: 2016/07/26 14:48:02 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#ifndef RTV1_H
+# define RTV1_H
 
-void		free_split_strings(t_split_string *split)
-{
-	size_t	i;
+# include "libft.h"
+# include "SDL.h"
+# include <errno.h>
+# include <float.h>
 
-	i = 0;
-	while (i < split->words)
-	{
-		ft_strdel(&split->strings[i]);
-		++i;
-	}
-	if (split->strings)
-		free(split->strings);
-	split->words = 0;
-}
+# include "defines.h"
+# include "structs.h"
+# include "prototypes.h"
+
+#endif

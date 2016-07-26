@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1_defines.h                                     :+:      :+:    :+:   */
+/*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
+/*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/08 21:30:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/16 20:50:35 by adippena         ###   ########.fr       */
+/*   Created: 2016/07/26 14:48:13 by adippena          #+#    #+#             */
+/*   Updated: 2016/07/26 14:48:53 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RTV1_DEFINES_H
-# define RTV1_DEFINES_H
+#ifndef DEFINES_H
+# define DEFINES_H
 
 /*
 ** WINDOW DEFINES

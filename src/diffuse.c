@@ -6,16 +6,11 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/13 13:55:24 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/17 14:10:15 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/26 15:16:14 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "diffuse.h"
-
-static t_vector	vector_project(t_vector a, t_vector b)
-{
-	return (vector_mult(b, (vector_dot(a, b) / vector_dot(b, b))));
-}
 
 static t_vector	get_normal(t_env *e, t_vector ray)
 {
@@ -39,11 +34,6 @@ static t_vector	get_normal(t_env *e, t_vector ray)
 		normal = (t_vector){0.0, 0.0, 0.0};
 	normal = vector_unit(normal);
 	return (normal);
-}
-
-t_vector		to_vector(t_colour colour)
-{
-	return ((t_vector){colour.r, colour.g, colour.b});
 }
 
 int				diffuse_colour(t_env *e, t_diffuse *d)

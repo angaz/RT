@@ -6,11 +6,11 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:26:54 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/17 12:27:15 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/26 15:16:31 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 double		vector_dot(t_vector v1, t_vector v2)
 {
@@ -25,4 +25,18 @@ double		vector_normalize(t_vector v)
 t_vector	vector_unit(t_vector v)
 {
 	return (vector_div(v, vector_normalize(v)));
+}
+
+t_vector	colour_to_vector(t_colour colour)
+{
+	return ((t_vector){colour.r, colour.g, colour.b});
+}
+
+/*
+** Returns a vector parallel to B, but with a length based off A and the angle
+** between A and B. Used for the diffuse shading of cones and cylinders
+*/
+t_vector	vector_project(t_vector a, t_vector b)
+{
+	return (vector_mult(b, (vector_dot(a, b) / vector_dot(b, b))));
 }

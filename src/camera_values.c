@@ -6,11 +6,11 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 12:24:39 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/17 12:41:11 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/26 14:52:51 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 static void	set_camera_values(t_env *e, char *pt1, char *pt2)
 {
@@ -23,7 +23,7 @@ static void	set_camera_values(t_env *e, char *pt1, char *pt2)
 		e->camera.dir = get_vector(e, values);
 	else if (!ft_strcmp(pt1, "UP"))
 		e->camera.up = get_vector(e, values);
-	free_split_strings(&values);
+	ft_free_split(&values);
 }
 
 void		get_camera_attributes(t_env *e, int fd)
@@ -44,6 +44,6 @@ void		get_camera_attributes(t_env *e, int fd)
 		if (attr.words < 2)
 			err(FILE_FORMAT_ERROR, "get_camera_attributes", e);
 		set_camera_values(e, &attr.strings[0][0], &attr.strings[1][0]);
-		free_split_strings(&attr);
+		ft_free_split(&attr);
 	}
 }
