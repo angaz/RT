@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 11:42:21 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/14 22:18:48 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/26 14:45:25 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void			ft_memswap(void *a, void *b);
 int				ft_atoi_hex(const char *nptr);
 t_split_string	ft_nstrsplit(const char *s, char c);
 double			ft_atod(const char *nptr);
+void			ft_free_split(t_split_string *split);
 
 /*
 ** FT_(S)PRINTF

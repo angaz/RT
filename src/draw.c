@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/17 13:27:20 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/26 16:07:44 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,12 @@ static void		setup_camera_plane(t_env *e, t_camera_ray *c)
 	c->h = (double)WIN_Y / (35 * 4.0);
 	c->w = c->h * (double)WIN_X / (double)WIN_Y;
 	c->d = 2;
-	c->cam = e->camera;
-	c->cam.dir = (t_vector){c->cam.dir.x, c->cam.dir.z, c->cam.dir.y};
-	c->cam.up = (t_vector){c->cam.up.x, c->cam.up.z, c->cam.up.y};
-	c->n = vector_unit(vector_sub(e->camera.loc, vector_unit(e->camera.dir)));
+	c->n = vector_unit(vector_sub(e->camera.loc, e->camera.dir));
 	c->u = vector_unit(vector_cross(e->camera.up, c->n));
 	c->v = vector_cross(c->n, c->u);
 	c->c = vector_sub(e->camera.loc, vector_mult(c->n, c->d));
 	c->l = vector_sub(c->c, vector_mult(c->u, c->w / 2.0));
-	c->l = vector_add(c->l, vector_mult(c->v, c->h / 2.0));
+	c->l = vector_sub(c->l, vector_mult(c->v, c->h / 2.0));
 }
 
 static void		get_ray_dir(t_env *e, t_camera_ray cr, size_t x, size_t y)
@@ -33,9 +30,7 @@ static void		get_ray_dir(t_env *e, t_camera_ray cr, size_t x, size_t y)
 	t_vector	dir;
 
 	dir = vector_add(cr.l, vector_mult(cr.u, (double)x * cr.w / (double)WIN_X));
-	dir = vector_sub(dir, vector_mult(cr.v, (double)y * cr.h / (double)WIN_Y));
-	dir = (t_vector){-dir.x, dir.y, -dir.z};
-	dir = vector_unit(dir);
+	dir = vector_add(dir, vector_mult(cr.v, (double)y * cr.h / (double)WIN_Y));
 	e->ray.loc = e->camera.loc;
 	e->ray.dir = dir;
 }

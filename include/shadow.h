@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect_cylinder.h                               :+:      :+:    :+:   */
+/*   shadow.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/17 12:28:51 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 14:50:55 by adippena         ###   ########.fr       */
+/*   Created: 2016/07/26 15:06:50 by adippena          #+#    #+#             */
+/*   Updated: 2016/07/26 15:08:09 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERSECT_CYLINDER_H
-# define INTERSECT_CYLINDER_H
+#ifndef SHADOW_H
+# define SHADOW_H
 
-# include "rt.h"
-
-typedef struct	s_int_cylinder
+typedef struct	s_shadow
 {
-	double		a;
-	double		b;
-	double		c;
-	double		d;
-	t_vector	dist;
-	t_vector	a_v;
-	t_vector	c_v;
-}				t_int_cylinder;
+	t_ray		ray;
+	double		t;
+	double		delta;
+	double		distance;
+	size_t		object;
+}				t_shadow;
 
 #endif
