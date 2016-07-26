@@ -6,11 +6,11 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:35 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/14 22:38:30 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/26 17:25:47 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 int		main(int ac, char **av)
 {

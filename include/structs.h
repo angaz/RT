@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1_structs.h                                     :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
+/*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/08 21:30:53 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/17 12:46:40 by adippena         ###   ########.fr       */
+/*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
+/*   Updated: 2016/07/26 17:28:56 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RTV1_STRUCTS_H
-# define RTV1_STRUCTS_H
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
 /*
 ** 3D VECTOR STRUCTURE

@@ -6,11 +6,11 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 23:47:45 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/17 13:46:36 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/26 17:26:26 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 double		in_shadow(t_env *e, t_light *light)
 {
@@ -28,10 +28,9 @@ double		in_shadow(t_env *e, t_light *light)
 	ray.dir = vector_unit(ray.dir);
 	object = 0;
 	while (object < e->objects)
-	{
 		if (intersect_object(e, &ray, object, &t) && t < delta && t < distance)
 			return (0.0);
-		++object;
-	}
+		else
+			++object;
 	return (1.0);
 }

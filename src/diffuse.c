@@ -6,16 +6,11 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/13 13:55:24 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/17 14:10:15 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/26 17:57:15 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "diffuse.h"
-
-static t_vector	vector_project(t_vector a, t_vector b)
-{
-	return (vector_mult(b, (vector_dot(a, b) / vector_dot(b, b))));
-}
 
 static t_vector	get_normal(t_env *e, t_vector ray)
 {
@@ -41,11 +36,6 @@ static t_vector	get_normal(t_env *e, t_vector ray)
 	return (normal);
 }
 
-t_vector		to_vector(t_colour colour)
-{
-	return ((t_vector){colour.r, colour.g, colour.b});
-}
-
 int				diffuse_colour(t_env *e, t_diffuse *d)
 {
 	d->light = e->light[d->i];
@@ -66,8 +56,8 @@ int				diffuse_colour(t_env *e, t_diffuse *d)
 		d->specular = pow(d->spec_angle, 16.0);
 	}
 	d->colour = vector_add(d->colour, vector_mult(vector_add(vector_mult(
-		to_vector(d->mat->diffuse), d->lambert / e->lights), vector_mult(
-		to_vector(d->mat->specular), d->specular / e->lights)),
+		colour_to_vector(d->mat->diffuse), d->lambert / e->lights), vector_mult(
+		colour_to_vector(d->mat->specular), d->specular / e->lights)),
 		(d->light->intensity * d->shade) / cbrt(d->distance)));
 	return (1);
 }

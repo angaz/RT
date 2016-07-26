@@ -6,11 +6,11 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:42 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/17 12:28:04 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/26 17:36:09 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 static void	scene_attributes(t_env *e, char *line)
 {
@@ -35,7 +35,7 @@ static void	scene_attributes(t_env *e, char *line)
 		quantity = ft_atoi(split.strings[1]);
 		e->material = (t_material **)malloc(sizeof(t_material *) * quantity);
 	}
-	free_split_strings(&split);
+	ft_free_split(&split);
 }
 
 static void	call_type(t_env *e, int fd, char **line)

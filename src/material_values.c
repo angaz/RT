@@ -6,11 +6,11 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 12:40:41 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/17 12:41:42 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/26 17:34:20 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 t_colour	get_colour(t_env *e, t_split_string values)
 {
@@ -70,7 +70,7 @@ static void	set_material_values(t_env *e, char *pt1, char *pt2)
 		e->material[e->materials]->diffuse = get_colour(e, values);
 	else if (!ft_strcmp(pt1, "SPECULAR"))
 		e->material[e->materials]->specular = get_colour(e, values);
-	free_split_strings(&values);
+	ft_free_split(&values);
 }
 
 void		get_material_attributes(t_env *e, int fd)
@@ -92,7 +92,7 @@ void		get_material_attributes(t_env *e, int fd)
 		if (attr.words < 2)
 			err(FILE_FORMAT_ERROR, "get_material_attributes", e);
 		set_material_values(e, attr.strings[0], attr.strings[1]);
-		free_split_strings(&attr);
+		ft_free_split(&attr);
 	}
 	++e->materials;
 }

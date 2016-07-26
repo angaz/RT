@@ -6,11 +6,11 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:01:01 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/17 12:27:18 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/26 17:26:43 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 t_vector	vector_mult(t_vector v, double s)
 {

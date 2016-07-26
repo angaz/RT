@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1_prototypes.h                                  :+:      :+:    :+:   */
+/*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
+/*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/08 21:30:47 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/17 13:10:00 by adippena         ###   ########.fr       */
+/*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
+/*   Updated: 2016/07/26 17:36:48 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RTV1_PROTOTYPES_H
-# define RTV1_PROTOTYPES_H
+#ifndef PROTOTYPES_H
+# define PROTOTYPES_H
 
 /*
 ** src/vector_maths.c
@@ -24,6 +24,15 @@ t_vector	vector_add(t_vector v1, t_vector v2);
 t_vector	vector_sub(t_vector v1, t_vector v2);
 t_vector	vector_cross(t_vector v1, t_vector v2);
 t_vector	vector_unit(t_vector v);
+t_vector	colour_to_vector(t_colour colour);
+t_vector	vector_project(t_vector a, t_vector b);
+
+/*
+** vector_rot.c
+*/
+t_vector	vector_rot_x(t_vector v, double angle);
+t_vector	vector_rot_y(t_vector v, double angle);
+t_vector	vector_rot_z(t_vector v, double angle);
 
 /*
 ** src/intersect_scene.c
@@ -79,11 +88,6 @@ t_vector	get_unit_vector(t_env *e, t_split_string values);
 ** src/material_values.c
 */
 void		get_material_attributes(t_env *e, int fd);
-
-/*
-** src/free_split_strings.c
-*/
-void		free_split_strings(t_split_string *split);
 
 /*
 ** src/draw.c
