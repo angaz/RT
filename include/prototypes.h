@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:28:14 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/26 17:36:48 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_vector	vector_add(t_vector v1, t_vector v2);
 t_vector	vector_sub(t_vector v1, t_vector v2);
 t_vector	vector_cross(t_vector v1, t_vector v2);
 t_vector	vector_unit(t_vector v);
-t_vector	to_vector(t_colour colour);
+t_vector	colour_to_vector(t_colour colour);
 t_vector	vector_project(t_vector a, t_vector b);
 
 /*

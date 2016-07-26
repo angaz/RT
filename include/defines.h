@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:13 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:27:23 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/26 18:11:40 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 /*
 ** WINDOW DEFINES
 */
-# define WIN_X	1600
-# define WIN_Y	900
+# define WIN_X	960
+# define WIN_Y	540
 
 /*
 ** SHAPE DEFINES

@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 09:54:48 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:26:07 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/26 17:36:00 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void		set_object_values(t_env *e, char *pt1, char *pt2)
 		e->object[e->objects]->angle = ft_atod(values.strings[0]) * M_PI / 180;
 	else if (!ft_strcmp(pt1, "MATERIAL"))
 		e->object[e->objects]->material = get_material_number(e, values);
-	free_split_strings(&values);
+	ft_free_split(&values);
 }
 
 void			get_object_attributes(t_env *e, int fd)
@@ -91,7 +91,7 @@ void			get_object_attributes(t_env *e, int fd)
 		if (attr.words < 2)
 			err(FILE_FORMAT_ERROR, "get_object_attributes", e);
 		set_object_values(e, attr.strings[0], attr.strings[1]);
-		free_split_strings(&attr);
+		ft_free_split(&attr);
 	}
 	++e->objects;
 }
