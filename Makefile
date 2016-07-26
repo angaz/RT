@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/07/17 13:48:49 by adippena         ###   ########.fr        #
+#    Updated: 2016/07/26 17:30:34 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ SRC		=	src/main.c					\
 			src/material_values.c		\
 			src/object_values.c			\
 			src/light_values.c			\
-			src/free_split_strings.c	\
 			src/draw.c					\
 			src/intersect_scene.c		\
 			src/intersect_sphere.c		\

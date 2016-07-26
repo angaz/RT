@@ -6,11 +6,11 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:38:20 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/17 13:10:02 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/26 17:25:02 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 double		intersect_object(t_env *e, t_ray *ray, size_t object, double *t)
 {

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.h                                             :+:      :+:    :+:   */
+/*   ft_free_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
+/*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/08 21:30:41 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/13 17:48:27 by adippena         ###   ########.fr       */
+/*   Created: 2016/07/26 14:43:57 by adippena          #+#    #+#             */
+/*   Updated: 2016/07/26 14:45:30 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RTV1_H
-# define RTV1_H
+#include "libft.h"
 
-# include "libft.h"
-# include "SDL.h"
-# include <errno.h>
-# include <float.h>
+void		ft_free_split(t_split_string *split)
+{
+	size_t	i;
 
-# include "rtv1_defines.h"
-# include "rtv1_structs.h"
-# include "rtv1_prototypes.h"
-
-#endif
+	i = 0;
+	while (i < split->words)
+		ft_strdel(&split->strings[i++]);
+	if (split->strings)
+		free(split->strings);
+	split->words = 0;
+}

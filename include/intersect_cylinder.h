@@ -6,14 +6,14 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:28:51 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/17 12:32:53 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/26 17:28:00 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INTERSECT_CYLINDER_H
 # define INTERSECT_CYLINDER_H
 
-# include "rtv1.h"
+# include "rt.h"
 
 typedef struct	s_int_cylinder
 {
