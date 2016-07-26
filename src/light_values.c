@@ -6,11 +6,11 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 12:30:08 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/17 12:44:52 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/26 17:25:29 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 static void	set_light_values(t_env *e, char *pt1, char *pt2)
 {

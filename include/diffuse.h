@@ -6,14 +6,14 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 19:40:14 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/17 14:07:41 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/26 17:27:32 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DIFFUSE_H
 # define DIFFUSE_H
 
-# include "rtv1.h"
+# include "rt.h"
 
 typedef struct	s_diffuse
 {
