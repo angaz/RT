@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:42 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:36:09 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/28 23:19:04 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void		read_scene(char *file, t_env *e)
 	if ((fd = open(file, O_RDONLY)) == -1)
 		err(FILE_OPEN_ERROR, "read_scene", e);
 	if (!(ft_gnl(fd, &line)))
-		if (ft_strcmp(line, "SCENE RTV1"))
+		if (ft_strcmp(line, "SCENE RT"))
 			err(FILE_FORMAT_ERROR, "read_scene", e);
 	ft_strdel(&line);
 	while (ft_gnl(fd, &temp_line))

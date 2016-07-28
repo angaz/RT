@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/13 13:55:24 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:57:15 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/28 18:32:31 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int				diffuse_colour(t_env *e, t_diffuse *d)
 	d->colour = vector_add(d->colour, vector_mult(vector_add(vector_mult(
 		colour_to_vector(d->mat->diffuse), d->lambert / e->lights), vector_mult(
 		colour_to_vector(d->mat->specular), d->specular / e->lights)),
-		(d->light->intensity * d->shade) / cbrt(d->distance)));
+		(d->light->intensity * d->shade) / (4.0 * M_PI * d->distance * d->distance * 0.001)));
 	return (1);
 }
 
