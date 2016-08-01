@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/02 00:42:10 by adippena         ###   ########.fr        #
+#    Updated: 2016/08/02 01:13:36 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ LIBS	= -lm
 SRC		=	src/main.c					\
 			src/vector_maths.c			\
 			src/vector_maths2.c			\
+			src/vector_rot.c			\
 			src/loop.c					\
 			src/error.c					\
 			src/init_env.c				\
