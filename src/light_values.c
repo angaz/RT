@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 12:30:08 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:35:59 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/30 11:15:31 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void	set_light_values(t_env *e, char *pt1, char *pt2)
 		e->light[e->lights]->colour = get_colour(e, values);
 	else if (!ft_strcmp(pt1, "INTENSITY"))
 		e->light[e->lights]->intensity = ft_atod(values.strings[0]);
+	else if (!ft_strcmp(pt1, "HALF"))
+		e->light[e->lights]->half = ft_atod(values.strings[0]);
 	ft_free_split(&values);
 }
 

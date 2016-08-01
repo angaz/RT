@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/07/28 23:18:37 by adippena         ###   ########.fr        #
+#    Updated: 2016/08/01 20:00:37 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	= RT
 LIBFT	= -I libft/include -L libft -lft
 SDL2	= $(shell sdl2-config --cflags --libs)
 INCLUDE	= -I include
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -pthread
 LIBS	= -lm
 
 SRC		=	src/main.c					\

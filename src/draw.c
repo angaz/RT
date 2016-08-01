@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/28 23:17:42 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/01 20:36:57 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 static void		setup_camera_plane(t_env *e, t_camera_ray *c)
 {
-	c->h = (double)WIN_Y / (35.0 * 4.0);
+	c->d = 2.1675;
+	c->h = 18.0 * c->d / 35.0;
 	c->w = c->h * (double)WIN_X / (double)WIN_Y;
-	c->d = 1;
 	c->n = vector_unit(vector_sub(e->camera.loc, e->camera.dir));
 	c->u = vector_unit(vector_cross(e->camera.up, c->n));
-	c->v = vector_cross(c->n, c->u);
+	c->v = vector_unit(vector_cross(c->n, c->u));
 	c->c = vector_sub(e->camera.loc, vector_mult(c->n, c->d));
 	c->l = vector_sub(c->c, vector_mult(c->u, c->w / 2.0));
 	c->l = vector_add(c->l, vector_mult(c->v, c->h / 2.0));
 }
 
-static void		get_ray_dir(t_env *e, t_camera_ray cr, size_t x, size_t y)
+static void		get_ray_dir(t_env *e, t_camera_ray *cr, double x, double y)
 {
-	t_vector	dir;
+	t_vector	s;
 
-	dir = vector_add(cr.l, vector_mult(cr.u, (double)x * cr.w / (double)WIN_X));
-	dir = vector_sub(dir, vector_mult(cr.v, (double)y * cr.h / (double)WIN_Y));
+	s = vector_add(cr->l, vector_mult(cr->u, x * cr->w / (double)WIN_X));
+	s = vector_sub(s, vector_mult(cr->v, y * cr->h / (double)WIN_Y));
+	e->ray.dir = vector_sub(s, e->camera.loc);;
 	e->ray.loc = e->camera.loc;
-	e->ray.dir = vector_unit((t_vector){dir.x, -dir.y, dir.z});
 }
 
 static uint32_t	find_colour(t_env *e)
@@ -57,6 +57,7 @@ static void		draw_frame(t_env *e, SDL_Rect *draw)
 	int				stopx;
 	int				stopy;
 	int				x;
+//	t_vector		hit;
 
 	stopx = draw->x + draw->w;
 	stopy = draw->y + draw->h;
@@ -66,10 +67,17 @@ static void		draw_frame(t_env *e, SDL_Rect *draw)
 		x = draw->x;
 		while (x < stopx && x < WIN_X)
 		{
-			get_ray_dir(e, cr, x, draw->y);
+			get_ray_dir(e, &cr, (double)x, (double)draw->y);
 			intersect_scene(e);
 			pixel = (draw->y * e->px_pitch + x * 4);
 			*(uint32_t *)(e->px + pixel) = find_colour(e);
+//			hit = vector_mult(e->ray.dir, e->t);
+//printf("LOC: %lf, %lf, %lf    ", e->ray.loc.x, e->ray.loc.y, e->ray.loc.z);
+//printf("DIR: %lf, %lf, %lf    ",
+//	e->ray.loc.x - e->ray.dir.x * cr.d,
+//	e->ray.loc.y - e->ray.dir.y * cr.d,
+//	e->ray.loc.z - e->ray.dir.z * cr.d);
+//printf("HIT: %lf, %lf, %lf\n", hit.x, hit.y, hit.z);
 			++x;
 		}
 		++draw->y;

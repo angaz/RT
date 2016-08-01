@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:28:56 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/30 11:14:33 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct	s_light
 	t_vector	loc;
 	t_colour	colour;
 	double		intensity;
+	double		half;
 }				t_light;
 
 /*
