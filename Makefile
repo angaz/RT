@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/01 20:00:37 by adippena         ###   ########.fr        #
+#    Updated: 2016/08/02 00:42:10 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRC		=	src/main.c					\
 			src/intersect_cylinder.c	\
 			src/intersect_cone.c		\
 			src/diffuse.c				\
-			src/shadow.c
+			src/shadow.c				\
+			src/camera_setup.c
 
 all: $(NAME)
 

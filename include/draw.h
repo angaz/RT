@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 11:01:32 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/30 12:06:19 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/02 00:44:37 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,15 @@
 
 # include "rt.h"
 
-typedef struct	s_camera_ray
+typedef struct	s_chunk
 {
-	t_vector	n;
-	t_vector	u;
-	t_vector	v;
-	t_vector	l;
-	t_vector	c;
-//	t_camera	cam;
-	double		d;
-//	double		x_inc;
-//	double		y_inc;
-	double		w;
-	double		h;
-}				t_camera_ray;
+	t_env			*e;
+	SDL_Rect		d;
+	t_camera_ray	cr;
+	size_t			pixel;
+	int				stopx;
+	int				stopy;
+	int				x;
+}				t_chunk;
 
 #endif

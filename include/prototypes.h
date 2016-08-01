@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:36:48 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/01 22:37:12 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,11 @@ t_colour	diffuse_shade(t_env *e);
 ** src/shadow.c
 */
 double		in_shadow(t_env *e, t_light *light);
+
+/*
+** src/camera_setup.c
+*/
+void		setup_camera_plane(t_env *e, t_camera_ray *c);
+void		get_ray_dir(t_env *e, t_camera_ray *cr, double x, double y);
 
 #endif

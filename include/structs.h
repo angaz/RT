@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/30 11:14:33 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/02 00:44:30 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,19 @@ typedef struct	s_env
 	size_t			lights;
 	t_material		**material;
 	size_t			materials;
-	double			aspect_ratio;
 	double			t;
 }				t_env;
+
+typedef struct	s_camera_ray
+{
+	t_vector	n;
+	t_vector	u;
+	t_vector	v;
+	t_vector	l;
+	t_vector	c;
+	double		d;
+	double		w;
+	double		h;
+}				t_camera_ray;
 
 #endif
