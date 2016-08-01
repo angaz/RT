@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/02 00:55:49 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/02 01:05:06 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,29 +92,25 @@ static void		make_chunks(t_env *e, SDL_Rect *d)
 	pthread_t	*tid;
 	t_chunk		*c;
 
-	tids = ft_ceiling((double)d->w / 16.0) * ft_ceiling((double)d->h / 16.0);
+	tids = ft_ceiling((double)d->w / 64.0) * ft_ceiling((double)d->h / 64.0);
 	tid = (pthread_t *)malloc(sizeof(pthread_t) * tids);
 	thread = 0;
 	chunk_y = 0;
-	while (chunk_y * 16 < (size_t)d->h)
+	while (chunk_y * 64 < (size_t)d->h)
 	{
 		chunk_x = 0;
-		while(chunk_x * 16 < (size_t)d->w)
+		while(chunk_x * 64 < (size_t)d->w)
 		{
 			c = (t_chunk *)malloc(sizeof(t_chunk));
 			c->e = copy_env(e);
-			c->d = (SDL_Rect){chunk_x * 16, chunk_y * 16, 16, 16};
-printf("Starting thread %lu\n", thread);
+			c->d = (SDL_Rect){chunk_x * 64, chunk_y * 64, 64, 64};
 			pthread_create(&tid[thread++], NULL, draw_chunk, (void *)c);
 			++chunk_x;
 		}
 		++chunk_y;
 	}
 	while (thread)
-	{
 		pthread_join(tid[--thread], NULL);
-printf("Thread %lu has finished\n", thread);
-	}
 	free(tid);
 }
 
