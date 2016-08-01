@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:38:20 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/28 18:27:15 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/01 16:12:04 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ void		intersect_scene(t_env *e)
 		}
 		++object_no;
 	}
-	e->t = t;
+	e->t = min_dist;
 	e->hit = hit;
 }
