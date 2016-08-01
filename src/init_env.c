@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:14 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:24:16 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/02 00:46:03 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	nullify_pointers(t_env *e)
 	e->objects = 0;
 	e->lights = 0;
 	e->materials = 0;
-	e->aspect_ratio = (double)WIN_Y / (double)WIN_X;
 }
 
 void	init_env(t_env *e, char **av)

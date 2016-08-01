@@ -6,34 +6,11 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/01 20:36:57 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/02 00:55:49 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
-
-static void		setup_camera_plane(t_env *e, t_camera_ray *c)
-{
-	c->d = 2.1675;
-	c->h = 18.0 * c->d / 35.0;
-	c->w = c->h * (double)WIN_X / (double)WIN_Y;
-	c->n = vector_unit(vector_sub(e->camera.loc, e->camera.dir));
-	c->u = vector_unit(vector_cross(e->camera.up, c->n));
-	c->v = vector_unit(vector_cross(c->n, c->u));
-	c->c = vector_sub(e->camera.loc, vector_mult(c->n, c->d));
-	c->l = vector_sub(c->c, vector_mult(c->u, c->w / 2.0));
-	c->l = vector_add(c->l, vector_mult(c->v, c->h / 2.0));
-}
-
-static void		get_ray_dir(t_env *e, t_camera_ray *cr, double x, double y)
-{
-	t_vector	s;
-
-	s = vector_add(cr->l, vector_mult(cr->u, x * cr->w / (double)WIN_X));
-	s = vector_sub(s, vector_mult(cr->v, y * cr->h / (double)WIN_Y));
-	e->ray.dir = vector_sub(s, e->camera.loc);;
-	e->ray.loc = e->camera.loc;
-}
 
 static uint32_t	find_colour(t_env *e)
 {
@@ -50,44 +27,101 @@ static uint32_t	find_colour(t_env *e)
 	return (colour);
 }
 
-static void		draw_frame(t_env *e, SDL_Rect *draw)
+static void		*draw_chunk(void *q)
 {
-	t_camera_ray	cr;
-	size_t			pixel;
-	int				stopx;
-	int				stopy;
-	int				x;
-//	t_vector		hit;
+	t_chunk		*c;
 
-	stopx = draw->x + draw->w;
-	stopy = draw->y + draw->h;
-	setup_camera_plane(e, &cr);
-	while (draw->y < stopy && draw->y < WIN_Y)
+	c = (t_chunk *)q;
+	c->stopx = c->d.x + c->d.w;
+	c->stopy = c->d.y + c->d.h;
+	setup_camera_plane(c->e, &c->cr);
+	while (c->d.y < c->stopy && c->d.y < WIN_Y)
 	{
-		x = draw->x;
-		while (x < stopx && x < WIN_X)
+		c->x = c->d.x;
+		while (c->x < c->stopx && c->x < WIN_X)
 		{
-			get_ray_dir(e, &cr, (double)x, (double)draw->y);
-			intersect_scene(e);
-			pixel = (draw->y * e->px_pitch + x * 4);
-			*(uint32_t *)(e->px + pixel) = find_colour(e);
-//			hit = vector_mult(e->ray.dir, e->t);
-//printf("LOC: %lf, %lf, %lf    ", e->ray.loc.x, e->ray.loc.y, e->ray.loc.z);
-//printf("DIR: %lf, %lf, %lf    ",
-//	e->ray.loc.x - e->ray.dir.x * cr.d,
-//	e->ray.loc.y - e->ray.dir.y * cr.d,
-//	e->ray.loc.z - e->ray.dir.z * cr.d);
-//printf("HIT: %lf, %lf, %lf\n", hit.x, hit.y, hit.z);
-			++x;
+			get_ray_dir(c->e, &c->cr, (double)c->x, (double)c->d.y);
+			intersect_scene(c->e);
+			c->pixel = (c->d.y * c->e->px_pitch + c->x * 4);
+			*(uint32_t *)(c->e->px + c->pixel) = find_colour(c->e);
+			++c->x;
 		}
-		++draw->y;
+		++c->d.y;
 	}
+	free(c->e);
+	free(c);
+	pthread_exit(0);
 }
 
-void			draw(t_env *e, SDL_Rect draw)
+static int		ft_ceiling(double nbr)
+{
+	if (nbr > (double)((int)nbr))
+		return ((int)nbr + 1);
+	return ((int)nbr);
+}
+
+static t_env	*copy_env(t_env *e)
+{
+	t_env	*res;
+
+	res = (t_env *)malloc(sizeof(t_env));
+	res->win = e->win;
+	res->rend = e->rend;
+	res->img = e->img;
+	res->px = e->px;
+	res->px_pitch = e->px_pitch;
+	res->ray = e->ray;
+	res->camera = e->camera;
+	res->hit = e->hit;
+	res->object = e->object;
+	res->objects = e->objects;
+	res->light = e->light;
+	res->lights = e->lights;
+	res->material = e->material;
+	res->materials = e->materials;
+	res->t = e->t;
+	return (res);
+}
+
+static void		make_chunks(t_env *e, SDL_Rect *d)
+{
+	size_t		tids;
+	size_t		thread;
+	size_t		chunk_x;
+	size_t		chunk_y;
+	pthread_t	*tid;
+	t_chunk		*c;
+
+	tids = ft_ceiling((double)d->w / 16.0) * ft_ceiling((double)d->h / 16.0);
+	tid = (pthread_t *)malloc(sizeof(pthread_t) * tids);
+	thread = 0;
+	chunk_y = 0;
+	while (chunk_y * 16 < (size_t)d->h)
+	{
+		chunk_x = 0;
+		while(chunk_x * 16 < (size_t)d->w)
+		{
+			c = (t_chunk *)malloc(sizeof(t_chunk));
+			c->e = copy_env(e);
+			c->d = (SDL_Rect){chunk_x * 16, chunk_y * 16, 16, 16};
+printf("Starting thread %lu\n", thread);
+			pthread_create(&tid[thread++], NULL, draw_chunk, (void *)c);
+			++chunk_x;
+		}
+		++chunk_y;
+	}
+	while (thread)
+	{
+		pthread_join(tid[--thread], NULL);
+printf("Thread %lu has finished\n", thread);
+	}
+	free(tid);
+}
+
+void			draw(t_env *e, SDL_Rect d)
 {
 	SDL_LockTexture(e->img, NULL, &e->px, &e->px_pitch);
-	draw_frame(e, &draw);
+	make_chunks(e, &d);
 	SDL_UnlockTexture(e->img);
 	SDL_RenderCopy(e->rend, e->img, NULL, NULL);
 	SDL_RenderPresent(e->rend);
