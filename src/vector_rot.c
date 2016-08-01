@@ -6,11 +6,11 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 15:18:56 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:27:00 by adippena         ###   ########.fr       */
+/*   Updated: 2016/07/31 12:36:23 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#incldue "rt.h"
+#include "rt.h"
 
 t_vector	vector_rot_x(t_vector v, double angle)
 {
