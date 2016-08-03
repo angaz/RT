@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/02 01:14:06 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/03 11:21:38 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static uint32_t	find_colour(t_env *e)
 		return (0x7F7F7F);
 	temp_c = diffuse_shade(e);
 	colour = 0;
-	colour |= (int)(temp_c.r * 255.0) << 16;
-	colour |= (int)(temp_c.g * 255.0) << 8;
-	colour |= (int)(temp_c.b * 255.0);
+	colour |= (int)(temp_c.r * 255.0 * temp_c.intensity) << 16;
+	colour |= (int)(temp_c.g * 255.0 * temp_c.intensity) << 8;
+	colour |= (int)(temp_c.b * 255.0 * temp_c.intensity);
 	return (colour);
 }
 

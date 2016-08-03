@@ -6,13 +6,13 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:01:01 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:26:43 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/03 12:02:56 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_vector	vector_mult(t_vector v, double s)
+t_vector	vmult(t_vector v, double s)
 {
 	t_vector	res;
 
@@ -22,7 +22,7 @@ t_vector	vector_mult(t_vector v, double s)
 	return (res);
 }
 
-t_vector	vector_div(t_vector v, double d)
+t_vector	vdiv(t_vector v, double d)
 {
 	t_vector	res;
 
@@ -32,7 +32,7 @@ t_vector	vector_div(t_vector v, double d)
 	return (res);
 }
 
-t_vector	vector_add(t_vector v1, t_vector v2)
+t_vector	vadd(t_vector v1, t_vector v2)
 {
 	t_vector	res;
 
@@ -42,7 +42,7 @@ t_vector	vector_add(t_vector v1, t_vector v2)
 	return (res);
 }
 
-t_vector	vector_sub(t_vector v1, t_vector v2)
+t_vector	vsub(t_vector v1, t_vector v2)
 {
 	t_vector	res;
 
@@ -52,7 +52,7 @@ t_vector	vector_sub(t_vector v1, t_vector v2)
 	return (res);
 }
 
-t_vector	vector_cross(t_vector v1, t_vector v2)
+t_vector	vcross(t_vector v1, t_vector v2)
 {
 	t_vector	res;
 

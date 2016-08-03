@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/01 22:37:12 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/03 13:36:40 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 /*
 ** src/vector_maths.c
 */
-double		vector_dot(t_vector v1, t_vector v2);
-double		vector_normalize(t_vector v);
-t_vector	vector_mult(t_vector v, double s);
-t_vector	vector_div(t_vector v, double d);
-t_vector	vector_add(t_vector v1, t_vector v2);
-t_vector	vector_sub(t_vector v1, t_vector v2);
-t_vector	vector_cross(t_vector v1, t_vector v2);
-t_vector	vector_unit(t_vector v);
+double		vdot(t_vector v1, t_vector v2);
+double		vnormalize(t_vector v);
+t_vector	vmult(t_vector v, double s);
+t_vector	vdiv(t_vector v, double d);
+t_vector	vadd(t_vector v1, t_vector v2);
+t_vector	vsub(t_vector v1, t_vector v2);
+t_vector	vcross(t_vector v1, t_vector v2);
+t_vector	vunit(t_vector v);
+t_vector	vproject(t_vector a, t_vector b);
 t_vector	colour_to_vector(t_colour colour);
-t_vector	vector_project(t_vector a, t_vector b);
 
 /*
 ** vector_rot.c
@@ -111,7 +111,7 @@ t_colour	diffuse_shade(t_env *e);
 /*
 ** src/shadow.c
 */
-double		in_shadow(t_env *e, t_light *light);
+int			in_shadow(t_env *e, t_light *light);
 
 /*
 ** src/camera_setup.c
