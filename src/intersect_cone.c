@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 09:02:46 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:24:33 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/03 13:22:31 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,18 @@ int			intersect_cone(t_ray *r, t_object *o, double *t)
 {
 	t_intersect_cone	c;
 
-	c.dist = vector_sub(r->loc, o->loc);
-	c.v_va = vector_dot(r->dir, o->dir);
-	c.dp_va = vector_dot(c.dist, o->dir);
-	c.a_v = vector_sub(r->dir, vector_mult(o->dir, c.v_va));
-	c.c_v = vector_sub(c.dist, vector_mult(o->dir, c.dp_va));
+	c.dist = vsub(r->loc, o->loc);
+	c.v_va = vdot(r->dir, o->dir);
+	c.dp_va = vdot(c.dist, o->dir);
+	c.a_v = vsub(r->dir, vmult(o->dir, c.v_va));
+	c.c_v = vsub(c.dist, vmult(o->dir, c.dp_va));
 	c.cos2 = cos(o->angle) * cos(o->angle);
 	c.sin2 = sin(o->angle) * sin(o->angle);
-	c.a = c.cos2 * vector_dot(c.a_v, c.a_v) -
+	c.a = c.cos2 * vdot(c.a_v, c.a_v) -
 		c.sin2 * c.v_va * c.v_va;
-	c.b = 2.0 * c.cos2 * vector_dot(c.a_v, c.c_v) -
+	c.b = 2.0 * c.cos2 * vdot(c.a_v, c.c_v) -
 		2.0 * c.sin2 * c.v_va * c.dp_va;
-	c.c = c.cos2 * vector_dot(c.c_v, c.c_v) - c.sin2 * c.dp_va * c.dp_va;
+	c.c = c.cos2 * vdot(c.c_v, c.c_v) - c.sin2 * c.dp_va * c.dp_va;
 	c.d = c.b * c.b - 4.0 * c.a * c.c;
 	if (c.d < 0.000001)
 		return (0);

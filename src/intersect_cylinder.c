@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 22:44:25 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:24:42 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/03 13:31:12 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,12 @@ int			intersect_cylinder(t_ray *r, t_object *o, double *t)
 {
 	t_int_cylinder	c;
 
-	c.dist = vector_sub(r->loc, o->loc);
-	c.a_v = vector_sub(r->dir, vector_mult(o->dir, vector_dot(r->dir, o->dir)));
-	c.c_v = vector_sub(
-		c.dist, (vector_mult(o->dir, vector_dot(c.dist, o->dir))));
-	c.a = vector_dot(c.a_v, c.a_v);
-	c.b = 2.0 * vector_dot(c.a_v, c.c_v);
-	c.c = vector_dot(c.c_v, c.c_v) - (o->radius * o->radius);
+	c.dist = vsub(r->loc, o->loc);
+	c.a_v = vsub(r->dir, vmult(o->dir, vdot(r->dir, o->dir)));
+	c.c_v = vsub(c.dist, (vmult(o->dir, vdot(c.dist, o->dir))));
+	c.a = vdot(c.a_v, c.a_v);
+	c.b = 2.0 * vdot(c.a_v, c.c_v);
+	c.c = vdot(c.c_v, c.c_v) - (o->radius * o->radius);
 	c.d = c.b * c.b - 4.0 * c.a * c.c;
 	if (c.d < 0.00001)
 		return (0);

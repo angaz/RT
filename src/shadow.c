@@ -6,13 +6,13 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 23:47:45 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:26:26 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/03 13:36:16 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-double		in_shadow(t_env *e, t_light *light)
+int		in_shadow(t_env *e, t_light *light)
 {
 	t_ray		ray;
 	double		t;
@@ -21,16 +21,16 @@ double		in_shadow(t_env *e, t_light *light)
 	size_t		object;
 
 	t = INFINITY;
-	ray.loc = vector_add(e->ray.loc, vector_mult(e->ray.dir, e->t));
-	delta = vector_normalize(ray.loc);
-	ray.dir = vector_sub(light->loc, ray.loc);
-	distance = vector_normalize(ray.dir);
-	ray.dir = vector_unit(ray.dir);
+	ray.loc = vadd(e->ray.loc, vmult(e->ray.dir, e->t));
+	delta = vnormalize(ray.loc);
+	ray.dir = vsub(light->loc, ray.loc);
+	distance = vnormalize(ray.dir);
+	ray.dir = vunit(ray.dir);
 	object = 0;
 	while (object < e->objects)
 		if (intersect_object(e, &ray, object, &t) && t < delta && t < distance)
-			return (0.0);
+			return (0);
 		else
 			++object;
-	return (1.0);
+	return (1);
 }

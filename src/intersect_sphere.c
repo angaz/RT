@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:52 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:25:16 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/03 13:18:54 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ int			intersect_sphere(t_ray *r, t_object *o, double *t)
 	double		discr;
 	t_vector	dist;
 
-	dist = vector_sub(r->loc, o->loc);
-	a = vector_dot(r->dir, r->dir);
-	b = 2.0 * vector_dot(r->dir, dist);
-	c = vector_dot(dist, dist) - (o->radius * o->radius);
+	dist = vsub(r->loc, o->loc);
+	a = vdot(r->dir, r->dir);
+	b = 2.0 * vdot(r->dir, dist);
+	c = vdot(dist, dist) - (o->radius * o->radius);
 	discr = b * b - 4.0 * a * c;
 	if (discr < 0.00001)
 		return (0);
