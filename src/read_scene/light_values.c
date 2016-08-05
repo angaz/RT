@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 12:30:08 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/05 15:10:33 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/05 15:52:31 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ static void	set_light_values(t_env *e, char *pt1, char *pt2)
 	ft_free_split(&values);
 }
 
+static void	init_light(t_light *l)
+{
+	l->loc = (t_vector){0.0, 0.0, 5.0};
+	l->colour = (t_colour){1.0, 1.0, 1.0, 1.0};
+	l->lm = 1.0 / M_PI;
+	l->half = 0.0;
+}
+
 void		get_light_attributes(t_env *e, int fd)
 {
 	t_split_string	attr;
@@ -35,6 +43,7 @@ void		get_light_attributes(t_env *e, int fd)
 
 	attr.words = 0;
 	e->light[e->lights] = (t_light *)malloc(sizeof(t_light));
+	init_light(e->light[e->lights]);
 	while (ft_gnl(fd, &temp_line))
 	{
 		if (temp_line[0] == '\0')

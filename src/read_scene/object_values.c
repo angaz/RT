@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 09:54:48 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/05 14:47:37 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/05 16:14:27 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,14 @@ static void		set_object_values(t_env *e, char *pt1, char *pt2)
 	ft_free_split(&values);
 }
 
+static void		init_object(t_object *o)
+{
+	o->type = OBJ_SPHERE;
+	o->loc = (t_vector){0.0, 0.0, 0.0};
+	o->radius = 1.0;
+	o->material = 0;
+}
+
 void			get_object_attributes(t_env *e, int fd)
 {
 	t_split_string	attr;
@@ -79,6 +87,7 @@ void			get_object_attributes(t_env *e, int fd)
 
 	attr.words = 0;
 	e->object[e->objects] = (t_object *)malloc(sizeof(t_object));
+	init_object(e->object[e->objects]);
 	while (ft_gnl(fd, &temp_line))
 	{
 		if (temp_line[0] == '\0')

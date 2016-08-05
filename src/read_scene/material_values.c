@@ -6,63 +6,11 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 12:40:41 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/05 15:32:25 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/05 16:02:58 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-t_colour	get_colour(t_env *e, t_split_string values)
-{
-	t_colour	res;
-	char		*temp;
-
-	res = (t_colour){0.0, 0.0, 0.0, 1.0};
-	if (values.words == 1 || values.words == 2)
-	{
-		if (ft_strlen(values.strings[0]) != 6)
-			err(FILE_FORMAT_ERROR, "get_colour", e);
-		temp = ft_strnew(3);
-		temp = ft_strncpy(temp, values.strings[0], 2);
-		res.r = ft_atoi_hex(temp) / 255.0;
-		temp = ft_strncpy(temp, values.strings[0] + 2, 2);
-		res.g = ft_atoi_hex(temp) / 255.0;
-		temp = ft_strncpy(temp, values.strings[0] + 4, 2);
-		res.b = ft_atoi_hex(temp) / 255.0;
-		ft_strdel(&temp);
-	}
-	if (values.words == 2)
-		res.intensity = ft_atod(values.strings[1]);
-	if (values.words > 2)
-		err(FILE_FORMAT_ERROR, "get_colour", e);
-	return (res);
-}
-
-t_vector	get_vector(t_env *e, t_split_string values)
-{
-	t_vector	res;
-
-	if (values.words != 3)
-		err(FILE_FORMAT_ERROR, "get_vector", e);
-	res = (t_vector){
-		ft_atod(values.strings[0]),
-		ft_atod(values.strings[1]),
-		ft_atod(values.strings[2])};
-	return (res);
-}
-
-t_vector	get_unit_vector(t_env *e, t_split_string values)
-{
-	t_vector	res;
-
-	if (values.words != 3)
-		err(FILE_FORMAT_ERROR, "get_vector", e);
-	res = vunit((t_vector){
-		ft_atod(values.strings[0]),
-		ft_atod(values.strings[1]),
-		ft_atod(values.strings[2])});
-	return (res);
-}
 
 static void	set_material_values(t_env *e, char *pt1, char *pt2)
 {
@@ -78,6 +26,13 @@ static void	set_material_values(t_env *e, char *pt1, char *pt2)
 	ft_free_split(&values);
 }
 
+static void	init_material(t_material *m)
+{
+	m->name = ft_strdup("INVALID");
+	m->diff = (t_colour){1.0, 0.0, 0.870588235294, 1.0};
+	m->spec = (t_colour){1.0, 1.0, 1.0, 0.5};
+}
+
 void		get_material_attributes(t_env *e, int fd)
 {
 	t_split_string	attr;
@@ -85,6 +40,7 @@ void		get_material_attributes(t_env *e, int fd)
 
 	attr.words = 0;
 	e->material[e->materials] = (t_material *)malloc(sizeof(t_material));
+	init_material(e->material[e->materials]);
 	while (ft_gnl(fd, &temp_line))
 	{
 		if (temp_line[0] == '\0')
