@@ -6,13 +6,20 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:14 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/02 00:46:03 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/05 15:45:34 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	nullify_pointers(t_env *e)
+static void		init_camera(t_env *e)
+{
+	e->camera.loc = (t_vector){0.0, -10.0, 0.0};
+	e->camera.dir = (t_vector){0.0, 0.0, 0.0};
+	e->camera.up = (t_vector){0.0, 0.0, 1.0};
+}
+
+void			nullify_pointers(t_env *e)
 {
 	e->win = NULL;
 	e->rend = NULL;
@@ -23,9 +30,10 @@ void	nullify_pointers(t_env *e)
 	e->objects = 0;
 	e->lights = 0;
 	e->materials = 0;
+	init_camera(e);
 }
 
-void	init_env(t_env *e, char **av)
+void			init_env(t_env *e, char **av)
 {
 	read_scene(av[1], e);
 	e->win = SDL_CreateWindow(av[1], SDL_WINDOWPOS_CENTERED,

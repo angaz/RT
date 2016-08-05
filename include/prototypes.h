@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/03 13:36:40 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/05 16:20:50 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PROTOTYPES_H
 
 /*
-** src/vector_maths.c
+** src/vector_maths
 */
 double		vdot(t_vector v1, t_vector v2);
 double		vnormalize(t_vector v);
@@ -26,13 +26,10 @@ t_vector	vcross(t_vector v1, t_vector v2);
 t_vector	vunit(t_vector v);
 t_vector	vproject(t_vector a, t_vector b);
 t_vector	colour_to_vector(t_colour colour);
-
-/*
-** vector_rot.c
-*/
-t_vector	vector_rot_x(t_vector v, double angle);
-t_vector	vector_rot_y(t_vector v, double angle);
-t_vector	vector_rot_z(t_vector v, double angle);
+t_vector	vrotx(t_vector v, double angle);
+t_vector	vroty(t_vector v, double angle);
+t_vector	vrotz(t_vector v, double angle);
+t_vector	vrot(t_vector v, double angle);
 
 /*
 ** src/intersect_scene.c
@@ -57,36 +54,15 @@ void		err(int error_no, char *function, t_env *e);
 void		exit_rt(t_env *e);
 
 /*
-** src/read_scene.c
+** src/read_scene
 */
 void		read_scene(char *file, t_env *e);
-
-/*
-** src/object_values.c
-*/
 void		get_object_attributes(t_env *e, int fd);
-
-/*
-** src/free_split_strings.c
-*/
-void		free_split_strings(t_split_string *split);
-
-/*
-** src/camera_values.c
-*/
 void		get_camera_attributes(t_env *e, int fd);
-
-/*
-** src/light_values.c
-*/
 void		get_light_attributes(t_env *e, int fd);
 t_colour	get_colour(t_env *e, t_split_string values);
 t_vector	get_vector(t_env *e, t_split_string values);
 t_vector	get_unit_vector(t_env *e, t_split_string values);
-
-/*
-** src/material_values.c
-*/
 void		get_material_attributes(t_env *e, int fd);
 
 /*
@@ -96,7 +72,7 @@ void		draw(t_env *e, SDL_Rect draw);
 double		intersect_object(t_env *e, t_ray *ray, size_t object, double *t);
 
 /*
-** INTERSECTIONS : src/intersect[object].c
+** src/intersect
 */
 int			intersect_sphere(t_ray *r, t_object *s, double *t);
 int			intersect_plane(t_ray *r, t_object *o, double *t);
@@ -119,4 +95,8 @@ int			in_shadow(t_env *e, t_light *light);
 void		setup_camera_plane(t_env *e, t_camera_ray *c);
 void		get_ray_dir(t_env *e, t_camera_ray *cr, double x, double y);
 
+/*
+** src/free_split_strings.c
+*/
+//void		free_split_strings(t_split_string *split);
 #endif
