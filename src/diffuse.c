@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/13 13:55:24 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/05 12:08:26 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/05 15:16:21 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ static t_vector	get_normal(t_env *e, t_vector ray)
 		normal = e->hit->normal;
 	else if (e->hit->type == OBJ_CYLINDER)
 	{
-		normal = vsub(vsub(ray, e->hit->loc), vproject(normal, e->hit->dir));
+		normal = vsub(vsub(ray, e->hit->loc),
+			vproject(vsub(ray, e->hit->loc), e->hit->dir));
 //		normal = vsub(normal, vproject(normal, e->hit->dir));		UNTESTED DON'T REMOVE
 	}
 	else if (e->hit->type == OBJ_CONE)
 	{
-		normal = vsub(vsub(ray, e->hit->loc), vproject(normal, e->hit->dir));
+		normal = vsub(vsub(ray, e->hit->loc),
+			vproject(vsub(ray, e->hit->loc), e->hit->dir));
 //		normal = vsub(ray, e->hit->loc);							UNTESTED DON'T REMOVE
 //		normal = vsub(normal, vproject(normal, e->hit->dir));		UNTESTED DON'T REMOVE
 	}
