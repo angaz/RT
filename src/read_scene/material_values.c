@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 12:40:41 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/03 13:18:02 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/05 15:17:55 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_colour	get_colour(t_env *e, t_split_string values)
 	t_colour	res;
 	char		*temp;
 
+	res = {0.0, 0.0, 0.0, 1.0};
 	if (values.words == 1 || values.words == 2)
 	{
 		if (ft_strlen(values.strings[0]) != 6)
@@ -28,14 +29,11 @@ t_colour	get_colour(t_env *e, t_split_string values)
 		res.g = ft_atoi_hex(temp) / 255.0;
 		temp = ft_strncpy(temp, values.strings[0] + 4, 2);
 		res.b = ft_atoi_hex(temp) / 255.0;
-		res.intensity = 1.0;
 		ft_strdel(&temp);
 	}
-	else if (values.words == 2)
-	{
+	if (values.words == 2)
 		res.intensity = ft_atod(values.strings[1]);
-	}
-	else
+	if (values.words > 2)
 		err(FILE_FORMAT_ERROR, "get_colour", e);
 	return (res);
 }

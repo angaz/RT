@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 09:54:48 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:36:00 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/05 14:47:37 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static size_t	get_material_number(t_env *e, t_split_string values)
 			return (material);
 		++material;
 	}
-	ft_sprintf(&warn, "\e[208m    WARNING: Material name: %s "
-		"is not a defined material name\n", values.strings[0]);
+	ft_sprintf(&warn, "\e[208m    WARNING: Material name: %s \
+		is not a defined material name\n", values.strings[0]);
 	ft_putstr_fd(warn, 2);
 	ft_strdel(&warn);
 	return (0);
