@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 12:40:41 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/05 15:17:55 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/05 15:32:25 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_colour	get_colour(t_env *e, t_split_string values)
 	t_colour	res;
 	char		*temp;
 
-	res = {0.0, 0.0, 0.0, 1.0};
+	res = (t_colour){0.0, 0.0, 0.0, 1.0};
 	if (values.words == 1 || values.words == 2)
 	{
 		if (ft_strlen(values.strings[0]) != 6)
