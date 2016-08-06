@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/05 15:01:55 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/06 13:49:46 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,6 @@ static void		*draw_chunk(void *q)
 	pthread_exit(0);
 }
 
-static int		ft_ceiling(double nbr)
-{
-	if (nbr > (double)((int)nbr))
-		return ((int)nbr + 1);
-	return ((int)nbr);
-}
-
 static t_env	*copy_env(t_env *e)
 {
 	t_env	*res;
@@ -85,33 +78,28 @@ static t_env	*copy_env(t_env *e)
 
 static void		make_chunks(t_env *e, SDL_Rect *d)
 {
-	size_t		tids;
-	size_t		thread;
-	size_t		chunk_x;
-	size_t		chunk_y;
-	pthread_t	*tid;
-	t_chunk		*c;
+	t_make_chunks	m;
 
-	tids = ft_ceiling((double)d->w / 64.0) * ft_ceiling((double)d->h / 64.0);
-	tid = (pthread_t *)malloc(sizeof(pthread_t) * tids);
-	thread = 0;
-	chunk_y = 0;
-	while (chunk_y * 64 < (size_t)d->h)
+	m.tids = ceil((double)d->w / 64.0) * ceil((double)d->h / 64.0);
+	m.tid = (pthread_t *)malloc(sizeof(pthread_t) * m.tids);
+	m.thread = 0;
+	m.chunk_y = 0;
+	while (m.chunk_y * 64 < (size_t)d->h)
 	{
-		chunk_x = 0;
-		while(chunk_x * 64 < (size_t)d->w)
+		m.chunk_x = 0;
+		while (m.chunk_x * 64 < (size_t)d->w)
 		{
-			c = (t_chunk *)malloc(sizeof(t_chunk));
-			c->e = copy_env(e);
-			c->d = (SDL_Rect){chunk_x * 64, chunk_y * 64, 64, 64};
-			pthread_create(&tid[thread++], NULL, draw_chunk, (void *)c);
-			++chunk_x;
+			m.c = (t_chunk *)malloc(sizeof(t_chunk));
+			m.c->e = copy_env(e);
+			m.c->d = (SDL_Rect){m.chunk_x * 64, m.chunk_y * 64, 64, 64};
+			pthread_create(&m.tid[m.thread++], NULL, draw_chunk, (void *)m.c);
+			++m.chunk_x;
 		}
-		++chunk_y;
+		++m.chunk_y;
 	}
-	while (thread)
-		pthread_join(tid[--thread], NULL);
-	free(tid);
+	while (m.thread)
+		pthread_join(m.tid[--m.thread], NULL);
+	free(m.tid);
 }
 
 void			draw(t_env *e, SDL_Rect d)

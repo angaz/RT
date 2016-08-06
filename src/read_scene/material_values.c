@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 12:40:41 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/05 16:02:58 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/06 13:40:44 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	set_material_values(t_env *e, char *pt1, char *pt2)
 
 static void	init_material(t_material *m)
 {
-	m->name = ft_strdup("INVALID");
+	m->name = ft_strdup("UNNAMED");
 	m->diff = (t_colour){1.0, 0.0, 0.870588235294, 1.0};
 	m->spec = (t_colour){1.0, 1.0, 1.0, 0.5};
 }
