@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/13 13:55:24 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/05 15:16:21 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/05 19:51:41 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void		diffuse_colour(t_env *e, t_diffuse *d)
 	t_vector	v;
 	t_vector	ld;
 	t_vector	ls;
+	double		intensity;
 
 	if (in_shadow(e, d->light) == 1)
 	{
@@ -54,13 +55,13 @@ static void		diffuse_colour(t_env *e, t_diffuse *d)
 		l = vunit(l);
 		v = vunit(vsub(e->camera.loc, d->intersect));
 		h = vunit(vadd(v, l));
+		intensity = d->light->lm * (d->light->half / (d->light->half + d->dist * d->dist));
+//		intensity = d->light->lm * ((pow(d->light->half, 2) / (pow(d->light->half, 2) + pow(d->dist, 2))));
 		ld = vmult(vmult(colour_to_vector(d->mat->diff), d->mat->diff.intensity),
-			/*d->light->lm */ MAX(0, vdot(d->n, l)));
+			intensity * MAX(0, vdot(d->n, l)));
 		ls = vmult(vmult(colour_to_vector(d->mat->spec), d->mat->spec.intensity),
-			/*d->light->lm */ pow(MAX(0, vdot(d->n, h)), 50.0));
-		d->colour = vadd(d->colour, vmult(vadd(ld, ls),
-			d->light->lm * (pow(d->light->half, 2) /
-			(pow(d->light->half, 2) + pow(d->dist, 2)))));
+			intensity * pow(MAX(0, vdot(d->n, h)), 50.0));
+		d->colour = vadd(d->colour, vadd(ld, ls));
 //			d->light->intensity / (4.0 * M_PI * pow(d->dist / d->light->half, 2))));
 	}
 }
