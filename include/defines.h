@@ -6,15 +6,12 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:13 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/03 13:34:21 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/06 15:02:08 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
-
-/*#define max(a, b) ({__typeof__ (a) _a = (a); __typeof__ (b) _b = (b); \
-	_a > _b ? _a : _b;}) */
 
 # define MAX(a, b) ((a > b) ? a : b)
 

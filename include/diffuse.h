@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 19:40:14 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/03 13:38:03 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/06 14:49:46 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,15 @@ typedef struct	s_diffuse
 {
 	t_material	*mat;
 	t_light		*light;
-	t_vector	intersect;
-	t_vector	n;
-	t_vector	l;
-	t_vector	v;
-	t_vector	h;
 	t_vector	colour;
+	t_vector	n;
+	t_vector	p;
+	t_vector	l;
+	t_vector	h;
+	t_vector	v;
+	t_vector	ld;
+	t_vector	ls;
 	double		intensity;
-	double		lambert;
-	double		specular;
-	double		spec_angle;
 	double		dist;
 }				t_diffuse;
 
