@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 15:54:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/06 13:40:42 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/06 15:07:14 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 static double	to_range(double value, double min, double max)
 {
-	if (value < min)
-		value = min;
-	if (value > max)
-		value = max;
+	value = (value < min) ? min : value;
+	value = (value > max) ? max : value;
 	return (value);
 }
+
+/*
+** TODO: Possible memory leak after each ft_strncpy because of new string each
+**	time
+*/
 
 t_colour		get_colour(t_env *e, t_split_string values)
 {
@@ -34,10 +37,8 @@ t_colour		get_colour(t_env *e, t_split_string values)
 		temp = ft_strnew(3);
 		temp = ft_strncpy(temp, values.strings[0], 2);
 		res.r = ft_atoi_hex(temp) / 255.0;
-		ft_strdel(&temp);
 		temp = ft_strncpy(temp, values.strings[0] + 2, 2);
 		res.g = ft_atoi_hex(temp) / 255.0;
-		ft_strdel(&temp);
 		temp = ft_strncpy(temp, values.strings[0] + 4, 2);
 		res.b = ft_atoi_hex(temp) / 255.0;
 		ft_strdel(&temp);

@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 15:18:56 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/05 12:56:23 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/06 15:01:10 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ t_vector	vrot(t_vector v, double angle)
 	res = vrotx(v, angle);
 	res = vroty(res, angle);
 	res = vrotz(res, angle);
-	return(res);
+	return (res);
 }

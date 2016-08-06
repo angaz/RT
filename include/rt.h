@@ -6,12 +6,12 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:47:44 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/01 20:00:06 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/06 15:02:21 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RTV1_H
-# define RTV1_H
+#ifndef RT_H
+# define RT_H
 
 # include "libft.h"
 # include "SDL.h"

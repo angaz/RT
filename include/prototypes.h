@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/05 16:20:50 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/06 15:02:48 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,4 @@ int			in_shadow(t_env *e, t_light *light);
 void		setup_camera_plane(t_env *e, t_camera_ray *c);
 void		get_ray_dir(t_env *e, t_camera_ray *cr, double x, double y);
 
-/*
-** src/free_split_strings.c
-*/
-//void		free_split_strings(t_split_string *split);
 #endif
