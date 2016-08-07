@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 09:54:48 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/07 14:41:00 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/07 15:22:06 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,21 @@ static size_t	get_material_number(t_env *e, t_split_string values)
 	return (0);
 }
 
-static void		get_tri(t_env *e, t_split_string *values)
+static void		get_tri(t_object *o, t_split_string *values)
 {
 	if (values->words != 9)
 		err(FILE_FORMAT_ERROR, "get_tri", e);
-	e->object[e->objects]->p1.x = ft_atod(values->strings[0]);
-	e->object[e->objects]->p1.y = ft_atod(values->strings[1]);
-	e->object[e->objects]->p1.z = ft_atod(values->strings[2]);
-	e->object[e->objects]->p2.x = ft_atod(values->strings[3]);
-	e->object[e->objects]->p2.y = ft_atod(values->strings[4]);
-	e->object[e->objects]->p2.z = ft_atod(values->strings[5]);
-	e->object[e->objects]->p3.x = ft_atod(values->strings[6]);
-	e->object[e->objects]->p3.y = ft_atod(values->strings[7]);
-	e->object[e->objects]->p3.z = ft_atod(values->strings[8]);
+	o->p1.x = ft_atod(values->strings[0]);
+	o->p1.y = ft_atod(values->strings[1]);
+	o->p1.z = ft_atod(values->strings[2]);
+	o->p2.x = ft_atod(values->strings[3]);
+	o->p2.y = ft_atod(values->strings[4]);
+	o->p2.z = ft_atod(values->strings[5]);
+	o->p3.x = ft_atod(values->strings[6]);
+	o->p3.y = ft_atod(values->strings[7]);
+	o->p3.z = ft_atod(values->strings[8]);
+	o->normal = vcross(vsub(o->p2, o->p1), vsub(o->p3, o->p1));
+	o->loc = p1;
 }
 
 static void		set_object_values(t_env *e, char *pt1, char *pt2)
@@ -87,7 +89,7 @@ static void		set_object_values(t_env *e, char *pt1, char *pt2)
 	else if (!ft_strcmp(pt1, "MATERIAL"))
 		e->object[e->objects]->material = get_material_number(e, values);
 	else if (!ft_strcmp(pt1, "TRIANGLE"))
-		get_tri(e, &values);
+		get_tri(e->object[e->objects], &values);
 	ft_free_split(&values);
 }
 

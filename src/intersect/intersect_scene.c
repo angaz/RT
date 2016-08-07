@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:38:20 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/01 16:12:04 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/07 14:56:34 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ double		intersect_object(t_env *e, t_ray *ray, size_t object, double *t)
 		return (intersect_cylinder(ray, e->object[object], t));
 	if (e->object[object]->type == OBJ_CONE)
 		return (intersect_cone(ray, e->object[object], t));
+	if (e->object[object]->type == OBJ_TRIANGLE)
+		return (intersect_triangle(ray, e->object[object], t));
 	return (0.0);
 }
 
