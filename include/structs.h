@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/05 15:44:30 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/07 14:35:26 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ typedef struct	s_object
 	size_t		material;
 	double		radius;
 	double		angle;
+	t_vector	p1;
+	t_vector	p2;
+	t_vector	p3;
 	t_vector	loc;
 	t_vector	dir;
 	t_vector	normal;

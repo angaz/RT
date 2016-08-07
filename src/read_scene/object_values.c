@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 09:54:48 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/05 16:14:27 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/07 14:41:00 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int		get_type(char *type_str)
 		type = OBJ_CONE;
 	else if (!ft_strcmp(type_str, "cylinder"))
 		type = OBJ_CYLINDER;
+	else if (!ft_strcmp(type_str, "triangle"))
+		type = OBJ_TRIANGLE;
 	return (type);
 }
 
@@ -49,6 +51,21 @@ static size_t	get_material_number(t_env *e, t_split_string values)
 	return (0);
 }
 
+static void		get_tri(t_env *e, t_split_string *values)
+{
+	if (values->words != 9)
+		err(FILE_FORMAT_ERROR, "get_tri", e);
+	e->object[e->objects]->p1.x = ft_atod(values->strings[0]);
+	e->object[e->objects]->p1.y = ft_atod(values->strings[1]);
+	e->object[e->objects]->p1.z = ft_atod(values->strings[2]);
+	e->object[e->objects]->p2.x = ft_atod(values->strings[3]);
+	e->object[e->objects]->p2.y = ft_atod(values->strings[4]);
+	e->object[e->objects]->p2.z = ft_atod(values->strings[5]);
+	e->object[e->objects]->p3.x = ft_atod(values->strings[6]);
+	e->object[e->objects]->p3.y = ft_atod(values->strings[7]);
+	e->object[e->objects]->p3.z = ft_atod(values->strings[8]);
+}
+
 static void		set_object_values(t_env *e, char *pt1, char *pt2)
 {
 	t_split_string	values;
@@ -69,6 +86,8 @@ static void		set_object_values(t_env *e, char *pt1, char *pt2)
 		e->object[e->objects]->angle = ft_atod(values.strings[0]) * M_PI / 180;
 	else if (!ft_strcmp(pt1, "MATERIAL"))
 		e->object[e->objects]->material = get_material_number(e, values);
+	else if (!ft_strcmp(pt1, "TRIANGLE"))
+		get_tri(e, &values);
 	ft_free_split(&values);
 }
 
