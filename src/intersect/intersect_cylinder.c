@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 22:44:25 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/08 15:09:22 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/08 16:20:54 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	find_t(double a, double b, double discr, double *t)
 	t1 = (-b - sqrt_discr) / (2.0 * a);
 	if (t0 > t1)
 		t0 = t1;
-	if (t0 > EPSILON /*&& t0 < *t*/)
+	if (t0 > EPSILON)
 	{
 		*t = t0;
 		return (1);
