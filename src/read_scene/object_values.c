@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 09:54:48 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/08 15:54:02 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/08 16:24:25 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,6 @@ static size_t	get_material_number(t_env *e, t_split_string values)
 	ft_putstr_fd(warn, 2);
 	ft_strdel(&warn);
 	return (0);
-}
-
-static void		get_tri(t_env *e, t_object *o, t_split_string *values)
-{
-	if (values->words != 9)
-		err(FILE_FORMAT_ERROR, "get_tri", e);
-	o->p1.x = ft_atod(values->strings[0]);
-	o->p1.y = ft_atod(values->strings[1]);
-	o->p1.z = ft_atod(values->strings[2]);
-	o->p2.x = ft_atod(values->strings[3]);
-	o->p2.y = ft_atod(values->strings[4]);
-	o->p2.z = ft_atod(values->strings[5]);
-	o->p3.x = ft_atod(values->strings[6]);
-	o->p3.y = ft_atod(values->strings[7]);
-	o->p3.z = ft_atod(values->strings[8]);
-	o->normal = vcross(vsub(o->p2, o->p1), vsub(o->p3, o->p1));
 }
 
 static void		set_object_values(t_env *e, char *pt1, char *pt2)
