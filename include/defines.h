@@ -6,14 +6,15 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:13 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/07 13:49:14 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/08 15:08:17 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
 
-# define MAX(a, b) ((a > b) ? a : b)
+# define MAX(a, b)	((a > b) ? a : b)
+# define EPSILON	0.000001
 
 /*
 ** WINDOW DEFINES

@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/05 16:16:58 by adippena         ###   ########.fr        #
+#    Updated: 2016/08/08 12:25:23 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ INTERSECT	=	src/intersect/intersect_scene.c		\
 				src/intersect/intersect_sphere.c	\
 				src/intersect/intersect_plane.c		\
 				src/intersect/intersect_cylinder.c	\
-				src/intersect/intersect_cone.c
+				src/intersect/intersect_cone.c		\
+				src/intersect/intersect_triangle.c
 
 READ_SCENE	=	src/read_scene/camera_values.c		\
 				src/read_scene/light_values.c		\

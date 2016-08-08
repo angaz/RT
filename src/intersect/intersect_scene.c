@@ -6,13 +6,13 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:38:20 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/07 14:56:34 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/08 15:09:53 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-double		intersect_object(t_env *e, t_ray *ray, size_t object, double *t)
+int			intersect_object(t_env *e, t_ray *ray, size_t object, double *t)
 {
 	if (e->object[object]->type == OBJ_SPHERE)
 		return (intersect_sphere(ray, e->object[object], t));
@@ -24,7 +24,7 @@ double		intersect_object(t_env *e, t_ray *ray, size_t object, double *t)
 		return (intersect_cone(ray, e->object[object], t));
 	if (e->object[object]->type == OBJ_TRIANGLE)
 		return (intersect_triangle(ray, e->object[object], t));
-	return (0.0);
+	return (0);
 }
 
 void		intersect_scene(t_env *e)

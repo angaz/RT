@@ -1,10 +1,10 @@
 SCENE RT
-	OBJECTS		5
-	LIGHTS		5
-	MATERIALS	1
+	OBJECTS		7
+	LIGHTS		3
+	MATERIALS	3
 
 	CAMERA
-		LOC	5 -10 0
+		LOC	5 -15 5
 		DIR	0 0 0
 		UP	0 0 1
 
@@ -79,5 +79,10 @@ SCENE RT
 
 	OBJECT
 		TYPE		triangle
-		TRIANGLE	0 0 -1.5 1 0 -1.5 0 1 -1.5
+		TRIANGLE	0 0 -2.5 0 2 -2.5 2 0 -2.5
+		MATERIAL	blue
+
+	OBJECT
+		TYPE		triangle
+		TRIANGLE	2 2 -2.5 0 2 -2.5 2 0 -2.5
 		MATERIAL	blue
