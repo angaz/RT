@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/06 15:02:48 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/08 13:18:54 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,16 @@ int			intersect_cone(t_ray *r, t_object *o, double *t);
 t_colour	diffuse_shade(t_env *e);
 
 /*
+** src/find_colour_struct.c
+*/
+t_colour    find_colour_struct(t_env *e, int depth);
+
+/*
+** src/reflect.c
+*/
+t_colour    reflect(t_env *e, int depth);
+
+/*
 ** src/shadow.c
 */
 int			in_shadow(t_env *e, t_light *light);
@@ -94,5 +104,15 @@ int			in_shadow(t_env *e, t_light *light);
 */
 void		setup_camera_plane(t_env *e, t_camera_ray *c);
 void		get_ray_dir(t_env *e, t_camera_ray *cr, double x, double y);
+
+/*
+** src/get_normal.c
+*/
+t_vector    get_normal(t_env *e, t_vector ray);
+
+/*
+** src/copy_env.c
+*/
+t_env	*copy_env(t_env *e);
 
 #endif

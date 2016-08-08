@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/13 13:55:24 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/06 15:00:16 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/08 12:12:04 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 ** normal = vsub(normal, vproject(normal, e->hit->dir));
 */
 
-static t_vector	get_normal(t_env *e, t_vector ray)
+/*static t_vector	get_normal(t_env *e, t_vector ray)
 {
 	t_vector	normal;
 
@@ -37,7 +37,7 @@ static t_vector	get_normal(t_env *e, t_vector ray)
 			vproject(vsub(ray, e->hit->loc), e->hit->dir));
 	normal = vunit(normal);
 	return (normal);
-}
+}*/
 
 static void		diffuse_colour(t_env *e, t_diffuse *d)
 {

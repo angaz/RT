@@ -1,7 +1,7 @@
 SCENE RT
 	OBJECTS		5
 	LIGHTS		5
-	MATERIALS	1
+	MATERIALS	3
 
 	CAMERA
 		LOC	5 -10 0
@@ -36,11 +36,22 @@ SCENE RT
 		NAME		red
 		DIFFUSE		FF0000 1.0
 		SPECULAR	FFFFFF 0.5
+		REFLECT		0.0
+		REFRACT		0.0
 
 	MATERIAL
 		NAME		orange
 		DIFFUSE		FFA900 1.0
 		SPECULAR	FFFFFF 0.5
+		REFLECT		0
+		REFRACT		1
+
+	MATERIAL
+		NAME		orange_reflect
+		DIFFUSE		FFA900 1.0
+		SPECULAR	FFFFFF 0.5
+		REFLECT		1.0
+		REFRACT		0.0
 
 	OBJECT
 		TYPE		plane
@@ -58,16 +69,16 @@ SCENE RT
 		TYPE		sphere
 		LOC			0 0 0
 		RADIUS		1
-		MATERIAL	orange
+		MATERIAL	orange_reflect
 
 	OBJECT
 		TYPE		sphere
 		LOC			-15 10 0
 		RADIUS		1.5
-		MATERIAL	orange
+		MATERIAL	orange_reflect
 
 	OBJECT
 		TYPE		sphere
 		LOC			5 0 0
 		RADIUS		1.5
-		MATERIAL	orange
+		MATERIAL	orange_reflect

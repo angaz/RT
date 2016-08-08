@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/05 15:44:30 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/08 12:25:17 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct	s_colour
 typedef struct	s_material
 {
 	char		*name;
+	double		reflect;
+	double		refract;
 	t_colour	diff;
 	t_colour	spec;
 }				t_material;
