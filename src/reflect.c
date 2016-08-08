@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/08 09:46:58 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/08 14:11:47 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/08 15:56:13 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ t_colour	reflect(t_env *e, int depth)
 	set_reflect_ray(e, reflect);
 	intersect_scene(reflect);
 	colour = find_colour_struct(reflect, depth + 1);
+	free(reflect);
 	return (colour);
 }
