@@ -6,24 +6,27 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/06 14:59:01 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/08 13:16:19 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-static uint32_t	find_colour(t_env *e)
+static uint32_t	find_colour(t_env *e, int depth)
 {
 	uint32_t	colour;
 	t_colour	temp_c;
+	t_colour	reflect_col;
 
 	if (e->hit == NULL)
 		return (0x7F7F7F);
 	temp_c = diffuse_shade(e);
+	if (depth < MAXDEPTH && e->material[e->hit->material]->reflect > 0.0)
+		        reflect_col = reflect(e, depth + 1);
 	colour = 0;
-	colour |= (int)(temp_c.r * 255.0) << 16;
-	colour |= (int)(temp_c.g * 255.0) << 8;
-	colour |= (int)(temp_c.b * 255.0);
+	colour |= (int)(((temp_c.r * (1 - e->material[e->hit->material]->reflect)) + (reflect_col.r * e->material[e->hit->material]->reflect)) * 255.0) << 16;
+	colour |= (int)(((temp_c.g * (1 - e->material[e->hit->material]->reflect)) + (reflect_col.g * e->material[e->hit->material]->reflect)) * 255.0) << 8;
+	colour |= (int)(((temp_c.b * (1 - e->material[e->hit->material]->reflect)) + (reflect_col.b * e->material[e->hit->material]->reflect)) * 255.0);
 	return (colour);
 }
 
@@ -43,7 +46,7 @@ static void		*draw_chunk(void *q)
 			get_ray_dir(c->e, &c->cr, (double)c->x, (double)c->d.y);
 			intersect_scene(c->e);
 			c->pixel = (c->d.y * c->e->px_pitch + c->x * 4);
-			*(uint32_t *)(c->e->px + c->pixel) = find_colour(c->e);
+			*(uint32_t *)(c->e->px + c->pixel) = find_colour(c->e, 0);
 			++c->x;
 		}
 		++c->d.y;
@@ -53,7 +56,7 @@ static void		*draw_chunk(void *q)
 	pthread_exit(0);
 }
 
-static t_env	*copy_env(t_env *e)
+/*static t_env	*copy_env(t_env *e)
 {
 	t_env	*res;
 
@@ -74,7 +77,7 @@ static t_env	*copy_env(t_env *e)
 	res->materials = e->materials;
 	res->t = e->t;
 	return (res);
-}
+}*/
 
 static void		make_chunks(t_env *e, SDL_Rect *d)
 {

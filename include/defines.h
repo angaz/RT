@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:13 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/06 15:02:08 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/08 14:20:10 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define DEFINES_H
 
 # define MAX(a, b) ((a > b) ? a : b)
+# define MAXDEPTH 20
 
 /*
 ** WINDOW DEFINES
