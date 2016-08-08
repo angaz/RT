@@ -6,13 +6,13 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/13 13:37:04 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/08 16:20:58 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 01:12:11 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		intersect_plane(t_ray *r, t_object *o, double *t)
+int		intersect_plane(t_ray *r, t_prim *o, double *t)
 {
 	double	denominator;
 	double	numerator;

@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 22:44:25 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/08 16:20:54 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 01:12:02 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	find_t(double a, double b, double discr, double *t)
 	return (0);
 }
 
-int			intersect_cylinder(t_ray *r, t_object *o, double *t)
+int			intersect_cylinder(t_ray *r, t_prim *o, double *t)
 {
 	t_int_cylinder	c;
 

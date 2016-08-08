@@ -1,8 +1,4 @@
 SCENE RT
-	OBJECTS		7
-	LIGHTS		3
-	MATERIALS	3
-
 	CAMERA
 		LOC	5 -15 5
 		DIR	0 0 0
@@ -47,42 +43,32 @@ SCENE RT
 		DIFFUSE		0000FF 1.0
 		SPEULAR		000000 0.0
 
-	OBJECT
+	PRIMITIVE
 		TYPE		plane
 		LOC			0 0 -5
 		NORMAL		0 0 1
 		MATERIAL	red
 
-	OBJECT
+	PRIMITIVE
 		TYPE		plane
 		LOC			0 20 0
 		NORMAL		0 -1 0
 		MATERIAL	red
 
-	OBJECT
+	PRIMITIVE
 		TYPE		sphere
 		LOC			0 0 0
 		RADIUS		1
 		MATERIAL	orange
 
-	OBJECT
+	PRIMITIVE
 		TYPE		sphere
 		LOC			-15 10 0
 		RADIUS		1.5
 		MATERIAL	orange
 
-	OBJECT
+	PRIMITIVE
 		TYPE		sphere
 		LOC			5 0 0
 		RADIUS		1.5
 		MATERIAL	orange
-
-	OBJECT
-		TYPE		triangle
-		TRIANGLE	0 0 -2.5 0 2 -2.5 2 0 -2.5
-		MATERIAL	blue
-
-	OBJECT
-		TYPE		triangle
-		TRIANGLE	2 2 -2.5 0 2 -2.5 2 0 -2.5
-		MATERIAL	blue
