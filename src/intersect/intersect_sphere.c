@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:52 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/03 13:18:54 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/08 15:10:31 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	find_t(double a, double b, double discr, double *t)
 	t1 = (-b - sqrt_discr) / (2.0 * a);
 	if (t0 > t1)
 		t0 = t1;
-	if (t0 > 0.00001 && t0 < *t)
+	if (t0 > EPSILON /*&& t0 < *t*/)
 	{
 		*t = t0;
 		return (1);
@@ -44,7 +44,7 @@ int			intersect_sphere(t_ray *r, t_object *o, double *t)
 	b = 2.0 * vdot(r->dir, dist);
 	c = vdot(dist, dist) - (o->radius * o->radius);
 	discr = b * b - 4.0 * a * c;
-	if (discr < 0.00001)
+	if (discr < EPSILON)
 		return (0);
 	return (find_t(a, b, discr, t));
 }

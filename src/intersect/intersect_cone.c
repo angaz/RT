@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 09:02:46 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/03 13:22:31 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/08 15:09:02 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	find_t(double a, double b, double discr, double *t)
 	t1 = (-b - sqrt_discr) / (2.0 * a);
 	if (t0 > t1)
 		t0 = t1;
-	if (t0 > 0.000001 && t0 < *t)
+	if (t0 > EPSILON /*&& t0 < *t*/)
 	{
 		*t = t0;
 		return (1);
@@ -48,7 +48,7 @@ int			intersect_cone(t_ray *r, t_object *o, double *t)
 		2.0 * c.sin2 * c.v_va * c.dp_va;
 	c.c = c.cos2 * vdot(c.c_v, c.c_v) - c.sin2 * c.dp_va * c.dp_va;
 	c.d = c.b * c.b - 4.0 * c.a * c.c;
-	if (c.d < 0.000001)
+	if (c.d < EPSILON)
 		return (0);
 	return (find_t(c.a, c.b, c.d, t));
 }

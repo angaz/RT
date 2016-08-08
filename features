@@ -5,6 +5,6 @@ external files - adippena
 	## X3D : difficult to impliment - Will need to convert Quaternion rotation
 		to vector rotation
 TODO: gamma correction - adippena
-TODO: glossy / reflective surfaces - arovan-
-TODO: refractions - arovan-
+glossy / reflective surfaces - arovan- rojones
+TODO: refractions - arovan- rojones
 TODO: add here anything you can think of

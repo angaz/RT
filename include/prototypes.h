@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/07 13:46:28 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/08 13:04:30 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ t_vector	vrotx(t_vector v, double angle);
 t_vector	vroty(t_vector v, double angle);
 t_vector	vrotz(t_vector v, double angle);
 t_vector	vrot(t_vector v, double angle);
-
-/*
-** src/intersect_scene.c
-*/
-void		intersect_scene(t_env *e);
 
 /*
 ** src/loop.c
@@ -69,15 +64,17 @@ void		get_material_attributes(t_env *e, int fd);
 ** src/draw.c
 */
 void		draw(t_env *e, SDL_Rect draw);
-double		intersect_object(t_env *e, t_ray *ray, size_t object, double *t);
+int			intersect_object(t_env *e, t_ray *ray, size_t object, double *t);
 
 /*
 ** src/intersect
 */
+void		intersect_scene(t_env *e);
 int			intersect_sphere(t_ray *r, t_object *s, double *t);
 int			intersect_plane(t_ray *r, t_object *o, double *t);
 int			intersect_cylinder(t_ray *r, t_object *o, double *t);
 int			intersect_cone(t_ray *r, t_object *o, double *t);
+int			intersect_triangle(t_ray *r, t_object *o, double *t);
 
 /*
 ** src/diffuse.c
