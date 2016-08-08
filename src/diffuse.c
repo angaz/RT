@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/13 13:55:24 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/06 15:00:16 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 01:22:51 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ static t_vector	get_normal(t_env *e, t_vector ray)
 	t_vector	normal;
 
 	normal = (t_vector){0.0, 0.0, 1.0};
-	if (e->hit->type == OBJ_SPHERE)
+	if (e->hit->type == PRIM_SPHERE)
 		normal = vdiv(vsub(ray, e->hit->loc), e->hit->radius);
-	else if (e->hit->type == OBJ_PLANE)
+	else if (e->hit->type == PRIM_PLANE)
 		normal = e->hit->normal;
-	else if (e->hit->type == OBJ_CYLINDER)
+	else if (e->hit->type == PRIM_CYLINDER)
 		normal = vsub(vsub(ray, e->hit->loc),
 			vproject(vsub(ray, e->hit->loc), e->hit->dir));
-	else if (e->hit->type == OBJ_CONE)
+	else if (e->hit->type == PRIM_CONE)
 		normal = vsub(vsub(ray, e->hit->loc),
 			vproject(vsub(ray, e->hit->loc), e->hit->dir));
 	normal = vunit(normal);

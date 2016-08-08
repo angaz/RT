@@ -6,24 +6,24 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:38:20 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/08 16:21:02 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 01:18:35 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int			intersect_object(t_env *e, t_ray *ray, size_t object, double *t)
+int			intersect_prim(t_env *e, t_ray *ray, size_t prim, double *t)
 {
-	if (e->object[object]->type == OBJ_SPHERE)
-		return (intersect_sphere(ray, e->object[object], t));
-	if (e->object[object]->type == OBJ_PLANE)
-		return (intersect_plane(ray, e->object[object], t));
-	if (e->object[object]->type == OBJ_CYLINDER)
-		return (intersect_cylinder(ray, e->object[object], t));
-	if (e->object[object]->type == OBJ_CONE)
-		return (intersect_cone(ray, e->object[object], t));
-	if (e->object[object]->type == OBJ_TRIANGLE)
-		return (intersect_triangle(ray, e->object[object], t));
+	if (e->prim[prim]->type == PRIM_SPHERE)
+		return (intersect_sphere(ray, e->prim[prim], t));
+	if (e->prim[prim]->type == PRIM_PLANE)
+		return (intersect_plane(ray, e->prim[prim], t));
+	if (e->prim[prim]->type == PRIM_CYLINDER)
+		return (intersect_cylinder(ray, e->prim[prim], t));
+	if (e->prim[prim]->type == PRIM_CONE)
+		return (intersect_cone(ray, e->prim[prim], t));
+//	if (e->prim[prim]->type == PRIM_TRIANGLE)
+//		return (intersect_triangle(ray, e->prim[prim], t));
 	return (0);
 }
 
@@ -31,21 +31,21 @@ void		intersect_scene(t_env *e)
 {
 	double		min_dist;
 	double		t;
-	size_t		object_no;
-	t_object	*hit;
+	size_t		prim_no;
+	t_prim		*hit;
 
 	min_dist = INFINITY;
 	t = INFINITY;
 	hit = NULL;
-	object_no = 0;
-	while (object_no < e->objects)
+	prim_no = 0;
+	while (prim_no < e->prims)
 	{
-		if (intersect_object(e, &e->ray, object_no, &t) && t < min_dist)
+		if (intersect_prim(e, &e->ray, prim_no, &t) && t < min_dist)
 		{
 			min_dist = t;
-			hit = e->object[object_no];
+			hit = e->prim[prim_no];
 		}
-		++object_no;
+		++prim_no;
 	}
 	e->t = min_dist;
 	e->hit = hit;

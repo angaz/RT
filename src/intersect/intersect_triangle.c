@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 14:57:03 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/08 16:22:21 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 01:15:10 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** Möller–Trumbore ray-triangle intersection algorithm
 */
 
-int		intersect_triangle(t_ray *r, t_object *o, double *t)
+int		intersect_triangle(t_ray *r, t_prim *o, double *t)
 {
 	t_intersect_triangle	it;
 

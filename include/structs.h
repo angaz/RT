@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/07 14:35:26 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 01:09:27 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,25 @@ typedef struct	s_material
 /*
 ** OBJECT STRUCTURE
 */
-typedef struct	s_object
+
+typedef struct	s_face
 {
+	t_vector	*v0;
+	t_vector	*v1;
+	t_vector	*v2;
+	t_vector	*n;
+}				t_face;
+
+typedef struct	s_prim
+{
+	t_vector	loc;
+	t_vector	dir;
+	t_vector	normal;
 	int			type;
 	size_t		material;
 	double		radius;
 	double		angle;
-	t_vector	p1;
-	t_vector	p2;
-	t_vector	p3;
-	t_vector	loc;
-	t_vector	dir;
-	t_vector	normal;
-}				t_object;
+}				t_prim;
 
 /*
 ** RAY, CAMERA AND LIGHT STRUCTURE
@@ -94,9 +100,9 @@ typedef struct	s_env
 	int				px_pitch;
 	t_ray			ray;
 	t_camera		camera;
-	t_object		*hit;
-	t_object		**object;
-	size_t			objects;
+	t_prim			*hit;
+	t_prim			**prim;
+	size_t			prims;
 	t_light			**light;
 	size_t			lights;
 	t_material		**material;

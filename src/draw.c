@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/06 14:59:01 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 01:23:53 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ static t_env	*copy_env(t_env *e)
 	res->ray = e->ray;
 	res->camera = e->camera;
 	res->hit = e->hit;
-	res->object = e->object;
-	res->objects = e->objects;
+	res->prim = e->prim;
+	res->prims = e->prims;
 	res->light = e->light;
 	res->lights = e->lights;
 	res->material = e->material;

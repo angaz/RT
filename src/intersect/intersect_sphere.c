@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:52 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/08 16:22:10 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 01:13:22 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	find_t(double a, double b, double discr, double *t)
 	return (0);
 }
 
-int			intersect_sphere(t_ray *r, t_object *o, double *t)
+int			intersect_sphere(t_ray *r, t_prim *o, double *t)
 {
 	double		a;
 	double		b;

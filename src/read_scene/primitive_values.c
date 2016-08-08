@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object_values.c                                    :+:      :+:    :+:   */
+/*   prim_values.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 09:54:48 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/08 16:24:25 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 01:32:56 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ static int		get_type(char *type_str)
 
 	type = -1;
 	if (!ft_strcmp(type_str, "sphere"))
-		type = OBJ_SPHERE;
+		type = PRIM_SPHERE;
 	else if (!ft_strcmp(type_str, "plane"))
-		type = OBJ_PLANE;
+		type = PRIM_PLANE;
 	else if (!ft_strcmp(type_str, "cone"))
-		type = OBJ_CONE;
+		type = PRIM_CONE;
 	else if (!ft_strcmp(type_str, "cylinder"))
-		type = OBJ_CYLINDER;
-	else if (!ft_strcmp(type_str, "triangle"))
-		type = OBJ_TRIANGLE;
+		type = PRIM_CYLINDER;
+//	else if (!ft_strcmp(type_str, "triangle"))
+//		type = OBJ_TRIANGLE;
 	return (type);
 }
 
@@ -51,47 +51,47 @@ static size_t	get_material_number(t_env *e, t_split_string values)
 	return (0);
 }
 
-static void		set_object_values(t_env *e, char *pt1, char *pt2)
+static void		set_primitive_values(t_env *e, char *pt1, char *pt2)
 {
 	t_split_string	values;
 
 	values = ft_nstrsplit(pt2, ' ');
 	if (!ft_strcmp(pt1, "TYPE"))
-		if ((e->object[e->objects]->type = get_type(values.strings[0])) == -1)
-			err(FILE_FORMAT_ERROR, "set_object_values", e);
+		if ((e->prim[e->prims]->type = get_type(values.strings[0])) == -1)
+			err(FILE_FORMAT_ERROR, "set_prim_values", e);
 	if (!ft_strcmp(pt1, "LOC"))
-		e->object[e->objects]->loc = get_vector(e, values);
+		e->prim[e->prims]->loc = get_vector(e, values);
 	else if (!ft_strcmp(pt1, "DIR"))
-		e->object[e->objects]->dir = get_unit_vector(e, values);
+		e->prim[e->prims]->dir = get_unit_vector(e, values);
 	else if (!ft_strcmp(pt1, "NORMAL"))
-		e->object[e->objects]->normal = get_unit_vector(e, values);
+		e->prim[e->prims]->normal = get_unit_vector(e, values);
 	else if (!ft_strcmp(pt1, "RADIUS"))
-		e->object[e->objects]->radius = ft_atod(values.strings[0]);
+		e->prim[e->prims]->radius = ft_atod(values.strings[0]);
 	else if (!ft_strcmp(pt1, "ANGLE"))
-		e->object[e->objects]->angle = ft_atod(values.strings[0]) * M_PI / 180;
+		e->prim[e->prims]->angle = ft_atod(values.strings[0]) * M_PI / 180;
 	else if (!ft_strcmp(pt1, "MATERIAL"))
-		e->object[e->objects]->material = get_material_number(e, values);
-	else if (!ft_strcmp(pt1, "TRIANGLE"))
-		get_tri(e, e->object[e->objects], &values);
+		e->prim[e->prims]->material = get_material_number(e, values);
+//	else if (!ft_strcmp(pt1, "TRIANGLE"))
+//		get_tri(e, e->prim[e->prims], &values);
 	ft_free_split(&values);
 }
 
-static void		init_object(t_object *o)
+static void		init_primitive(t_prim *o)
 {
-	o->type = OBJ_SPHERE;
+	o->type = PRIM_SPHERE;
 	o->loc = (t_vector){0.0, 0.0, 0.0};
 	o->radius = 1.0;
 	o->material = 0;
 }
 
-void			get_object_attributes(t_env *e, int fd)
+void			get_primitive_attributes(t_env *e, int fd)
 {
 	t_split_string	attr;
 	char			*temp_line;
 
 	attr.words = 0;
-	e->object[e->objects] = (t_object *)malloc(sizeof(t_object));
-	init_object(e->object[e->objects]);
+	e->prim[e->prims] = (t_prim *)malloc(sizeof(t_prim));
+	init_primitive(e->prim[e->prims]);
 	while (ft_gnl(fd, &temp_line))
 	{
 		if (temp_line[0] == '\0')
@@ -102,9 +102,9 @@ void			get_object_attributes(t_env *e, int fd)
 		attr = ft_nstrsplit(temp_line, '\t');
 		ft_strdel(&temp_line);
 		if (attr.words < 2)
-			err(FILE_FORMAT_ERROR, "get_object_attributes", e);
-		set_object_values(e, attr.strings[0], attr.strings[1]);
+			err(FILE_FORMAT_ERROR, "get_primitive_attributes", e);
+		set_primitive_values(e, attr.strings[0], attr.strings[1]);
 		ft_free_split(&attr);
 	}
-	++e->objects;
+	++e->prims;
 }
