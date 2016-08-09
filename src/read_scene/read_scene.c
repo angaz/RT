@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:42 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 01:34:21 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 23:27:22 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	call_type(t_env *e, int fd, char **line)
 	ft_strdel(line);
 	if (!ft_strcmp(temp_line, "PRIMITIVE"))
 		get_primitive_attributes(e, fd);
+	if (!ft_strcmp(temp_line, "OBJECT"))
+		get_object_attributes(e, fd);
 	else if (!ft_strcmp(temp_line, "CAMERA"))
 		get_camera_attributes(e, fd);
 	else if (!ft_strcmp(temp_line, "LIGHT"))
@@ -44,14 +46,16 @@ static void	get_quantities(t_env *e, int fd)
 			++e->materials;
 		else if (!ft_strcmp(line, "PRIMITIVE"))
 			++e->prims;
+		else if (!ft_strcmp(line, "OBJECT"))
+			++e->objects;
 		ft_strdel(&line);
 	}
-	ft_printf("%d :\tLIGHTS\n", (int)e->lights);
-	ft_printf("%d :\tMATERIALS\n", (int)e->materials);
-	ft_printf("%d :\tPRIMITIVES\n", (int)e->prims);
+	ft_printf("%d:\tLIGHTS\n%d:\tMATERIALS\n%d:\tPRIMITIVES\n%d:\tOBJECTS\n",\
+		(int)e->lights, (int)e->materials, (int)e->prims, (int)e->objects);
 	e->light = (t_light **)malloc(sizeof(t_light *) * e->lights);
 	e->material = (t_material **)malloc(sizeof(t_material *) * e->materials);
 	e->prim = (t_prim **)malloc(sizeof(t_prim *) * e->prims);
+	e->object = (t_object **)malloc(sizeof(t_object *) * e->objects);
 	close(fd);
 }
 
@@ -71,6 +75,7 @@ void		read_scene(char *file, t_env *e)
 	e->lights = 0;
 	e->materials = 0;
 	e->prims = 0;
+	e->objects = 0;
 	if ((fd = open(file, O_RDONLY)) == -1)
 		err(FILE_OPEN_ERROR, "read_scene", e);
 	while (ft_gnl(fd, &temp_line))

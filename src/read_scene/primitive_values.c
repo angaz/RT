@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 09:54:48 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 01:32:56 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 23:21:40 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,23 @@ static int		get_type(char *type_str)
 		type = PRIM_CONE;
 	else if (!ft_strcmp(type_str, "cylinder"))
 		type = PRIM_CYLINDER;
-//	else if (!ft_strcmp(type_str, "triangle"))
-//		type = OBJ_TRIANGLE;
 	return (type);
 }
 
-static size_t	get_material_number(t_env *e, t_split_string values)
+size_t			get_material_number(t_env *e, char *str)
 {
 	size_t	material;
 	char	*warn;
 
 	material = 0;
-	if (values.words != 1)
-		err(FILE_FORMAT_ERROR, "get_material_number", e);
 	while (material < e->materials)
 	{
-		if (!ft_strcmp(e->material[material]->name, values.strings[0]))
+		if (!ft_strcmp(e->material[material]->name, str))
 			return (material);
 		++material;
 	}
 	ft_sprintf(&warn, "\e[208m    WARNING: Material name: %s \
-		is not a defined material name\n", values.strings[0]);
+		is not a defined material name\n", str);
 	ft_putstr_fd(warn, 2);
 	ft_strdel(&warn);
 	return (0);
@@ -70,18 +66,16 @@ static void		set_primitive_values(t_env *e, char *pt1, char *pt2)
 	else if (!ft_strcmp(pt1, "ANGLE"))
 		e->prim[e->prims]->angle = ft_atod(values.strings[0]) * M_PI / 180;
 	else if (!ft_strcmp(pt1, "MATERIAL"))
-		e->prim[e->prims]->material = get_material_number(e, values);
-//	else if (!ft_strcmp(pt1, "TRIANGLE"))
-//		get_tri(e, e->prim[e->prims], &values);
+		e->prim[e->prims]->material = get_material_number(e, values.strings[0]);
 	ft_free_split(&values);
 }
 
-static void		init_primitive(t_prim *o)
+static void		init_primitive(t_prim *p)
 {
-	o->type = PRIM_SPHERE;
-	o->loc = (t_vector){0.0, 0.0, 0.0};
-	o->radius = 1.0;
-	o->material = 0;
+	p->type = PRIM_SPHERE;
+	p->loc = (t_vector){0.0, 0.0, 0.0};
+	p->radius = 1.0;
+	p->material = 0;
 }
 
 void			get_primitive_attributes(t_env *e, int fd)

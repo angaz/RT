@@ -6,14 +6,14 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 11:42:21 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 00:34:37 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 23:48:35 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# define BUFF_SIZE	8
+# define BUFF_SIZE	1
 
 # include <string.h>
 # include <stdlib.h>

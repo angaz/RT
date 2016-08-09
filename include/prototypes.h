@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 01:30:26 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 23:22:04 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void		exit_rt(t_env *e);
 */
 void		read_scene(char *file, t_env *e);
 void		get_primitive_attributes(t_env *e, int fd);
+void		get_object_attributes(t_env *e, int fd);
+size_t		get_material_number(t_env *e, char *str);
 void		get_camera_attributes(t_env *e, int fd);
 void		get_light_attributes(t_env *e, int fd);
 t_colour	get_colour(t_env *e, t_split_string values);
