@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/09 01:16:48 by adippena         ###   ########.fr        #
+#    Updated: 2016/08/09 23:10:37 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ INTERSECT	=	src/intersect/intersect_scene.c		\
 READ_SCENE	=	src/read_scene/camera_values.c		\
 				src/read_scene/light_values.c		\
 				src/read_scene/material_values.c	\
+				src/read_scene/object_values.c		\
 				src/read_scene/primitive_values.c	\
 				src/read_scene/read_colour.c		\
 				src/read_scene/read_scene.c			\

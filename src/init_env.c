@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:14 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 01:29:18 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 23:28:30 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void			nullify_pointers(t_env *e)
 	e->light = NULL;
 	e->material = NULL;
 	e->prims = 0;
+	e->objects = 0;
 	e->lights = 0;
 	e->materials = 0;
 	init_camera(e);

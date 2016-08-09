@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 01:09:27 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 23:09:33 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,17 @@ typedef struct	s_face
 	t_vector	*v2;
 	t_vector	*n;
 }				t_face;
+
+typedef struct	s_object
+{
+	t_face		*face;
+	size_t		faces;
+	size_t		material;
+	t_vector	*v;
+	size_t		verticies;
+	t_vector	*vn;
+	size_t		vnormals;
+}				t_object;
 
 typedef struct	s_prim
 {
@@ -100,9 +111,12 @@ typedef struct	s_env
 	int				px_pitch;
 	t_ray			ray;
 	t_camera		camera;
-	t_prim			*hit;
+	t_prim			*p_hit;
 	t_prim			**prim;
 	size_t			prims;
+	t_object		*o_hit;
+	t_object		**object;
+	size_t			objects;
 	t_light			**light;
 	size_t			lights;
 	t_material		**material;

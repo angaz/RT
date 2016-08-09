@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 01:23:53 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 21:36:00 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static uint32_t	find_colour(t_env *e)
 	uint32_t	colour;
 	t_colour	temp_c;
 
-	if (e->hit == NULL)
+	if (e->p_hit == NULL)
 		return (0x7F7F7F);
 	temp_c = diffuse_shade(e);
 	colour = 0;
@@ -65,9 +65,12 @@ static t_env	*copy_env(t_env *e)
 	res->px_pitch = e->px_pitch;
 	res->ray = e->ray;
 	res->camera = e->camera;
-	res->hit = e->hit;
+	res->p_hit = e->p_hit;
 	res->prim = e->prim;
 	res->prims = e->prims;
+	res->o_hit = e->o_hit;
+	res->object = e->object;
+	res->objects = e->objects;
 	res->light = e->light;
 	res->lights = e->lights;
 	res->material = e->material;

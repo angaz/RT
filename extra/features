@@ -1,0 +1,10 @@
+multithreadding - adippena
+external files - adippena
+	## TODO: reduce the amount of lines
+	## Blender files are too difficult to read :(
+	## X3D : difficult to impliment - Will need to convert Quaternion rotation
+		to vector rotation
+TODO: gamma correction - adippena
+glossy / reflective surfaces - arovan- rojones
+TODO: refractions - arovan- rojones
+TODO: add here anything you can think of
