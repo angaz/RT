@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 12:40:41 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/08 13:42:48 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/09 12:11:33 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	set_material_values(t_env *e, char *pt1, char *pt2)
 		e->material[e->materials]->reflect = to_range(ft_atod(values.strings[0]), 0.0, 1.0);
 	else if (!ft_strcmp(pt1, "REFRACT"))
 		e->material[e->materials]->refract = to_range(ft_atod(values.strings[0]), 0.0, 1.0);
+	else if (!ft_strcmp(pt1, "IOR"))
+		e->material[e->materials]->ior = ft_atod(values.strings[0]);
 	ft_free_split(&values);
 }
 
@@ -41,7 +43,8 @@ static void	init_material(t_material *m)
 {
 	m->name = ft_strdup("UNNAMED");
 	m->reflect = 0.0;
-	m->refract = 0.0;
+	m->refract = 1.0;
+	m->ior = 1;
 	m->diff = (t_colour){1.0, 0.0, 0.870588235294, 1.0};
 	m->spec = (t_colour){1.0, 1.0, 1.0, 0.5};
 }

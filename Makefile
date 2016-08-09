@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/08 13:17:41 by rojones          ###   ########.fr        #
+#    Updated: 2016/08/09 10:22:17 by rojones          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,8 +56,9 @@ SRC			=	$(INTERSECT)						\
 				src/loop.c							\
 				src/main.c							\
 				src/shadow.c						\
-				src/reflect.c						\
 				src/get_normal.c					\
+				src/reflect.c						\
+				src/refract.c						\
 				src/find_colour_struct.c			\
 				src/copy_env.c
 
