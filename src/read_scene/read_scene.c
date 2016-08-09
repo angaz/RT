@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:42 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/05 16:15:28 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 13:34:48 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ static void	scene_attributes(t_env *e, char *line)
 	{
 		quantity = ft_atoi(split.strings[1]);
 		e->material = (t_material **)malloc(sizeof(t_material *) * quantity);
+	}
+	else if (!ft_strcmp(split.strings[0], "MAXDEPTH"))
+	{
+		e->maxdepth = ft_atoi(split.strings[1]);
+		if (e->maxdepth < 0)
+			e->maxdepth = -1 * e->maxdepth;
 	}
 	ft_free_split(&split);
 }

@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/08 13:16:30 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/08 13:20:40 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/09 13:53:39 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ t_env	*copy_env(t_env *e)
 	res->material = e->material;
 	res->materials = e->materials;
 	res->t = e->t;
+	res->maxdepth = e->maxdepth;
 	return (res);
 }

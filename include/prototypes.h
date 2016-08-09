@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/08 13:18:54 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/09 12:04:41 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,11 @@ t_colour    find_colour_struct(t_env *e, int depth);
 ** src/reflect.c
 */
 t_colour    reflect(t_env *e, int depth);
+
+/*
+** src/refract.c
+*/
+t_colour    refract(t_env *e, int depth, t_colour colour);
 
 /*
 ** src/shadow.c

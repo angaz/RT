@@ -1,6 +1,6 @@
 SCENE RT
-	OBJECTS		7
-	LIGHTS		5
+	OBJECTS		3
+	LIGHTS		1
 	MATERIALS	5
 	MAXDEPTH	5
 
@@ -10,27 +10,9 @@ SCENE RT
 		UP	0 0 1
 
 	LIGHT
-		LOC			10 0 10
+		LOC			15 -18 10
 		COLOUR		FFFFFF
-		INTENSITY	1.0
-		HALF		30
-
-	LIGHT
-		LOC			20 0 10
-		COLOUR		FFFFFF
-		INTENSITY	1.0
-		HALF		30
-
-	LIGHT
-		LOC			-10 0 10
-		COLOUR		FFFFFF
-		INTENSITY	1.0
-		HALF		30
-
-	LIGHT
-		LOC			-20 0 10
-		COLOUR		FFFFFF
-		INTENSITY	1.0
+		INTENSITY	10
 		HALF		30
 
 	MATERIAL
@@ -86,24 +68,6 @@ SCENE RT
 
 	OBJECT
 		TYPE		sphere
-		LOC			0 0 0
+		LOC			-4 -1 2 
 		RADIUS		1
 		MATERIAL	blue
-
-	OBJECT
-		TYPE		sphere
-		LOC			-5 10 0
-		RADIUS		1
-		MATERIAL	orange
-
-	OBJECT
-		TYPE		sphere
-		LOC			-15 10 0
-		RADIUS		1.5
-		MATERIAL	orange_reflect
-
-	OBJECT
-		TYPE		sphere
-		LOC			5 0 0
-		RADIUS		1.5
-		MATERIAL	orange_reflect
