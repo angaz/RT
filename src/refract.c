@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/09 09:30:32 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/09 15:54:43 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/10 08:29:50 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,23 @@ static int	set_refract_ray(t_env *e, t_env *refract)
 	double		sin;
 	double		check;
 
+
 	refract->ray.loc = vadd(e->ray.loc, vmult(e->ray.dir, e->t));
 	n = get_normal(e, refract->ray.loc);
-	refract->ray.ior = e->material[e->hit->material]->ior;
-	cos = vdot(e->ray.dir, n);
+
+	if (e->ray.in == e->hit)
+	{
+		cos = 180 - vdot(e->ray.dir, n);
+		refract->ray.in = NULL;
+		refract->ray.ior = 1;
+	}
+	else
+	{
+		cos = vdot(e->ray.dir, n);
+		refract->ray.in = e->hit;
+		refract->ray.ior = e->material[e->hit->material]->ior;
+	}
+//printf("IOR %f ior of e->ray %f refract.ior %f\n", e->ray.ior / refract->ray.ior, e->ray.ior , refract->ray.ior);
 	sin = pow ((e->ray.ior / refract->ray.ior), 2) * (1 - pow(cos,2));
 	check = 1 - sin;
 	if (check < 0)
