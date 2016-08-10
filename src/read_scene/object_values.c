@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/09 21:36:49 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 23:50:36 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/10 11:32:15 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ static void		get_quantities(t_object *o, int fd)
 
 	while (ft_gnl(fd, &line))
 	{
-		if (!ft_strncmp(line, "v ", 2))
-			++o->verticies;
 		if (!ft_strncmp(line, "vn", 2))
+			++o->verticies;
+		else if (line[0] == 'v')
 			++o->vnormals;
-		if (!ft_strncmp(line, "f ", 2))
+		else if (line[0] == 'f')
 			++o->faces;
 		ft_strdel(&line);
 	}
-	o->face = (t_face *)malloc(sizeof(t_face) * o->faces);
-	o->v = (t_vector *)malloc(sizeof(t_vector) * o->verticies);
-	o->vn = (t_vector *)malloc(sizeof(t_vector) * o->vnormals);
+	o->face = (t_face **)malloc(sizeof(t_face *) * o->faces);
+	o->v = (t_vector **)malloc(sizeof(t_vector *) * o->verticies);
+	o->vn = (t_vector **)malloc(sizeof(t_vector *) * o->vnormals);
 	o->faces = 0;
 	o->verticies = 0;
 	o->vnormals = 0;
@@ -48,25 +48,28 @@ static void		read_obj(t_env *e, int fd)
 			values = ft_nstrsplit(line, ' ');
 			if (!ft_strcmp(values.strings[0], "v") && values.words == 4)
 			{
-				o->v[o->verticies].x = ft_atod(values.strings[1]);
-				o->v[o->verticies].y = ft_atod(values.strings[2]);
-				o->v[o->verticies].z = ft_atod(values.strings[3]);
+				o->v[o->verticies] = (t_vector *)malloc(sizeof(t_vector));
+				o->v[o->verticies]->x = ft_atod(values.strings[1]);
+				o->v[o->verticies]->y = ft_atod(values.strings[2]);
+				o->v[o->verticies]->z = ft_atod(values.strings[3]);
 				++o->verticies;
 			}
 			if (!ft_strcmp(values.strings[0], "vn") && values.words == 4)
 			{
-				o->vn[o->vnormals].x = ft_atod(values.strings[1]);
-				o->vn[o->vnormals].y = ft_atod(values.strings[2]);
-				o->vn[o->vnormals].z = ft_atod(values.strings[3]);
+				o->vn[o->vnormals] = (t_vector *)malloc(sizeof(t_vector));
+				o->vn[o->vnormals]->x = ft_atod(values.strings[1]);
+				o->vn[o->vnormals]->y = ft_atod(values.strings[2]);
+				o->vn[o->vnormals]->z = ft_atod(values.strings[3]);
 				++o->vnormals;
 			}
 			if (!ft_strcmp(values.strings[0], "f") && values.words == 4)
 			{
-				o->face[o->faces].v0 = &o->v[ft_atoi(values.strings[1]) - 1];
-				o->face[o->faces].v1 = &o->v[ft_atoi(values.strings[2]) - 1];
-				o->face[o->faces].v2 = &o->v[ft_atoi(values.strings[3]) - 1];
-				o->face[o->faces].n =\
-					&o->vn[ft_atoi(ft_strrchr(values.strings[1], '/') + 1) - 1];
+				o->face[o->faces] = (t_face *)malloc(sizeof(t_face));
+				o->face[o->faces]->v0 = o->v[ft_atoi(values.strings[1]) - 1];
+				o->face[o->faces]->v1 = o->v[ft_atoi(values.strings[2]) - 1];
+				o->face[o->faces]->v2 = o->v[ft_atoi(values.strings[3]) - 1];
+				o->face[o->faces]->n =\
+					o->vn[ft_atoi(ft_strrchr(values.strings[1], '/') + 1) - 1];
 				++o->faces;
 			}
 			ft_free_split(&values);
@@ -115,7 +118,6 @@ void			get_object_attributes(t_env *e, int fd)
 	init_object(e->object[e->objects]);
 	while (ft_gnl(fd, &temp_line))
 	{
-ft_putendl(temp_line);
 		if (temp_line[0] == '\0')
 		{
 			ft_strdel(&temp_line);
@@ -134,18 +136,18 @@ ft_putendl(temp_line);
 	while (i < o->faces)
 	{
 		printf("FACE: %lu\n", i);
-		printf("V0: %lf, %lf, %lf\n", o->face[i].v0->x,\
-										o->face[i].v0->y,\
-										o->face[i].v0->z);
-		printf("V1: %lf, %lf, %lf\n", o->face[i].v1->x,\
-										o->face[i].v1->y,\
-										o->face[i].v1->z);
-		printf("V2: %lf, %lf, %lf\n", o->face[i].v2->x,\
-										o->face[i].v2->y,\
-										o->face[i].v2->z);
-		printf("N: %lf, %lf, %lf\n\n", o->face[i].n->x,\
-										o->face[i].n->y,\
-										o->face[i].n->z);
+		printf("V0: %lf, %lf, %lf\n", o->face[i]->v0->x,\
+										o->face[i]->v0->y,\
+										o->face[i]->v0->z);
+		printf("V1: %lf, %lf, %lf\n", o->face[i]->v1->x,\
+										o->face[i]->v1->y,\
+										o->face[i]->v1->z);
+		printf("V2: %lf, %lf, %lf\n", o->face[i]->v2->x,\
+										o->face[i]->v2->y,\
+										o->face[i]->v2->z);
+		printf("N: %lf, %lf, %lf\n\n", o->face[i]->n->x,\
+										o->face[i]->n->y,\
+										o->face[i]->n->z);
 	++i;
 	}
 	++e->objects;
