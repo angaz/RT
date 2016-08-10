@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:38:20 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/10 21:06:01 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/10 22:40:56 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int			intersect_prim(t_env *e, t_ray *ray, size_t prim, double *t)
 
 void		intersect_scene(t_env *e)
 {
-ft_putstr("INTERSECT_SCENE\n");
 	double		t;
 	size_t		prim;
 	size_t		face;
@@ -40,7 +39,6 @@ ft_putstr("INTERSECT_SCENE\n");
 	e->hit_type = -1;
 	prim = 0;
 	object = 0;
-	face = 0;
 	while (prim < e->prims)
 	{
 		if (intersect_prim(e, &e->ray, prim, &t) && t < e->t)
@@ -54,6 +52,7 @@ ft_putstr("INTERSECT_SCENE\n");
 	while (object < e->objects)
 	{
 		o = e->object[object];
+		face = 0;
 		while (face < o->faces)
 		{
 			if (intersect_triangle(&e->ray, o->face[face], &t) && t < e->t)
