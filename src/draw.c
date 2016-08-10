@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 12:14:59 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/10 08:29:41 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,10 @@
 static uint32_t	find_colour(t_env *e)
 {
 	uint32_t	colour;
-//	double		refract_key;
-//	double		reflect_key;
 	t_colour	temp_c;
 	t_colour	reflect_col;
 	t_colour	refract_col;
 
-//	refract_key = e->material[e->hit->material]->refract;
-//	reflect_key = e->material[e->hit->material]->reflect;
 	if (e->hit == NULL)
 		return (0x7F7F7F);
 	temp_c = diffuse_shade(e);

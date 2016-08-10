@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 13:29:44 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/10 18:08:21 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct	s_object
 typedef struct	s_ray
 {
 	double		ior;
+	t_object	*in;
 	t_vector	loc;
 	t_vector	dir;
 }				t_ray;
@@ -118,4 +119,10 @@ typedef struct	s_camera_ray
 	double		h;
 }				t_camera_ray;
 
+typedef struct	s_objcount
+{
+	int	obj;
+	int	light;
+	int	mat;
+}				t_objcount;
 #endif
