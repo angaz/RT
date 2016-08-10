@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 23:22:04 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/10 19:00:49 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,13 @@ int			intersect_sphere(t_ray *r, t_prim *s, double *t);
 int			intersect_plane(t_ray *r, t_prim *o, double *t);
 int			intersect_cylinder(t_ray *r, t_prim *o, double *t);
 int			intersect_cone(t_ray *r, t_prim *o, double *t);
-int			intersect_triangle(t_ray *r, t_prim *o, double *t);
+int			intersect_triangle(t_ray *r, t_face *f, double *t);
 
 /*
 ** src/diffuse.c
 */
-t_colour	diffuse_shade(t_env *e);
+t_colour	prim_diffuse(t_env *e);
+t_colour	face_diffuse(t_env *e);
 
 /*
 ** src/shadow.c

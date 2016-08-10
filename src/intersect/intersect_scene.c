@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:38:20 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/10 11:39:20 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/10 21:06:01 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,44 @@ int			intersect_prim(t_env *e, t_ray *ray, size_t prim, double *t)
 
 void		intersect_scene(t_env *e)
 {
-	double		min_dist;
+ft_putstr("INTERSECT_SCENE\n");
 	double		t;
-	size_t		prim_no;
-	t_prim		*hit;
+	size_t		prim;
+	size_t		face;
+	size_t		object;
+	t_object	*o;
 
-	min_dist = INFINITY;
-	t = INFINITY;
-	hit = NULL;
-	prim_no = 0;
-	while (prim_no < e->prims)
+	e->t = INFINITY;
+	e->p_hit = NULL;
+	e->o_hit = NULL;
+	e->hit_type = -1;
+	prim = 0;
+	object = 0;
+	face = 0;
+	while (prim < e->prims)
 	{
-		if (intersect_prim(e, &e->ray, prim_no, &t) && t < min_dist)
+		if (intersect_prim(e, &e->ray, prim, &t) && t < e->t)
 		{
-			min_dist = t;
-			hit = e->prim[prim_no];
+			e->t = t;
+			e->p_hit = e->prim[prim];
+			e->hit_type = PRIMITIVE;
 		}
-		++prim_no;
+		++prim;
 	}
-	e->t = min_dist;
-	e->p_hit = hit;
+	while (object < e->objects)
+	{
+		o = e->object[object];
+		while (face < o->faces)
+		{
+			if (intersect_triangle(&e->ray, o->face[face], &t) && t < e->t)
+			{
+				e->t = t;
+				e->o_hit = o->face[face];
+				e->o_hit_index = object;
+				e->hit_type = FACE;
+			}
+			++face;
+		}
+		++object;
+	}
 }

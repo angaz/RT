@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/09 21:36:49 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/10 11:32:15 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/10 21:05:26 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,19 @@ static void		get_quantities(t_object *o, int fd)
 	while (ft_gnl(fd, &line))
 	{
 		if (!ft_strncmp(line, "vn", 2))
-			++o->verticies;
-		else if (line[0] == 'v')
 			++o->vnormals;
+		else if (line[0] == 'v')
+			++o->verticies;
 		else if (line[0] == 'f')
 			++o->faces;
 		ft_strdel(&line);
 	}
-	o->face = (t_face **)malloc(sizeof(t_face *) * o->faces);
-	o->v = (t_vector **)malloc(sizeof(t_vector *) * o->verticies);
-	o->vn = (t_vector **)malloc(sizeof(t_vector *) * o->vnormals);
+	if ((o->face = (t_face **)malloc(sizeof(t_face *) * o->faces)) == NULL)
+		perror("");
+	if ((o->v = (t_vector **)malloc(sizeof(t_vector *) * o->verticies)) == NULL)
+		perror("");
+	if ((o->vn = (t_vector **)malloc(sizeof(t_vector *) * o->vnormals)) == NULL)
+		perror("");
 	o->faces = 0;
 	o->verticies = 0;
 	o->vnormals = 0;
@@ -129,26 +132,6 @@ void			get_object_attributes(t_env *e, int fd)
 			err(FILE_FORMAT_ERROR, "get_object_attributes", e);
 		set_object_values(e, attr.strings[0], attr.strings[1]);
 		ft_free_split(&attr);
-	}
-
-	size_t		i	= 0;
-	t_object	*o	= e->object[e->objects];
-	while (i < o->faces)
-	{
-		printf("FACE: %lu\n", i);
-		printf("V0: %lf, %lf, %lf\n", o->face[i]->v0->x,\
-										o->face[i]->v0->y,\
-										o->face[i]->v0->z);
-		printf("V1: %lf, %lf, %lf\n", o->face[i]->v1->x,\
-										o->face[i]->v1->y,\
-										o->face[i]->v1->z);
-		printf("V2: %lf, %lf, %lf\n", o->face[i]->v2->x,\
-										o->face[i]->v2->y,\
-										o->face[i]->v2->z);
-		printf("N: %lf, %lf, %lf\n\n", o->face[i]->n->x,\
-										o->face[i]->n->y,\
-										o->face[i]->n->z);
-	++i;
 	}
 	++e->objects;
 }

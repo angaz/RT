@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/10 11:39:26 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/10 19:09:51 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static uint32_t	find_colour(t_env *e)
 	uint32_t	colour;
 	t_colour	temp_c;
 
-	if (e->p_hit == NULL)
+	if (!e->hit_type)
 		return (0x7F7F7F);
-	temp_c = diffuse_shade(e);
+	temp_c = (e->hit_type == FACE) ? face_diffuse(e) : prim_diffuse(e);
 	colour = 0;
 	colour |= (int)(temp_c.r * 255.0) << 16;
 	colour |= (int)(temp_c.g * 255.0) << 8;

@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 14:57:03 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 01:15:10 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/10 21:05:30 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@
 ** Möller–Trumbore ray-triangle intersection algorithm
 */
 
-int		intersect_triangle(t_ray *r, t_prim *o, double *t)
+int		intersect_triangle(t_ray *r, t_face *f, double *t)
 {
 	t_intersect_triangle	it;
 
-	it.edge1 = vsub(o->p2, o->p1);
-	it.edge2 = vsub(o->p3, o->p1);
+	it.edge1 = vsub(*f->v1, *f->v0);
+	it.edge2 = vsub(*f->v2, *f->v0);
 	it.p = vcross(r->dir, it.edge2);
 	it.d = vdot(it.edge1, it.p);
 	if (it.d > -EPSILON && it.d < EPSILON)
 		return (0);
 	it.inverse_d = 1.0 / it.d;
-	it.dist = vsub(r->loc, o->p1);
+	it.dist = vsub(r->loc, *f->v0);
 	it.u = vdot(it.dist, it.p) * it.inverse_d;
 	if (it.u < EPSILON || it.u > 1.0)
 		return (0);
