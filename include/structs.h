@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 23:09:33 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/10 11:24:31 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ typedef struct	s_face
 
 typedef struct	s_object
 {
-	t_face		*face;
+	t_face		**face;
 	size_t		faces;
 	size_t		material;
-	t_vector	*v;
+	t_vector	**v;
 	size_t		verticies;
-	t_vector	*vn;
+	t_vector	**vn;
 	size_t		vnormals;
 }				t_object;
 
