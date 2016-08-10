@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/13 13:55:24 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/10 11:34:55 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/10 19:14:43 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void		diffuse_colour(t_env *e, t_diffuse *d)
 	}
 }
 
-t_colour		diffuse_shade(t_env *e)
+t_colour		prim_diffuse(t_env *e)
 {
 	t_diffuse	d;
 	size_t		i;
@@ -59,6 +59,29 @@ t_colour		diffuse_shade(t_env *e)
 	d.mat = e->material[e->p_hit->material];
 	d.p = vadd(e->ray.loc, vmult(e->ray.dir, e->t));
 	d.n = get_normal(e, d.p);
+	d.colour = (t_vector){0.0, 0.0, 0.0};
+	d.intensity = 1.0;
+	i = 0;
+	while (i < e->lights)
+	{
+		d.light = e->light[i];
+		diffuse_colour(e, &d);
+		++i;
+	}
+	d.colour.x = (d.colour.x > 1.0) ? 1.0 : d.colour.x;
+	d.colour.y = (d.colour.y > 1.0) ? 1.0 : d.colour.y;
+	d.colour.z = (d.colour.z > 1.0) ? 1.0 : d.colour.z;
+	return ((t_colour){d.colour.x, d.colour.y, d.colour.z, d.intensity});
+}
+
+t_colour		face_diffuse(t_env *e)
+{
+	t_diffuse	d;
+	size_t		i;
+
+	d.mat = e->material[e->object[e->o_hit_index]->material];
+	d.p = vadd(e->ray.loc, vmult(e->ray.dir, e->t));
+	d.n = *e->o_hit->n;
 	d.colour = (t_vector){0.0, 0.0, 0.0};
 	d.intensity = 1.0;
 	i = 0;

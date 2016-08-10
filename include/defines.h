@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:13 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 21:59:56 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/10 19:10:04 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 # define PRIM_CONE		3
 # define PRIM_CYLINDER	4
 # define PRIM_TRIANGLE	5
+
+# define PRIMITIVE		1
+# define FACE			2
 
 /*
 ** ERROR DEFINES

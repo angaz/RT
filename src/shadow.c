@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 23:47:45 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 01:27:46 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/10 21:04:47 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ int		in_shadow(t_env *e, t_light *light)
 	double		delta;
 	double		distance;
 	size_t		prim;
+	size_t		face;
+	size_t		object;
+	t_object	*o;
 
 	t = INFINITY;
 	ray.loc = vadd(e->ray.loc, vmult(e->ray.dir, e->t));
@@ -27,10 +30,23 @@ int		in_shadow(t_env *e, t_light *light)
 	distance = vnormalize(ray.dir);
 	ray.dir = vunit(ray.dir);
 	prim = 0;
+	face = 0;
+	object = 0;
 	while (prim < e->prims)
 		if (intersect_prim(e, &ray, prim, &t) && t < delta && t < distance)
 			return (0);
 		else
 			++prim;
+	while (object < e->objects)
+	{
+		o = e->object[object];
+		while (face < o->faces)
+			if (intersect_triangle(&e->ray, o->face[face], &t) && t < e->t)
+				return (0);
+			else
+				++face;
+		++object;
+	}
+
 	return (1);
 }
