@@ -79,13 +79,13 @@ SCENE RT
 		MATERIAL	orange
 
 	OBJECT
+		FILE		cube.obj
+		MATERIAL	green
+
+	OBJECT
 		FILE		check01.obj
 		MATERIAL	green
 
 	OBJECT
 		FILE		check02.obj
 		MATERIAL	blue
-
-	OBJECT
-		FILE		cube.obj
-		MATERIAL	green

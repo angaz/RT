@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/09 21:36:49 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/10 21:56:04 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/11 14:16:39 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static void		read_obj(t_env *e, int fd)
 				o->v[o->verticies]->x = ft_atod(values.strings[1]);
 				o->v[o->verticies]->y = ft_atod(values.strings[2]);
 				o->v[o->verticies]->z = ft_atod(values.strings[3]);
-printf("%lf %lf %lf\n", o->v[o->verticies]->x, o->v[o->verticies]->y, o->v[o->verticies]->z);
 				++o->verticies;
 			}
 			if (!ft_strcmp(values.strings[0], "vn") && values.words == 4)
