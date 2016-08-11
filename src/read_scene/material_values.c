@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 12:40:41 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 12:11:33 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/11 15:58:07 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ static void	set_material_values(t_env *e, char *pt1, char *pt2)
 
 	values = ft_nstrsplit(pt2, ' ');
 	if (!ft_strcmp(pt1, "NAME"))
+	{
+		ft_strdel(&e->material[e->materials]->name);
 		e->material[e->materials]->name = ft_strdup(values.strings[0]);
+	}
 	else if (!ft_strcmp(pt1, "DIFFUSE"))
 		e->material[e->materials]->diff = get_colour(e, values);
 	else if (!ft_strcmp(pt1, "SPECULAR"))
@@ -39,7 +42,7 @@ static void	set_material_values(t_env *e, char *pt1, char *pt2)
 	ft_free_split(&values);
 }
 
-static void	init_material(t_material *m)
+void	init_material(t_material *m)
 {
 	m->name = ft_strdup("UNNAMED");
 	m->reflect = 0.0;

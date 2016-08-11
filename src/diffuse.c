@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/13 13:55:24 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 14:15:51 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/11 15:11:43 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void		diffuse_colour(t_env *e, t_diffuse *d)
 		d->l = vsub(d->light->loc, d->p);
 		d->dist = vnormalize(d->l);
 		d->l = vunit(d->l);
-		d->v = vunit(vsub(e->camera.loc, d->p));
+		d->v = vunit(vsub(e->ray.loc, d->p));
 		d->h = vunit(vadd(d->v, d->l));
 		d->intensity = d->light->lm *
 			(d->light->half / (d->light->half + d->dist * d->dist));
