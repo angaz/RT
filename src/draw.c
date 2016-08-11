@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/11 15:37:09 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/11 18:01:52 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,14 +107,14 @@ static void		make_chunks(t_env *e, SDL_Rect *d)
 
 void			draw(t_env *e, SDL_Rect d)
 {
-	clock_t		t;
+	time_t	t;
 
-	t = clock();
+	t = time(NULL);
 	SDL_LockTexture(e->img, NULL, &e->px, &e->px_pitch);
 	make_chunks(e, &d);
 	SDL_UnlockTexture(e->img);
 	SDL_RenderCopy(e->rend, e->img, NULL, NULL);
 	SDL_RenderPresent(e->rend);
-	t = clock() - t;
-	ft_printf("Frame drawn in %d seconds\n", t / CLOCKS_PER_SEC);
+	t = time(NULL) - t;
+	ft_printf("Frame drawn in %d seconds\n", t);
 }

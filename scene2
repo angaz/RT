@@ -40,7 +40,7 @@ SCENE RT
 
 	MATERIAL
 		NAME		blue
-		DIFFUSE		0000FF 1.0
+		DIFFUSE		0000FF 0.8
 		SPEULAR		000000 0.0
 
 	MATERIAL
@@ -78,16 +78,24 @@ SCENE RT
 		RADIUS		1.5
 		MATERIAL	orange
 
-	PRIMITIVE
-		TYPE		cylinder
-		LOC			5 0 0
-		RADIUS		1.5
-		DIR			0 0 1
-		MATERIAL	orange
+	OBJECT
+		FILE		cube.obj
+		MATERIAL	green
 
-	PRIMITIVE
-		TYPE		cone
-		LOC			-5 0 0
-		ANGLE		22.5
-		DIR			1 1 1
-		MATERIAL	orange
+	OBJECT
+		FILE		check01.obj
+		MATERIAL	green
+
+	OBJECT
+		FILE		check02.obj
+		MATERIAL	blue
+
+
+	OBJECT
+		FILE		suzanne.obj
+		MATERIAL	green
+
+
+	OBJECT
+		FILE		teapot.obj
+		MATERIAL	green

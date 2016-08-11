@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/09 21:36:49 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/11 14:16:39 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/11 19:49:28 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,50 +35,6 @@ static void		get_quantities(t_object *o, int fd)
 	o->faces = 0;
 	o->verticies = 0;
 	o->vnormals = 0;
-}
-
-static void		read_obj(t_env *e, int fd)
-{
-	t_split_string	values;
-	char			*line;
-	t_object		*o;
-
-	o = e->object[e->objects];
-	while (ft_gnl(fd, &line))
-	{
-		if (line[0] != '#' || line[0] != 's')
-		{
-			values = ft_nstrsplit(line, ' ');
-			if (!ft_strcmp(values.strings[0], "v") && values.words == 4)
-			{
-				o->v[o->verticies] = (t_vector *)malloc(sizeof(t_vector));
-				o->v[o->verticies]->x = ft_atod(values.strings[1]);
-				o->v[o->verticies]->y = ft_atod(values.strings[2]);
-				o->v[o->verticies]->z = ft_atod(values.strings[3]);
-				++o->verticies;
-			}
-			if (!ft_strcmp(values.strings[0], "vn") && values.words == 4)
-			{
-				o->vn[o->vnormals] = (t_vector *)malloc(sizeof(t_vector));
-				o->vn[o->vnormals]->x = ft_atod(values.strings[1]);
-				o->vn[o->vnormals]->y = ft_atod(values.strings[2]);
-				o->vn[o->vnormals]->z = ft_atod(values.strings[3]);
-				++o->vnormals;
-			}
-			if (!ft_strcmp(values.strings[0], "f") && values.words == 4)
-			{
-				o->face[o->faces] = (t_face *)malloc(sizeof(t_face));
-				o->face[o->faces]->v0 = o->v[ft_atoi(values.strings[1]) - 1];
-				o->face[o->faces]->v1 = o->v[ft_atoi(values.strings[2]) - 1];
-				o->face[o->faces]->v2 = o->v[ft_atoi(values.strings[3]) - 1];
-				o->face[o->faces]->n =\
-					o->vn[ft_atoi(ft_strrchr(values.strings[1], '/') + 1) - 1];
-				++o->faces;
-			}
-			ft_free_split(&values);
-		}
-		ft_strdel(&line);
-	}
 }
 
 static void		set_object_values(t_env *e, char *pt1, char *pt2)

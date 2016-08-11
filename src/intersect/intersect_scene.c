@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:38:20 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/10 22:40:56 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/11 22:11:44 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,20 @@ void		intersect_scene(t_env *e)
 	while (object < e->objects)
 	{
 		o = e->object[object];
-		face = 0;
-		while (face < o->faces)
+		if (intersect_box(&e->ray, o->box))
 		{
-			if (intersect_triangle(&e->ray, o->face[face], &t) && t < e->t)
+			face = 0;
+			while (face < o->faces)
 			{
-				e->t = t;
-				e->o_hit = o->face[face];
-				e->o_hit_index = object;
-				e->hit_type = FACE;
+				if (intersect_triangle(&e->ray, o->face[face], &t) && t < e->t)
+				{
+					e->t = t;
+					e->o_hit = o->face[face];
+					e->o_hit_index = object;
+					e->hit_type = FACE;
+				}
+				++face;
 			}
-			++face;
 		}
 		++object;
 	}
