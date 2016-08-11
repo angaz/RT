@@ -6,65 +6,11 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:42 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/11 10:13:16 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/11 15:58:02 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-/*static t_objcount	count_object(char *file, t_env *e)
-{
-	t_objcount	re;
-	char		*line;
-	char		*temp_line;
-	char		*temp_line2;
-	char		*temp_line3;
-	int			fd;
-
-	re.obj = 0;
-	re.light = 0;
-	re.mat = 0;
-	if ((fd = open(file, O_RDONLY)) == -1)
-		err(FILE_OPEN_ERROR, "read_scene", e);
-	if (!(ft_gnl(fd, &line)))
-		if (ft_strcmp(line, "SCENE RT"))
-			err(FILE_FORMAT_ERROR, "read_scene", e);
-	ft_strdel(&line);
-	while (ft_gnl(fd, &temp_line))
-	{
-		if (temp_line[0] == '\0')
-		{
-			ft_strdel(&line);
-			break ;
-		}
-		line = ft_strtrim(temp_line);
-		ft_strdel(&temp_line);
-		ft_strdel(&line);
-	}
-	while (ft_gnl(fd, &temp_line))
-	{
-		temp_line2 = ft_strtrim(temp_line);
-		if (!ft_strcmp(temp_line2, "OBJECT"))
-			re.obj++;
-		else if (!ft_strcmp(temp_line2, "LIGHT"))
-			re.light++;
-		else if (!ft_strcmp(temp_line2, "MATERIAL"))
-			re.mat++;
-		while (ft_gnl(fd, &temp_line3))
-		{   
-			if (temp_line3[0] == '\0')
-			{   
-				ft_strdel(&temp_line3);
-				break ;
-			}
-			ft_strdel(&temp_line3);
-		}	
-		ft_strdel(&temp_line2);
-		ft_strdel(&temp_line);
-	}
-	close (fd);
-	return (re);
-}*/
 
 static void	scene_attributes(t_env *e, char *line)
 {
@@ -106,6 +52,15 @@ static void	call_type(t_env *e, int fd, char **line)
 	ft_strdel(&temp_line);
 }
 
+static void	default_material(t_env *e)
+{
+	e->material[0] = (t_material *)malloc(sizeof(t_material));
+	init_material(e->material[0]);
+	ft_strdel(&e->material[0]->name);
+	e->material[e->materials]->name = ft_strdup("DEFAULT");
+	++e->materials;
+}
+
 void		read_scene(char *file, t_env *e)
 {
 	int			fd;
@@ -133,6 +88,7 @@ void		read_scene(char *file, t_env *e)
 		ft_strdel(&line);
 	}
 	scene_allocate(e, &counts);
+	default_material(e);
 	while (ft_gnl(fd, &temp_line))
 		call_type(e, fd, &temp_line);
 }

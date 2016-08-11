@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/11 09:28:52 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/11 10:13:19 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/11 15:31:53 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_objcount	count_object(char *file, t_env *e)
 
 	re.obj = 0;
 	re.light = 0;
-	re.mat = 0;
+	re.mat = 1;
 	if ((fd = open(file, O_RDONLY)) == -1)
 		err(FILE_OPEN_ERROR, "read_scene", e);
 	if (!(ft_gnl(fd, &temp_line)))

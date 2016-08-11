@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/11 10:01:05 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/11 15:33:41 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ t_colour	get_colour(t_env *e, t_split_string values);
 t_vector	get_vector(t_env *e, t_split_string values);
 t_vector	get_unit_vector(t_env *e, t_split_string values);
 void		get_material_attributes(t_env *e, int fd);
+
+/*
+** src/read_scene/material_values.c 
+*/
+void    init_material(t_material *m); 
 
 /*
 ** src/draw.c
