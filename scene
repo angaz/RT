@@ -95,16 +95,10 @@ SCENE RT
 		FILE		torus.obj
 		MATERIAL	purple
 
-
 	OBJECT
 		FILE		suzanne.obj
 		MATERIAL	green
 
-
 	OBJECT
 		FILE		teapot.obj
-		MATERIAL	green
-
-	OBJECT
-		FILE		cube.obj
 		MATERIAL	green
