@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 12:04:41 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/11 10:01:05 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,10 @@ t_vector    get_normal(t_env *e, t_vector ray);
 ** src/copy_env.c
 */
 t_env	*copy_env(t_env *e);
+
+/*
+** src/read_file/count_structurs.c 
+*/
+t_objcount  count_object(char *file, t_env *e);
 
 #endif

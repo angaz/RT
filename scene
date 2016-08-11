@@ -1,7 +1,4 @@
 SCENE RT
-	OBJECTS		4
-	LIGHTS		1
-	MATERIALS	3
 	MAXDEPTH	5
 
 	CAMERA
@@ -52,11 +49,11 @@ SCENE RT
 	OBJECT
 		TYPE		sphere
 		LOC			0 0 0 
-		RADIUS		1
+		RADIUS		1.5
 		MATERIAL	refract
 
 	OBJECT
 		TYPE		sphere
-		LOC			0 8 0 
-		RADIUS		1
+		LOC			2 8 0 
+		RADIUS		0.5
 		MATERIAL	blue
