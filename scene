@@ -89,3 +89,12 @@ SCENE RT
 	OBJECT
 		FILE		check02.obj
 		MATERIAL	blue
+
+	OBJECT
+		FILE		suzanne.obj
+		MATERIAL	green
+
+
+	OBJECT
+		FILE		teapot.obj
+		MATERIAL	green
