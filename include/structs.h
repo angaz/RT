@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/10 21:05:33 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/11 19:47:27 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct	s_object
 	size_t		verticies;
 	t_vector	**vn;
 	size_t		vnormals;
+	t_vector	box[2];
 }				t_object;
 
 typedef struct	s_prim

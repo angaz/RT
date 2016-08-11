@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/10 19:00:49 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/11 21:01:43 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_vector	get_vector(t_env *e, t_split_string values);
 t_vector	get_unit_vector(t_env *e, t_split_string values);
 void		get_tri(t_env *e, t_prim *o, t_split_string *values);
 void		get_material_attributes(t_env *e, int fd);
+void		read_obj(t_env *e, int fd);
 
 /*
 ** src/draw.c
@@ -78,6 +79,7 @@ int			intersect_plane(t_ray *r, t_prim *o, double *t);
 int			intersect_cylinder(t_ray *r, t_prim *o, double *t);
 int			intersect_cone(t_ray *r, t_prim *o, double *t);
 int			intersect_triangle(t_ray *r, t_face *f, double *t);
+int			intersect_box(t_ray *r, t_vector box[2]);
 
 /*
 ** src/diffuse.c

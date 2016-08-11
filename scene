@@ -45,7 +45,12 @@ SCENE RT
 
 	MATERIAL
 		NAME		orange
-		DIFFUSE		FFA900 1.0
+		DIFFUSE		FFA900 0.8
+		SPECULAR	FFFFFF 0.5
+
+	MATERIAL
+		NAME		purple
+		DIFUSE		BC00FF 0.8
 		SPECULAR	FFFFFF 0.5
 
 	PRIMITIVE
@@ -79,10 +84,6 @@ SCENE RT
 		MATERIAL	orange
 
 	OBJECT
-		FILE		cube.obj
-		MATERIAL	green
-
-	OBJECT
 		FILE		check01.obj
 		MATERIAL	green
 
@@ -91,10 +92,19 @@ SCENE RT
 		MATERIAL	blue
 
 	OBJECT
+		FILE		torus.obj
+		MATERIAL	purple
+
+
+	OBJECT
 		FILE		suzanne.obj
 		MATERIAL	green
 
 
 	OBJECT
 		FILE		teapot.obj
+		MATERIAL	green
+
+	OBJECT
+		FILE		cube.obj
 		MATERIAL	green
