@@ -2,7 +2,7 @@ SCENE RT
 	MAXDEPTH	5
 
 	CAMERA
-		LOC	8 -20 1
+		LOC	8 -20 0
 		DIR	0 0 0
 		UP	0 0 1
 
@@ -20,7 +20,7 @@ SCENE RT
 
 	MATERIAL
 		NAME		blue
-		DIFFUSE		0000FF 1.0
+		DIFFUSE		000000 1.0
 		SPECULAR	FFFFFF 0.5
 		REFLECT		0.0
 		REFRACT		1.0
@@ -32,20 +32,41 @@ SCENE RT
 		REFLECT		0.0
 		REFRACT		1.0
 
+	MATERIAL
+		NAME		refract
+		DIFFUSE		00F1F1 1.0
+		SPECULAR	FFFFFF 0.5
+		REFLECT		0.0
+		REFRACT		0.0
+		IOR			1.375
+
+	MATERIAL
+		NAME		red_reflect
+		DIFFUSE		990005 1.0
+		SPECULAR	FFFFFF 0.5
+		REFLECT		0.8
+		REFRACT		1.0
+
 	OBJECT
 		TYPE		plane
-		LOC			0 0 0
+		LOC			0 0 -5
 		NORMAL		0 0 1
 		MATERIAL	red
 
 	OBJECT
 		TYPE		plane
-		LOC			0 0 0
-		NORMAL		0 1 0
-		MATERIAL	red
+		LOC			0 20 0
+		NORMAL		0 -1 0
+		MATERIAL	red_reflect
 
 	OBJECT
 		TYPE		sphere
 		LOC			0 0 0 
 		RADIUS		1
-		MATERIAL	blue	
+		MATERIAL	refract
+
+	OBJECT
+		TYPE		sphere
+		LOC			0 8 0 
+		RADIUS		1
+		MATERIAL	blue

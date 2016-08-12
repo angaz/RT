@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/11 10:03:55 by rojones          ###   ########.fr        #
+#    Updated: 2016/08/12 10:02:07 by rojones          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,4 +83,4 @@ run:
 	rm -f $(NAME)
 	@$(MAKE) all
 	@clear
-	@./$(NAME) scene
+	@./$(NAME) scenes/scene

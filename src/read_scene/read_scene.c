@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:42 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/11 15:58:02 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/12 13:58:32 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	scene_attributes(t_env *e, char *line)
 	t_split_string	split;
 
 	split = ft_nstrsplit(line, '\t');
-	if (split.words != 2)
+	if (split.strings[0][0] != '#' &&split.words != 2)
 		err(FILE_FORMAT_ERROR, "scene_arrtibutes", e);
 	if (!ft_strcmp(split.strings[0], "MAXDEPTH"))
 	{
