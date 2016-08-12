@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 22:44:25 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/03 13:31:12 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 01:12:02 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	find_t(double a, double b, double discr, double *t)
 	t1 = (-b - sqrt_discr) / (2.0 * a);
 	if (t0 > t1)
 		t0 = t1;
-	if (t0 > 0.00001 && t0 < *t)
+	if (t0 > EPSILON)
 	{
 		*t = t0;
 		return (1);
@@ -31,7 +31,7 @@ static int	find_t(double a, double b, double discr, double *t)
 	return (0);
 }
 
-int			intersect_cylinder(t_ray *r, t_object *o, double *t)
+int			intersect_cylinder(t_ray *r, t_prim *o, double *t)
 {
 	t_int_cylinder	c;
 
@@ -42,7 +42,7 @@ int			intersect_cylinder(t_ray *r, t_object *o, double *t)
 	c.b = 2.0 * vdot(c.a_v, c.c_v);
 	c.c = vdot(c.c_v, c.c_v) - (o->radius * o->radius);
 	c.d = c.b * c.b - 4.0 * c.a * c.c;
-	if (c.d < 0.00001)
+	if (c.d < EPSILON)
 		return (0);
 	return (find_t(c.a, c.b, c.d, t));
 }
