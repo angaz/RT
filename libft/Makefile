@@ -35,7 +35,7 @@ OBJ = 	ft_atoi.o		ft_bzero.o		ft_isalnum.o	ft_isalpha.o	\
 		ft_strdup.o		ft_strequ.o		ft_striter.o	ft_striteri.o	\
 		ft_strjoin.o	ft_strcat.o		ft_strlen.o		ft_strmap.o		\
 		ft_strmapi.o	ft_strncat.o	ft_strncmp.o	ft_strncpy.o	\
-		ft_strnequ.o	ft_strnew.o		ft_strnstr.o	ft_strchr.o		\
+		ft_strnequ.o	ft_strnew.o		ft_strnstr.o	ft_strrchr.o	\
 		ft_strsplit.o	ft_strstr.o		ft_strsub.o		ft_strtrim.o	\
 		ft_tolower.o	ft_toupper.o	ft_strrev.o		ft_printf.o		\
 		ft_uitoa_base.o	ft_uitoa.o		ft_strtoupper.o	ft_gnl.o		\
