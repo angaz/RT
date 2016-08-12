@@ -1,4 +1,4 @@
-SCENE RT
+# SCENE RT
 	MAXDEPTH	10
 
 	CAMERA
@@ -49,44 +49,44 @@ SCENE RT
 		REFLECT		0.85
 		REFRACT		1.0
 
-	OBJECT
+	PRIMITIVE
 		TYPE		plane
 		LOC			0 0 -2
 		NORMAL		0 0 1
 		MATERIAL	mirror
 
-	OBJECT
+	PRIMITIVE
 		TYPE		plane
 		LOC			0 5 0
 		NORMAL		0 -1 0
 		MATERIAL	mirror
 
-	OBJECT
+	PRIMITIVE
 		TYPE		plane
 		LOC			5 0 0
 		NORMAL		1 0 0
 		MATERIAL	mirror
 
-	OBJECT
+	PRIMITIVE
 		TYPE		sphere
-		LOC			0 0.16 1.62 
+		LOC			0 0.16 1.62
 		RADIUS		1
 		MATERIAL	red
 
-	OBJECT
+	PRIMITIVE
 		TYPE		sphere
-		LOC			0 -1 0 
+		LOC			0 -1 0
 		RADIUS		1
 		MATERIAL	blue
 
-	OBJECT
+	PRIMITIVE
 		TYPE		sphere
-		LOC			-1 0.73 0 
+		LOC			-1 0.73 0
 		RADIUS		1
 		MATERIAL	green
 
-	OBJECT
+	PRIMITIVE
 		TYPE		sphere
-		LOC			1 0.73 0 
+		LOC			1 0.73 0
 		RADIUS		1
 		MATERIAL	yellow

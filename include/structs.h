@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/10 18:08:21 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/12 18:22:19 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,37 @@ typedef struct	s_material
 /*
 ** OBJECT STRUCTURE
 */
+
+typedef struct	s_face
+{
+	t_vector	*v0;
+	t_vector	*v1;
+	t_vector	*v2;
+	t_vector	*n;
+}				t_face;
+
 typedef struct	s_object
 {
+	t_face		**face;
+	size_t		faces;
+	size_t		material;
+	t_vector	**v;
+	size_t		verticies;
+	t_vector	**vn;
+	size_t		vnormals;
+	t_vector	box[2];
+}				t_object;
+
+typedef struct	s_prim
+{
+	t_vector	loc;
+	t_vector	dir;
+	t_vector	normal;
 	int			type;
 	size_t		material;
 	double		radius;
 	double		angle;
-	t_vector	loc;
-	t_vector	dir;
-	t_vector	normal;
-}				t_object;
+}				t_prim;
 
 /*
 ** RAY, CAMERA AND LIGHT STRUCTURE
@@ -64,7 +85,7 @@ typedef struct	s_object
 typedef struct	s_ray
 {
 	double		ior;
-	t_object	*in;
+	t_prim		*in;
 	t_vector	loc;
 	t_vector	dir;
 }				t_ray;
@@ -96,7 +117,12 @@ typedef struct	s_env
 	int				px_pitch;
 	t_ray			ray;
 	t_camera		camera;
-	t_object		*hit;
+	t_prim			*p_hit;
+	size_t			hit_type;
+	t_prim			**prim;
+	size_t			prims;
+	t_face			*o_hit;
+	size_t			o_hit_index;
 	t_object		**object;
 	size_t			objects;
 	t_light			**light;
@@ -119,10 +145,4 @@ typedef struct	s_camera_ray
 	double		h;
 }				t_camera_ray;
 
-typedef struct	s_objcount
-{
-	int	obj;
-	int	light;
-	int	mat;
-}				t_objcount;
 #endif

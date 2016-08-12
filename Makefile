@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/12 10:02:07 by rojones          ###   ########.fr        #
+#    Updated: 2016/08/12 19:04:31 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,25 +14,30 @@ NAME		=	RT
 LIBFT		=	-I libft/include -L libft -lft
 SDL2		=	$(shell sdl2-config --cflags --libs)
 INCLUDE		=	-I include
-CFLAGS		=	-Wall -Wextra -Werror -Wuninitialized -pthread
+CFLAGS		=	-Wall -Wextra -Werror -g3 -pthread
 LIBS		=	-lm
 
 ## PLEASE TRY AND KEEP THE SOURCE FILES IN ALPHABETICAL ORDER ##
 
-INTERSECT	=	src/intersect/intersect_scene.c		\
+INTERSECT	=	src/intersect/intersect_box.c		\
+				src/intersect/intersect_scene.c		\
 				src/intersect/intersect_sphere.c	\
 				src/intersect/intersect_plane.c		\
 				src/intersect/intersect_cylinder.c	\
-				src/intersect/intersect_cone.c
+				src/intersect/intersect_cone.c		\
+				src/intersect/intersect_triangle.c
 
 READ_SCENE	=	src/read_scene/camera_values.c		\
 				src/read_scene/light_values.c		\
 				src/read_scene/material_values.c	\
 				src/read_scene/object_values.c		\
+				src/read_scene/primitive_values.c	\
 				src/read_scene/read_colour.c		\
 				src/read_scene/read_scene.c			\
-				src/read_scene/read_vector.c		\
-				src/read_scene/count_structurs.c 
+				src/read_scene/read_obj.c			\
+				src/read_scene/read_vector.c
+#				src/read_scene/read_triangle.c
+#				src/read_scene/count_structurs.c
 
 MATHS		=	src/vector_maths/colour_to_unit.c	\
 				src/vector_maths/vector_add.c		\
@@ -83,4 +88,4 @@ run:
 	rm -f $(NAME)
 	@$(MAKE) all
 	@clear
-	@./$(NAME) scenes/scene
+	@./$(NAME) scene
