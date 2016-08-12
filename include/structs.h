@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/11 19:47:27 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/12 18:22:19 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ typedef struct	s_colour
 typedef struct	s_material
 {
 	char		*name;
+	double		reflect;
+	double		refract;
+	double		ior;
 	t_colour	diff;
 	t_colour	spec;
 }				t_material;
@@ -81,6 +84,8 @@ typedef struct	s_prim
 */
 typedef struct	s_ray
 {
+	double		ior;
+	t_prim		*in;
 	t_vector	loc;
 	t_vector	dir;
 }				t_ray;
@@ -125,6 +130,7 @@ typedef struct	s_env
 	t_material		**material;
 	size_t			materials;
 	double			t;
+	int				maxdepth;
 }				t_env;
 
 typedef struct	s_camera_ray

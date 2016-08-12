@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 12:30:08 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/08 14:02:14 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/12 19:14:01 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	init_light(t_light *l)
 {
 	l->loc = (t_vector){0.0, 0.0, 5.0};
 	l->colour = (t_colour){1.0, 1.0, 1.0, 1.0};
-	l->lm = 1.0 / M_PI;
+	l->lm = 3.415;
 	l->half = 0.0;
 }
 

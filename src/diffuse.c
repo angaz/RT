@@ -6,13 +6,13 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/13 13:55:24 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/10 19:14:43 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/12 17:48:12 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "diffuse.h"
 
-static t_vector	get_normal(t_env *e, t_vector ray)
+/*static t_vector	get_normal(t_env *e, t_vector ray)
 {
 	t_vector	normal;
 
@@ -29,7 +29,7 @@ static t_vector	get_normal(t_env *e, t_vector ray)
 			vproject(vsub(ray, e->p_hit->loc), e->p_hit->dir));
 	normal = vunit(normal);
 	return (normal);
-}
+} */
 
 static void		diffuse_colour(t_env *e, t_diffuse *d)
 {
@@ -38,7 +38,7 @@ static void		diffuse_colour(t_env *e, t_diffuse *d)
 		d->l = vsub(d->light->loc, d->p);
 		d->dist = vnormalize(d->l);
 		d->l = vunit(d->l);
-		d->v = vunit(vsub(e->camera.loc, d->p));
+		d->v = vunit(vsub(e->ray.loc, d->p));
 		d->h = vunit(vadd(d->v, d->l));
 		d->intensity = d->light->lm *
 			(d->light->half / (d->light->half + d->dist * d->dist));

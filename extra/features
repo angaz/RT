@@ -4,6 +4,7 @@ external files - adippena
 	## Blender files are too difficult to read :(
 	## X3D : difficult to impliment - Will need to convert Quaternion rotation
 		to vector rotation
+count objects in scean file befor saving - rojones
 TODO: gamma correction - adippena
 glossy / reflective surfaces - arovan- rojones
 TODO: refractions - arovan- rojones

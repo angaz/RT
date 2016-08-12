@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/11 19:48:22 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/11 20:04:44 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/12 19:44:44 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static void	make_box(t_object *o)
 			o->box[1].z = o->v[vertex]->z;
 		++vertex;
 	}
-printf("%lf, %lf, %lf\n", o->box[0].x, o->box[0].y, o->box[0].z);
-printf("%lf, %lf, %lf\n", o->box[1].x, o->box[1].y, o->box[1].z);
 }
 
 void		read_obj(t_env *e, int fd)
