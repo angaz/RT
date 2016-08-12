@@ -1,9 +1,12 @@
-## Before threadding ##
-real    0m3.540s
-user    0m3.220s
-sys     0m0.012s
+real	0m17.639s
+user	1m5.136s
+sys	0m0.088s
 
-## After threadding ##
-real    0m1.475s
-user    0m5.092s
-sys     0m0.020s
+
+
+
+
+
+
+234 seconds before bounding box
+24 seconds after bounding box

@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/06 15:02:48 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/11 21:01:43 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,6 @@ t_vector	vrotz(t_vector v, double angle);
 t_vector	vrot(t_vector v, double angle);
 
 /*
-** src/intersect_scene.c
-*/
-void		intersect_scene(t_env *e);
-
-/*
 ** src/loop.c
 */
 void		event_loop(t_env *e);
@@ -57,32 +52,40 @@ void		exit_rt(t_env *e);
 ** src/read_scene
 */
 void		read_scene(char *file, t_env *e);
+void		get_primitive_attributes(t_env *e, int fd);
 void		get_object_attributes(t_env *e, int fd);
+size_t		get_material_number(t_env *e, char *str);
 void		get_camera_attributes(t_env *e, int fd);
 void		get_light_attributes(t_env *e, int fd);
 t_colour	get_colour(t_env *e, t_split_string values);
 t_vector	get_vector(t_env *e, t_split_string values);
 t_vector	get_unit_vector(t_env *e, t_split_string values);
+void		get_tri(t_env *e, t_prim *o, t_split_string *values);
 void		get_material_attributes(t_env *e, int fd);
+void		read_obj(t_env *e, int fd);
 
 /*
 ** src/draw.c
 */
 void		draw(t_env *e, SDL_Rect draw);
-double		intersect_object(t_env *e, t_ray *ray, size_t object, double *t);
+int			intersect_prim(t_env *e, t_ray *ray, size_t prim, double *t);
 
 /*
 ** src/intersect
 */
-int			intersect_sphere(t_ray *r, t_object *s, double *t);
-int			intersect_plane(t_ray *r, t_object *o, double *t);
-int			intersect_cylinder(t_ray *r, t_object *o, double *t);
-int			intersect_cone(t_ray *r, t_object *o, double *t);
+void		intersect_scene(t_env *e);
+int			intersect_sphere(t_ray *r, t_prim *s, double *t);
+int			intersect_plane(t_ray *r, t_prim *o, double *t);
+int			intersect_cylinder(t_ray *r, t_prim *o, double *t);
+int			intersect_cone(t_ray *r, t_prim *o, double *t);
+int			intersect_triangle(t_ray *r, t_face *f, double *t);
+int			intersect_box(t_ray *r, t_vector box[2]);
 
 /*
 ** src/diffuse.c
 */
-t_colour	diffuse_shade(t_env *e);
+t_colour	prim_diffuse(t_env *e);
+t_colour	face_diffuse(t_env *e);
 
 /*
 ** src/shadow.c
