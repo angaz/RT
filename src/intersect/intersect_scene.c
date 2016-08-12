@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:38:20 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/11 22:11:44 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/12 19:21:10 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		intersect_scene(t_env *e)
 	e->t = INFINITY;
 	e->p_hit = NULL;
 	e->o_hit = NULL;
-	e->hit_type = -1;
+	e->hit_type = 0;
 	prim = 0;
 	object = 0;
 	while (prim < e->prims)

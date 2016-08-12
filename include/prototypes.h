@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/11 21:01:43 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/12 17:33:21 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ void		get_material_attributes(t_env *e, int fd);
 void		read_obj(t_env *e, int fd);
 
 /*
+** src/read_scene/material_values.c
+*/
+void    init_material(t_material *m);
+
+/*
 ** src/draw.c
 */
 void		draw(t_env *e, SDL_Rect draw);
@@ -88,6 +93,21 @@ t_colour	prim_diffuse(t_env *e);
 t_colour	face_diffuse(t_env *e);
 
 /*
+** src/find_colour_struct.c
+*/
+t_colour    find_colour_struct(t_env *e, int depth);
+
+/*
+** src/reflect.c
+*/
+t_colour    reflect(t_env *e, int depth);
+
+/*
+** src/refract.c
+*/
+t_colour    refract(t_env *e, int depth, t_colour colour);
+
+/*
 ** src/shadow.c
 */
 int			in_shadow(t_env *e, t_light *light);
@@ -97,5 +117,20 @@ int			in_shadow(t_env *e, t_light *light);
 */
 void		setup_camera_plane(t_env *e, t_camera_ray *c);
 void		get_ray_dir(t_env *e, t_camera_ray *cr, double x, double y);
+
+/*
+** src/get_normal.c
+*/
+t_vector    get_normal(t_env *e, t_vector ray);
+
+/*
+** src/copy_env.c
+*/
+t_env	*copy_env(t_env *e);
+
+/*
+** src/read_file/count_structurs.c
+*/
+//t_objcount  count_object(char *file, t_env *e);
 
 #endif

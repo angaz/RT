@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/11 20:53:28 by adippena         ###   ########.fr        #
+#    Updated: 2016/08/12 19:04:31 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,9 @@ READ_SCENE	=	src/read_scene/camera_values.c		\
 				src/read_scene/read_colour.c		\
 				src/read_scene/read_scene.c			\
 				src/read_scene/read_obj.c			\
-				src/read_scene/read_vector.c		\
+				src/read_scene/read_vector.c
 #				src/read_scene/read_triangle.c
+#				src/read_scene/count_structurs.c
 
 MATHS		=	src/vector_maths/colour_to_unit.c	\
 				src/vector_maths/vector_add.c		\
@@ -60,7 +61,12 @@ SRC			=	$(INTERSECT)						\
 				src/init_env.c						\
 				src/loop.c							\
 				src/main.c							\
-				src/shadow.c
+				src/shadow.c						\
+				src/get_normal.c					\
+				src/reflect.c						\
+				src/refract.c						\
+				src/find_colour_struct.c			\
+				src/copy_env.c
 
 all: $(NAME)
 
