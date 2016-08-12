@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 21:37:20 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/14 22:32:35 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/11 14:15:05 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 static double	get_fraction(const char *nptr)
 {
 	double	res;
+	double	div;
 
 	res = 0.0;
+	div = 10.0;
 	if (*nptr == '.' || *nptr == ',')
 	{
 		++nptr;
 		while (ft_isdigit(*nptr))
 		{
-			res *= 10;
-			res += *(nptr++) - '0';
+			res += (*(nptr++) - '0') / div;
+			div *= 10.0;
 		}
-		while (res > 1)
-			res /= 10;
 	}
 	return (res);
 }
@@ -38,7 +38,7 @@ static double	get_double(const char *nptr)
 	res = 0.0;
 	while (ft_isdigit(*nptr))
 	{
-		res *= 10;
+		res *= 10.0;
 		res += *(nptr++) - '0';
 	}
 	res += get_fraction(nptr);

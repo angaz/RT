@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   intersect_triangle.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/15 11:30:21 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/10 10:37:55 by adippena         ###   ########.fr       */
+/*   Created: 2016/08/08 16:12:26 by adippena          #+#    #+#             */
+/*   Updated: 2016/08/08 16:16:49 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef INTERSECT_TRIANGLE_H
+# define INTERSECT_TRIANGLE_H
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
+# include "rt.h"
+
+typedef struct	s_intersect_triangle
 {
-	while ((*s1 == *s2) && (*s1 != '\0') && (*s2 != '\0') && --n)
-	{
-		s1++;
-		s2++;
-	}
-	return (*(char *)s1 - *(char *)s2);
-}
+	t_vector	edge1;
+	t_vector	edge2;
+	t_vector	p;
+	t_vector	q;
+	t_vector	dist;
+	double		d;
+	double		inverse_d;
+	double		u;
+	double		v;
+	double		t0;
+}				t_intersect_triangle;
+
+#endif

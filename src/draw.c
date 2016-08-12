@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/06 14:59:01 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/11 18:01:52 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static uint32_t	find_colour(t_env *e)
 	uint32_t	colour;
 	t_colour	temp_c;
 
-	if (e->hit == NULL)
+	if (!e->hit_type)
 		return (0x7F7F7F);
-	temp_c = diffuse_shade(e);
+	temp_c = (e->hit_type == FACE) ? face_diffuse(e) : prim_diffuse(e);
 	colour = 0;
 	colour |= (int)(temp_c.r * 255.0) << 16;
 	colour |= (int)(temp_c.g * 255.0) << 8;
@@ -65,7 +65,10 @@ static t_env	*copy_env(t_env *e)
 	res->px_pitch = e->px_pitch;
 	res->ray = e->ray;
 	res->camera = e->camera;
-	res->hit = e->hit;
+	res->p_hit = e->p_hit;
+	res->prim = e->prim;
+	res->prims = e->prims;
+	res->o_hit = e->o_hit;
 	res->object = e->object;
 	res->objects = e->objects;
 	res->light = e->light;
@@ -104,10 +107,14 @@ static void		make_chunks(t_env *e, SDL_Rect *d)
 
 void			draw(t_env *e, SDL_Rect d)
 {
+	time_t	t;
+
+	t = time(NULL);
 	SDL_LockTexture(e->img, NULL, &e->px, &e->px_pitch);
 	make_chunks(e, &d);
 	SDL_UnlockTexture(e->img);
 	SDL_RenderCopy(e->rend, e->img, NULL, NULL);
 	SDL_RenderPresent(e->rend);
-	ft_putstr("Frame drawn\n");
+	t = time(NULL) - t;
+	ft_printf("Frame drawn in %d seconds\n", t);
 }
