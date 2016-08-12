@@ -6,6 +6,7 @@ external files - adippena
 		to vector rotation
 count objects in scean file befor saving - rojones
 TODO: gamma correction - adippena
-TODO: glossy / reflective surfaces - arovan-
-TODO: refractions - arovan-
+glossy / reflective surfaces - arovan- rojones
+TODO: refractions - arovan- rojones
+TODO: backface culling for composed objects - adippena
 TODO: add here anything you can think of

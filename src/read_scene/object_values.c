@@ -5,79 +5,66 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/09 09:54:48 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/12 10:01:55 by rojones          ###   ########.fr       */
+/*   Created: 2016/08/09 21:36:49 by adippena          #+#    #+#             */
+/*   Updated: 2016/08/12 19:44:02 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static int		get_type(char *type_str)
+static void		get_quantities(t_object *o, int fd)
 {
-	int				type;
+	char	*line;
 
-	type = -1;
-	if (!ft_strcmp(type_str, "sphere"))
-		type = OBJ_SPHERE;
-	else if (!ft_strcmp(type_str, "plane"))
-		type = OBJ_PLANE;
-	else if (!ft_strcmp(type_str, "cone"))
-		type = OBJ_CONE;
-	else if (!ft_strcmp(type_str, "cylinder"))
-		type = OBJ_CYLINDER;
-	return (type);
-}
-
-static size_t	get_material_number(t_env *e, t_split_string values)
-{
-	size_t	material;
-	char	*warn;
-
-	material = 0;
-	if (values.words != 1)
-		err(FILE_FORMAT_ERROR, "get_material_number", e);
-	while (material < e->materials)
+	while (ft_gnl(fd, &line))
 	{
-		if (!ft_strcmp(e->material[material]->name, values.strings[0]))
-			return (material);
-		++material;
+		if (!ft_strncmp(line, "vn", 2))
+			++o->vnormals;
+		else if (line[0] == 'v')
+			++o->verticies;
+		else if (line[0] == 'f')
+			++o->faces;
+		ft_strdel(&line);
 	}
-	ft_sprintf(&warn, "\e[208m    WARNING: Material name: %s \
-		is not a defined material name\n", values.strings[0]);
-	ft_putstr_fd(warn, 2);
-	ft_strdel(&warn);
-	return (0);
+	if ((o->face = (t_face **)malloc(sizeof(t_face *) * o->faces)) == NULL)
+		perror("");
+	if ((o->v = (t_vector **)malloc(sizeof(t_vector *) * o->verticies)) == NULL)
+		perror("");
+	if ((o->vn = (t_vector **)malloc(sizeof(t_vector *) * o->vnormals)) == NULL)
+		perror("");
+	o->faces = 0;
+	o->verticies = 0;
+	o->vnormals = 0;
 }
 
 static void		set_object_values(t_env *e, char *pt1, char *pt2)
 {
-	t_split_string	values;
+	int		fd;
 
-	values = ft_nstrsplit(pt2, ' ');
-	if (!ft_strcmp(pt1, "TYPE"))
-		if ((e->object[e->objects]->type = get_type(values.strings[0])) == -1)
-			err(FILE_FORMAT_ERROR, "set_object_values", e);
-	if (!ft_strcmp(pt1, "LOC"))
-		e->object[e->objects]->loc = get_vector(e, values);
-	else if (!ft_strcmp(pt1, "DIR"))
-		e->object[e->objects]->dir = get_unit_vector(e, values);
-	else if (!ft_strcmp(pt1, "NORMAL"))
-		e->object[e->objects]->normal = get_unit_vector(e, values);
-	else if (!ft_strcmp(pt1, "RADIUS"))
-		e->object[e->objects]->radius = ft_atod(values.strings[0]);
-	else if (!ft_strcmp(pt1, "ANGLE"))
-		e->object[e->objects]->angle = ft_atod(values.strings[0]) * M_PI / 180;
+	if (!ft_strcmp(pt1, "FILE"))
+	{
+		if ((fd = open(pt2, O_RDONLY)) == -1)
+			err(FILE_OPEN_ERROR, "set_object_values", e);
+		get_quantities(e->object[e->objects], fd);
+		close(fd);
+		if ((fd = open(pt2, O_RDONLY)) == -1)
+			err(FILE_OPEN_ERROR, "set_object_values", e);
+		read_obj(e, fd);
+		close(fd);
+	}
 	else if (!ft_strcmp(pt1, "MATERIAL"))
-		e->object[e->objects]->material = get_material_number(e, values);
-	ft_free_split(&values);
+		e->object[e->objects]->material = get_material_number(e, pt2);
 }
 
 static void		init_object(t_object *o)
 {
-	o->type = OBJ_SPHERE;
-	o->loc = (t_vector){0.0, 0.0, 0.0};
-	o->radius = 1.0;
+	o->face = NULL;
+	o->faces = 0;
 	o->material = 0;
+	o->v = NULL;
+	o->verticies = 0;
+	o->vn = NULL;
+	o->vnormals = 0;
 }
 
 void			get_object_attributes(t_env *e, int fd)

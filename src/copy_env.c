@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/08 13:16:30 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/10 08:29:44 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/12 18:26:21 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ t_env	*copy_env(t_env *e)
 	res->px_pitch = e->px_pitch;
 	res->ray = e->ray;
 	res->camera = e->camera;
-	res->hit = e->hit;
+	res->p_hit = e->p_hit;
+	res->prim = e->prim;
+	res->prims = e->prims;
+	res->o_hit = e->o_hit;
 	res->object = e->object;
 	res->objects = e->objects;
 	res->light = e->light;

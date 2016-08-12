@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:14 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/05 15:45:34 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/09 23:28:30 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ void			nullify_pointers(t_env *e)
 	e->win = NULL;
 	e->rend = NULL;
 	e->img = NULL;
-	e->object = NULL;
+	e->prim = NULL;
 	e->light = NULL;
 	e->material = NULL;
+	e->prims = 0;
 	e->objects = 0;
 	e->lights = 0;
 	e->materials = 0;

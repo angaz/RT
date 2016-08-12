@@ -6,15 +6,15 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:13 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 11:07:23 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/12 19:36:48 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
 
-# define MAX(a, b) ((a > b) ? a : b)
-# define MAXDEPTH 2
+# define MAX(a, b)	((a > b) ? a : b)
+# define EPSILON	0.000001
 
 /*
 ** WINDOW DEFINES
@@ -23,12 +23,16 @@
 # define WIN_Y	900
 
 /*
-** SHAPE DEFINES
+** PRIMITIVE DEFINES
 */
-# define OBJ_SPHERE		1
-# define OBJ_PLANE		2
-# define OBJ_CONE		3
-# define OBJ_CYLINDER	4
+# define PRIM_SPHERE	1
+# define PRIM_PLANE		2
+# define PRIM_CONE		3
+# define PRIM_CYLINDER	4
+# define PRIM_TRIANGLE	5
+
+# define PRIMITIVE		1
+# define FACE			2
 
 /*
 ** ERROR DEFINES

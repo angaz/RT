@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/11 16:09:14 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/12 18:25:07 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,29 @@ static uint32_t	find_colour(t_env *e)
 {
 	uint32_t	colour;
 	t_colour	temp_c;
-	t_colour	reflect_col;
-	t_colour	refract_col;
+	t_colour	reflect_c;
+	t_colour	refract_c;
+	t_material	*mat;
 
-	if (e->hit == NULL)
+	if (!e->hit_type)
 		return (0x7F7F7F);
-	temp_c = diffuse_shade(e);
-	if (e->material[e->hit->material]->reflect > 0.0)
-		reflect_col = reflect(e, 1);
-	if ( e->material[e->hit->material]->refract < 1.0)
+	temp_c = (e->hit_type == FACE) ? face_diffuse(e) : prim_diffuse(e);
+	mat = (e->hit_type == FACE) ?
+		e->material[e->object[e->o_hit_index]->material] :
+		e->material[e->p_hit->material];
+	if (mat->reflect > 0.0)
+		reflect_c = reflect(e, 1);
+	if (mat->refract < 1.0)
 	{
-		refract_col = refract(e, 1, temp_c);
-		temp_c.r = (temp_c.r * e->material[e->hit->material]->refract) + (refract_col.r * (1 - e->material[e->hit->material]->refract));
-		temp_c.g = (temp_c.g * e->material[e->hit->material]->refract) + (refract_col.g * (1 - e->material[e->hit->material]->refract));
-		temp_c.b = (temp_c.b * e->material[e->hit->material]->refract) + (refract_col.b * (1 - e->material[e->hit->material]->refract));
+		refract_c = refract(e, 1, temp_c);
+		temp_c.r = (temp_c.r * mat->refract) + (refract_c.r * (1 - mat->refract));
+		temp_c.g = (temp_c.g * mat->refract) + (refract_c.g * (1 - mat->refract));
+		temp_c.b = (temp_c.b * mat->refract) + (refract_c.b * (1 - mat->refract));
 	}
 	colour = 0;
-	colour |= (int)(((temp_c.r * (1 - e->material[e->hit->material]->reflect)) + (reflect_col.r * e->material[e->hit->material]->reflect)) * 255.0) << 16;
-	colour |= (int)(((temp_c.g * (1 - e->material[e->hit->material]->reflect)) + (reflect_col.g * e->material[e->hit->material]->reflect)) * 255.0) << 8;
-	colour |= (int)(((temp_c.b * (1 - e->material[e->hit->material]->reflect)) + (reflect_col.b * e->material[e->hit->material]->reflect)) * 255.0);
+	colour |= (int)(((temp_c.r * (1 - mat->reflect)) + (reflect_c.r * mat->reflect)) * 255.0) << 16;
+	colour |= (int)(((temp_c.g * (1 - mat->reflect)) + (reflect_c.g * mat->reflect)) * 255.0) << 8;
+	colour |= (int)(((temp_c.b * (1 - mat->reflect)) + (reflect_c.b * mat->reflect)) * 255.0);
 	return (colour);
 }
 
@@ -119,9 +123,14 @@ static void		make_chunks(t_env *e, SDL_Rect *d)
 
 void			draw(t_env *e, SDL_Rect d)
 {
+	time_t	t;
+
+	t = time(NULL);
 	SDL_LockTexture(e->img, NULL, &e->px, &e->px_pitch);
 	make_chunks(e, &d);
 	SDL_UnlockTexture(e->img);
 	SDL_RenderCopy(e->rend, e->img, NULL, NULL);
 	SDL_RenderPresent(e->rend);
+	t = time(NULL) - t;
+	ft_printf("Frame drawn in %d seconds\n", t);
 }

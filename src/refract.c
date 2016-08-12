@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/09 09:30:32 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/11 12:10:20 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/12 18:10:49 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	set_refract_ray(t_env *e, t_env *refract)
 {
 	t_vector	i_scale;
 	t_vector	n_scale;
-	t_vector  v;
+	t_vector	v;
 	t_vector	n;
 	double		ior;
 	double		cos;
@@ -27,7 +27,7 @@ static int	set_refract_ray(t_env *e, t_env *refract)
 	refract->ray.loc = vadd(e->ray.loc, vmult(e->ray.dir, e->t));
 	n = get_normal(e, refract->ray.loc);
 	v = vunit(vsub(e->ray.loc, refract->ray.loc));
-	if (e->ray.in == e->hit)
+	if (e->ray.in == e->p_hit)
 	{
 		cos = 180 - vdot(v, n);
 		refract->ray.in = NULL;
@@ -36,8 +36,8 @@ static int	set_refract_ray(t_env *e, t_env *refract)
 	else
 	{
 		cos = vdot(v, n);
-		refract->ray.in = e->hit;
-		refract->ray.ior = e->material[e->hit->material]->ior;
+		refract->ray.in = e->p_hit;
+		refract->ray.ior = e->material[e->p_hit->material]->ior;
 	}
 	ior = (e->ray.ior / refract->ray.ior);
 	sin = pow (ior, 2) * (1 - pow(cos,2));
