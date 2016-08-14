@@ -1,5 +1,5 @@
 # SCENE RT
-	MAXDEPTH	50
+	MAXDEPTH	10
 
 	CAMERA
 		LOC	0 -31 0
@@ -82,6 +82,11 @@
 		LOC			-5 0 0
 		NORMAL		1 0 0
 		MATERIAL	mirror
+
+	OBJECT
+		FILE		suzanne.obj
+		MATERIAL	blue
+
 
 	PRIMITIVE
 		TYPE		sphere

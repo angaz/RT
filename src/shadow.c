@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 23:47:45 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/12 16:45:33 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/14 16:04:24 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,21 @@ int		in_shadow(t_env *e, t_light *light)
 	ray.dir = vsub(light->loc, ray.loc);
 	distance = vnormalize(ray.dir);
 	ray.dir = vunit(ray.dir);
-	prim = 0;
-	object = 0;
-	while (prim < e->prims)
+	prim = e->prims;
+	object = e->objects;
+	while (prim--)
 		if (intersect_prim(e, &ray, prim, &t) && t < distance)
 			return (0);
-		else
-			++prim;
-	while (object < e->objects)
+	while (object--)
 	{
 		o = e->object[object];
 		if (intersect_box(&ray, o->box))
 		{
-			face = 0;
-			while (face < o->faces)
+			face = o->faces;
+			while (face--)
 				if (intersect_triangle(&ray, o->face[face], &t) && t < distance)
 					return (0);
-				else
-					++face;
 		}
-		++object;
 	}
 	return (1);
 }

@@ -1,19 +1,19 @@
 # SCENE RT
-	MAXDEPTH	5
+	MAXDEPTH	50
 
 	CAMERA
-		LOC	0 -20 0
-		DIR	0 0 0
+		LOC	0 -5 0
+		DIR	0.729 6.223 -2.25
 		UP	0 0 1
 
 	LIGHT
-		LOC			12 -20 10
+		LOC			-4.97 3.82 1.17
 		COLOUR		FFFFFF
-		INTENSITY	5
+		INTENSITY	0.8
 		HALF		30
 
 	MATERIAL
-		NAME		refract
+		NAME		mirror
 		DIFFUSE		00F1F1 1.0
 		SPECULAR	FFFFFF 0.5
 		REFLECT		1.0
@@ -32,9 +32,6 @@
 		NAME		blue
 		DIFFUSE		0000FF 1.0
 		SPECULAR	FFFFFF 0.5
-		REFLECT		0.0
-		REFRACT		0.0
-		IOR			1.52
 
 	MATERIAL
 		NAME		orange
@@ -45,6 +42,12 @@
 		DIFUSE		BC00FF 0.8
 		SPECULAR	FFFFFF 0.5
 
+	MATERIAL
+		NAME		SUZANNE
+		DIFFUSE		FFFFFF 0.8
+		SPECULAR	FFFFFF 0.0
+		REFLECT		0.5
+
 	PRIMITIVE
 		TYPE		plane
 		LOC			0 0 -5
@@ -53,21 +56,21 @@
 
 	PRIMITIVE
 		TYPE		plane
-		LOC			0 20 0
-		NORMAL		0 -1 0
+		LOC			0 0 5
+		NORMAL		0 0 -1
 		MATERIAL	red
 
 	PRIMITIVE
-		TYPE		sphere
-		LOC			0 0 0
-		RADIUS		1
-		MATERIAL	blue
+		TYPE		plane
+		LOC			0 20 0
+		NORMAL		0 -1 0
+		MATERIAL	mirror
 
 	PRIMITIVE
 		TYPE		sphere
 		LOC			-5 10 0
 		RADIUS		1.5
-		MATERIAL	refract
+		MATERIAL	mirror
 
 	PRIMITIVE
 		TYPE		sphere
@@ -81,8 +84,8 @@
 
 	OBJECT
 		FILE		check02.obj
-		MATERIAL	purple
+		MATERIAL	blue
 
 	OBJECT
 		FILE		suzanne.obj
-		MATERIAL	green
+		MATERIAL	SUZANNE
