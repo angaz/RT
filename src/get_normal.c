@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/08 12:10:39 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/12 18:27:02 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/14 14:56:07 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static t_vector	get_con_normal(t_env *e, t_vector ray)
 {
 	t_vector    normal;
 	t_vector	pro;
-//	t_vector	com;
 	t_vector    rot;
 	t_vector	p_par;
 	t_vector	p_orth;
@@ -24,9 +23,7 @@ static t_vector	get_con_normal(t_env *e, t_vector ray)
 	double		angle;
 
 	pro = vproject(vsub(ray, e->p_hit->loc), e->p_hit->dir);
-	normal = vsub(vsub(ray, e->p_hit->loc), pro);
-	normal = vunit(normal);
-//	com = vsub(pro, e->p_hit->loc);
+	normal = vunit(vsub(vsub(ray, e->p_hit->loc), pro));
 	rot = vunit(vcross(normal, e->p_hit->dir));
 	p_par = vproject(normal, rot);
 	p_orth = vsub(normal, p_par);
@@ -38,18 +35,16 @@ static t_vector	get_con_normal(t_env *e, t_vector ray)
 
 t_vector	get_normal(t_env *e, t_vector ray)
 {
-	t_vector	normal;
-
-	normal = (t_vector){0.0, 0.0, 1.0};
+	if (e->hit_type == FACE)
+		return (vunit(*e->o_hit->n));
 	if (e->p_hit->type == PRIM_SPHERE)
-		normal = vdiv(vsub(ray, e->p_hit->loc), e->p_hit->radius);
-	else if (e->p_hit->type == PRIM_PLANE)
-		normal = e->p_hit->normal;
-	else if (e->p_hit->type == PRIM_CYLINDER)
-		normal = vsub(vsub(ray, e->p_hit->loc),
-			vproject(vsub(ray, e->p_hit->loc), e->p_hit->dir));
-	else if (e->p_hit->type == PRIM_CONE)
-		normal = get_con_normal(e, ray);
-	normal = vunit(normal);
-	return (normal);
+		return (vunit(vdiv(vsub(ray, e->p_hit->loc), e->p_hit->radius)));
+	if (e->p_hit->type == PRIM_PLANE)
+		return (vunit(e->p_hit->normal));
+	if (e->p_hit->type == PRIM_CYLINDER)
+		return (vunit(vsub(vsub(ray, e->p_hit->loc),
+			vproject(vsub(ray, e->p_hit->loc), e->p_hit->dir))));
+	if (e->p_hit->type == PRIM_CONE)
+		return (vunit(get_con_normal(e, ray)));
+	return ((t_vector){0.0, 0.0, 1.0});
 }

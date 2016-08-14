@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/12 18:22:19 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/14 11:40:28 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ typedef struct	s_env
 	t_prim			**prim;
 	size_t			prims;
 	t_face			*o_hit;
-	size_t			o_hit_index;
+	t_object		*object_hit;
 	t_object		**object;
 	size_t			objects;
 	t_light			**light;

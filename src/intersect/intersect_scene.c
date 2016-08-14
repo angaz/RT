@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:38:20 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/12 19:21:10 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/14 15:42:59 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,44 +29,22 @@ void		intersect_scene(t_env *e)
 {
 	double		t;
 	size_t		prim;
-	size_t		face;
 	size_t		object;
-	t_object	*o;
 
 	e->t = INFINITY;
 	e->p_hit = NULL;
 	e->o_hit = NULL;
 	e->hit_type = 0;
-	prim = 0;
-	object = 0;
-	while (prim < e->prims)
-	{
+	prim = e->prims;
+	object = e->objects;
+	while (prim--)
 		if (intersect_prim(e, &e->ray, prim, &t) && t < e->t)
 		{
 			e->t = t;
 			e->p_hit = e->prim[prim];
 			e->hit_type = PRIMITIVE;
 		}
-		++prim;
-	}
-	while (object < e->objects)
-	{
-		o = e->object[object];
-		if (intersect_box(&e->ray, o->box))
-		{
-			face = 0;
-			while (face < o->faces)
-			{
-				if (intersect_triangle(&e->ray, o->face[face], &t) && t < e->t)
-				{
-					e->t = t;
-					e->o_hit = o->face[face];
-					e->o_hit_index = object;
-					e->hit_type = FACE;
-				}
-				++face;
-			}
-		}
-		++object;
-	}
+	while (object--)
+		if (intersect_box(&e->ray, e->object[object]->box))
+			intersect_object(e, e->object[object], &t);
 }

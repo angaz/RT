@@ -6,40 +6,44 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/12 18:25:07 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/14 20:32:58 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
+/*
+** l = ref[l]ect colour
+** r = ref[r]act colour
+*/
+
 static uint32_t	find_colour(t_env *e)
 {
-	uint32_t	colour;
-	t_colour	temp_c;
-	t_colour	reflect_c;
-	t_colour	refract_c;
+	t_colour	c;
+	t_colour	l;
+	t_colour	r;
 	t_material	*mat;
 
 	if (!e->hit_type)
 		return (0x7F7F7F);
-	temp_c = (e->hit_type == FACE) ? face_diffuse(e) : prim_diffuse(e);
+	l = (t_colour){0.0, 0.0, 0.0, 0.0};
+	c = (e->hit_type == FACE) ? face_diffuse(e) : prim_diffuse(e);
 	mat = (e->hit_type == FACE) ?
-		e->material[e->object[e->o_hit_index]->material] :
+		e->material[e->object_hit->material] :
 		e->material[e->p_hit->material];
-	if (mat->reflect > 0.0)
-		reflect_c = reflect(e, 1);
+	if (mat->reflect > EPSILON)
+		l = reflect(e, 1);
 	if (mat->refract < 1.0)
 	{
-		refract_c = refract(e, 1, temp_c);
-		temp_c.r = (temp_c.r * mat->refract) + (refract_c.r * (1 - mat->refract));
-		temp_c.g = (temp_c.g * mat->refract) + (refract_c.g * (1 - mat->refract));
-		temp_c.b = (temp_c.b * mat->refract) + (refract_c.b * (1 - mat->refract));
+		r = refract(e, 1, c);
+		c.r = (c.r * mat->refract) + (r.r * (1 - mat->refract));
+		c.g = (c.g * mat->refract) + (r.g * (1 - mat->refract));
+		c.b = (c.b * mat->refract) + (r.b * (1 - mat->refract));
 	}
-	colour = 0;
-	colour |= (int)(((temp_c.r * (1 - mat->reflect)) + (reflect_c.r * mat->reflect)) * 255.0) << 16;
-	colour |= (int)(((temp_c.g * (1 - mat->reflect)) + (reflect_c.g * mat->reflect)) * 255.0) << 8;
-	colour |= (int)(((temp_c.b * (1 - mat->reflect)) + (reflect_c.b * mat->reflect)) * 255.0);
-	return (colour);
+	return ((uint32_t)(
+	(int)(((c.r * (1 - mat->reflect)) + (l.r * mat->reflect)) * 255.0) << 16 |
+	(int)(((c.g * (1 - mat->reflect)) + (l.g * mat->reflect)) * 255.0) << 8 |
+	(int)(((c.b * (1 - mat->reflect)) + (l.b * mat->reflect)) * 255.0)));
 }
 
 static void		*draw_chunk(void *q)
@@ -69,31 +73,6 @@ static void		*draw_chunk(void *q)
 	pthread_exit(0);
 }
 
-//static void		make_chunks(t_env *e, SDL_Rect *d)
-//{
-//	t_make_chunks	m;
-//
-//	m.tids = 1/*ceil((double)d->w / 64.0) * ceil((double)d->h /64.0)*/;
-//	m.tid = (pthread_t *)malloc(sizeof(pthread_t) * m.tids);
-//	m.thread = 0;
-//	m.chunk_y = 0;
-//	while (m.chunk_y * 64 < (size_t)d->h)
-//	{
-//		m.chunk_x = 0;
-//		while (m.chunk_x * 64 < (size_t)d->w)
-//		{
-//			m.c = (t_chunk *)malloc(sizeof(t_chunk));
-//			m.c->e = copy_env(e);
-//			m.c->d = (SDL_Rect){/*m.chunk_x * 64, m.chunk_y * 64, 64, 64*/0, 0, d->w, d->h};
-//			pthread_create(&m.tid[m.thread++], NULL, draw_chunk, (void *)m.c);
-//			++m.chunk_x;
-//		}
-//		++m.chunk_y;
-//	}
-//	while (m.thread)
-//		pthread_join(m.tid[--m.thread], NULL);
-//	free(m.tid);
-//}
 
 static void		make_chunks(t_env *e, SDL_Rect *d)
 {
