@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/08 12:29:05 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/14 20:32:15 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/14 20:43:49 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_colour	find_colour_struct(t_env *e, int depth)
 	t_material	*mat;
 
 	if (!e->hit_type)
-		return ((t_colour){0.4980392156, 0.4980392156, 0.4980392156, 1.0});
+		return ((t_colour){0.5, 0.5, 0.5, 1.0});
 	temp_c = (e->hit_type == FACE) ? face_diffuse(e) : prim_diffuse(e);
 	mat = (e->hit_type == FACE) ?
 		e->material[e->object_hit->material] :
