@@ -12,31 +12,46 @@
 
 #include "rt.h"
 
-static int	get_col(t_colour *col)
+static void write_color_segment(int col, int fd)
 {
-	int	re;
+    char *temp;
 
-	re = 0;
-	re |= (int)(col->r * 255) << 16;
-	re |= (int)(col->g * 255) << 8;
-	re |= (int)(col->b * 255);
-	return (re);
+    if (col != 0)
+    {
+        temp = ft_itoa_base(col, 16);
+        ft_putstr_fd(temp, fd);
+        ft_strdel(&temp);
+    }
+    else
+        ft_putstr_fd("00", fd);
+}
+
+static void	write_colour(t_colour *col, int fd)
+{
+    int		temp2;
+
+    temp2 = 0;
+    temp2 |= (int)(col->r * 255) << 16;
+    write_color_segmen(temp2, fd);
+    temp2 = 0;
+    temp2 |= (int)(col->g * 255) << 8;
+    write_color_segmen(temp2, fd);
+    temp2 = 0;
+    temp2 |= (int)(col->b * 255);
+    write_color_segmen(temp2, fd);
+    temp2 = 0;
+    ft_putchar_fd('\n', fd);
 }
 
 static void	save_light(t_light *light, int fd)
 {
-	int		tcol;
 	char	*temp;
 
-	tcol = get_col(&light->colour);
-	temp = ft_itoa_base(tcol, 16);
 	ft_putstr_fd("\tLIGHT\n", fd);
 	ft_putstr_fd("\t\tLOC\t" ,fd);
 	write_coord(light->loc, fd);
 	ft_putstr_fd("\t\tCOLOUR\t", fd);
-	ft_putstr_fd(temp, fd);
-	ft_strdel(&temp);
-	ft_putchar_fd('\n',fd);
+    write_colour(light->colour, fd);
 	ft_putstr_fd("\t\tINTENSITY\t", fd);
 	temp = ft_dtoa(light->lm / 3.415, 6);
 	ft_putstr_fd(temp, fd);
