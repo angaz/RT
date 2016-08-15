@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/01 22:35:01 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/11 10:48:43 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/14 21:43:59 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void		get_ray_dir(t_env *e, t_camera_ray *cr, double x, double y)
 	s = vsub(s, vmult(cr->v, y * cr->h / (double)WIN_Y));
 	e->ray.dir = vunit(vsub(s, e->camera.loc));
 	e->ray.loc = e->camera.loc;
-	e->ray.in = NULL;
+	e->ray.p_in = NULL;
+	e->ray.o_in = NULL;
 	e->ray.ior = 1;
 }

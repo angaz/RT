@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/14 11:40:28 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/14 21:44:57 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,10 @@ typedef struct	s_prim
 typedef struct	s_ray
 {
 	double		ior;
-	t_prim		*in;
 	t_vector	loc;
 	t_vector	dir;
+	t_prim		*p_in;
+	t_object	*o_in;
 }				t_ray;
 
 typedef struct	s_camera
