@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/09 21:36:49 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/12 19:44:02 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/14 22:35:54 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ static void		set_object_values(t_env *e, char *pt1, char *pt2)
 	if (!ft_strcmp(pt1, "FILE"))
 	{
 		if ((fd = open(pt2, O_RDONLY)) == -1)
-			err(FILE_OPEN_ERROR, "set_object_values", e);
+			err(FILE_OPEN_ERROR, pt2, e);
 		get_quantities(e->object[e->objects], fd);
 		close(fd);
 		if ((fd = open(pt2, O_RDONLY)) == -1)
-			err(FILE_OPEN_ERROR, "set_object_values", e);
+			err(FILE_OPEN_ERROR, pt2, e);
 		read_obj(e, fd);
 		close(fd);
 	}

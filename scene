@@ -2,7 +2,7 @@
 	MAXDEPTH	50
 
 	CAMERA
-		LOC	0 -5 0
+		LOC	3 -5 0
 		DIR	0.729 6.223 -2.25
 		UP	0 0 1
 
@@ -17,6 +17,13 @@
 		DIFFUSE		00F1F1 1.0
 		SPECULAR	FFFFFF 0.5
 		REFLECT		1.0
+
+	MATERIAL
+		NAME		glass
+		DIFFUSE		FFFFFF 1.0
+		SPECULAR	FFFFFF 0.0
+		REFRACT		0.0
+		IOR			1.49
 
 	MATERIAL
 		NAME		red
@@ -62,21 +69,21 @@
 
 	PRIMITIVE
 		TYPE		plane
+		LOC			8 0 0
+		NORMAL		-1 0 0
+		MATERIAL	red
+
+	PRIMITIVE
+		TYPE		plane
+		LOC			-8 0 0
+		NORMAL		1 0 0
+		MATERIAL	red
+
+	PRIMITIVE
+		TYPE		plane
 		LOC			0 20 0
 		NORMAL		0 -1 0
-		MATERIAL	mirror
-
-	PRIMITIVE
-		TYPE		sphere
-		LOC			-5 10 0
-		RADIUS		1.5
-		MATERIAL	mirror
-
-	PRIMITIVE
-		TYPE		sphere
-		LOC			5 0 0
-		RADIUS		1.5
-		MATERIAL	orange
+		MATERIAL	red
 
 	OBJECT
 		FILE		check01.obj
@@ -87,5 +94,5 @@
 		MATERIAL	blue
 
 	OBJECT
-		FILE		suzanne.obj
-		MATERIAL	SUZANNE
+		FILE		glass_pane.obj
+		MATERIAL	glass
