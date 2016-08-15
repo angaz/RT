@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/09 09:30:32 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/15 14:09:59 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/15 15:49:06 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,22 +78,16 @@ static int	set_refract_ray_object(t_env *e, t_env *r)
 	double	sint2;
 	double	cost;
 
-	n = (r->ray.ior == e->material[r->object_hit->material]->ior) ?
-		e->material[r->object_hit->material]->ior :
-		r->ray.ior / e->material[r->object_hit->material]->ior;
+	n = r->ray.ior / e->material[r->object_hit->material]->ior;
 	cosi = -vdot(*r->o_hit->n, r->ray.dir);
-//printf("%lf\n", cosi);
-//	cosi = (cosi > M_PI / 2.0) ? cosi - M_PI : cosi;
-printf("%lf\n", n);
-//	cosi = (n == 1.0) ? M_PI - cosi : cosi;
 	sint2 = n * n * (1.0 - cosi * cosi);
 	if (sint2 > 1.0)
 		return (0);
 	cost = sqrt(1.0 - sint2);
-printf("%lf %lf\n", cosi, cost);
 	r->ray.ior = e->material[r->object_hit->material]->ior;
-	r->ray.loc = vmult(r->ray.dir, r->t);
+	r->ray.loc = vadd(r->ray.loc, vmult(r->ray.dir, r->t));
 	r->ray.dir = vadd(vmult(r->ray.dir, n), vmult(*r->o_hit->n, (n * cosi - cost)));
+//	r->ray.dir = vunit(vsub(vmult(r->ray.dir, n), vmult(*r->o_hit->n, (n + sqrt(1.0 - sint2)))));
 	return(1);
 }
 
