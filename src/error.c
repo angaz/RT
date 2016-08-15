@@ -6,14 +6,17 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 19:58:53 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:24:05 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/15 16:27:41 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	exit_rt(t_env *e)
+void	exit_rt(t_env *e, int code)
 {
+	if (code == 0)
+		save(e);
+	free(e->file_name);
 	if (e->img)
 		SDL_DestroyTexture(e->img);
 	if (e->rend)
@@ -44,5 +47,5 @@ void	err(int error_no, char *function, t_env *e)
 		perror(error);
 	if (error_no < 32)
 		ft_strdel(&error);
-	exit_rt(e);
+	exit_rt(e, -1);
 }

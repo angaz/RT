@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 11:42:21 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 23:48:35 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/15 16:53:56 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # define BUFF_SIZE	1
+# define ABS(x) (x <0) ? x * -1 : x
 
 # include <string.h>
 # include <stdlib.h>
@@ -94,6 +95,8 @@ int				ft_atoi_hex(const char *nptr);
 t_split_string	ft_nstrsplit(const char *s, char c);
 double			ft_atod(const char *nptr);
 void			ft_free_split(t_split_string *split);
+char            *ft_dtoa(double n, int num_place);
+char			*ft_itoa_base(int value, int base);
 
 /*
 ** FT_(S)PRINTF

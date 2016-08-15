@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/14 15:26:04 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/15 16:36:25 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void		event_loop(t_env *e);
 /*
 ** src/init_env.c
 */
-void		init_env(t_env *e, char **av);
+void		init_env(t_env *e);
 void		nullify_pointers(t_env *e);
 
 /*
 ** src/error.c
 */
 void		err(int error_no, char *function, t_env *e);
-void		exit_rt(t_env *e);
+void		exit_rt(t_env *e, int code);
 
 /*
 ** src/read_scene
@@ -82,6 +82,16 @@ int			intersect_cone(t_ray *r, t_prim *o, double *t);
 int			intersect_triangle(t_ray *r, t_face *f, double *t);
 int			intersect_box(t_ray *r, t_vector box[2]);
 int			intersect_object(t_env *e, t_object *o, double *t);
+
+/*
+** src/save
+*/
+void    save(t_env *e);
+void    save_lights(t_light **lights, size_t num_light, int fd);
+void    save_materials(t_material **material, size_t materials, int fd);
+void    save_objects(t_object **obj, size_t objects, t_material **mat, int fd);
+void    save_prims(t_prim **prim, t_material **mat, size_t prims, int fd);
+void	write_coord(t_vector v, int fd);
 
 /*
 ** src/diffuse.c

@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:14 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/09 23:28:30 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/15 11:49:56 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ void			nullify_pointers(t_env *e)
 	init_camera(e);
 }
 
-void			init_env(t_env *e, char **av)
+void			init_env(t_env *e)
 {
-	read_scene(av[1], e);
-	e->win = SDL_CreateWindow(av[1], SDL_WINDOWPOS_CENTERED,
+
+	read_scene(e->file_name, e);
+	e->win = SDL_CreateWindow(e->file_name, SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, WIN_X, WIN_Y, 0);
 	e->rend = SDL_CreateRenderer(e->win, -1, SDL_RENDERER_ACCELERATED);
 	e->img = SDL_CreateTexture(e->rend, SDL_PIXELFORMAT_ARGB8888,

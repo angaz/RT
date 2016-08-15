@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/14 15:16:03 by adippena         ###   ########.fr        #
+#    Updated: 2016/08/15 16:54:53 by rojones          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,9 +52,17 @@ MATHS		=	src/vector_maths/colour_to_unit.c	\
 				src/vector_maths/vector_sub.c		\
 				src/vector_maths/vector_unit.c
 
+SAVE		=	src/save/save.c						\
+				src/save/save_lights.c				\
+				src/save/save_materials.c			\
+				src/save/save_objects.c				\
+				src/save/save_prims.c				\
+				src/save/write_coord.c
+
 SRC			=	$(INTERSECT)						\
 				$(MATHS)							\
 				$(READ_SCENE)						\
+				$(SAVE)								\
 				src/camera_setup.c					\
 				src/diffuse.c						\
 				src/draw.c							\
