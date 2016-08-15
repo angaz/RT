@@ -83,7 +83,7 @@
 		TYPE		plane
 		LOC			0 20 0
 		NORMAL		0 -1 0
-		MATERIAL	red
+		MATERIAL	green
 
 	OBJECT
 		FILE		check01.obj
