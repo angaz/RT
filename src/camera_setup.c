@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/01 22:35:01 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/16 08:13:23 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/16 09:21:18 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,12 @@ void		setup_camera_plane(t_env *e, t_camera_ray *c)
 	c->d = 2.175;
 	c->h = 18.0 * c->d / 35.0;
 	c->w = c->h * (double)WIN_X / (double)WIN_Y;
-//	c->n = vunit(vsub(e->camera.loc, e->camera.dir));
-//	c->u = vunit(vcross(e->camera.up, c->n));
-//	c->v = vunit(vcross(c->n, c->u));
 	c->n = vunit(vsub(e->camera.loc, e->camera.dir));
 	c->u = vunit(vcross(e->camera.up, c->n));
 	c->v = vunit(vcross(c->n, c->u));
 	c->c = vsub(e->camera.loc, vmult(c->n, c->d));
 	c->l = vsub(c->c, vmult(c->u, c->w / 2.0));
 	c->l = vadd(c->l, vmult(c->v, c->h / 2.0));
-printf("%lf %lf %lf\n", c->l.x, c->l.y, c->l.z);
 }
 
 void		get_ray_dir(t_env *e, t_camera_ray *cr, double x, double y)
