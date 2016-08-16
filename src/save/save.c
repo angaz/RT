@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 11:59:15 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/15 17:22:21 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/16 09:45:40 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,15 @@ static void	save_camra(t_camera *cam, int fd)
 	ft_putchar_fd('\n', fd);
 }
 
-void	save(t_env *e)
+void		save(t_env *e)
 {
 	int		fd;
 	char	*temp;
 
 	temp = NULL;
-	//fd = open(e->file_name, O_WRONLY | O_TRUNC);
-	//if (fd == -1)
-	//	err(FILE_OPEN_ERROR, "save", e);
-	fd = 0;/////////////////////////////////////////////////////////////////////
+	fd = open(e->file_name, O_WRONLY | O_TRUNC);
+	if (fd == -1)
+		err(FILE_OPEN_ERROR, "save", e);
 	ft_putstr_fd("# SCENE RT\n", fd);
 	ft_putstr_fd("	MAXDEPTH	", fd);
 	temp = ft_dtoa(e->maxdepth, 6);
