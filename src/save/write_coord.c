@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   write_coord.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/15 11:29:28 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/15 12:56:49 by rojones          ###   ########.fr       */
+/*   Created: 2016/08/15 13:51:06 by rojones           #+#    #+#             */
+/*   Updated: 2016/08/16 09:26:58 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "rt.h"
 
-void	ft_putnbr(int n)
+void	write_coord(t_vector v, int fd)
 {
-	char *str;
+	char	temp[40];
 
-	str = ft_itoa(n);
-	write(1, str, ft_strlen(str));
+	sprintf(temp, "%f %f %f\n", v.x, v.y, v.z);
+	ft_putstr_fd(temp, fd);
 }

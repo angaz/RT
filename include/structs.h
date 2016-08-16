@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/14 21:44:57 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/16 10:26:07 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct	s_face
 
 typedef struct	s_object
 {
+	char		*name;
 	t_face		**face;
 	size_t		faces;
 	size_t		material;
@@ -115,6 +116,7 @@ typedef struct	s_env
 	SDL_Renderer	*rend;
 	SDL_Texture		*img;
 	void			*px;
+	char			*file_name;
 	int				px_pitch;
 	t_ray			ray;
 	t_camera		camera;

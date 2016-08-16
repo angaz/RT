@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:42 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/12 19:11:54 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/15 17:12:55 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ static void	scene_attributes(t_env *e, char *line)
 		err(FILE_FORMAT_ERROR, "scene_arrtibutes", e);
 	if (!ft_strcmp(split.strings[0], "MAXDEPTH"))
 		e->maxdepth = MAX(ft_atoi(split.strings[1]), 1);
-//		if (e->maxdepth < 0)
-//			e->maxdepth = 1;
 	ft_free_split(&split);
 }
 
