@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:14 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/17 14:34:22 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/17 17:45:58 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void			nullify_pointers(t_env *e)
 	e->light = NULL;
 	e->material = NULL;
 	e->p_hit = NULL;
-	e->p_selected = NULL;
+	e->selected = NULL;
+	e->selects = 0;
 	e->prims = 0;
 	e->objects = 0;
 	e->lights = 0;
@@ -40,6 +41,7 @@ void			nullify_pointers(t_env *e)
 
 void			init_env(t_env *e)
 {
+	nullify_pointers(e);
 	read_scene(e->file_name, e);
 	e->win = SDL_CreateWindow(e->file_name, SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, WIN_X, WIN_Y, 0);

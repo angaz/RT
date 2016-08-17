@@ -6,26 +6,12 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/17 14:44:22 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/17 18:21:19 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
-
-/*
- * ** KEYBOARD HANDLER
- * */
-typedef struct	s_key
-{
-	int		shift;
-	int		g;
-	int		s;
-	int		r;
-	int		x;
-	int		y;
-	int		z;
-}				t_key;
 
 /*
 ** 3D VECTOR STRUCTURE
@@ -122,6 +108,48 @@ typedef struct	s_light
 	double		half;
 }				t_light;
 
+typedef struct	s_camera_ray
+{
+	t_vector	n;
+	t_vector	u;
+	t_vector	v;
+	t_vector	l;
+	t_vector	c;
+	double		d;
+	double		w;
+	double		h;
+}				t_camera_ray;
+
+/*
+** KEYBOARD HANDLER & MOUSE STRUCTURE
+*/
+typedef struct	s_key
+{
+	int		shift;
+	int		g;
+	int		s;
+	int		r;
+	int		x;
+	int		y;
+	int		z;
+}				t_key;
+
+typedef struct	s_click
+{
+	int				mouse_x;
+	int				mouse_y;
+	t_camera_ray	ray_cam;
+}				t_click;
+
+/*
+** SELECTED PRIMITIVE LIST STRUCTURE
+*/
+typedef struct	s_sel_list
+{
+	t_prim				primitive;
+	struct s_sel_list	*next;
+}				t_sel_list;
+
 /*
 ** ENVIRNMENT STRUCTURE
 */
@@ -136,7 +164,8 @@ typedef struct	s_env
 	t_ray			ray;
 	t_camera		camera;
 	t_prim			*p_hit;
-	t_prim			*p_selected;
+	t_prim			*selected;
+	size_t			selects;
 	t_vector		orig_loc;
 	size_t			hit_type;
 	t_prim			**prim;
@@ -152,18 +181,7 @@ typedef struct	s_env
 	double			t;
 	int				maxdepth;
 	t_key			key;
+	t_click			click;
 }				t_env;
-
-typedef struct	s_camera_ray
-{
-	t_vector	n;
-	t_vector	u;
-	t_vector	v;
-	t_vector	l;
-	t_vector	c;
-	double		d;
-	double		w;
-	double		h;
-}				t_camera_ray;
 
 #endif

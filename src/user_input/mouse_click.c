@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/12 15:51:20 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/16 18:21:24 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/17 18:20:06 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 /*
 static void deselect(t_env *e)
 {
-	e->p_selected->select = 0;
-	e->p_selected = NULL;
+	e->selected->select = 0;
+	e->selected = NULL;
 }
 */
 
@@ -35,14 +35,22 @@ static void	click_select(t_env *e)
 	if (mouse->p_hit != NULL)
 	{
 			mouse->p_hit->select = (mouse->p_hit->select == 0) ? 1 : 0;
-			if (e->p_selected)
-				e->p_selected->select = 0;
+			if (e->selected)
+				e->selected->select = 0;
 			if (mouse->p_hit->select == 1)
 			{
-				e->p_selected = mouse->p_hit;
+				e->selected = mouse->p_hit;
 			}
 			else
-				e->p_selected = NULL;
+				e->selected = NULL;
+			e->orig_loc = (t_vector)
+			{e->selected->loc.x, e->selected->loc.y, e->selected->loc.z};
+	}
+	else if (!mouse->p_hit && e->selected)
+	{
+			e->selected->select = 0;
+//			e->orig_loc = (t_vector){0.0, 0.0, 0.0};
+	
 	}
 	free(mouse);
 }
@@ -63,12 +71,12 @@ static void	shift_select(t_env *e)
 	{
 printf("Shift-selecting!\n");
 			mouse->p_hit->select = (mouse->p_hit->select == 0) ? 1 : 0;
-		//	if (e->p_selected)
-		//		e->p_selected->select = 0;
+		//	if (e->selected)
+		//		e->selected->select = 0;
 		//	if (mouse->p_hit->select == 1)
-		//		e->p_selected = mouse->p_hit;
+		//		e->selected = mouse->p_hit;
 		//	else
-		//		e->p_selected = NULL;
+		//		e->selected = NULL;
 	}
 	free(mouse);
 }
@@ -88,7 +96,7 @@ void		mouse_click(t_env *e, SDL_Event event)
 		if (e->key.g == 1)
 		{
 			e->key.g = 0;
-			e->p_selected->loc = e->orig_loc;
+			e->selected->loc = e->orig_loc;
 		}
 	}
 	reset_keys(e);

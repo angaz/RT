@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:24 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/17 14:41:44 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/17 17:42:59 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ static void	event_poll(t_env *e)
 			key_release(e, event);
 		else if (event.type == SDL_MOUSEBUTTONDOWN && e->objects == 0)
 			mouse_click(e, event);
+		(e->key.g == 1 && event.type == SDL_MOUSEMOTION) ? grab(e, event) : 0;
 		if (e->key.g == 1 && event.type == SDL_MOUSEWHEEL)
 		{
-			e->p_selected->loc.y -= (double)event.wheel.y * 0.05;
+			e->selected->loc.y -= (double)event.wheel.y * 0.05;
 			draw(e, (SDL_Rect){0, 0, WIN_X, WIN_Y});
 		}
 	}

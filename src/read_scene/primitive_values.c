@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 09:54:48 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/15 16:26:03 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/17 16:45:21 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static void		init_primitive(t_prim *p)
 	p->loc = (t_vector){0.0, 0.0, 0.0};
 	p->radius = 1.0;
 	p->material = 0;
+	p->select = 0;
 }
 
 void			get_primitive_attributes(t_env *e, int fd)
