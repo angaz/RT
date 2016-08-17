@@ -6,12 +6,26 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/16 10:26:07 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/17 14:44:22 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+/*
+ * ** KEYBOARD HANDLER
+ * */
+typedef struct	s_key
+{
+	int		shift;
+	int		g;
+	int		s;
+	int		r;
+	int		x;
+	int		y;
+	int		z;
+}				t_key;
 
 /*
 ** 3D VECTOR STRUCTURE
@@ -75,6 +89,7 @@ typedef struct	s_prim
 	t_vector	dir;
 	t_vector	normal;
 	int			type;
+	int			select;
 	size_t		material;
 	double		radius;
 	double		angle;
@@ -121,6 +136,8 @@ typedef struct	s_env
 	t_ray			ray;
 	t_camera		camera;
 	t_prim			*p_hit;
+	t_prim			*p_selected;
+	t_vector		orig_loc;
 	size_t			hit_type;
 	t_prim			**prim;
 	size_t			prims;
@@ -134,6 +151,7 @@ typedef struct	s_env
 	size_t			materials;
 	double			t;
 	int				maxdepth;
+	t_key			key;
 }				t_env;
 
 typedef struct	s_camera_ray
