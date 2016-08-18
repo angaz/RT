@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:38:20 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/14 15:42:59 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/18 15:01:24 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int			intersect_prim(t_env *e, t_ray *ray, size_t prim, double *t)
 
 void		intersect_scene(t_env *e)
 {
+		//printf("intersect scene called with rayloc %f %f %f dir %f %f %f\n",e->ray.loc.x, e->ray.loc.y, e->ray.loc.z, e->ray.dir.x, e->ray.dir.y, e->ray.dir.z);
+
 	double		t;
 	size_t		prim;
 	size_t		object;
@@ -38,12 +40,22 @@ void		intersect_scene(t_env *e)
 	prim = e->prims;
 	object = e->objects;
 	while (prim--)
+	{
+
 		if (intersect_prim(e, &e->ray, prim, &t) && t < e->t)
 		{
 			e->t = t;
 			e->p_hit = e->prim[prim];
 			e->hit_type = PRIMITIVE;
+
+			t_vector p;
+			p = vadd(e->ray.loc, vmult(e->ray.dir, t));
+		//	printf("hit prim at %f %f %f \n", p.x, p.y, p.z);
 		}
+		else
+			;
+		//	puts("missed prim");
+	}
 	while (object--)
 		if (intersect_box(&e->ray, e->object[object]->box))
 			intersect_object(e, e->object[object], &t);
