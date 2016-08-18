@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/14 20:32:58 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/17 14:45:19 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,11 @@ static uint32_t	find_colour(t_env *e)
 	t_colour	r;
 	t_material	*mat;
 
-	if (!e->hit_type)
-		return (0x7F7F7F);
-	l = (t_colour){0.0, 0.0, 0.0, 0.0};
 	c = (e->hit_type == FACE) ? face_diffuse(e) : prim_diffuse(e);
 	mat = (e->hit_type == FACE) ?
 		e->material[e->object_hit->material] :
 		e->material[e->p_hit->material];
-	if (mat->reflect > EPSILON)
-		l = reflect(e, 1);
+	l = mat->reflect > EPSILON ? reflect(e, 1) : (t_colour){0.0, 0.0, 0.0, 0.0};
 	if (mat->refract < 1.0)
 	{
 		r = refract(e, 1, c);
@@ -44,6 +40,21 @@ static uint32_t	find_colour(t_env *e)
 	(int)(((c.r * (1 - mat->reflect)) + (l.r * mat->reflect)) * 255.0) << 16 |
 	(int)(((c.g * (1 - mat->reflect)) + (l.g * mat->reflect)) * 255.0) << 8 |
 	(int)(((c.b * (1 - mat->reflect)) + (l.b * mat->reflect)) * 255.0)));
+}
+
+static uint32_t	find_base_colour(t_env *e)
+{
+	t_colour	c;
+
+	if (!e->hit_type)
+	{
+		return (0x7F7F7F);
+	}
+	c = prim_diffuse(e);
+	return ((uint32_t)(
+	(int)(c.r * 255.0) << 16 |
+	(int)(c.g * 255.0) << 8 |
+	(int)(c.b * 255.0)));
 }
 
 static void		*draw_chunk(void *q)
@@ -59,11 +70,12 @@ static void		*draw_chunk(void *q)
 		c->x = c->d.x;
 		while (c->x < c->stopx && c->x < WIN_X)
 		{
-
 			get_ray_dir(c->e, &c->cr, (double)c->x, (double)c->d.y);
 			intersect_scene(c->e);
 			c->pixel = (c->d.y * c->e->px_pitch + c->x * 4);
-			*(uint32_t *)(c->e->px + c->pixel) = find_colour(c->e);
+			(c->e->p_hit && (c->e->p_hit->select == 0) && (c->e->key.g == 0)) ?	
+			(*(uint32_t *)(c->e->px + c->pixel) = find_colour(c->e)) :
+			(*(uint32_t *)(c->e->px + c->pixel) = find_base_colour(c->e));
 			++c->x;
 		}
 		++c->d.y;
@@ -93,7 +105,7 @@ static void		make_chunks(t_env *e, SDL_Rect *d)
 			pthread_create(&m.tid[m.thread++], NULL, draw_chunk, (void *)m.c);
 			++m.chunk_x;
 		}
-	++m.chunk_y;
+		++m.chunk_y;
 	}
 	while (m.thread)
 		pthread_join(m.tid[--m.thread], NULL);
