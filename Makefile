@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/15 16:54:53 by rojones          ###   ########.fr        #
+#    Updated: 2016/08/18 14:25:06 by rojones          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,12 @@ CFLAGS		=	-Wall -Wextra -Werror -g3 -pthread
 LIBS		=	-lm
 
 ## PLEASE TRY AND KEEP THE SOURCE FILES IN ALPHABETICAL ORDER ##
+
+FREE		=	src/free/free_light.c				\
+				src/free/free_material.c			\
+				src/free/free_obj_vert.c			\
+				src/free/free_object.c				\
+				src/free/free_prim.c
 
 INTERSECT	=	src/intersect/intersect_box.c		\
 				src/intersect/intersect_scene.c		\
@@ -59,7 +65,8 @@ SAVE		=	src/save/save.c						\
 				src/save/save_prims.c				\
 				src/save/write_coord.c
 
-SRC			=	$(INTERSECT)						\
+SRC			=	$(FREE)								\
+				$(INTERSECT)						\
 				$(MATHS)							\
 				$(READ_SCENE)						\
 				$(SAVE)								\
@@ -97,4 +104,4 @@ run:
 	rm -f $(NAME)
 	@$(MAKE) all
 	@clear
-	@./$(NAME) scene
+	#@./$(NAME) scene
