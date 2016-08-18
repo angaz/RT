@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/15 16:36:25 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/17 14:19:44 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,23 @@ t_vector    get_normal(t_env *e, t_vector ray);
 ** src/copy_env.c
 */
 t_env	*copy_env(t_env *e);
+
+/*
+** src/user_input/key_press.c
+*/
+void	key_press(t_env *e, SDL_Event event);
+void	key_release(t_env *e, SDL_Event event);
+void	reset_keys(t_env *e);
+
+/*
+** src/user_input/mouse_click.c
+*/
+void	mouse_click(t_env *e, SDL_Event event);
+
+/*
+** src/user_input/grab.c
+*/
+void	grab(t_env *e, SDL_Event event);
 
 /*
 ** src/read_file/count_structurs.c
