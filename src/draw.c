@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/18 15:00:44 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/18 17:08:40 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ static uint32_t	find_colour(t_env *e)
 		e->material[e->p_hit->material];
 	if (mat->reflect > EPSILON)
 		l = reflect(e, 1);
-	if (mat->refract < 1.0)
+	if (mat->refract > EPSILON)
 	{
 		r = refract(e, 1, c);
-		c.r = (c.r * mat->refract) + (r.r * (1 - mat->refract));
-		c.g = (c.g * mat->refract) + (r.g * (1 - mat->refract));
-		c.b = (c.b * mat->refract) + (r.b * (1 - mat->refract));
+		c.r = (c.r * (1 - mat->refract)) + (r.r * mat->refract);
+		c.g = (c.g * (1 - mat->refract)) + (r.g * mat->refract);
+		c.b = (c.b * (1 - mat->refract)) + (r.b * mat->refract);
 	}
 	return ((uint32_t)(
 	(int)(((c.r * (1 - mat->reflect)) + (l.r * mat->reflect)) * 255.0) << 16 |
@@ -78,23 +78,23 @@ static void		make_chunks(t_env *e, SDL_Rect *d)
 {
 	t_make_chunks	m;
 
-	m.tids = 1 /*ceil((double)d->w / 64.0) * ceil((double)d->h /64.0)*/;
+	m.tids = ceil((double)d->w / 64.0) * ceil((double)d->h /64.0);
 	m.tid = (pthread_t *)malloc(sizeof(pthread_t) * m.tids);
 	m.thread = 0;
 	m.chunk_y = 0;
-/*	while (m.chunk_y * 64 < (size_t)d->h)
+	while (m.chunk_y * 64 < (size_t)d->h)
 	{
 		m.chunk_x = 0;
 		while (m.chunk_x * 64 < (size_t)d->w)
-		{*/
+		{
 			m.c = (t_chunk *)malloc(sizeof(t_chunk));
 			m.c->e = copy_env(e);
-			m.c->d = (SDL_Rect){/*m.chunk_x * 64, m.chunk_y * 64, 64, 64*/  1, 1, d->w, d->h};
+			m.c->d = (SDL_Rect){m.chunk_x * 64, m.chunk_y * 64, 64, 64};
 			pthread_create(&m.tid[m.thread++], NULL, draw_chunk, (void *)m.c);
-	/*		++m.chunk_x;
+			++m.chunk_x;
 		}
 	++m.chunk_y;
-	}*/
+	}
 	while (m.thread)
 		pthread_join(m.tid[--m.thread], NULL);
 	free(m.tid);

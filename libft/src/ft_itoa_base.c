@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 16:52:59 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/15 16:53:31 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/18 16:47:01 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_itoa_base(int value, int base)
 	rep = "0123456789ABCDEF";
 	if (value < 0)
 		sign = -1;
-	if (!(re = (char *)malloc(sizeof(char) * size)))
+	if (!(re = (char *)malloc(sizeof(char) * (size + 1))))
 		return (NULL);
 	re[size--] = '\0';
 	if (value == 0)

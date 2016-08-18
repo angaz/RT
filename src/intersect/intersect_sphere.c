@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:52 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/18 15:08:10 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/18 16:33:36 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static int	find_t(double a, double b, double discr, double *t)
 	if (tc > EPSILON)
 	{
 		*t = tc;
-//		puts("sphere find sphere returns true on close term");
 		return (1);
 	}
 	else
@@ -35,7 +34,6 @@ static int	find_t(double a, double b, double discr, double *t)
 		if (tc > EPSILON)
 		{
 		*t = tc;
-//		puts("sphere find sphere returns true on fare term");
 		return (1);
 		}
 	}

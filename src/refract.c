@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/09 09:30:32 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/18 15:03:34 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/18 17:09:22 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,12 @@ static int	set_refract_ray_prim(t_env *e, t_env *refract)
 	n = get_normal(e, refract->ray.loc);
 	if (e->ray.p_in == e->p_hit)
 	{
-		puts("exit");
 		cos = M_PI - vdot(vunit(vsub(e->ray.loc, refract->ray.loc)), n);
 		refract->ray.p_in = NULL;
 		refract->ray.ior = 1;
 	}
 	else
 	{
-		puts("enter");
 		cos = vdot(vunit(vsub(e->ray.loc, refract->ray.loc)), n);
 		refract->ray.p_in = e->p_hit;
 		refract->ray.ior = e->material[e->p_hit->material]->ior;
@@ -113,14 +111,11 @@ static int	set_refract_ray_object(t_env *e, t_env *r)
 
 t_colour	refract(t_env *e, int depth, t_colour colour)
 {
-	//printf("depth %d\n", depth);
 	t_env		*refract_env;
 
 	refract_env = copy_env(e);
 	if (e->hit_type == FACE && set_refract_ray_object(e, refract_env))
 	{
-//		intersect_object(refract_env, refract_env->object_hit, &refract_env->t);
-//		set_refract_ray_object(e, refract_env);
 		intersect_scene(refract_env);
 		colour = find_colour_struct(refract_env, depth);
 	}
