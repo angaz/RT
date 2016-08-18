@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/15 16:36:25 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/17 14:41:10 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,15 @@ void		init_material(t_material *m);
 */
 void		draw(t_env *e, SDL_Rect draw);
 int			intersect_prim(t_env *e, t_ray *ray, size_t prim, double *t);
+
+/*
+** src/free
+*/
+void    free_light(t_light **light, size_t num_light);
+void    free_material(t_material **material, size_t num_mat);
+void	free_obj_vert(void **v, size_t num_v);
+void    free_object(t_object **obj, size_t num_obj);
+void    free_prim(t_prim ***prim, size_t num_prim);
 
 /*
 ** src/intersect
