@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/18 17:06:44 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/19 09:39:14 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct	s_prim
 	size_t		material;
 	double		radius;
 	double		angle;
+	double		limit;
 }				t_prim;
 
 /*
