@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 09:40:33 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:27:51 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/19 10:58:24 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@
 
 typedef struct	s_intersect_cone
 {
-	double		a;
-	double		b;
-	double		c;
-	double		d;
+	t_quad		quad;
 	double		cos2;
 	double		sin2;
 	double		v_va;
