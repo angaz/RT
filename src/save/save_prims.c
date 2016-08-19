@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 15:05:07 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/19 09:33:13 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/19 10:08:03 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,24 @@ static void	put_type(int type, int fd)
 		temp = "cone";
 	else if (type == PRIM_CYLINDER)
 		temp = "cylinder";
+	else if (type == PRIM_DISK)
+		temp = "disk";
 	else if (type == PRIM_TRIANGLE)
 		temp = "triangle";
 	ft_putstr_fd(temp, fd);
 	ft_putchar_fd('\n', fd);
 }
 
+static void	ft_putd_fd(double d, int fd)
+{
+	char    temp[20];
+
+	sprintf(temp, "%f\n", d);
+	ft_putstr_fd(temp, fd);
+}
+
 static void	save_prim(t_prim *prim, t_material **mat, int fd)
 {
-	char	temp[20];
-
 	ft_putstr_fd("\tPRIMITIVE\n", fd);
 	ft_putstr_fd("\t\tTYPE\t\t", fd);
 	put_type(prim->type, fd);
@@ -44,14 +52,12 @@ static void	save_prim(t_prim *prim, t_material **mat, int fd)
 	write_coord(prim->dir, fd);
 	ft_putstr_fd("\t\tNORMAL\t\t", fd);
 	write_coord(prim->normal, fd);
+	ft_putstr_fd("\t\tLIMIT\t\t", fd);
+	ft_putd_fd(prim->limit, fd);
 	ft_putstr_fd("\t\tRADIUS\t\t", fd);
-	sprintf(temp, "%f\n", prim->radius);
-	ft_putstr_fd(temp, fd);
-	ft_bzero(temp, 20);
+	ft_putd_fd(prim->radius, fd);
 	ft_putstr_fd("\t\tANGLE\t\t", fd);
-	sprintf(temp, "%f\n", (180 / M_PI) * prim->angle);
-	ft_putstr_fd(temp, fd);
-	ft_bzero(temp, 20);
+	ft_putd_fd((180 / M_PI) * prim->angle, fd);
 	ft_putstr_fd("\t\tMATERIAL\t", fd);
 	ft_putstr_fd(mat[prim->material]->name, fd);
 	ft_putstr_fd("\n\n", fd);
