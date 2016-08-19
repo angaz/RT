@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/19 09:39:14 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/19 10:55:50 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,5 +148,13 @@ typedef struct	s_camera_ray
 	double		w;
 	double		h;
 }				t_camera_ray;
+
+typedef struct	s_quadratic
+{
+	double	a;
+	double	b;
+	double	c;
+	double	discr;
+}				t_quad;
 
 #endif
