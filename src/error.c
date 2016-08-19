@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 19:58:53 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/15 16:27:41 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/19 14:04:30 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	exit_rt(t_env *e, int code)
 	if (code == 0)
 		save(e);
 	free(e->file_name);
+	free(e->selected);
 	if (e->img)
 		SDL_DestroyTexture(e->img);
 	if (e->rend)

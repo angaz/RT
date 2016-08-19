@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/13 13:55:24 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/14 15:42:33 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/19 17:56:18 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		diffuse_colour(t_env *e, t_diffuse *d)
 {
-	if (in_shadow(e, d->light) == 1)
+	if (in_shadow(e, d->light) == 0)
 	{
 		d->l = vsub(d->light->loc, d->p);
 		d->dist = vnormalize(d->l);

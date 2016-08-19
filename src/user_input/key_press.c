@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/12 15:44:46 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/17 17:42:26 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/19 18:05:29 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,15 @@ void		key_press(t_env *e, SDL_Event event)
 		e->key.shift = 1;
 		printf("shift: %i\n", e->key.shift);
 	}
-	else if (event.key.keysym.sym == SDLK_g && e->selected)
-	{
-
-		printf("g: %i\n", e->key.g);
-		
-		printf("obj: %lu\n", e->objects);
+	else if (event.key.keysym.sym == SDLK_g && e->s_num > 0)
 		e->key.g = 1;
+	else if (event.key.keysym.sym == SDLK_a && e->key.g == 0)
+	{
+		if (e->s_num == 0)
+			select_all(e);
+		else
+			deselect(e);
+		draw(e, (SDL_Rect){0, 0, WIN_X, WIN_Y});
 	}
 	else if (event.key.keysym.sym == SDLK_s)
 		e->key.s = (e->key.s == 1) ? 0 : 1;

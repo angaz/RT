@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 23:47:45 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/14 16:04:24 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/19 17:54:30 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		in_shadow(t_env *e, t_light *light)
 	object = e->objects;
 	while (prim--)
 		if (intersect_prim(e, &ray, prim, &t) && t < distance)
-			return (0);
+			return (1);
 	while (object--)
 	{
 		o = e->object[object];
@@ -40,8 +40,8 @@ int		in_shadow(t_env *e, t_light *light)
 			face = o->faces;
 			while (face--)
 				if (intersect_triangle(&ray, o->face[face], &t) && t < distance)
-					return (0);
+					return (1);
 		}
 	}
-	return (1);
+	return (0);
 }

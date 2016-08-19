@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/17 18:21:19 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/19 15:43:19 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,9 @@ typedef struct	s_prim
 	t_vector	loc;
 	t_vector	dir;
 	t_vector	normal;
+	t_vector	loc_bak;
 	int			type;
-	int			select;
+	int			s_bool;
 	size_t		material;
 	double		radius;
 	double		angle;
@@ -127,6 +128,7 @@ typedef struct	s_key
 {
 	int		shift;
 	int		g;
+	int		a;
 	int		s;
 	int		r;
 	int		x;
@@ -164,9 +166,9 @@ typedef struct	s_env
 	t_ray			ray;
 	t_camera		camera;
 	t_prim			*p_hit;
-	t_prim			*selected;
-	size_t			selects;
-	t_vector		orig_loc;
+	t_prim			**selected;
+	size_t			s_num;
+	int				s_all;
 	size_t			hit_type;
 	t_prim			**prim;
 	size_t			prims;
