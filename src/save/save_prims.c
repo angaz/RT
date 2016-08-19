@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 15:05:07 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/16 09:46:25 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/19 09:33:13 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	save_prim(t_prim *prim, t_material **mat, int fd)
 	ft_putstr_fd(temp, fd);
 	ft_bzero(temp, 20);
 	ft_putstr_fd("\t\tANGLE\t\t", fd);
-	sprintf(temp, "%f\n", prim->angle);
+	sprintf(temp, "%f\n", (180 / M_PI) * prim->angle);
 	ft_putstr_fd(temp, fd);
 	ft_bzero(temp, 20);
 	ft_putstr_fd("\t\tMATERIAL\t", fd);

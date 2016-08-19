@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 14:39:54 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/16 10:10:51 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/19 09:06:35 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	write_colour(t_colour *col, int fd)
 	temp2 = 0;
 	temp2 = (int)((col->b * 255.0));
 	write_color_segment(temp2, fd);
-	sprintf(temp, "\t%f\n", col->intensity);
+	sprintf(temp, " %f\n", col->intensity);
 	ft_putstr_fd(temp, fd);
 }
 

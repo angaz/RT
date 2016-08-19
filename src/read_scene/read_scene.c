@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:42 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/15 17:12:55 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/19 08:47:59 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static void	get_quantities(t_env *e, int fd)
 	char	*temp;
 	char	*line;
 
+	temp = NULL;
+	line = NULL;
 	while (ft_gnl(fd, &temp) || temp != NULL)
 	{
 		line = ft_strtrim(temp);
@@ -108,7 +110,7 @@ void		read_scene(char *file, t_env *e)
 	{
 		if (temp_line[0] == '\0')
 		{
-			ft_strdel(&line);
+			//ft_strdel(&line);
 			break ;
 		}
 		line = ft_strtrim(temp_line);
