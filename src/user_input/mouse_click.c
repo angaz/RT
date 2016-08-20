@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/12 15:51:20 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/19 18:09:08 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/20 15:28:12 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	reset_loc(t_env *e)
 	size_t	index;
 
 	index = e->s_num;
-	e->key.g = 0;
 	while (index > 0)
 	{
 		e->selected[index]->loc = e->selected[index]->loc_bak;
@@ -32,8 +31,6 @@ static void	click_select(t_env *e)
 	int				mouse_y;
 	t_camera_ray 	ray_origin;
 	
-	printf("s_num : %lu\n", e->s_num);
-
 	mouse = copy_env(e);
 	setup_camera_plane(mouse, &ray_origin);
 	SDL_GetMouseState( &mouse_x, &mouse_y );
@@ -41,19 +38,14 @@ static void	click_select(t_env *e)
 	intersect_scene(mouse);
 	if (mouse->p_hit != NULL)
 	{
-		/*
-		if (e->key.shift == 0)
-		{
-			printf("s_num : %lu\n", e->s_num);
-			deselect(e);
-		}*/
-
 		if (e->key.shift == 0 || (mouse->p_hit == e->selected[e->s_num]))
-		{
-			printf("sdfsdf");
-			deselect(e);
-		}
-
+			deselect_all(e);
+			
+//		if (e->key.shift == 1 || mouse->p_hit->s_bool == 1)
+//		{
+//		printf("deselect");
+//			deselect_one(e, mouse);	
+//		}
 		if (mouse->p_hit->s_bool == 0)
 		{
 			e->s_num++;
@@ -61,30 +53,41 @@ static void	click_select(t_env *e)
 			e->selected[e->s_num] = mouse->p_hit;
 			e->selected[e->s_num]->loc_bak = e->selected[e->s_num]->loc; 
 		}
-		else
-		{
-			
-//			e->selected[e->s_num] = 0;
+		else		
 			mouse->p_hit->s_bool = 0;
-		}
-//		mouse->p_hit->s_bool = (mouse->p_hit->s_bool == 0) ? 1 : 0;
-//		mouse->p_hit->s_bool = (mouse->p_hit->s_bool == 0) ? 1 : 0;
-//			e->selected[e->s_num]->s_bool = 0;
 	}
 	else if (!mouse->p_hit && e->s_num > 0)
-		deselect(e);	
+		deselect_all(e);
 	free(mouse);
+}
+
+void		click_release(t_env *e, SDL_Event event)
+{
+	if (event.button.button == SDL_BUTTON_MIDDLE)
+	{
+		e->key.mid_click = 0;
+		SDL_SetRelativeMouseMode(0);
+		printf("mid click %i\n", e->key.mid_click);
+	}
 }
 
 void		mouse_click(t_env *e, SDL_Event event)
 {
 	SDL_SetRelativeMouseMode(0);
-	if (event.button.button == SDL_BUTTON_LEFT && e->key.g != 1)
+	if (event.button.button == SDL_BUTTON_LEFT && e->key.g == 0)
+	{
 		click_select(e);
-	if (event.button.button == SDL_BUTTON_RIGHT)
+	}
+	else if (event.button.button == SDL_BUTTON_RIGHT)
 	{
 		if (e->key.g == 1)
 			reset_loc(e);
+	}
+	else if (event.button.button == SDL_BUTTON_MIDDLE)
+	{
+		e->key.mid_click = 1;
+//		cam_rot(e, event);
+		printf("mid click %i\n", e->key.mid_click);
 	}
 	reset_keys(e);
 	draw(e, (SDL_Rect){0, 0, WIN_X, WIN_Y});

@@ -6,11 +6,28 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/12 15:44:46 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/19 18:05:29 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/20 16:35:16 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+void		init_keys(t_env *e)
+{
+	e->key.g = 0;
+	e->key.s = 0;
+	e->key.r = 0;
+	e->key.x = 0;
+	e->key.y = 0;
+	e->key.z = 0;
+	e->key.up = 0;
+	e->key.down = 0;
+	e->key.left = 0;
+	e->key.right = 0;
+	e->key.ctrl = 0;
+	e->key.space = 0;
+	e->key.mid_click = 0;
+}
 
 void		reset_keys(t_env *e)
 {
@@ -24,22 +41,22 @@ void		reset_keys(t_env *e)
 
 void		key_release(t_env *e, SDL_Event event)
 {
-	if (event.key.keysym.sym == SDLK_LSHIFT ||
-			event.key.keysym.sym == SDLK_RSHIFT)
+	if (event.key.keysym.sym == SDLK_LSHIFT)
 	{
+		e->key.up = 0;
+		e->key.down = 0;
+		e->key.left = 0;
+		e->key.right = 0;
 		e->key.shift = 0;
-		printf("shift: %i\n", e->key.shift);
+		e->key.space = 0;
+		e->key.ctrl = 0;
 	}
 }
 
 void		key_press(t_env *e, SDL_Event event)
 {
-	if (event.key.keysym.sym == SDLK_LSHIFT ||
-			event.key.keysym.sym == SDLK_RSHIFT)
-	{
+	if (event.key.keysym.sym == SDLK_LSHIFT)
 		e->key.shift = 1;
-		printf("shift: %i\n", e->key.shift);
-	}
 	else if (event.key.keysym.sym == SDLK_g && e->s_num > 0)
 		e->key.g = 1;
 	else if (event.key.keysym.sym == SDLK_a && e->key.g == 0)
@@ -47,7 +64,7 @@ void		key_press(t_env *e, SDL_Event event)
 		if (e->s_num == 0)
 			select_all(e);
 		else
-			deselect(e);
+			deselect_all(e);
 		draw(e, (SDL_Rect){0, 0, WIN_X, WIN_Y});
 	}
 	else if (event.key.keysym.sym == SDLK_s)
@@ -60,4 +77,16 @@ void		key_press(t_env *e, SDL_Event event)
 		e->key.y = (e->key.y == 1) ? 0 : 1;
 	else if (event.key.keysym.sym == SDLK_z)
 		e->key.z = (e->key.z == 1) ? 0 : 1;
+	else if (event.key.keysym.sym == SDLK_LCTRL)
+		e->key.ctrl = (e->key.ctrl == 1) ? 0 : 1;
+	else if (event.key.keysym.sym == SDLK_KP_SPACE)
+		e->key.space = (e->key.space == 1) ? 0 : 1;
+	else if (event.key.keysym.sym == SDLK_UP)
+		e->key.up = (e->key.up == 1) ? 0 : 1;
+	else if (event.key.keysym.sym == SDLK_DOWN)
+		e->key.down = (e->key.down == 1) ? 0 : 1;
+	else if (event.key.keysym.sym == SDLK_LEFT)
+		e->key.left = (e->key.left == 1) ? 0 : 1;
+	else if (event.key.keysym.sym == SDLK_RIGHT)
+		e->key.right = (e->key.right == 1) ? 0 : 1;
 }
