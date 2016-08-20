@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/19 15:43:19 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/20 16:24:04 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,13 @@ typedef struct	s_key
 	int		x;
 	int		y;
 	int		z;
+	int		up;
+	int		down;
+	int		left;
+	int		right;
+	int		ctrl;
+	int		space;
+	int		mid_click;
 }				t_key;
 
 typedef struct	s_click

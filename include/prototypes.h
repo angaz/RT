@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/19 17:51:04 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/20 16:28:27 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,19 +141,27 @@ t_env	*copy_env(t_env *e);
 void	key_press(t_env *e, SDL_Event event);
 void	key_release(t_env *e, SDL_Event event);
 void	reset_keys(t_env *e);
+void	init_keys(t_env *e);
 
 /*
 ** src/user_input/mouse_click.c
 */
 void	mouse_click(t_env *e, SDL_Event event);
-
+void	click_release(t_env *e, SDL_Event event);
 /*
 ** src/user_input/grab.c
 */
 void	grab(t_env *e, SDL_Event event);
 void	mouse_wheel(t_env *e, SDL_Event event);
 void	select_all(t_env *e);
-void	deselect(t_env *e);
+void	deselect_all(t_env *e);
+//void	deselect_one(t_env *e, t_env *mouse);
+
+/*
+** src/user_input/cam_transforms.c
+*/
+void	cam_rot(t_env *e, SDL_Event event);
+void	cam_move(t_env *e);
 
 /*
 ** src/read_file/count_structurs.c

@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/17 14:43:50 by arnovan-         ###   ########.fr        #
+#    Updated: 2016/08/20 11:52:28 by arnovan-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,8 @@ SRC			=	$(INTERSECT)						\
 				src/copy_env.c						\
 				src/user_input/mouse_click.c		\
 				src/user_input/key_press.c			\
-				src/user_input/grab.c
+				src/user_input/grab.c				\
+				src/user_input/cam_transforms.c
 
 all: $(NAME)
 
