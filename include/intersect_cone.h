@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 09:40:33 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/19 10:58:24 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/20 10:06:02 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,15 @@ typedef struct	s_intersect_cone
 	t_vector	a_v;
 	t_vector	c_v;
 }				t_intersect_cone;
+
+typedef struct s_cone_normal
+{
+	t_vector    pro;
+	t_vector    normal;
+	t_vector    rot;
+	t_vector    p_par;
+	t_vector    p_orth;
+	t_vector    nnor_orth;
+}				t_cone_normal;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/18 17:08:40 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/20 11:00:18 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void		*draw_chunk(void *q)
 		c->x = c->d.x;
 		while (c->x < c->stopx && c->x < WIN_X)
 		{
-
+			c->e->p_hit = NULL;
 			get_ray_dir(c->e, &c->cr, (double)c->x, (double)c->d.y);
 			intersect_scene(c->e);
 			c->pixel = (c->d.y * c->e->px_pitch + c->x * 4);
@@ -73,12 +73,11 @@ static void		*draw_chunk(void *q)
 	pthread_exit(0);
 }
 
-
 static void		make_chunks(t_env *e, SDL_Rect *d)
 {
 	t_make_chunks	m;
 
-	m.tids = ceil((double)d->w / 64.0) * ceil((double)d->h /64.0);
+	m.tids = ceil((double)d->w / 64.0) * ceil((double)d->h / 64.0);
 	m.tid = (pthread_t *)malloc(sizeof(pthread_t) * m.tids);
 	m.thread = 0;
 	m.chunk_y = 0;
@@ -93,7 +92,7 @@ static void		make_chunks(t_env *e, SDL_Rect *d)
 			pthread_create(&m.tid[m.thread++], NULL, draw_chunk, (void *)m.c);
 			++m.chunk_x;
 		}
-	++m.chunk_y;
+		++m.chunk_y;
 	}
 	while (m.thread)
 		pthread_join(m.tid[--m.thread], NULL);
@@ -107,16 +106,6 @@ void			draw(t_env *e, SDL_Rect d)
 	t = time(NULL);
 	SDL_LockTexture(e->img, NULL, &e->px, &e->px_pitch);
 	make_chunks(e, &d);
-
-	/*t_camera_ray cr;
-	int	pixel;
-
-			setup_camera_plane(e, &cr);
-			get_ray_dir(e, &cr, d.w/2, d.h/2);
-			intersect_scene(e);
-			pixel = (d.h/2 * e->px_pitch + d.w/2 * 4);
-			*(uint32_t *)(e->px + pixel) = find_colour(e);*/
-
 	SDL_UnlockTexture(e->img);
 	SDL_RenderCopy(e->rend, e->img, NULL, NULL);
 	SDL_RenderPresent(e->rend);

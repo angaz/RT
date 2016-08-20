@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:14 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/19 08:12:19 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/20 10:34:33 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void			nullify_pointers(t_env *e)
 
 void			init_env(t_env *e)
 {
-	nullify_pointers(e);	
+	nullify_pointers(e);
 	read_scene(e->file_name, e);
 	e->win = SDL_CreateWindow(e->file_name, SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, WIN_X, WIN_Y, 0);

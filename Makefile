@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/19 09:55:54 by rojones          ###   ########.fr        #
+#    Updated: 2016/08/20 09:28:01 by rojones          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ READ_SCENE	=	src/read_scene/camera_values.c		\
 #				src/read_scene/count_structurs.c
 
 MATHS		=	src/vector_maths/colour_to_unit.c	\
+				src/vector_maths/vector_comp.c		\
 				src/vector_maths/vector_add.c		\
 				src/vector_maths/vector_cross.c		\
 				src/vector_maths/vector_div.c		\

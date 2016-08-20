@@ -6,45 +6,47 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/08 12:10:39 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/19 10:05:22 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/20 15:26:24 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "diffuse.h"
+#include "intersect_cone.h"
 
 static t_vector	get_con_normal(t_env *e, t_vector ray)
 {
-	t_vector    normal;
-	t_vector    rot;
-	t_vector	p_par;
-	t_vector	p_orth;
-	t_vector	nnor_orth;
+	t_cone_normal	cn;
 
-	normal = vunit(vsub(vsub(ray, e->p_hit->loc),
-				vproject(vsub(ray, e->p_hit->loc), e->p_hit->dir)));
-	rot = vunit(vcross(normal, e->p_hit->dir));
-	p_par = vproject(normal, rot);
-	p_orth = vsub(normal, p_par);
-	nnor_orth = vadd(vmult(p_orth, cos(e->p_hit->angle)),
-			vmult(vcross(rot, p_orth), sin(e->p_hit->angle)));
-	normal = vunit(vadd(nnor_orth, p_par));
-	return (normal);
+	cn.pro = vproject(vsub(ray, e->p_hit->loc), e->p_hit->dir);
+	cn.normal = vunit(vsub(vsub(ray, e->p_hit->loc), cn.pro));
+	cn.rot = (vdot(e->p_hit->dir, vsub(vsub(ray, e->p_hit->loc), e->p_hit->loc)) > 0) ? vunit(vcross(e->p_hit->dir, cn.normal)) : (t_vector){0, 0, 0}/*vunit(vcross(cn.normal, e->p_hit->dir))*/;
+	cn.p_par = vproject(cn.normal, cn.rot);
+	cn.p_orth = vsub(cn.normal, cn.p_par);
+	cn.nnor_orth = vadd(vmult(cn.p_orth, cos(e->p_hit->angle)),
+			vmult(vcross(cn.rot, cn.p_orth), sin(e->p_hit->angle)));
+	cn.normal = vunit(vadd(cn.nnor_orth, cn.p_par));
+	return (cn.normal);
 }
 
-t_vector	get_normal(t_env *e, t_vector ray)
+t_vector		get_normal(t_env *e, t_vector ray)
 {
+	t_vector	normal;
+
+	normal = (t_vector){0.0, 0.0, 1.0};
 	if (e->hit_type == FACE)
-		return (vunit(*e->o_hit->n));
-	if (e->p_hit->type == PRIM_SPHERE)
-		return (vunit(vdiv(vsub(ray, e->p_hit->loc), e->p_hit->radius)));
-	if (e->p_hit->type == PRIM_PLANE || e->p_hit->type == PRIM_DISK)
-		return ((vdot(e->p_hit->normal, ray) < -0.44807361612) ? 
-				vunit(e->p_hit->normal) : 
+		normal = (vunit(*e->o_hit->n));
+	else if (e->p_hit->type == PRIM_SPHERE)
+		normal = (vunit(vdiv(vsub(ray, e->p_hit->loc), e->p_hit->radius)));
+	else if (e->p_hit->type == PRIM_PLANE || e->p_hit->type == PRIM_DISK)
+		return ((vdot(e->p_hit->normal, ray) < -0.44807361612) ?
+				vunit(e->p_hit->normal) :
 				vunit(vsub((t_vector){0, 0, 0}, e->p_hit->normal)));
-	if (e->p_hit->type == PRIM_CYLINDER)
-		return (vunit(vsub(vsub(ray, e->p_hit->loc),
-			vproject(vsub(ray, e->p_hit->loc), e->p_hit->dir))));
-	if (e->p_hit->type == PRIM_CONE)
-		return (vunit(get_con_normal(e, ray)));
-	return ((t_vector){0.0, 0.0, 1.0});
+	else if (e->p_hit->type == PRIM_CYLINDER)
+		normal = (vunit(vsub(vsub(ray, e->p_hit->loc),
+						vproject(vsub(ray, e->p_hit->loc), e->p_hit->dir))));
+	else if (e->p_hit->type == PRIM_CONE)
+		normal = (vunit(get_con_normal(e, ray)));
+	if (e->ray.inter == 2)
+		normal = vsub((t_vector){0, 0, 0}, normal);
+	return (normal);
 }
