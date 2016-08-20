@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 09:02:46 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/19 11:35:41 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/20 15:26:29 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,29 @@
 
 static int	check_lim(t_ray *r, t_prim *o, double *t, double *t_test)
 {
-	t_vector	point;
+	t_vector	p1;
+	t_vector	p2;
+	t_vector	ph;
 
-	if (o->limit == -1)
+	ph = vadd(r->loc, vmult(r->dir, *t_test));
+	p1 = vadd(o->loc, vmult(o->dir, o->limit));
+	p2 = vadd(o->loc, vmult(o->dir, -o->limit));
+	if (vdot(o->dir, vsub(ph, p1)) <= 0 && vdot(o->dir, vsub(ph, p2)) >= 0)
 	{
 		*t = *t_test;
 		return (1);
 	}
+	return (0);
+}
 
-	point = vadd(r->loc, vmult(r->dir, *t_test));
-	point = vproject(point, o->dir);
-	if (vnormalize(vsub(point, o->loc)) <= o->limit)
+static int	check_t(t_ray *r, t_prim *o, double *t, double *t_test)
+{
+	if (o->limit != -1)
+	{
+		if (check_lim(r, o, t, t_test))
+			return (1);
+	}
+	else
 	{
 		*t = *t_test;
 		return (1);
@@ -45,27 +57,14 @@ static int	find_t(t_quad *quad, double *t, t_prim *o, t_ray *r)
 	tc = (t0 > t1) ? t1 : t0;
 	if (tc > EPSILON)
 	{
-		if (o->limit != -1 )
-		{
-			if(check_lim(r, o, t, &tc))
-				return (1);
-		}
-		else
-		{
-			*t = tc;
+		if (check_t(r, o, t, &tc))
 			return (1);
-		}
 	}
 	tc = (tc == t1) ? t0 : t1;
 	if (tc > EPSILON)
 	{
-		if (o->limit != -1)
-			return (check_lim(r, o, t, &tc));
-		else
-		{
-			*t = tc;
-			return (1);
-		}
+		if (check_t(r, o, t, &tc))
+			return (2);
 	}
 	return (0);
 }

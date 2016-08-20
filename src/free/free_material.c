@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 07:50:06 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/17 17:26:10 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/20 11:03:02 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_material(t_material **material, size_t num_mat)
 {
-	if(material)
+	if (material)
 	{
 		while (num_mat--)
 		{
@@ -23,7 +23,7 @@ void	free_material(t_material **material, size_t num_mat)
 				free(material[num_mat]);
 			material[num_mat] = NULL;
 		}
-
 		free(material);
+		material = NULL;
 	}
 }

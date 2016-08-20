@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   copy_env.c                                         :+:      :+:    :+:   */
+/*   in_shadow.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/08 13:16:30 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/20 10:33:36 by rojones          ###   ########.fr       */
+/*   Created: 2016/08/20 10:39:15 by rojones           #+#    #+#             */
+/*   Updated: 2016/08/20 10:48:31 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#ifndef IN_SHADOW_H
+# define IN_SHADOW_H
 
-t_env	*copy_env(t_env *e)
+typedef struct	s_in_shadow
 {
-	t_env	*res;
+	t_ray		ray;
+	double		t;
+	double		distance;
+	size_t		prim;
+	size_t		face;
+	size_t		object;
+	t_object	*o;
+}				t_in_shadow;
 
-	res = (t_env *)malloc(sizeof(t_env));
-	*res = *e;
-	res->p_hit = NULL;
-	return (res);
-}
+#endif

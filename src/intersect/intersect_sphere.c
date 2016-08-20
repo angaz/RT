@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:52 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/18 16:33:36 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/19 16:44:09 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static int	find_t(double a, double b, double discr, double *t)
 		tc = (tc == t1) ? t0 : t1;
 		if (tc > EPSILON)
 		{
-		*t = tc;
-		return (1);
+			*t = tc;
+			return (2);
 		}
 	}
 	return (0);

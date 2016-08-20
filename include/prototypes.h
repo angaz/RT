@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/19 09:56:34 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/20 09:26:54 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_vector	vcross(t_vector v1, t_vector v2);
 t_vector	vunit(t_vector v);
 t_vector	vproject(t_vector a, t_vector b);
 t_vector	colour_to_vector(t_colour colour);
+int			vcomp(t_vector v1, t_vector v2);
 t_vector	vrotx(t_vector v, double angle);
 t_vector	vroty(t_vector v, double angle);
 t_vector	vrotz(t_vector v, double angle);
