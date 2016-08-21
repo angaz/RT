@@ -97,7 +97,7 @@ int			intersect_object(t_env *e, t_object *o, double *t);
 /*
 ** src/save
 */
-void    save(t_env *e);
+void	save(t_env *e);
 void    save_lights(t_light **lights, size_t num_light, int fd);
 void    save_materials(t_material **material, size_t materials, int fd);
 void    save_objects(t_object **obj, size_t objects, t_material **mat, int fd);
@@ -118,8 +118,8 @@ t_colour    find_colour_struct(t_env *e, int depth);
 /*
 ** src/reflect.c
 */
-t_colour    reflect(t_env *e, int depth);
-
+t_colour	reflect(t_env *e, int depth);
+void    set_reflect_ray(t_env *e, t_env *reflect);
 /*
 ** src/refract.c
 */

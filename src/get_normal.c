@@ -36,13 +36,13 @@ t_vector		get_normal(t_env *e, t_vector ray)
 
 	normal = (t_vector){0.0, 0.0, 1.0};
 	if (e->hit_type == FACE)
-		return ((vdot(*(e->o_hit->n), ray) < -0.44807361612) ?
+		return ((vdot(*(e->o_hit->n), e->ray.dir) < 0) ?
 			vunit(*e->o_hit->n) :
 			vunit(vsub((t_vector){0, 0, 0}, *e->o_hit->n)));
 	else if (e->p_hit->type == PRIM_SPHERE)
 		normal = (vunit(vdiv(vsub(ray, e->p_hit->loc), e->p_hit->radius)));
 	else if (e->p_hit->type == PRIM_PLANE || e->p_hit->type == PRIM_DISK)
-		return ((vdot(e->p_hit->normal, ray) < -0.44807361612) ?
+		return ((vdot(e->p_hit->normal, e->ray.dir) < 0) ?
 			vunit(e->p_hit->normal) :
 			vunit(vsub((t_vector){0, 0, 0}, e->p_hit->normal)));
 	else if (e->p_hit->type == PRIM_CYLINDER)

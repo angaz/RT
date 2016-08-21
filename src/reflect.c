@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-static void	set_reflect_ray(t_env *e, t_env *reflect)
+void	set_reflect_ray(t_env *e, t_env *reflect)
 {
 	t_vector	v;
 	t_vector	n;
