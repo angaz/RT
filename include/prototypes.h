@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/21 14:32:07 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/21 14:52:04 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,12 @@ int			intersect_object(t_env *e, t_object *o, double *t);
 /*
 ** src/save
 */
-void    save(t_env *e);
-void    save_lights(t_light **lights, size_t num_light, int fd);
-void    save_materials(t_material **material, size_t materials, int fd);
-void    save_objects(t_object **obj, size_t objects, t_material **mat, int fd);
-void    save_prims(t_prim **prim, t_material **mat, size_t prims, int fd);
-void	write_coord(t_vector v, int fd);
+void		save(t_env *e);
+void		save_lights(t_light **lights, size_t num_light, int fd);
+void		save_materials(t_material **material, size_t materials, int fd);
+void		save_objects(t_object **obj, size_t objects, t_material **mat, int fd);
+void		save_prims(t_prim **prim, t_material **mat, size_t prims, int fd);
+void		write_coord(t_vector v, int fd);
 
 /*
 ** src/diffuse.c
@@ -102,17 +102,17 @@ t_colour	face_diffuse(t_env *e);
 /*
 ** src/find_colour_struct.c
 */
-t_colour    find_colour_struct(t_env *e, int depth);
+t_colour	find_colour_struct(t_env *e, int depth);
 
 /*
 ** src/reflect.c
 */
-t_colour    reflect(t_env *e, int depth);
+t_colour	reflect(t_env *e, int depth);
 
 /*
 ** src/refract.c
 */
-t_colour    refract(t_env *e, int depth, t_colour colour);
+t_colour	refract(t_env *e, int depth, t_colour colour);
 
 /*
 ** src/shadow.c
@@ -128,41 +128,41 @@ void		get_ray_dir(t_env *e, t_camera_ray *cr, double x, double y);
 /*
 ** src/get_normal.c
 */
-t_vector    get_normal(t_env *e, t_vector ray);
+t_vector	get_normal(t_env *e, t_vector ray);
 
 /*
 ** src/copy_env.c
 */
-t_env	*copy_env(t_env *e);
+t_env		*copy_env(t_env *e);
 
 /*
 ** src/user_input/key_press.c
 */
-void	key_press(t_env *e, SDL_Event event);
-void	mkey_press(t_env *e, SDL_Event event);
-void	key_release(t_env *e, SDL_Event event);
-void	reset_keys(t_env *e);
-void	init_keys(t_env *e);
+void		key_press(t_env *e, SDL_Event event);
+void		mkey_press(t_env *e, SDL_Event event);
+void		key_release(t_env *e, SDL_Event event);
+void		reset_keys(t_env *e);
+void		init_keys(t_env *e);
 
 /*
 ** src/user_input/mouse_click.c
 */
-void	mouse_click(t_env *e, SDL_Event event);
-void	click_release(t_env *e, SDL_Event event);
+void		mouse_click(t_env *e, SDL_Event event);
+void		click_release(t_env *e, SDL_Event event);
 
 /*
 ** src/user_input/grab.c
 */
-void	grab(t_env *e, SDL_Event event);
-void	m_wheel(t_env *e, SDL_Event event);
-void	select_all(t_env *e);
-void	deselect_all(t_env *e);
+void		grab(t_env *e, SDL_Event event);
+void		m_wheel(t_env *e, SDL_Event event);
+void		select_all(t_env *e);
+void		deselect_all(t_env *e);
 
 /*
 ** src/user_input/cam_transforms.c
 */
-void	cam_rot(t_env *e, SDL_Event event);
-void	cam_move(t_env *e);
+void		cam_rot(t_env *e, SDL_Event event);
+void		cam_move(t_env *e);
 
 /*
 ** src/read_file/count_structurs.c

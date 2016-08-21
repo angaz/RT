@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/21 10:28:44 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/21 14:49:03 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,15 +147,6 @@ typedef struct	s_click
 	int				mouse_y;
 	t_camera_ray	ray_cam;
 }				t_click;
-
-/*
-** SELECTED PRIMITIVE LIST STRUCTURE
-*/
-typedef struct	s_sel_list
-{
-	t_prim				primitive;
-	struct s_sel_list	*next;
-}				t_sel_list;
 
 /*
 ** ENVIRNMENT STRUCTURE
