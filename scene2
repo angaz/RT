@@ -15,7 +15,7 @@
 	PRIMITIVE
 		TYPE		plane
 		LOC			0.000000 0.000000 -1.000000
-		DIR			nan nan nan
+		DIR			-nan -nan -nan
 		NORMAL		0.000000 0.000000 1.000000
 		LIMIT		-1.000000
 		RADIUS		1.000000
@@ -25,7 +25,7 @@
 	PRIMITIVE
 		TYPE		plane
 		LOC			0.000000 0.000000 1.000000
-		DIR			nan nan nan
+		DIR			-nan -nan -nan
 		NORMAL		0.000000 0.000000 1.000000
 		LIMIT		-1.000000
 		RADIUS		1.000000
