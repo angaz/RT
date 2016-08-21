@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/20 16:24:04 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/21 10:28:44 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,16 +128,14 @@ typedef struct	s_key
 {
 	int		shift;
 	int		g;
-	int		a;
-	int		s;
 	int		r;
 	int		x;
 	int		y;
 	int		z;
-	int		up;
-	int		down;
-	int		left;
-	int		right;
+	int		w;
+	int		s;
+	int		a;
+	int		d;
 	int		ctrl;
 	int		space;
 	int		mid_click;

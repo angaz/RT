@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/12 15:44:46 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/20 16:35:16 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/21 14:28:05 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ void		init_keys(t_env *e)
 	e->key.x = 0;
 	e->key.y = 0;
 	e->key.z = 0;
-	e->key.up = 0;
-	e->key.down = 0;
-	e->key.left = 0;
-	e->key.right = 0;
+	e->key.w = 0;
+	e->key.s = 0;
+	e->key.a = 0;
+	e->key.d = 0;
+	e->key.a = 0;
 	e->key.ctrl = 0;
 	e->key.space = 0;
 	e->key.mid_click = 0;
@@ -42,15 +43,19 @@ void		reset_keys(t_env *e)
 void		key_release(t_env *e, SDL_Event event)
 {
 	if (event.key.keysym.sym == SDLK_LSHIFT)
-	{
-		e->key.up = 0;
-		e->key.down = 0;
-		e->key.left = 0;
-		e->key.right = 0;
 		e->key.shift = 0;
-		e->key.space = 0;
+	else if (event.key.keysym.sym == SDLK_LCTRL)
 		e->key.ctrl = 0;
-	}
+	else if (event.key.keysym.sym == SDLK_KP_SPACE)
+		e->key.space = 0;
+	else if (event.key.keysym.sym == SDLK_w)
+		e->key.w = 0;
+	else if (event.key.keysym.sym == SDLK_s)
+		e->key.s = 0;
+	else if (event.key.keysym.sym == SDLK_a)
+		e->key.a = 0;
+	else if (event.key.keysym.sym == SDLK_d)
+		e->key.d = 0;
 }
 
 void		key_press(t_env *e, SDL_Event event)
@@ -77,16 +82,20 @@ void		key_press(t_env *e, SDL_Event event)
 		e->key.y = (e->key.y == 1) ? 0 : 1;
 	else if (event.key.keysym.sym == SDLK_z)
 		e->key.z = (e->key.z == 1) ? 0 : 1;
-	else if (event.key.keysym.sym == SDLK_LCTRL)
-		e->key.ctrl = (e->key.ctrl == 1) ? 0 : 1;
+}
+
+void		mkey_press(t_env *e, SDL_Event event)
+{
+	if (event.key.keysym.sym == SDLK_LCTRL)
+		e->key.ctrl = 1;
 	else if (event.key.keysym.sym == SDLK_KP_SPACE)
-		e->key.space = (e->key.space == 1) ? 0 : 1;
-	else if (event.key.keysym.sym == SDLK_UP)
-		e->key.up = (e->key.up == 1) ? 0 : 1;
-	else if (event.key.keysym.sym == SDLK_DOWN)
-		e->key.down = (e->key.down == 1) ? 0 : 1;
-	else if (event.key.keysym.sym == SDLK_LEFT)
-		e->key.left = (e->key.left == 1) ? 0 : 1;
-	else if (event.key.keysym.sym == SDLK_RIGHT)
-		e->key.right = (e->key.right == 1) ? 0 : 1;
+		e->key.space = 1;
+	else if (event.key.keysym.sym == SDLK_w)
+		e->key.w = 1;
+	else if (event.key.keysym.sym == SDLK_s)
+		e->key.s = 1;
+	else if (event.key.keysym.sym == SDLK_a)
+		e->key.a = 1;
+	else if (event.key.keysym.sym == SDLK_d)
+		e->key.d = 1;
 }
