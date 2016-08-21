@@ -37,34 +37,35 @@ static int	set_refract_ray_prim(t_env *e, t_env *refract)
 	return (1);
 }
 
-static int	set_refract_ray_object(t_env *e, t_env *r)
+static int	set_refract_ray_object(t_env *e, t_env *refract)
 {
-	double		n;
-	double		cosi;
-	double		sint2;
-	double		cost;
-	t_vector	norm;
+	t_vector	n;
+	double		ior;
+	double		cos;
+	double		check;
 
+	refract->ray.loc = vadd(e->ray.loc, vmult(e->ray.dir, e->t));
 	if (e->object_hit == e->ray.o_in)
 	{
-		norm = vsub((t_vector){0, 0, 0}, *e->o_hit->n);
-		r->ray.o_in = NULL;
-		n = e->material[r->object_hit->material]->ior;
+		n = vsub((t_vector){0, 0, 0}, *e->o_hit->n);
+		refract->ray.o_in = NULL;
+		refract->ray.ior = 1;
 	}
 	else
 	{
-		norm = *e->o_hit->n;
-		r->ray.o_in = e->object_hit;
-		n = e->ray.ior / e->material[r->object_hit->material]->ior;
+		n = *e->o_hit->n;
+		refract->ray.o_in = e->object_hit;
+		refract->ray.ior = e->material[e->object_hit->material]->ior;
 	}
-	cosi = -vdot(norm, e->ray.dir);
-	sint2 = n * n * (1.0 - cosi * cosi);
-	if (sint2 > 1.0)
+	cos = vdot(vunit(vsub(e->ray.loc, refract->ray.loc)), n);
+	ior = (e->ray.ior / refract->ray.ior);
+	if ((check = 1 - pow(ior, 2) * (1 - pow(cos, 2))) < 0.0)
+	{
+		puts("total internal refraction found");
 		return (0);
-	cost = sqrt(1.0 - sint2);
-	r->ray.ior = e->material[e->object_hit->material]->ior;
-	r->ray.loc = vadd(e->ray.loc, vmult(e->ray.dir, e->t));
-	r->ray.dir = vadd(vmult(e->ray.dir, n), vmult(norm, (n * cosi - cost)));
+	}
+	refract->ray.dir = vunit(vadd(
+		vmult(e->ray.dir, ior), vmult(n, ((ior * cos) - sqrt(check)))));
 	return (1);
 }
 
