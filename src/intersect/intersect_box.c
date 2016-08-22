@@ -6,19 +6,12 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/11 20:12:04 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/11 21:01:35 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/20 11:07:42 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-typedef struct	s_intersect_box
-{
-	t_vector	inv_dir;
-	int			sign[3];
-	t_vector	min;
-	t_vector	max;
-}				t_intersect_box;
+#include "intersect_object.h"
 
 static void		init_ray(t_intersect_box *b, t_ray *r)
 {
@@ -48,4 +41,4 @@ int				intersect_box(t_ray *r, t_vector box[2])
 	if (b.min.x > b.max.x || b.min.x > b.max.x)
 		return (0);
 	return (1);
-}	
+}

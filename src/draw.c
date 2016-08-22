@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/17 14:45:19 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/22 14:47:16 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static uint32_t	find_colour(t_env *e)
 	if (mat->refract < 1.0)
 	{
 		r = refract(e, 1, c);
-		c.r = (c.r * mat->refract) + (r.r * (1 - mat->refract));
-		c.g = (c.g * mat->refract) + (r.g * (1 - mat->refract));
-		c.b = (c.b * mat->refract) + (r.b * (1 - mat->refract));
+		c.r = (c.r * (1 - mat->refract)) + (r.r * mat->refract);
+		c.g = (c.g * (1 - mat->refract)) + (r.g * mat->refract);
+		c.b = (c.b * (1 - mat->refract)) + (r.b * mat->refract);
 	}
 	return ((uint32_t)(
 	(int)(((c.r * (1 - mat->reflect)) + (l.r * mat->reflect)) * 255.0) << 16 |
@@ -70,10 +70,11 @@ static void		*draw_chunk(void *q)
 		c->x = c->d.x;
 		while (c->x < c->stopx && c->x < WIN_X)
 		{
+			c->e->p_hit = NULL;
 			get_ray_dir(c->e, &c->cr, (double)c->x, (double)c->d.y);
 			intersect_scene(c->e);
 			c->pixel = (c->d.y * c->e->px_pitch + c->x * 4);
-			(c->e->p_hit && (c->e->p_hit->select == 0) && (c->e->key.g == 0)) ?	
+			(c->e->p_hit && (c->e->p_hit->select == 0) && (c->e->key.g == 0)) ?
 			(*(uint32_t *)(c->e->px + c->pixel) = find_colour(c->e)) :
 			(*(uint32_t *)(c->e->px + c->pixel) = find_base_colour(c->e));
 			++c->x;
@@ -85,12 +86,11 @@ static void		*draw_chunk(void *q)
 	pthread_exit(0);
 }
 
-
 static void		make_chunks(t_env *e, SDL_Rect *d)
 {
 	t_make_chunks	m;
 
-	m.tids = ceil((double)d->w / 64.0) * ceil((double)d->h /64.0);
+	m.tids = ceil((double)d->w / 64.0) * ceil((double)d->h / 64.0);
 	m.tid = (pthread_t *)malloc(sizeof(pthread_t) * m.tids);
 	m.thread = 0;
 	m.chunk_y = 0;

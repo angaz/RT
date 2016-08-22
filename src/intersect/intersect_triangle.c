@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 14:57:03 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/10 22:37:18 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/21 19:47:21 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ int		intersect_triangle(t_ray *r, t_face *f, double *t)
 	it.inverse_d = 1.0 / it.d;
 	it.dist = vsub(r->loc, *f->v0);
 	it.u = vdot(it.dist, it.p) * it.inverse_d;
-	if (it.u < EPSILON || it.u > 1.0)
+	if (it.u < 0.0 || it.u > 1.0)
 		return (0);
 	it.q = vcross(it.dist, it.edge1);
 	it.v = vdot(r->dir, it.q) * it.inverse_d;
-	if (it.v < EPSILON || it.u + it.v > 1.0)
+	if (it.v < 0.0 || it.u + it.v > 1.0)
 		return (0);
 	it.t0 = vdot(it.edge2, it.q) * it.inverse_d;
 	if (it.t0 > EPSILON)

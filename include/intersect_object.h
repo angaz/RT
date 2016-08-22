@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   copy_env.c                                         :+:      :+:    :+:   */
+/*   intersect_object.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/08 13:16:30 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/20 10:33:36 by rojones          ###   ########.fr       */
+/*   Created: 2016/08/20 11:05:17 by rojones           #+#    #+#             */
+/*   Updated: 2016/08/20 11:06:29 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#ifndef INTERSECT_OBJECT_H
+# define INTERSECT_OBJECT_H
 
-t_env	*copy_env(t_env *e)
+typedef struct  s_intersect_box
 {
-	t_env	*res;
+	t_vector    inv_dir;
+	int         sign[3];
+	t_vector    min;
+	t_vector    max;
+}               t_intersect_box;
 
-	res = (t_env *)malloc(sizeof(t_env));
-	*res = *e;
-	res->p_hit = NULL;
-	return (res);
-}
+#endif

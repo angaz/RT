@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/17 14:19:44 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/22 14:25:08 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_vector	vcross(t_vector v1, t_vector v2);
 t_vector	vunit(t_vector v);
 t_vector	vproject(t_vector a, t_vector b);
 t_vector	colour_to_vector(t_colour colour);
+int			vcomp(t_vector v1, t_vector v2);
 t_vector	vrotx(t_vector v, double angle);
 t_vector	vroty(t_vector v, double angle);
 t_vector	vrotz(t_vector v, double angle);
@@ -72,6 +73,15 @@ void		draw(t_env *e, SDL_Rect draw);
 int			intersect_prim(t_env *e, t_ray *ray, size_t prim, double *t);
 
 /*
+** src/free
+*/
+void		free_light(t_light **light, size_t num_light);
+void		free_material(t_material **material, size_t num_mat);
+void		free_obj_vert(void **v, size_t num_v);
+void		free_object(t_object **obj, size_t num_obj);
+void		free_prim(t_prim ***prim, size_t num_prim);
+
+/*
 ** src/intersect
 */
 void		intersect_scene(t_env *e);
@@ -79,6 +89,7 @@ int			intersect_sphere(t_ray *r, t_prim *s, double *t);
 int			intersect_plane(t_ray *r, t_prim *o, double *t);
 int			intersect_cylinder(t_ray *r, t_prim *o, double *t);
 int			intersect_cone(t_ray *r, t_prim *o, double *t);
+int			intersect_disk(t_ray *r, t_prim *o, double *t);
 int			intersect_triangle(t_ray *r, t_face *f, double *t);
 int			intersect_box(t_ray *r, t_vector box[2]);
 int			intersect_object(t_env *e, t_object *o, double *t);
@@ -86,12 +97,12 @@ int			intersect_object(t_env *e, t_object *o, double *t);
 /*
 ** src/save
 */
-void    save(t_env *e);
-void    save_lights(t_light **lights, size_t num_light, int fd);
-void    save_materials(t_material **material, size_t materials, int fd);
-void    save_objects(t_object **obj, size_t objects, t_material **mat, int fd);
-void    save_prims(t_prim **prim, t_material **mat, size_t prims, int fd);
-void	write_coord(t_vector v, int fd);
+void		save(t_env *e);
+void		save_lights(t_light **lights, size_t num_light, int fd);
+void		save_materials(t_material **material, size_t materials, int fd);
+void		save_objects(t_object **obj, size_t objects, t_material **mat, int fd);
+void		save_prims(t_prim **prim, t_material **mat, size_t prims, int fd);
+void		write_coord(t_vector v, int fd);
 
 /*
 ** src/diffuse.c
@@ -107,8 +118,8 @@ t_colour    find_colour_struct(t_env *e, int depth);
 /*
 ** src/reflect.c
 */
-t_colour    reflect(t_env *e, int depth);
-
+t_colour	reflect(t_env *e, int depth);
+void		set_reflect_ray(t_env *e, t_env *reflect);
 /*
 ** src/refract.c
 */
@@ -133,28 +144,23 @@ t_vector    get_normal(t_env *e, t_vector ray);
 /*
 ** src/copy_env.c
 */
-t_env	*copy_env(t_env *e);
+t_env		*copy_env(t_env *e);
 
 /*
 ** src/user_input/key_press.c
 */
-void	key_press(t_env *e, SDL_Event event);
-void	key_release(t_env *e, SDL_Event event);
-void	reset_keys(t_env *e);
+void		key_press(t_env *e, SDL_Event event);
+void		key_release(t_env *e, SDL_Event event);
+void		reset_keys(t_env *e);
 
 /*
 ** src/user_input/mouse_click.c
 */
-void	mouse_click(t_env *e, SDL_Event event);
+void		mouse_click(t_env *e, SDL_Event event);
 
 /*
 ** src/user_input/grab.c
 */
-void	grab(t_env *e, SDL_Event event);
-
-/*
-** src/read_file/count_structurs.c
-*/
-//t_objcount  count_object(char *file, t_env *e);
+void		grab(t_env *e, SDL_Event event);
 
 #endif

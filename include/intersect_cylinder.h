@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:28:51 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/26 17:28:00 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/19 11:45:18 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@
 
 typedef struct	s_int_cylinder
 {
-	double		a;
-	double		b;
-	double		c;
-	double		d;
+	t_quad		quad;
 	t_vector	dist;
 	t_vector	a_v;
 	t_vector	c_v;

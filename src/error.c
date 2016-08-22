@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 19:58:53 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/15 16:27:41 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/19 08:17:20 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,18 @@ void	exit_rt(t_env *e, int code)
 {
 	if (code == 0)
 		save(e);
-	free(e->file_name);
+	if (e->file_name)
+		free(e->file_name);
 	if (e->img)
 		SDL_DestroyTexture(e->img);
 	if (e->rend)
 		SDL_DestroyRenderer(e->rend);
 	if (e->win)
 		SDL_DestroyWindow(e->win);
+	free_light(e->light, e->lights);
+	free_material(e->material, e->materials);
+	free_object(e->object, e->objects);
+	free_prim(&e->prim, e->prims);
 	exit(0);
 }
 
