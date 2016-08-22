@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 12:40:41 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/15 16:24:53 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/18 17:06:38 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	init_material(t_material *m)
 {
 	m->name = ft_strdup("UNNAMED");
 	m->reflect = 0.0;
-	m->refract = 1.0;
+	m->refract = 0.0;
 	m->ior = 1;
 	m->diff = (t_colour){1.0, 0.0, 0.870588235294, 1.0};
 	m->spec = (t_colour){1.0, 1.0, 1.0, 0.5};

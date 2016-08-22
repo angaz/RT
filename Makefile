@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/17 14:43:50 by arnovan-         ###   ########.fr        #
+#    Updated: 2016/08/22 14:25:52 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,16 @@ NAME		=	RT
 LIBFT		=	-I libft/include -L libft -lft
 SDL2		=	$(shell sdl2-config --cflags --libs)
 INCLUDE		=	-I include
-CFLAGS		=	-Wall -Wextra -Werror -g3 -pthread
+CFLAGS		=	-Wall -Wextra -Werror -g3 -pthread -g
 LIBS		=	-lm
 
 ## PLEASE TRY AND KEEP THE SOURCE FILES IN ALPHABETICAL ORDER ##
+
+FREE		=	src/free/free_light.c				\
+				src/free/free_material.c			\
+				src/free/free_obj_vert.c			\
+				src/free/free_object.c				\
+				src/free/free_prim.c
 
 INTERSECT	=	src/intersect/intersect_box.c		\
 				src/intersect/intersect_scene.c		\
@@ -26,7 +32,8 @@ INTERSECT	=	src/intersect/intersect_box.c		\
 				src/intersect/intersect_cylinder.c	\
 				src/intersect/intersect_cone.c		\
 				src/intersect/intersect_triangle.c	\
-				src/intersect/intersect_object.c
+				src/intersect/intersect_object.c	\
+				src/intersect/intersect_disk.c
 
 READ_SCENE	=	src/read_scene/camera_values.c		\
 				src/read_scene/light_values.c		\
@@ -37,10 +44,9 @@ READ_SCENE	=	src/read_scene/camera_values.c		\
 				src/read_scene/read_scene.c			\
 				src/read_scene/read_obj.c			\
 				src/read_scene/read_vector.c
-#				src/read_scene/read_triangle.c
-#				src/read_scene/count_structurs.c
 
 MATHS		=	src/vector_maths/colour_to_unit.c	\
+				src/vector_maths/vector_comp.c		\
 				src/vector_maths/vector_add.c		\
 				src/vector_maths/vector_cross.c		\
 				src/vector_maths/vector_div.c		\
@@ -59,7 +65,8 @@ SAVE		=	src/save/save.c						\
 				src/save/save_prims.c				\
 				src/save/write_coord.c
 
-SRC			=	$(INTERSECT)						\
+SRC			=	$(FREE)								\
+				$(INTERSECT)						\
 				$(MATHS)							\
 				$(READ_SCENE)						\
 				$(SAVE)								\
@@ -100,4 +107,3 @@ run:
 	rm -f $(NAME)
 	@$(MAKE) all
 	@clear
-	@./$(NAME) scene

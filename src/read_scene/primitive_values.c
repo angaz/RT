@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 09:54:48 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/17 16:45:21 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/22 14:27:55 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int		get_type(char *type_str)
 		type = PRIM_CONE;
 	else if (!ft_strcmp(type_str, "cylinder"))
 		type = PRIM_CYLINDER;
+	else if (!ft_strcmp(type_str, "disk"))
+		type = PRIM_DISK;
 	return (type);
 }
 
@@ -67,6 +69,8 @@ static void		set_primitive_values(t_env *e, char *pt1, char *pt2)
 		e->prim[e->prims]->angle = ft_atod(values.strings[0]) * M_PI / 180;
 	else if (!ft_strcmp(pt1, "MATERIAL"))
 		e->prim[e->prims]->material = get_material_number(e, values.strings[0]);
+	else if (!ft_strcmp(pt1, "LIMIT"))
+		e->prim[e->prims]->limit = ft_atod(values.strings[0]);
 	ft_free_split(&values);
 }
 
@@ -74,8 +78,12 @@ static void		init_primitive(t_prim *p)
 {
 	p->type = PRIM_SPHERE;
 	p->loc = (t_vector){0.0, 0.0, 0.0};
+	p->dir = (t_vector){0.0, 0.0, 0.0};
+	p->normal = (t_vector){0.0, 0.0, 0.0};
 	p->radius = 1.0;
+	p->angle = 0.523599;
 	p->material = 0;
+	p->limit = -1;
 	p->select = 0;
 }
 
