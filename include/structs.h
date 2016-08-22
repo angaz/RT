@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/20 10:28:58 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/22 14:38:13 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct	s_prim
 	t_vector	dir;
 	t_vector	normal;
 	int			type;
+	int			select;
 	size_t		material;
 	double		radius;
 	double		angle;
@@ -108,6 +109,48 @@ typedef struct	s_light
 	double		half;
 }				t_light;
 
+typedef struct	s_camera_ray
+{
+	t_vector	n;
+	t_vector	u;
+	t_vector	v;
+	t_vector	l;
+	t_vector	c;
+	double		d;
+	double		w;
+	double		h;
+}				t_camera_ray;
+
+/*
+** KEYBOARD HANDLER & MOUSE STRUCTURE
+*/
+typedef struct	s_key
+{
+	int		shift;
+	int		g;
+	int		s;
+	int		r;
+	int		x;
+	int		y;
+	int		z;
+}				t_key;
+
+typedef struct	s_click
+{
+	int				mouse_x;
+	int				mouse_y;
+	t_camera_ray	ray_cam;
+}				t_click;
+
+/*
+** SELECTED PRIMITIVE LIST STRUCTURE
+*/
+typedef struct	s_sel_list
+{
+	t_prim				primitive;
+	struct s_sel_list	*next;
+}				t_sel_list;
+
 /*
 ** ENVIRNMENT STRUCTURE
 */
@@ -122,6 +165,9 @@ typedef struct	s_env
 	t_ray			ray;
 	t_camera		camera;
 	t_prim			*p_hit;
+	t_prim			*selected;
+	size_t			selects;
+	t_vector		orig_loc;
 	size_t			hit_type;
 	t_prim			**prim;
 	size_t			prims;
@@ -135,19 +181,9 @@ typedef struct	s_env
 	size_t			materials;
 	double			t;
 	int				maxdepth;
+	t_key			key;
+	t_click			click;
 }				t_env;
-
-typedef struct	s_camera_ray
-{
-	t_vector	n;
-	t_vector	u;
-	t_vector	v;
-	t_vector	l;
-	t_vector	c;
-	double		d;
-	double		w;
-	double		h;
-}				t_camera_ray;
 
 typedef struct	s_quadratic
 {

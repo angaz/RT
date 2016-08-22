@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/20 09:28:01 by rojones          ###   ########.fr        #
+#    Updated: 2016/08/22 14:25:52 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,6 @@ READ_SCENE	=	src/read_scene/camera_values.c		\
 				src/read_scene/read_scene.c			\
 				src/read_scene/read_obj.c			\
 				src/read_scene/read_vector.c
-#				src/read_scene/read_triangle.c
-#				src/read_scene/count_structurs.c
 
 MATHS		=	src/vector_maths/colour_to_unit.c	\
 				src/vector_maths/vector_comp.c		\
@@ -84,7 +82,10 @@ SRC			=	$(FREE)								\
 				src/reflect.c						\
 				src/refract.c						\
 				src/find_colour_struct.c			\
-				src/copy_env.c
+				src/copy_env.c						\
+				src/user_input/mouse_click.c		\
+				src/user_input/key_press.c			\
+				src/user_input/grab.c
 
 all: $(NAME)
 
@@ -106,4 +107,3 @@ run:
 	rm -f $(NAME)
 	@$(MAKE) all
 	@clear
-	#@./$(NAME) scene

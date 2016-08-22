@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/20 09:26:54 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/22 14:25:08 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ int			intersect_prim(t_env *e, t_ray *ray, size_t prim, double *t);
 /*
 ** src/free
 */
-void    free_light(t_light **light, size_t num_light);
-void    free_material(t_material **material, size_t num_mat);
-void	free_obj_vert(void **v, size_t num_v);
-void    free_object(t_object **obj, size_t num_obj);
-void    free_prim(t_prim ***prim, size_t num_prim);
+void		free_light(t_light **light, size_t num_light);
+void		free_material(t_material **material, size_t num_mat);
+void		free_obj_vert(void **v, size_t num_v);
+void		free_object(t_object **obj, size_t num_obj);
+void		free_prim(t_prim ***prim, size_t num_prim);
 
 /*
 ** src/intersect
@@ -97,12 +97,12 @@ int			intersect_object(t_env *e, t_object *o, double *t);
 /*
 ** src/save
 */
-void	save(t_env *e);
-void    save_lights(t_light **lights, size_t num_light, int fd);
-void    save_materials(t_material **material, size_t materials, int fd);
-void    save_objects(t_object **obj, size_t objects, t_material **mat, int fd);
-void    save_prims(t_prim **prim, t_material **mat, size_t prims, int fd);
-void	write_coord(t_vector v, int fd);
+void		save(t_env *e);
+void		save_lights(t_light **lights, size_t num_light, int fd);
+void		save_materials(t_material **material, size_t materials, int fd);
+void		save_objects(t_object **obj, size_t objects, t_material **mat, int fd);
+void		save_prims(t_prim **prim, t_material **mat, size_t prims, int fd);
+void		write_coord(t_vector v, int fd);
 
 /*
 ** src/diffuse.c
@@ -119,7 +119,7 @@ t_colour    find_colour_struct(t_env *e, int depth);
 ** src/reflect.c
 */
 t_colour	reflect(t_env *e, int depth);
-void    set_reflect_ray(t_env *e, t_env *reflect);
+void		set_reflect_ray(t_env *e, t_env *reflect);
 /*
 ** src/refract.c
 */
@@ -144,11 +144,23 @@ t_vector    get_normal(t_env *e, t_vector ray);
 /*
 ** src/copy_env.c
 */
-t_env	*copy_env(t_env *e);
+t_env		*copy_env(t_env *e);
 
 /*
-** src/read_file/count_structurs.c
+** src/user_input/key_press.c
 */
-//t_objcount  count_object(char *file, t_env *e);
+void		key_press(t_env *e, SDL_Event event);
+void		key_release(t_env *e, SDL_Event event);
+void		reset_keys(t_env *e);
+
+/*
+** src/user_input/mouse_click.c
+*/
+void		mouse_click(t_env *e, SDL_Event event);
+
+/*
+** src/user_input/grab.c
+*/
+void		grab(t_env *e, SDL_Event event);
 
 #endif

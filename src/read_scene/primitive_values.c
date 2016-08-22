@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 09:54:48 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/19 11:00:39 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/22 14:27:55 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ static void		init_primitive(t_prim *p)
 	p->angle = 0.523599;
 	p->material = 0;
 	p->limit = -1;
+	p->select = 0;
 }
 
 void			get_primitive_attributes(t_env *e, int fd)
