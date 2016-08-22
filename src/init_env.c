@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:14 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/20 10:34:33 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/22 14:18:56 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,17 @@ void			nullify_pointers(t_env *e)
 	e->material = NULL;
 	e->px_pitch = 0;
 	e->hit_type = 0;
+	e->p_hit = NULL;
+	e->selected = NULL;
+	e->selects = 0;
 	e->prims = 0;
 	e->objects = 0;
 	e->lights = 0;
 	e->materials = 0;
 	e->t = INFINITY;
 	e->maxdepth = 1;
+	e->orig_loc = (t_vector){0.0, 0.0, 0.0};
+	reset_keys(e);
 	init_camera(e);
 }
 
