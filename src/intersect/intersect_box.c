@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/11 20:12:04 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/20 11:07:42 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/22 20:50:24 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 static void		init_ray(t_intersect_box *b, t_ray *r)
 {
 	b->inv_dir = (t_vector){1.0 / r->dir.x, 1.0 / r->dir.y, 1.0 / r->dir.z};
-	b->sign[0] = (b->inv_dir.x < EPSILON);
-	b->sign[1] = (b->inv_dir.y < EPSILON);
-	b->sign[2] = (b->inv_dir.z < EPSILON);
+	b->sign[0] = (b->inv_dir.x < 0.0);
+	b->sign[1] = (b->inv_dir.y < 0.0);
+	b->sign[2] = (b->inv_dir.z < 0.0);
 }
 
 int				intersect_box(t_ray *r, t_vector box[2])

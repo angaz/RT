@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 08:05:34 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/20 11:03:49 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/22 21:36:51 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	free_object(t_object **obj, size_t num_obj)
 	if (obj)
 	{
 		while (num_obj--)
-		{
 			if (obj[num_obj])
 			{
 				ft_strdel(&obj[num_obj]->name);
@@ -30,7 +29,6 @@ void	free_object(t_object **obj, size_t num_obj)
 				free(obj[num_obj]);
 				obj[num_obj] = NULL;
 			}
-		}
 		free(obj);
 		obj = NULL;
 	}

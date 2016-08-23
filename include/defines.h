@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:13 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/19 09:50:35 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/22 20:49:13 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,6 @@
 
 # define MAX(a, b)	((a > b) ? a : b)
 # define EPSILON	0.000001
-
-/*
-** WINDOW DEFINES
-*/
-# define WIN_X	1600
-# define WIN_Y	900
 
 /*
 ** PRIMITIVE DEFINES

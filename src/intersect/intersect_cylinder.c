@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 22:44:25 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/20 13:05:17 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/22 20:49:46 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,12 @@ static int	find_t(t_quad *quad, double *t, t_prim *o, t_ray *r)
 	t1 = (-quad->b - sqrt_discr) / (2.0 * quad->a);
 	tc = (t0 > t1) ? t1 : t0;
 	if (tc > EPSILON)
-	{
 		if (check_t(r, o, t, &tc))
 			return (1);
-	}
 	tc = (tc == t1) ? t0 : t1;
 	if (tc > EPSILON)
-	{
 		if (check_t(r, o, t, &tc))
 			return (2);
-	}
 	return (0);
 }
 
