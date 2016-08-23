@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/22 14:38:13 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/22 19:17:57 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ typedef struct	s_camera_ray
 	double		d;
 	double		w;
 	double		h;
+	double		stepx;
+	double		stepy;
 }				t_camera_ray;
 
 /*
@@ -183,6 +185,8 @@ typedef struct	s_env
 	int				maxdepth;
 	t_key			key;
 	t_click			click;
+	size_t			x;
+	size_t			y;
 }				t_env;
 
 typedef struct	s_quadratic

@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/08 12:29:05 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/18 17:06:23 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/22 18:48:40 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ t_colour	find_colour_struct(t_env *e, int depth)
 	mat = (e->hit_type == FACE) ?
 		e->material[e->object_hit->material] :
 		e->material[e->p_hit->material];
-	if (depth < e->maxdepth && mat->reflect > EPSILON)
+	if (depth < e->maxdepth && mat->reflect > 0.0)
 		l = reflect(e, depth + 1);
-	if (mat->refract > EPSILON)
+	if (mat->refract > 0.0)
 	{
 		r = refract(e, depth + 1, temp_c);
 		temp_c.r = (temp_c.r * (1 - mat->refract)) + (r.r * mat->refract);

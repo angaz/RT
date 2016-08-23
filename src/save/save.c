@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 11:59:15 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/20 18:49:12 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/22 21:29:33 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,24 @@ static void	save_camra(t_camera *cam, int fd)
 	ft_putchar_fd('\n', fd);
 }
 
+static void	save_render(t_env *e, int fd)
+{
+	char	*tempx;
+	char	*tempy;
+	char	*print;
+
+	ft_putstr_fd("	RENDER		", fd);
+	tempx = ft_itoa(e->x);
+	tempy = ft_itoa(e->y);
+	print = ft_strjoin(tempx, " ");
+	ft_strdel(&tempx);
+	tempx = print;
+	print = ft_strjoin(tempx, tempy);
+	ft_strdel(&tempy);
+	ft_putendl_fd(print, fd);
+	ft_strdel(&print);
+}
+
 void		save(t_env *e)
 {
 	int		fd;
@@ -35,9 +53,10 @@ void		save(t_env *e)
 	ft_putstr_fd("# SCENE RT\n", fd);
 	ft_putstr_fd("	MAXDEPTH	", fd);
 	temp = ft_dtoa(e->maxdepth, 6);
-	ft_putstr_fd(temp, fd);
+	ft_putendl_fd(temp, fd);
 	ft_strdel(&temp);
-	ft_putstr_fd("\n\n", fd);
+	save_render(e, fd);
+	ft_putstr_fd("\n", fd);
 	save_camra(&e->camera, fd);
 	save_lights(e->light, e->lights, fd);
 	save_materials(e->material, e->materials, fd);

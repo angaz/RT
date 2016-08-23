@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:38:20 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/19 16:45:35 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/22 20:50:02 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void		intersect_scene(t_env *e)
 	prim = e->prims;
 	object = e->objects;
 	while (prim--)
-	{
 		if ((inter = intersect_prim(e, &e->ray, prim, &t)) && t < e->t)
 		{
 			e->ray.inter = inter;
@@ -49,7 +48,6 @@ void		intersect_scene(t_env *e)
 			e->p_hit = e->prim[prim];
 			e->hit_type = PRIMITIVE;
 		}
-	}
 	while (object--)
 		if (intersect_box(&e->ray, e->object[object]->box))
 			intersect_object(e, e->object[object], &t);

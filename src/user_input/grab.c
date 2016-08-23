@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 17:07:36 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/22 14:27:22 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/22 19:36:22 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	grab(t_env *e, SDL_Event event)
 		{e->p_selected->loc.x, e->p_selected->loc.y, e->p_selected->loc.z};
 */
 
-		draw(e, (SDL_Rect){0, 0, WIN_X, WIN_Y});
+		draw(e, (SDL_Rect){0, 0, e->x, e->y});
 		e->selected->loc.x += (double)event.motion.xrel * 0.015;
 		e->selected->loc.z -= (double)event.motion.yrel * 0.015;
-		draw(e, (SDL_Rect){0, 0, WIN_X, WIN_Y});
+		draw(e, (SDL_Rect){0, 0, e->x, e->y});
 	}
 }

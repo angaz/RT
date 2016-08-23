@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:24 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/17 17:42:59 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/22 22:14:35 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,19 @@ static void	event_poll(t_env *e)
 	{
 		if (event.type == SDL_QUIT)
 			exit_rt(e, 0);
+		else if (event.type == SDL_WINDOWEVENT_EXPOSED)
+		{
+			ft_putendl("!!  EXPOSED");
+			draw(e, (SDL_Rect){0, 0, e->x, e->y});
+		}
 		else if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
 		{
 			if (event.key.keysym.sym == SDLK_ESCAPE)
 				exit_rt(e, 0);
+			else if (event.key.keysym.sym == SDLK_s)
+				save(e);
 			else if (event.key.keysym.sym == SDLK_d)
-				draw(e, (SDL_Rect){0, 0, WIN_X, WIN_Y});
+				draw(e, (SDL_Rect){0, 0, e->x, e->y});
 			else if (e->objects == 0)
 				key_press(e, event);
 		}
@@ -37,7 +44,7 @@ static void	event_poll(t_env *e)
 		if (e->key.g == 1 && event.type == SDL_MOUSEWHEEL)
 		{
 			e->selected->loc.y -= (double)event.wheel.y * 0.05;
-			draw(e, (SDL_Rect){0, 0, WIN_X, WIN_Y});
+			draw(e, (SDL_Rect){0, 0, e->x, e->y});
 		}
 	}
 }
