@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/21 14:49:03 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/22 07:41:59 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ typedef struct	s_env
 	int				maxdepth;
 	t_key			key;
 	t_click			click;
+	t_camera_ray	ray_cam_test;
 }				t_env;
 
 #endif
