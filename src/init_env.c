@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:14 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/20 16:13:38 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/25 13:15:43 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,43 @@ static void		init_camera(t_env *e)
 	e->camera.up = (t_vector){0.0, 0.0, 1.0};
 }
 
+static void		init_e(t_env *e)
+{
+	e->px_pitch = 0;
+	e->hit_type = 0;
+	e->prims = 0;
+	e->objects = 0;
+	e->lights = 0;
+	e->materials = 0;
+	e->t = INFINITY;
+	e->maxdepth = 1;
+	e->x = 1600;
+	e->y = 900;
+}
+
 void			nullify_pointers(t_env *e)
 {
 	e->win = NULL;
 	e->rend = NULL;
 	e->img = NULL;
+	e->px = NULL;
+	e->p_hit = NULL;
 	e->prim = NULL;
+	e->o_hit = NULL;
+	e->object_hit = NULL;
+	e->object = NULL;
 	e->light = NULL;
 	e->material = NULL;
 	e->p_hit = NULL;
 	e->selected = NULL;
+//separate
 	e->s_num = 0;
 	e->prims = 0;
 	e->objects = 0;
 	e->lights = 0;
 	e->materials = 0;
 	init_keys(e);
+	init_e(e);
 	init_camera(e);
 }
 
@@ -44,8 +65,8 @@ void			init_env(t_env *e)
 	e->selected = (t_prim **)malloc(sizeof(t_prim) * e->prims);
 	read_scene(e->file_name, e);
 	e->win = SDL_CreateWindow(e->file_name, SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED, WIN_X, WIN_Y, 0);
+		SDL_WINDOWPOS_CENTERED, e->x, e->y, 0);
 	e->rend = SDL_CreateRenderer(e->win, -1, SDL_RENDERER_ACCELERATED);
 	e->img = SDL_CreateTexture(e->rend, SDL_PIXELFORMAT_ARGB8888,
-		SDL_TEXTUREACCESS_STREAMING, WIN_X, WIN_Y);
+		SDL_TEXTUREACCESS_STREAMING, e->x, e->y);
 }

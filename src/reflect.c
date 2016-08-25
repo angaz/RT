@@ -6,13 +6,13 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/08 09:46:58 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/21 14:41:10 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/25 13:01:48 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void	set_reflect_ray(t_env *e, t_env *reflect)
+void	set_reflect_ray(t_env *e, t_env *reflect)
 {
 	t_vector	v;
 	t_vector	n;

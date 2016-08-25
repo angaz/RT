@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:24 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/21 14:41:50 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/25 13:16:50 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,23 @@ static void	event_poll(t_env *e)
 	{
 		if (event.type == SDL_QUIT)
 			exit_rt(e, 0);
+		else if (event.type == SDL_WINDOWEVENT_EXPOSED)
+		{
+			ft_putendl("!!  EXPOSED");
+			draw(e, (SDL_Rect){0, 0, e->x, e->y});
+		}
 		else if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
 		{
 			if (event.key.keysym.sym == SDLK_ESCAPE)
 				exit_rt(e, 0);
 			else if (event.key.keysym.sym == SDLK_d && e->key.mid_click == 0)
-				draw(e, (SDL_Rect){0, 0, WIN_X, WIN_Y});
+				draw(e, (SDL_Rect){0, 0, e->x, e->y});
 			else if (e->objects == 0 && e->key.mid_click == 1)
 				mkey_press(e, event);
 			else if (e->objects == 0 && e->key.mid_click == 0)
 				key_press(e, event);
+			else if (event.key.keysym.sym == SDLK_s && e->key.mid_click == 0)
+				save(e);
 		}
 		else if (event.type == SDL_KEYUP && event.key.repeat == 0)
 			key_release(e, event);

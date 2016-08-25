@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:38:20 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/14 15:42:59 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/22 20:50:02 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@ int			intersect_prim(t_env *e, t_ray *ray, size_t prim, double *t)
 		return (intersect_cylinder(ray, e->prim[prim], t));
 	if (e->prim[prim]->type == PRIM_CONE)
 		return (intersect_cone(ray, e->prim[prim], t));
+	if (e->prim[prim]->type == PRIM_DISK)
+		return (intersect_disk(ray, e->prim[prim], t));
 	return (0);
 }
 
 void		intersect_scene(t_env *e)
 {
+	int			inter;
 	double		t;
 	size_t		prim;
 	size_t		object;
@@ -38,8 +41,9 @@ void		intersect_scene(t_env *e)
 	prim = e->prims;
 	object = e->objects;
 	while (prim--)
-		if (intersect_prim(e, &e->ray, prim, &t) && t < e->t)
+		if ((inter = intersect_prim(e, &e->ray, prim, &t)) && t < e->t)
 		{
+			e->ray.inter = inter;
 			e->t = t;
 			e->p_hit = e->prim[prim];
 			e->hit_type = PRIMITIVE;

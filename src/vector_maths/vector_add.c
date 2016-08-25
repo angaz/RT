@@ -6,13 +6,13 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 12:45:10 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/11 21:38:12 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/25 13:23:40 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_vector	vadd(t_vector v1, t_vector v2)
+inline t_vector	vadd(t_vector v1, t_vector v2)
 {
-	return (t_vector){v1.x + v2.x, v1.y + v2.y, v1.z + v2.z};
+	return ((t_vector){v1.x + v2.x, v1.y + v2.y, v1.z + v2.z});
 }

@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/08 13:16:30 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/14 16:04:25 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/20 10:33:36 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@ t_env	*copy_env(t_env *e)
 
 	res = (t_env *)malloc(sizeof(t_env));
 	*res = *e;
+	res->p_hit = NULL;
 	return (res);
 }

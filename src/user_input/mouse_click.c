@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/12 15:51:20 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/21 14:37:57 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/25 12:59:33 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static void	click_select(t_env *e)
 	SDL_GetMouseState(&e->click.mouse_x, &e->click.mouse_y);
 	get_ray_dir(mouse, &e->click.ray_cam, e->click.mouse_x, e->click.mouse_y);
 	intersect_scene(mouse);
-	if (mouse->p_hit != NULL)
+printf("%p\n", mouse->p_hit);
+	if (mouse->p_hit && !e->selected)
 	{
 		if (e->key.shift == 0 || (mouse->p_hit == e->selected[e->s_num]))
 			deselect_all(e);
@@ -65,18 +66,14 @@ void		mouse_click(t_env *e, SDL_Event event)
 {
 	SDL_SetRelativeMouseMode(0);
 	if (event.button.button == SDL_BUTTON_LEFT && e->key.g == 0)
-	{
 		click_select(e);
-	}
 	else if (event.button.button == SDL_BUTTON_RIGHT)
 	{
 		if (e->key.g == 1)
 			reset_loc(e);
 	}
 	else if (event.button.button == SDL_BUTTON_MIDDLE)
-	{
 		e->key.mid_click = 1;
-	}
 	reset_keys(e);
-	draw(e, (SDL_Rect){0, 0, WIN_X, WIN_Y});
+	draw(e, (SDL_Rect){0, 0, e->x, e->y});
 }

@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 17:07:36 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/21 14:30:24 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/25 13:18:17 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	m_wheel(t_env *e, SDL_Event event)
 		while (index > 0)
 		{
 			e->selected[index]->loc.y -= (double)event.wheel.y * 0.05;
-			draw(e, (SDL_Rect){0, 0, WIN_X, WIN_Y});
+			draw(e, (SDL_Rect){0, 0, e->x, e->y});
 			index--;
 		}
 	}
@@ -38,10 +38,10 @@ void	grab(t_env *e, SDL_Event event)
 		index = e->s_num;
 		while (index > 0)
 		{
-			draw(e, (SDL_Rect){0, 0, WIN_X, WIN_Y});
+			draw(e, (SDL_Rect){0, 0, e->x, e->y});
 			e->selected[index]->loc.x += (double)event.motion.xrel * 0.015;
 			e->selected[index]->loc.z -= (double)event.motion.yrel * 0.015;
-			draw(e, (SDL_Rect){0, 0, WIN_X, WIN_Y});
+			draw(e, (SDL_Rect){0, 0, e->x, e->y});
 			index--;
 		}
 	}

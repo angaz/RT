@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/21 14:39:54 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/25 13:10:27 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ static uint32_t	find_colour(t_env *e)
 	mat = (e->hit_type == FACE) ?
 		e->material[e->object_hit->material] :
 		e->material[e->p_hit->material];
-	l = mat->reflect > EPSILON ? reflect(e, 1) : (t_colour){0.0, 0.0, 0.0, 0.0};
+	l = mat->reflect > 0.0 ? reflect(e, 1) : (t_colour){0.0, 0.0, 0.0, 0.0};
 	if (mat->refract < 1.0)
 	{
 		r = refract(e, 1, c);
-		c.r = (c.r * mat->refract) + (r.r * (1 - mat->refract));
-		c.g = (c.g * mat->refract) + (r.g * (1 - mat->refract));
-		c.b = (c.b * mat->refract) + (r.b * (1 - mat->refract));
+		c.r = (c.r * (1 - mat->refract)) + (r.r * mat->refract);
+		c.g = (c.g * (1 - mat->refract)) + (r.g * mat->refract);
+		c.b = (c.b * (1 - mat->refract)) + (r.b * mat->refract);
 	}
 	return ((uint32_t)(
 	(int)(((c.r * (1 - mat->reflect)) + (l.r * mat->reflect)) * 255.0) << 16 |
@@ -47,9 +47,7 @@ static uint32_t	find_base_colour(t_env *e)
 	t_colour	c;
 
 	if (!e->hit_type)
-	{
 		return (0x7F7F7F);
-	}
 	c = prim_diffuse(e);
 	return ((uint32_t)(
 	(int)(c.r * 255.0) << 16 |
@@ -64,12 +62,12 @@ static void		*draw_chunk(void *q)
 	c = (t_chunk *)q;
 	c->stopx = c->d.x + c->d.w;
 	c->stopy = c->d.y + c->d.h;
-	setup_camera_plane(c->e, &c->cr);
-	while (c->d.y < c->stopy && c->d.y < WIN_Y)
+	while (c->d.y < c->stopy && c->d.y < (int)c->e->y)
 	{
 		c->x = c->d.x;
-		while (c->x < c->stopx && c->x < WIN_X)
+		while (c->x < c->stopx && c->x < (int)c->e->x)
 		{
+			c->e->p_hit = NULL;
 			get_ray_dir(c->e, &c->cr, (double)c->x, (double)c->d.y);
 			intersect_scene(c->e);
 			c->pixel = (c->d.y * c->e->px_pitch + c->x * 4);
@@ -93,6 +91,7 @@ static void		make_chunks(t_env *e, SDL_Rect *d)
 	m.tid = (pthread_t *)malloc(sizeof(pthread_t) * m.tids);
 	m.thread = 0;
 	m.chunk_y = 0;
+	setup_camera_plane(e, &m.cr);
 	while (m.chunk_y * 64 < (size_t)d->h)
 	{
 		m.chunk_x = 0;
@@ -101,6 +100,7 @@ static void		make_chunks(t_env *e, SDL_Rect *d)
 			m.c = (t_chunk *)malloc(sizeof(t_chunk));
 			m.c->e = copy_env(e);
 			m.c->d = (SDL_Rect){m.chunk_x * 64, m.chunk_y * 64, 64, 64};
+			m.c->cr = m.cr;
 			pthread_create(&m.tid[m.thread++], NULL, draw_chunk, (void *)m.c);
 			++m.chunk_x;
 		}
