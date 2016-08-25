@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/25 16:09:11 by adippena         ###   ########.fr        #
+#    Updated: 2016/08/25 17:05:37 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=	RT
 LIBFT		=	-I libft/include -L libft -lft
 SDL2		=	$(shell sdl2-config --cflags --libs)
 INCLUDE		=	-I include
-CFLAGS		=	-Wall -Wextra -Werror -pthread -g3
+CFLAGS		=	-Wall -Wextra -Werror -pthread -O3 -g3
 LIBS		=	-lm
 
 ## PLEASE TRY AND KEEP THE SOURCE FILES IN ALPHABETICAL ORDER ##

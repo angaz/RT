@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_mult.c                                      :+:      :+:    :+:   */
+/*   ft_btrue.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
+/*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/05 12:41:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/25 16:54:36 by adippena         ###   ########.fr       */
+/*   Created: 2016/05/15 11:28:18 by adippena          #+#    #+#             */
+/*   Updated: 2016/08/25 16:28:14 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#include "libft.h"
 
-inline t_vector	vmult(t_vector v, double s)
+void	ft_btrue(void *s, size_t n)
 {
-	return (t_vector){v.x * s, v.y * s, v.z * s};
+	while (n--)
+		*(unsigned char *)s++ = 0xFF;
 }

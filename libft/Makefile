@@ -23,7 +23,7 @@ SRC =	src/ft_atoi.c		src/ft_bzero.c		src/ft_isalnum.c		\
 		src/ft_nstrsplit.c	src/ft_swap.c		src/ft_atoi_hex.c		\
 		src/ft_memswap.c	src/ft_float_swap.c	src/ft_sprintf.c		\
 		src/ft_atod.c		src/ft_free_split.c	src/ft_dtoa.c			\
-		src/ft_itoa_base.c
+		src/ft_itoa_base.c	src/ft_btrue.c
 
 OBJ = 	ft_atoi.o		ft_bzero.o		ft_isalnum.o	ft_isalpha.o	\
 		ft_isascii.o	ft_isdigit.o	ft_islower.o	ft_isprint.o	\
@@ -42,7 +42,7 @@ OBJ = 	ft_atoi.o		ft_bzero.o		ft_isalnum.o	ft_isalpha.o	\
 		ft_uitoa_base.o	ft_uitoa.o		ft_strtoupper.o	ft_gnl.o		\
 		ft_nstrsplit.o	ft_swap.o		ft_atoi_hex.o	ft_memswap.o	\
 		ft_float_swap.o	ft_sprintf.o	ft_atod.o		ft_free_split.o	\
-		ft_dtoa.o		ft_itoa_base.o
+		ft_dtoa.o		ft_itoa_base.o	ft_btrue.o
 
 CFLAGS = -Wall -Wextra -Werror -Ofast -g3
 

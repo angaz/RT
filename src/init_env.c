@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:14 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/25 16:07:58 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/25 16:41:04 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void			init_env(t_env *e)
 	e->win = SDL_CreateWindow(e->file_name, SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, e->x, e->y, SDL_WINDOW_SHOWN);
 	e->img = SDL_GetWindowSurface(e->win);
-	e->px = (uint32_t *)e->img;
-//	ft_bzero(e->img, (e->x * 4) * e->y);
+	e->px = (uint32_t *)e->img->pixels;
+	ft_btrue(e->px, (e->x * 4) * e->y);
 	SDL_UpdateWindowSurface(e->win);
 }

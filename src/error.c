@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 19:58:53 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/25 15:24:25 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/25 16:19:48 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	exit_rt(t_env *e, int code)
 		free_prim(&e->prim, e->prims);
 	}
 	SDL_Quit();
+	exit(0);
 }
 
 void	err(int error_no, char *function, t_env *e)
