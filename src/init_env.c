@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:14 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/25 13:15:43 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/25 15:01:40 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,11 @@ void			init_env(t_env *e)
 	nullify_pointers(e);
 	e->selected = (t_prim **)malloc(sizeof(t_prim) * e->prims);
 	read_scene(e->file_name, e);
-	e->win = SDL_CreateWindow(e->file_name, SDL_WINDOWPOS_CENTERED,
+	e->win = SDL_CreateWindow(/*e->file_name*/"RT", SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, e->x, e->y, 0);
 	e->rend = SDL_CreateRenderer(e->win, -1, SDL_RENDERER_ACCELERATED);
 	e->img = SDL_CreateTexture(e->rend, SDL_PIXELFORMAT_ARGB8888,
 		SDL_TEXTUREACCESS_STREAMING, e->x, e->y);
+	SDL_RenderCopy(e->rend, e->img, NULL, NULL);
+	SDL_RenderPresent(e->rend);
 }

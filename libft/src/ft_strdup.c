@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 09:53:55 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/09 20:26:22 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/25 15:00:26 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 char	*ft_strdup(const char *s)
 {
-	size_t	i;
 	char	*str;
+	char	*ret;
 
-	i = 0;
 	str = ft_strnew(ft_strlen(s) + 1);
-	while (s[i] != '\0')
-	{
-		str[i] = s[i];
-		i++;
-	}
-	return (str);
+	ret = str;
+	while (*s)
+		*(str++) = *(s++);
+	*str = '\0';
+	return (ret);
 }

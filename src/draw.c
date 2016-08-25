@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/25 13:10:27 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/25 14:28:32 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static uint32_t	find_colour(t_env *e)
 		e->material[e->object_hit->material] :
 		e->material[e->p_hit->material];
 	l = mat->reflect > 0.0 ? reflect(e, 1) : (t_colour){0.0, 0.0, 0.0, 0.0};
-	if (mat->refract < 1.0)
+	if (mat->refract > 0.0)
 	{
 		r = refract(e, 1, c);
 		c.r = (c.r * (1 - mat->refract)) + (r.r * mat->refract);
