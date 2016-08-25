@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 19:58:53 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/22 22:05:37 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/25 13:09:46 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	exit_rt(t_env *e, int code)
 			SDL_DestroyRenderer(e->rend);
 		if (e->win)
 			SDL_DestroyWindow(e->win);
+		free(e->selected);
 		free_light(e->light, e->lights);
 		free_material(e->material, e->materials);
 		free_object(e->object, e->objects);

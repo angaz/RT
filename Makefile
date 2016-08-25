@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/22 19:50:27 by adippena         ###   ########.fr        #
+#    Updated: 2016/08/25 13:27:02 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=	RT
 LIBFT		=	-I libft/include -L libft -lft
 SDL2		=	$(shell sdl2-config --cflags --libs)
 INCLUDE		=	-I include
-CFLAGS		=	-Wall -Wextra -Werror -g3 -pthread
+CFLAGS		=	-Wall -Wextra -Werror -pthread -Ofast -g3
 LIBS		=	-lm
 
 ## PLEASE TRY AND KEEP THE SOURCE FILES IN ALPHABETICAL ORDER ##
@@ -85,7 +85,8 @@ SRC			=	$(FREE)								\
 				src/copy_env.c						\
 				src/user_input/mouse_click.c		\
 				src/user_input/key_press.c			\
-				src/user_input/grab.c
+				src/user_input/grab.c				\
+				src/user_input/cam_move.c
 
 all: $(NAME)
 

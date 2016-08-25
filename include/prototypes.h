@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/22 14:25:08 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/25 13:12:59 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ t_colour	face_diffuse(t_env *e);
 /*
 ** src/find_colour_struct.c
 */
-t_colour    find_colour_struct(t_env *e, int depth);
+t_colour	find_colour_struct(t_env *e, int depth);
 
 /*
 ** src/reflect.c
@@ -123,7 +123,7 @@ void		set_reflect_ray(t_env *e, t_env *reflect);
 /*
 ** src/refract.c
 */
-t_colour    refract(t_env *e, int depth, t_colour colour);
+t_colour	refract(t_env *e, int depth, t_colour colour);
 
 /*
 ** src/shadow.c
@@ -139,7 +139,7 @@ void		get_ray_dir(t_env *e, t_camera_ray *cr, double x, double y);
 /*
 ** src/get_normal.c
 */
-t_vector    get_normal(t_env *e, t_vector ray);
+t_vector	get_normal(t_env *e, t_vector ray);
 
 /*
 ** src/copy_env.c
@@ -150,17 +150,29 @@ t_env		*copy_env(t_env *e);
 ** src/user_input/key_press.c
 */
 void		key_press(t_env *e, SDL_Event event);
+void		mkey_press(t_env *e, SDL_Event event);
 void		key_release(t_env *e, SDL_Event event);
 void		reset_keys(t_env *e);
+void		init_keys(t_env *e);
 
 /*
 ** src/user_input/mouse_click.c
 */
 void		mouse_click(t_env *e, SDL_Event event);
+void		click_release(t_env *e, SDL_Event event);
 
 /*
 ** src/user_input/grab.c
 */
 void		grab(t_env *e, SDL_Event event);
+void		m_wheel(t_env *e, SDL_Event event);
+void		select_all(t_env *e);
+void		deselect_all(t_env *e);
+
+/*
+** src/user_input/cam_transforms.c
+*/
+void		cam_rot(t_env *e, SDL_Event event);
+void		cam_move(t_env *e);
 
 #endif
