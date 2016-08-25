@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/22 07:41:59 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/25 13:11:45 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct	s_prim
 	size_t		material;
 	double		radius;
 	double		angle;
+	double		limit;
 }				t_prim;
 
 /*
@@ -87,10 +88,10 @@ typedef struct	s_prim
 */
 typedef struct	s_ray
 {
+	int			inter;
 	double		ior;
 	t_vector	loc;
 	t_vector	dir;
-	t_prim		*p_in;
 	t_object	*o_in;
 }				t_ray;
 
@@ -119,6 +120,8 @@ typedef struct	s_camera_ray
 	double		d;
 	double		w;
 	double		h;
+	double		stepx;
+	double		stepy;
 }				t_camera_ray;
 
 /*
@@ -180,7 +183,18 @@ typedef struct	s_env
 	int				maxdepth;
 	t_key			key;
 	t_click			click;
+//
 	t_camera_ray	ray_cam_test;
+	size_t			x;
+	size_t			y;
 }				t_env;
+
+typedef struct	s_quadratic
+{
+	double	a;
+	double	b;
+	double	c;
+	double	discr;
+}				t_quad;
 
 #endif

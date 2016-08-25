@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   copy_env.c                                         :+:      :+:    :+:   */
+/*   free_material.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/08 13:16:30 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/20 10:33:36 by rojones          ###   ########.fr       */
+/*   Created: 2016/08/17 07:50:06 by rojones           #+#    #+#             */
+/*   Updated: 2016/08/22 21:36:42 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_env	*copy_env(t_env *e)
+void	free_material(t_material **material, size_t num_mat)
 {
-	t_env	*res;
-
-	res = (t_env *)malloc(sizeof(t_env));
-	*res = *e;
-	res->p_hit = NULL;
-	return (res);
+	if (material)
+	{
+		while (num_mat--)
+		{
+			ft_strdel(&material[num_mat]->name);
+			if (material[num_mat])
+				free(material[num_mat]);
+			material[num_mat] = NULL;
+		}
+		free(material);
+		material = NULL;
+	}
 }

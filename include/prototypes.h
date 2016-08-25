@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/21 14:52:04 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/25 13:12:59 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_vector	vcross(t_vector v1, t_vector v2);
 t_vector	vunit(t_vector v);
 t_vector	vproject(t_vector a, t_vector b);
 t_vector	colour_to_vector(t_colour colour);
+int			vcomp(t_vector v1, t_vector v2);
 t_vector	vrotx(t_vector v, double angle);
 t_vector	vroty(t_vector v, double angle);
 t_vector	vrotz(t_vector v, double angle);
@@ -72,6 +73,15 @@ void		draw(t_env *e, SDL_Rect draw);
 int			intersect_prim(t_env *e, t_ray *ray, size_t prim, double *t);
 
 /*
+** src/free
+*/
+void		free_light(t_light **light, size_t num_light);
+void		free_material(t_material **material, size_t num_mat);
+void		free_obj_vert(void **v, size_t num_v);
+void		free_object(t_object **obj, size_t num_obj);
+void		free_prim(t_prim ***prim, size_t num_prim);
+
+/*
 ** src/intersect
 */
 void		intersect_scene(t_env *e);
@@ -79,6 +89,7 @@ int			intersect_sphere(t_ray *r, t_prim *s, double *t);
 int			intersect_plane(t_ray *r, t_prim *o, double *t);
 int			intersect_cylinder(t_ray *r, t_prim *o, double *t);
 int			intersect_cone(t_ray *r, t_prim *o, double *t);
+int			intersect_disk(t_ray *r, t_prim *o, double *t);
 int			intersect_triangle(t_ray *r, t_face *f, double *t);
 int			intersect_box(t_ray *r, t_vector box[2]);
 int			intersect_object(t_env *e, t_object *o, double *t);
@@ -108,7 +119,7 @@ t_colour	find_colour_struct(t_env *e, int depth);
 ** src/reflect.c
 */
 t_colour	reflect(t_env *e, int depth);
-
+void		set_reflect_ray(t_env *e, t_env *reflect);
 /*
 ** src/refract.c
 */
@@ -163,10 +174,5 @@ void		deselect_all(t_env *e);
 */
 void		cam_rot(t_env *e, SDL_Event event);
 void		cam_move(t_env *e);
-
-/*
-** src/read_file/count_structurs.c
-*/
-//t_objcount  count_object(char *file, t_env *e);
 
 #endif

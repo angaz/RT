@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:42 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/15 17:12:55 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/22 21:16:41 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,21 @@
 static void	scene_attributes(t_env *e, char *line)
 {
 	t_split_string	split;
+	t_split_string	render;
 
 	split = ft_nstrsplit(line, '\t');
 	if (split.strings[0][0] != '#' && split.words != 2)
 		err(FILE_FORMAT_ERROR, "scene_arrtibutes", e);
 	if (!ft_strcmp(split.strings[0], "MAXDEPTH"))
 		e->maxdepth = MAX(ft_atoi(split.strings[1]), 1);
+	if (!ft_strcmp(split.strings[0], "RENDER"))
+	{
+		render = ft_nstrsplit(split.strings[1], ' ');
+		if (render.words != 2)
+			err(FILE_FORMAT_ERROR, "RENDER [tab] x-res y-res", e);
+		e->x = ft_atoi(render.strings[0]);
+		e->y = ft_atoi(render.strings[1]);
+	}
 	ft_free_split(&split);
 }
 
@@ -57,6 +66,8 @@ static void	get_quantities(t_env *e, int fd)
 	char	*temp;
 	char	*line;
 
+	temp = NULL;
+	line = NULL;
 	while (ft_gnl(fd, &temp) || temp != NULL)
 	{
 		line = ft_strtrim(temp);
@@ -108,7 +119,7 @@ void		read_scene(char *file, t_env *e)
 	{
 		if (temp_line[0] == '\0')
 		{
-			ft_strdel(&line);
+			//ft_strdel(&line);
 			break ;
 		}
 		line = ft_strtrim(temp_line);

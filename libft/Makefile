@@ -44,7 +44,7 @@ OBJ = 	ft_atoi.o		ft_bzero.o		ft_isalnum.o	ft_isalpha.o	\
 		ft_float_swap.o	ft_sprintf.o	ft_atod.o		ft_free_split.o	\
 		ft_dtoa.o		ft_itoa_base.o
 
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -Ofast -g3
 
 all: $(NAME)
 

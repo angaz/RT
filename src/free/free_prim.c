@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   copy_env.c                                         :+:      :+:    :+:   */
+/*   free_prim.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/08 13:16:30 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/20 10:33:36 by rojones          ###   ########.fr       */
+/*   Created: 2016/08/17 07:47:18 by rojones           #+#    #+#             */
+/*   Updated: 2016/08/22 21:36:56 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_env	*copy_env(t_env *e)
+void	free_prim(t_prim ***prim, size_t num_prim)
 {
-	t_env	*res;
-
-	res = (t_env *)malloc(sizeof(t_env));
-	*res = *e;
-	res->p_hit = NULL;
-	return (res);
+	if (*prim)
+	{
+		while (num_prim--)
+		{
+			if (prim[0][num_prim])
+				free(prim[0][num_prim]);
+		}
+		free(*prim);
+		*prim = NULL;
+	}
 }
