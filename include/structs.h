@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/25 13:11:45 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/25 15:53:40 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,9 +157,8 @@ typedef struct	s_click
 typedef struct	s_env
 {
 	SDL_Window		*win;
-	SDL_Renderer	*rend;
-	SDL_Texture		*img;
-	void			*px;
+	SDL_Surface		*img;
+	uint32_t		*px;
 	char			*file_name;
 	int				px_pitch;
 	t_ray			ray;

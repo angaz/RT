@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/25 14:28:32 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/25 16:03:58 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ static uint32_t	find_base_colour(t_env *e)
 		return (0x7F7F7F);
 	c = prim_diffuse(e);
 	return ((uint32_t)(
-	(int)(c.r * 255.0) << 16 |
-	(int)(c.g * 255.0) << 8 |
-	(int)(c.b * 255.0)));
+	(unsigned int)(c.r * 255.0) << 16 |
+	(unsigned int)(c.g * 255.0) << 8 |
+	(unsigned int)(c.b * 255.0)));
 }
 
 static void		*draw_chunk(void *q)
@@ -70,13 +70,13 @@ static void		*draw_chunk(void *q)
 			c->e->p_hit = NULL;
 			get_ray_dir(c->e, &c->cr, (double)c->x, (double)c->d.y);
 			intersect_scene(c->e);
-			c->pixel = (c->d.y * c->e->px_pitch + c->x * 4);
-			(c->e->p_hit && (c->e->p_hit->s_bool == 0) && (c->e->key.g == 0)) ?
-			(*(uint32_t *)(c->e->px + c->pixel) = find_colour(c->e)) :
-			(*(uint32_t *)(c->e->px + c->pixel) = find_base_colour(c->e));
+			c->e->px[c->d.y * c->e->y + c->x] = (c->e->p_hit &&
+				(c->e->p_hit->s_bool == 0) && (c->e->key.g == 0)) ?
+				find_colour(c->e) : find_base_colour(c->e);
 			++c->x;
 		}
 		++c->d.y;
+//		SDL_UpdateWindowSurface(c->e->win);
 	}
 	free(c->e);
 	free(c);
@@ -116,11 +116,8 @@ void			draw(t_env *e, SDL_Rect d)
 	time_t	t;
 
 	t = time(NULL);
-	SDL_LockTexture(e->img, NULL, &e->px, &e->px_pitch);
 	make_chunks(e, &d);
-	SDL_UnlockTexture(e->img);
-	SDL_RenderCopy(e->rend, e->img, NULL, NULL);
-	SDL_RenderPresent(e->rend);
+	SDL_UpdateWindowSurface(e->win);
 	t = time(NULL) - t;
 	ft_printf("Frame drawn in %d seconds\n", t);
 }
