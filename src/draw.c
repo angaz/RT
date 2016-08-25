@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/22 19:40:45 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/25 13:10:27 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void		*draw_chunk(void *q)
 			get_ray_dir(c->e, &c->cr, (double)c->x, (double)c->d.y);
 			intersect_scene(c->e);
 			c->pixel = (c->d.y * c->e->px_pitch + c->x * 4);
-			(c->e->p_hit && (c->e->p_hit->select == 0) && (c->e->key.g == 0)) ?
+			(c->e->p_hit && (c->e->p_hit->s_bool == 0) && (c->e->key.g == 0)) ?
 			(*(uint32_t *)(c->e->px + c->pixel) = find_colour(c->e)) :
 			(*(uint32_t *)(c->e->px + c->pixel) = find_base_colour(c->e));
 			++c->x;

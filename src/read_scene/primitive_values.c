@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 09:54:48 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/22 14:27:55 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/25 13:15:10 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,14 @@ static void		init_primitive(t_prim *p)
 {
 	p->type = PRIM_SPHERE;
 	p->loc = (t_vector){0.0, 0.0, 0.0};
+	p->loc_bak = (t_vector){0.0, 0.0, 0.0};
 	p->dir = (t_vector){0.0, 0.0, 0.0};
 	p->normal = (t_vector){0.0, 0.0, 0.0};
 	p->radius = 1.0;
 	p->angle = 0.523599;
 	p->material = 0;
+	p->s_bool = 0;
 	p->limit = -1;
-	p->select = 0;
 }
 
 void			get_primitive_attributes(t_env *e, int fd)

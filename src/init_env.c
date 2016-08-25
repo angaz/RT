@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:14 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/22 19:32:57 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/25 13:15:43 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,12 @@ static void		init_e(t_env *e)
 {
 	e->px_pitch = 0;
 	e->hit_type = 0;
-	e->selects = 0;
 	e->prims = 0;
 	e->objects = 0;
 	e->lights = 0;
 	e->materials = 0;
 	e->t = INFINITY;
 	e->maxdepth = 1;
-	e->orig_loc = (t_vector){0.0, 0.0, 0.0};
 	e->x = 1600;
 	e->y = 900;
 }
@@ -50,14 +48,21 @@ void			nullify_pointers(t_env *e)
 	e->material = NULL;
 	e->p_hit = NULL;
 	e->selected = NULL;
+//separate
+	e->s_num = 0;
+	e->prims = 0;
+	e->objects = 0;
+	e->lights = 0;
+	e->materials = 0;
+	init_keys(e);
 	init_e(e);
-	reset_keys(e);
 	init_camera(e);
 }
 
 void			init_env(t_env *e)
 {
 	nullify_pointers(e);
+	e->selected = (t_prim **)malloc(sizeof(t_prim) * e->prims);
 	read_scene(e->file_name, e);
 	e->win = SDL_CreateWindow(e->file_name, SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, e->x, e->y, 0);
