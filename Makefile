@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/26 23:34:27 by adippena         ###   ########.fr        #
+#    Updated: 2016/08/26 23:56:19 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,7 +91,7 @@ SRC			=	$(FREE)								\
 				src/user_input/grab.c				\
 				src/user_input/cam_move.c
 
-all: lft $(NAME)
+all: lft rt
 
 OBJ = $(SRC:.c=.o)
 
@@ -99,9 +99,9 @@ OBJ = $(SRC:.c=.o)
 	@echo "\033[92m    CC    $@\033[0m"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJ)
-	@echo "\033[92m    LD    $@\033[0m"
-	@$(LD) $^ $(LFLAGS) -o $@
+rt: $(OBJ)
+	@echo "\033[92m    LD    $(NAME)\033[0m"
+	@$(LD) $^ $(LFLAGS) -o $(NAME)
 
 lft:
 	@make -s -C libft all
