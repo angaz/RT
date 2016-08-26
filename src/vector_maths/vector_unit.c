@@ -6,13 +6,13 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 12:49:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/11 21:44:30 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/25 16:56:37 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_vector	vunit(t_vector v)
+inline t_vector	vunit(t_vector v)
 {
 	return (vdiv(v, vnormalize(v)));
 }

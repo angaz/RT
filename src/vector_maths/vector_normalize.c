@@ -6,13 +6,13 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 12:48:39 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/11 21:41:15 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/25 16:54:45 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-double		vnormalize(t_vector v)
+inline double		vnormalize(t_vector v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }

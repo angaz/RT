@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/25 13:10:27 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/26 19:52:06 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static uint32_t	find_colour(t_env *e)
 		e->material[e->object_hit->material] :
 		e->material[e->p_hit->material];
 	l = mat->reflect > 0.0 ? reflect(e, 1) : (t_colour){0.0, 0.0, 0.0, 0.0};
-	if (mat->refract < 1.0)
+	if (mat->refract > 0.0)
 	{
 		r = refract(e, 1, c);
 		c.r = (c.r * (1 - mat->refract)) + (r.r * mat->refract);
@@ -50,9 +50,9 @@ static uint32_t	find_base_colour(t_env *e)
 		return (0x7F7F7F);
 	c = prim_diffuse(e);
 	return ((uint32_t)(
-	(int)(c.r * 255.0) << 16 |
-	(int)(c.g * 255.0) << 8 |
-	(int)(c.b * 255.0)));
+	(unsigned int)(c.r * 255.0) << 16 |
+	(unsigned int)(c.g * 255.0) << 8 |
+	(unsigned int)(c.b * 255.0)));
 }
 
 static void		*draw_chunk(void *q)
@@ -70,14 +70,14 @@ static void		*draw_chunk(void *q)
 			c->e->p_hit = NULL;
 			get_ray_dir(c->e, &c->cr, (double)c->x, (double)c->d.y);
 			intersect_scene(c->e);
-			c->pixel = (c->d.y * c->e->px_pitch + c->x * 4);
-			(c->e->p_hit && (c->e->p_hit->s_bool == 0) && (c->e->key.g == 0)) ?
-			(*(uint32_t *)(c->e->px + c->pixel) = find_colour(c->e)) :
-			(*(uint32_t *)(c->e->px + c->pixel) = find_base_colour(c->e));
+			c->e->px[c->d.y * c->e->x + c->x] = (c->e->p_hit &&
+				(c->e->p_hit->s_bool == 0) && (c->e->key.g == 0)) ?
+				find_colour(c->e) : find_base_colour(c->e);
 			++c->x;
 		}
 		++c->d.y;
 	}
+	SDL_UpdateWindowSurface(c->e->win);
 	free(c->e);
 	free(c);
 	pthread_exit(0);
@@ -102,12 +102,13 @@ static void		make_chunks(t_env *e, SDL_Rect *d)
 			m.c->d = (SDL_Rect){m.chunk_x * 64, m.chunk_y * 64, 64, 64};
 			m.c->cr = m.cr;
 			pthread_create(&m.tid[m.thread++], NULL, draw_chunk, (void *)m.c);
+			if (m.thread == 4)
+				while (m.thread)
+					pthread_join(m.tid[--m.thread], NULL);
 			++m.chunk_x;
 		}
 		++m.chunk_y;
 	}
-	while (m.thread)
-		pthread_join(m.tid[--m.thread], NULL);
 	free(m.tid);
 }
 
@@ -116,11 +117,7 @@ void			draw(t_env *e, SDL_Rect d)
 	time_t	t;
 
 	t = time(NULL);
-	SDL_LockTexture(e->img, NULL, &e->px, &e->px_pitch);
 	make_chunks(e, &d);
-	SDL_UnlockTexture(e->img);
-	SDL_RenderCopy(e->rend, e->img, NULL, NULL);
-	SDL_RenderPresent(e->rend);
 	t = time(NULL) - t;
 	ft_printf("Frame drawn in %d seconds\n", t);
 }
