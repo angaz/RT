@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/25 16:52:56 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/26 19:52:06 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ static void		*draw_chunk(void *q)
 			c->e->p_hit = NULL;
 			get_ray_dir(c->e, &c->cr, (double)c->x, (double)c->d.y);
 			intersect_scene(c->e);
-//printf("%lu\n", c->d.y * c->e->y + c->x);
 			c->e->px[c->d.y * c->e->x + c->x] = (c->e->p_hit &&
 				(c->e->p_hit->s_bool == 0) && (c->e->key.g == 0)) ?
 				find_colour(c->e) : find_base_colour(c->e);
@@ -78,6 +77,7 @@ static void		*draw_chunk(void *q)
 		}
 		++c->d.y;
 	}
+	SDL_UpdateWindowSurface(c->e->win);
 	free(c->e);
 	free(c);
 	pthread_exit(0);
@@ -102,14 +102,12 @@ static void		make_chunks(t_env *e, SDL_Rect *d)
 			m.c->d = (SDL_Rect){m.chunk_x * 64, m.chunk_y * 64, 64, 64};
 			m.c->cr = m.cr;
 			pthread_create(&m.tid[m.thread++], NULL, draw_chunk, (void *)m.c);
+			if (m.thread == 4)
+				while (m.thread)
+					pthread_join(m.tid[--m.thread], NULL);
 			++m.chunk_x;
 		}
 		++m.chunk_y;
-	}
-	while (m.thread)
-	{
-		pthread_join(m.tid[--m.thread], NULL);
-		SDL_UpdateWindowSurface(e->win);
 	}
 	free(m.tid);
 }
@@ -120,7 +118,6 @@ void			draw(t_env *e, SDL_Rect d)
 
 	t = time(NULL);
 	make_chunks(e, &d);
-	SDL_UpdateWindowSurface(e->win);
 	t = time(NULL) - t;
 	ft_printf("Frame drawn in %d seconds\n", t);
 }

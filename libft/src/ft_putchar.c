@@ -6,13 +6,13 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 09:39:42 by adippena          #+#    #+#             */
-/*   Updated: 2016/05/15 11:46:11 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/26 19:13:52 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar(char c)
+inline void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }

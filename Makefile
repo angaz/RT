@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/25 17:05:37 by adippena         ###   ########.fr        #
+#    Updated: 2016/08/26 23:34:27 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,11 @@ NAME		=	RT
 LIBFT		=	-I libft/include -L libft -lft
 SDL2		=	$(shell sdl2-config --cflags --libs)
 INCLUDE		=	-I include
-CFLAGS		=	-Wall -Wextra -Werror -pthread -O3 -g3
 LIBS		=	-lm
+CFLAGS		=	-Wall -Wextra -Werror -pthread -Ofast $(INCLUDE) $(SDL2) $(LIBFT) $(LIBS)
+LFLAGS		=	-pthread $(INCLUDE) $(SDL2) $(LIBFT) $(LIBS)
+CC			=	gcc
+LD			=	gcc
 
 ## PLEASE TRY AND KEEP THE SOURCE FILES IN ALPHABETICAL ORDER ##
 
@@ -88,23 +91,30 @@ SRC			=	$(FREE)								\
 				src/user_input/grab.c				\
 				src/user_input/cam_move.c
 
-all: $(NAME)
+all: lft $(NAME)
 
-$(NAME):
-	make -C libft all
-	gcc $(CFLAGS) $(INCLUDE) $(SRC) $(SDL2) $(LIBFT) $(LIBS) -o $(NAME)
+OBJ = $(SRC:.c=.o)
+
+%.o: %.c
+	@echo "\033[92m    CC    $@\033[0m"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME): $(OBJ)
+	@echo "\033[92m    LD    $@\033[0m"
+	@$(LD) $^ $(LFLAGS) -o $@
+
+lft:
+	@make -s -C libft all
 
 clean:
-	make -C libft clean
+	@echo "\033[92m    RM    object files\033[0m"
+	@rm -f $(OBJ)
+	@make -s -C libft clean
 
-fclean:
-	make -C libft fclean
-	rm -f $(NAME)
-	rm -rf $(NAME).dSYM
+fclean: clean
+	@echo "\033[92m    RM    $(NAME)\033[0m"
+	@rm -f $(NAME)
+	@rm -rf $(NAME).dSYM
+	@make -s -C libft fclean
 
 re: fclean all
-
-run:
-	rm -f $(NAME)
-	@$(MAKE) all
-	@clear

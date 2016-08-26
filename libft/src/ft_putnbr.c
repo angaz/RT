@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 11:29:28 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/15 12:56:49 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/26 19:14:15 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,5 @@ void	ft_putnbr(int n)
 
 	str = ft_itoa(n);
 	write(1, str, ft_strlen(str));
+	ft_strdel(&str);
 }

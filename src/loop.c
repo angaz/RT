@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:24 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/25 13:16:50 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/26 19:52:03 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	event_poll(t_env *e)
 		else if (event.type == SDL_WINDOWEVENT_EXPOSED)
 		{
 			ft_putendl("!!  EXPOSED");
-			draw(e, (SDL_Rect){0, 0, e->x, e->y});
+			SDL_UpdateWindowSurface(e->win);
 		}
 		else if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
 		{
