@@ -6,18 +6,11 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:54:15 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/17 12:54:20 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/26 18:47:29 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static char	convert_decimal_hex(size_t n)
-{
-	if (n < 10)
-		return (n + '0');
-	return (n - 10 + 'a');
-}
 
 static char	*my_strjoinchar(char *str, char c)
 {
@@ -37,9 +30,10 @@ char		*ft_uitoa_base(size_t value, int base)
 {
 	char	*temp;
 
+	temp = NULL;
 	while (value > 0)
 	{
-		temp = my_strjoinchar(temp, convert_decimal_hex(value % base));
+		temp = my_strjoinchar(temp, "0123456789ABCDEF"[value % base]);
 		value /= base;
 	}
 	return (ft_strrev(temp));

@@ -6,26 +6,21 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/11 20:12:04 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/22 20:50:24 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/26 19:52:16 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include "intersect_object.h"
 
-static void		init_ray(t_intersect_box *b, t_ray *r)
-{
-	b->inv_dir = (t_vector){1.0 / r->dir.x, 1.0 / r->dir.y, 1.0 / r->dir.z};
-	b->sign[0] = (b->inv_dir.x < 0.0);
-	b->sign[1] = (b->inv_dir.y < 0.0);
-	b->sign[2] = (b->inv_dir.z < 0.0);
-}
-
 int				intersect_box(t_ray *r, t_vector box[2])
 {
 	t_intersect_box		b;
 
-	init_ray(&b, r);
+	b.inv_dir = (t_vector){1.0 / r->dir.x, 1.0 / r->dir.y, 1.0 / r->dir.z};
+	b.sign[0] = (b.inv_dir.x < 0.0);
+	b.sign[1] = (b.inv_dir.y < 0.0);
+	b.sign[2] = (b.inv_dir.z < 0.0);
 	b.min.x = (box[b.sign[0]].x - r->loc.x) * b.inv_dir.x;
 	b.max.x = (box[1 - b.sign[0]].x - r->loc.x) * b.inv_dir.x;
 	b.min.y = (box[b.sign[1]].y - r->loc.y) * b.inv_dir.y;

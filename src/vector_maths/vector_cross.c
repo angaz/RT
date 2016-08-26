@@ -6,13 +6,13 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 12:46:27 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/11 21:39:38 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/25 16:54:13 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_vector	vcross(t_vector v1, t_vector v2)
+inline t_vector	vcross(t_vector v1, t_vector v2)
 {
 	return (t_vector){
 		v1.y * v2.z - v1.z * v2.y,

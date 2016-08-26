@@ -6,13 +6,13 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 12:47:58 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/11 21:40:32 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/25 16:54:30 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-double		vdot(t_vector v1, t_vector v2)
+inline double		vdot(t_vector v1, t_vector v2)
 {
 	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
 }
