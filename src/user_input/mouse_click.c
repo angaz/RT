@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/12 15:51:20 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/25 12:59:33 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/27 16:21:58 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,16 @@ static void	click_select(t_env *e)
 	SDL_GetMouseState(&e->click.mouse_x, &e->click.mouse_y);
 	get_ray_dir(mouse, &e->click.ray_cam, e->click.mouse_x, e->click.mouse_y);
 	intersect_scene(mouse);
-printf("%p\n", mouse->p_hit);
-	if (mouse->p_hit && !e->selected)
+	if (mouse->p_hit)
 	{
 		if (e->key.shift == 0 || (mouse->p_hit == e->selected[e->s_num]))
 			deselect_all(e);
 		if (mouse->p_hit->s_bool == 0)
 		{
-			e->s_num++;
 			mouse->p_hit->s_bool = 1;
 			e->selected[e->s_num] = mouse->p_hit;
 			e->selected[e->s_num]->loc_bak = e->selected[e->s_num]->loc;
+			e->s_num++;
 		}
 		else
 			mouse->p_hit->s_bool = 0;

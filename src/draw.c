@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/26 19:52:06 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/27 15:44:40 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,31 @@ static void		make_chunks(t_env *e, SDL_Rect *d)
 	free(m.tid);
 }
 
+static void		half_bytes(SDL_Surface *s)
+{
+	size_t			index;
+	unsigned char	*px;
+
+	index = s->h * s->pitch;
+	px = (unsigned char *)(s->pixels + index - 1);
+	while (index--)
+		*px-- >>= 1;
+}
+
 void			draw(t_env *e, SDL_Rect d)
 {
 	time_t	t;
 
+	if (e->s_num && !e->key.g)
+	{
+		half_bytes(e->img);
+		SDL_UpdateWindowSurface(e->win);
+	}
 	t = time(NULL);
 	make_chunks(e, &d);
-	t = time(NULL) - t;
-	ft_printf("Frame drawn in %d seconds\n", t);
+	if (!e->s_num)
+	{
+		t = time(NULL) - t;
+		ft_printf("Frame drawn in %d seconds\n", t);
+	}
 }
