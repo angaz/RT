@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/26 18:13:07 by adippena          #+#    #+#              #
-#    Updated: 2016/08/26 23:35:36 by adippena         ###   ########.fr        #
+#    Updated: 2016/08/27 10:53:14 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ OBJ		=	$(SRC:.c=.o)
 
 all: $(NAME)
 
-%.o: %.c
+%.o: %.c include/libft.h
 	@echo "\033[94mLFT CC    $@\033[0m"
 	@gcc $(CFLAGS) $(INCLUDE) -c $< -o $@
 
