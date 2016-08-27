@@ -1,4 +1,5 @@
-*.o
+build
+libft/build
 *.a
 RT
 .*.swp

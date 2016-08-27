@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/26 18:13:07 by adippena          #+#    #+#              #
-#    Updated: 2016/08/27 10:53:14 by adippena         ###   ########.fr        #
+#    Updated: 2016/08/27 11:34:04 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	=	libft.a
 INCLUDE	=	-I include
 CFLAGS	=	-Wall -Wextra -Werror -Ofast -Wno-unused-result
 
-SRC		=	src/ft_atoi.c		src/ft_bzero.c		src/ft_isalnum.c		\
+#SRC		=	src/ft_atoi.c		src/ft_bzero.c		src/ft_isalnum.c		\
 			src/ft_isalpha.c	src/ft_isascii.c	src/ft_isdigit.c		\
 			src/ft_islower.c	src/ft_isprint.c	src/ft_isupper.c		\
 			src/ft_itoa.c		src/ft_memalloc.c	src/ft_memccpy.c		\
@@ -39,12 +39,15 @@ SRC		=	src/ft_atoi.c		src/ft_bzero.c		src/ft_isalnum.c		\
 			src/ft_atod.c		src/ft_free_split.c	src/ft_dtoa.c			\
 			src/ft_itoa_base.c	src/ft_btrue.c
 
-OBJ		=	$(SRC:.c=.o)
+INC		=	$(shell find include -name "*.h")
+SRC		=	$(shell find src -name "*.c")
+OBJ		=	$(SRC:src/%.c=build/%.o)
 
 all: $(NAME)
 
-%.o: %.c include/libft.h
+build/%.o: src/%.c include/libft.h
 	@echo "\033[94mLFT CC    $@\033[0m"
+	@mkdir -p $(dir $@)
 	@gcc $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(NAME): $(OBJ)
@@ -54,7 +57,7 @@ $(NAME): $(OBJ)
 
 clean:
 	@echo "\033[94mLFT RM    object files\033[0m"
-	@rm -f $(OBJ)
+	@rm -rf build
 
 fclean: clean
 	@echo "\033[94mLFT RM    $(NAME)\033[0m"
