@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/12 15:44:46 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/25 13:17:28 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/27 14:57:57 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ void		key_press(t_env *e, SDL_Event event)
 	if (event.key.keysym.sym == SDLK_LSHIFT)
 		e->key.shift = 1;
 	else if (event.key.keysym.sym == SDLK_g && e->s_num > 0)
+	{
 		e->key.g = 1;
+		draw(e, (SDL_Rect){0, 0, e->x, e->y});
+	}
 	else if (event.key.keysym.sym == SDLK_a && e->key.g == 0)
 	{
 		if (e->s_num == 0)

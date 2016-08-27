@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/25 15:53:40 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/27 14:04:56 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,9 @@ typedef struct	s_env
 {
 	SDL_Window		*win;
 	SDL_Surface		*img;
+	SDL_Surface		*depth;
 	uint32_t		*px;
+	uint32_t		*dx;
 	char			*file_name;
 	int				px_pitch;
 	t_ray			ray;

@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/27 11:42:47 by adippena         ###   ########.fr        #
+#    Updated: 2016/08/27 15:12:42 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ LIBFT		=	-I libft/include -L libft -lft
 SDL2		=	$(shell sdl2-config --cflags --libs)
 INCLUDE		=	-I include
 LIBS		=	-lm
-CFLAGS		=	-Wall -Wextra -Werror -pthread -Ofast $(INCLUDE) $(SDL2) $(LIBFT) $(LIBS)
+CFLAGS		=	-Wall -Wextra -Werror -pthread -Ofast -g $(INCLUDE) $(SDL2) $(LIBFT) $(LIBS)
 LFLAGS		=	-pthread $(INCLUDE) $(SDL2) $(LIBFT) $(LIBS)
 CC			=	gcc
 LD			=	gcc

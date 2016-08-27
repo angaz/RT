@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:14 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/26 19:50:35 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/27 16:21:01 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void			nullify_pointers(t_env *e)
 	e->win = NULL;
 	e->img = NULL;
 	e->px = NULL;
+	e->dx = NULL;
 	e->p_hit = NULL;
 	e->prim = NULL;
 	e->o_hit = NULL;
@@ -66,7 +67,10 @@ void			init_env(t_env *e)
 	e->win = SDL_CreateWindow(e->file_name, SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, e->x, e->y, SDL_WINDOW_SHOWN);
 	e->img = SDL_GetWindowSurface(e->win);
+	e->depth = SDL_CreateRGBSurface(0, e->x, e->y, 32, 0, 0, 0, 0);
 	e->px = (uint32_t *)e->img->pixels;
+	e->dx = (uint32_t *)e->depth->pixels;
 	ft_bzero(e->px, (e->x * 4) * e->y);
+	ft_bzero(e->dx, (e->x * 4) * e->y);
 	SDL_UpdateWindowSurface(e->win);
 }
