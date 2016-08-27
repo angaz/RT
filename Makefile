@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/26 23:56:19 by adippena         ###   ########.fr        #
+#    Updated: 2016/08/27 11:03:18 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,11 +68,17 @@ SAVE		=	src/save/save.c						\
 				src/save/save_prims.c				\
 				src/save/write_coord.c
 
+USER_INPUT	=	src/user_input/mouse_click.c		\
+				src/user_input/key_press.c			\
+				src/user_input/grab.c				\
+				src/user_input/cam_move.c
+
 SRC			=	$(FREE)								\
 				$(INTERSECT)						\
 				$(MATHS)							\
 				$(READ_SCENE)						\
 				$(SAVE)								\
+				$(USER_INPUT)						\
 				src/camera_setup.c					\
 				src/diffuse.c						\
 				src/draw.c							\
@@ -85,17 +91,25 @@ SRC			=	$(FREE)								\
 				src/reflect.c						\
 				src/refract.c						\
 				src/find_colour_struct.c			\
-				src/copy_env.c						\
-				src/user_input/mouse_click.c		\
-				src/user_input/key_press.c			\
-				src/user_input/grab.c				\
-				src/user_input/cam_move.c
+				src/copy_env.c
+
+INC			=	include/defines.h					\
+				include/diffuse.h					\
+				include/draw.h						\
+				include/in_shadow.h					\
+				include/intersect_cone.h			\
+				include/intersect_cylinder.h		\
+				include/intersect_object.h			\
+				include/intersect_triangle.h		\
+				include/prototypes.h				\
+				include/rt.h						\
+				include/structs.h
 
 all: lft rt
 
 OBJ = $(SRC:.c=.o)
 
-%.o: %.c
+%.o: %.c $(INC)
 	@echo "\033[92m    CC    $@\033[0m"
 	@$(CC) $(CFLAGS) -c $< -o $@
 

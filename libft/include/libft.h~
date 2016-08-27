@@ -13,7 +13,7 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# define BUFF_SIZE	16
+# define BUFF_SIZE	1
 # define ABS(x) (x < 0) ? x * -1 : x
 
 # include <string.h>
