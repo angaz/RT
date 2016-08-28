@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/12 15:51:20 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/27 16:21:58 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/28 22:04:34 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,8 @@ static void	reset_loc(t_env *e)
 	size_t	index;
 
 	index = e->s_num;
-	while (index > 0)
-	{
+	while (index--)
 		e->selected[index]->loc = e->selected[index]->loc_bak;
-		index--;
-	}
 }
 
 static void	click_select(t_env *e)
@@ -35,9 +32,11 @@ static void	click_select(t_env *e)
 	intersect_scene(mouse);
 	if (mouse->p_hit)
 	{
-		if (e->key.shift == 0 || (mouse->p_hit == e->selected[e->s_num]))
+		if (!e->key.shift)
 			deselect_all(e);
-		if (mouse->p_hit->s_bool == 0)
+		if (mouse->p_hit == e->selected[e->s_num])
+			e->selected[e->s_num] = 0;
+		else if (mouse->p_hit->s_bool == 0)
 		{
 			mouse->p_hit->s_bool = 1;
 			e->selected[e->s_num] = mouse->p_hit;
@@ -47,7 +46,7 @@ static void	click_select(t_env *e)
 		else
 			mouse->p_hit->s_bool = 0;
 	}
-	else if (!mouse->p_hit && e->s_num > 0)
+	else if (!mouse->p_hit && e->s_num)
 		deselect_all(e);
 	free(mouse);
 }
@@ -64,11 +63,14 @@ void		click_release(t_env *e, SDL_Event event)
 void		mouse_click(t_env *e, SDL_Event event)
 {
 	SDL_SetRelativeMouseMode(0);
-	if (event.button.button == SDL_BUTTON_LEFT && e->key.g == 0)
-		click_select(e);
+	if (event.button.button == SDL_BUTTON_LEFT)
+	{
+		if (!e->key.g)
+			click_select(e);
+	}
 	else if (event.button.button == SDL_BUTTON_RIGHT)
 	{
-		if (e->key.g == 1)
+		if (e->key.g)
 			reset_loc(e);
 	}
 	else if (event.button.button == SDL_BUTTON_MIDDLE)

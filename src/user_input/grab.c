@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 17:07:36 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/27 16:36:42 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/28 15:11:26 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,13 @@ void	m_wheel(t_env *e, SDL_Event event)
 {
 	size_t index;
 
-	if (e->s_num > 0)
+	if (e->s_num)
 	{
 		index = e->s_num;
-		while (index)
+		while (index--)
 		{
 			e->selected[index]->loc.y -= (double)event.wheel.y * 0.05;
 			draw(e, (SDL_Rect){0, 0, e->x, e->y});
-			index--;
 		}
 	}
 }
@@ -33,7 +32,7 @@ void	grab(t_env *e, SDL_Event event)
 	size_t	index;
 
 	SDL_SetRelativeMouseMode(1);
-	if (e->s_num > 0)
+	if (e->s_num)
 	{
 		index = e->s_num;
 		while (index--)
@@ -62,12 +61,12 @@ void	deselect_all(t_env *e)
 void	select_all(t_env *e)
 {
 	deselect_all(e);
-	e->s_num = 0;
-	while (e->s_num < e->prims)
+	e->s_num = e->prims;
+	while (e->s_num--)
 	{
 		e->selected[e->s_num] = e->prim[e->s_num];
 		e->selected[e->s_num]->s_bool = 1;
 		e->selected[e->s_num]->loc_bak = e->selected[e->s_num]->loc;
-		e->s_num++;
 	}
+	e->s_num = e->prims;
 }
