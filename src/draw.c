@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/29 17:13:27 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/29 17:36:10 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void			draw(t_env *e, SDL_Rect d)
 {
 	time_t	t;
 
-	if (e->s_num && !e->key.g)
+	if (!e->key.g)
 	{
 		half_bytes(e->img);
 		SDL_UpdateWindowSurface(e->win);
@@ -133,7 +133,7 @@ void			draw(t_env *e, SDL_Rect d)
 	t = time(NULL);
 	setup_camera_plane(e);
 	make_chunks(e, &d);
-	if (!e->s_num)
+	if (!e->key.g)
 	{
 		t = time(NULL) - t;
 		ft_printf("Frame drawn in %d seconds\n", t);

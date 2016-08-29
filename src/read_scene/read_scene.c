@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:42 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/22 21:16:41 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/29 21:19:00 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,12 @@ static void	call_type(t_env *e, int fd, char **line)
 	ft_strdel(&temp_line);
 }
 
-static void	default_material(t_env *e)
-{
-	e->material[0] = (t_material *)malloc(sizeof(t_material));
-	init_material(e->material[0]);
-	ft_strdel(&e->material[0]->name);
-	e->material[e->materials]->name = ft_strdup("DEFAULT");
-	++e->materials;
-}
-
 static void	get_quantities(t_env *e, int fd)
 {
 	char	*temp;
 	char	*line;
 
 	temp = NULL;
-	line = NULL;
 	while (ft_gnl(fd, &temp) || temp != NULL)
 	{
 		line = ft_strtrim(temp);
@@ -91,9 +81,19 @@ static void	get_quantities(t_env *e, int fd)
 	close(fd);
 }
 
-/*
-**  33 lines :'(
-*/
+static void	init_read_scene(t_env *e, int fd)
+{
+	get_quantities(e, fd);
+	e->lights = 0;
+	e->materials = 0;
+	e->prims = 0;
+	e->objects = 0;
+	e->material[0] = (t_material *)malloc(sizeof(t_material));
+	init_material(e->material[0]);
+	ft_strdel(&e->material[0]->name);
+	e->material[e->materials]->name = ft_strdup("DEFAULT");
+	++e->materials;
+}
 
 void		read_scene(char *file, t_env *e)
 {
@@ -103,30 +103,22 @@ void		read_scene(char *file, t_env *e)
 
 	if ((fd = open(file, O_RDONLY)) == -1)
 		err(FILE_OPEN_ERROR, "read_scene", e);
-	if (!(ft_gnl(fd, &line)))
-		if (ft_strcmp(line, "# SCENE RT"))
-			err(FILE_FORMAT_ERROR, "read_scene", e);
+	if ((ft_gnl(fd, &line) == -1) || (ft_strcmp(line, "# SCENE RT")))
+		err(FILE_FORMAT_ERROR, "read_scene", e);
 	ft_strdel(&line);
-	get_quantities(e, fd);
-	e->lights = 0;
-	e->materials = 0;
-	e->prims = 0;
-	e->objects = 0;
-	default_material(e);
+	init_read_scene(e, fd);
 	if ((fd = open(file, O_RDONLY)) == -1)
 		err(FILE_OPEN_ERROR, "read_scene", e);
 	while (ft_gnl(fd, &temp_line))
 	{
 		if (temp_line[0] == '\0')
-		{
-			//ft_strdel(&line);
 			break ;
-		}
 		line = ft_strtrim(temp_line);
 		ft_strdel(&temp_line);
 		scene_attributes(e, line);
 		ft_strdel(&line);
 	}
+	ft_strdel(&temp_line);
 	while (ft_gnl(fd, &temp_line))
 		call_type(e, fd, &temp_line);
 	close(fd);

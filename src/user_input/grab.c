@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 17:07:36 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/29 01:08:50 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/29 21:35:11 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	m_wheel(t_env *e, SDL_Event event)
 	{
 		index = e->prims;
 		while (index--)
-			e->prim[index]->loc.y -= (double)event.wheel.y * 0.05;
+			if (e->prim[index]->s_bool)
+				e->prim[index]->loc.y -= (double)event.wheel.y * 0.5;
 		SDL_FlushEvent(SDL_MOUSEWHEEL);
 		draw(e, (SDL_Rect){0, 0, e->x, e->y});
 	}
@@ -31,14 +32,16 @@ void	grab(t_env *e, SDL_Event event)
 	size_t	index;
 
 	SDL_SetRelativeMouseMode(1);
+	SDL_SetWindowGrab(e->win, SDL_TRUE);
 	if (e->s_num)
 	{
 		index = e->prims;
 		while (index--)
-		{
-			e->prim[index]->loc.x += (double)event.motion.xrel * 0.015;
-			e->prim[index]->loc.z -= (double)event.motion.yrel * 0.015;
-		}
+			if (e->prim[index]->s_bool)
+			{
+				e->prim[index]->loc.x += (double)event.motion.xrel * 0.015;
+				e->prim[index]->loc.z -= (double)event.motion.yrel * 0.015;
+			}
 		SDL_FlushEvent(SDL_MOUSEMOTION);
 		draw(e, (SDL_Rect){0, 0, e->x, e->y});
 	}

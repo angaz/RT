@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 09:54:48 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/28 22:18:59 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/29 20:57:08 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,7 @@ void			get_primitive_attributes(t_env *e, int fd)
 	while (ft_gnl(fd, &temp_line))
 	{
 		if (temp_line[0] == '\0')
-		{
-			ft_strdel(&temp_line);
 			break ;
-		}
 		attr = ft_nstrsplit(temp_line, '\t');
 		ft_strdel(&temp_line);
 		if (attr.words < 2)
@@ -107,5 +104,6 @@ void			get_primitive_attributes(t_env *e, int fd)
 		set_primitive_values(e, attr.strings[0], attr.strings[1]);
 		ft_free_split(&attr);
 	}
+	ft_strdel(&temp_line);
 	++e->prims;
 }

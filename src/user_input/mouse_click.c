@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/12 15:51:20 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/29 01:01:32 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/29 21:28:25 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ static void	click_select(t_env *e)
 {
 	int	x;
 	int	y;
-//	t_env	*mouse;
 
-//	mouse = copy_env(e);
 	SDL_GetMouseState(&x, &y);
 	get_ray_dir(e, x, y);
 	intersect_scene(e);
@@ -50,21 +48,20 @@ static void	click_select(t_env *e)
 	}
 	else
 		deselect_all(e);
-//	free(mouse);
 }
 
 void		click_release(t_env *e, SDL_Event event)
 {
 	if (event.button.button == SDL_BUTTON_MIDDLE)
 	{
-		e->key.mid_click = 0;
 		SDL_SetRelativeMouseMode(0);
+		SDL_SetWindowGrab(e->win, SDL_FALSE);
+		e->key.mid_click = 0;
 	}
 }
 
 void		mouse_click(t_env *e, SDL_Event event)
 {
-	SDL_SetRelativeMouseMode(0);
 	if (event.button.button == SDL_BUTTON_LEFT)
 	{
 		if (!e->key.g)
@@ -76,7 +73,11 @@ void		mouse_click(t_env *e, SDL_Event event)
 			reset_loc(e);
 	}
 	else if (event.button.button == SDL_BUTTON_MIDDLE)
+	{
 		e->key.mid_click = 1;
+		SDL_SetRelativeMouseMode(0);
+		SDL_SetWindowGrab(e->win, SDL_FALSE);
+	}
 	reset_keys(e);
 	draw(e, (SDL_Rect){0, 0, e->x, e->y});
 }

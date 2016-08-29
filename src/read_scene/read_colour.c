@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 15:54:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/16 10:11:17 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/29 20:57:35 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@ static double	to_range(double value, double min, double max)
 	value = (value > max) ? max : value;
 	return (value);
 }
-
-/*
-** TODO: Possible memory leak after each ft_strncpy because of new string each
-**	time
-*/
 
 t_colour		get_colour(t_env *e, t_split_string values)
 {
