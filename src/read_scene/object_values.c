@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/09 21:36:49 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/16 10:29:49 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/29 20:56:54 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,7 @@ void			get_object_attributes(t_env *e, int fd)
 	while (ft_gnl(fd, &temp_line))
 	{
 		if (temp_line[0] == '\0')
-		{
-			ft_strdel(&temp_line);
 			break ;
-		}
 		attr = ft_nstrsplit(temp_line, '\t');
 		ft_strdel(&temp_line);
 		if (attr.words < 2)
@@ -90,5 +87,6 @@ void			get_object_attributes(t_env *e, int fd)
 		set_object_values(e, attr.strings[0], attr.strings[1]);
 		ft_free_split(&attr);
 	}
+	ft_strdel(&temp_line);
 	++e->objects;
 }
