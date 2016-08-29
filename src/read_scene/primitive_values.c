@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 09:54:48 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/25 13:15:10 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/28 22:18:59 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,10 @@ size_t			get_material_number(t_env *e, char *str)
 	size_t	material;
 	char	*warn;
 
-	material = 0;
-	while (material < e->materials)
-	{
+	material = e->materials;
+	while (material--)
 		if (!ft_strcmp(e->material[material]->name, str))
 			return (material);
-		++material;
-	}
 	ft_sprintf(&warn, "\e[208m    WARNING: Material name: %s \
 		is not a defined material name\n", str);
 	ft_putstr_fd(warn, 2);

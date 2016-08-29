@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/20 11:12:18 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/26 19:15:46 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/28 22:35:34 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void	cam_rot(t_env *e, SDL_Event event)
 
 void	cam_move(t_env *e)
 {
-	if (e->key.w == 1)
+	if (e->key.w)
 		e->camera.loc.y += 1;
-	if (e->key.s == 1)
+	if (e->key.s)
 		e->camera.loc.y -= 1;
-	if (e->key.a == 1)
+	if (e->key.a)
 		e->camera.loc.x -= 1;
-	if (e->key.d == 1)
+	if (e->key.d)
 		e->camera.loc.x += 1;
-	if (e->key.space == 1)
+	if (e->key.space)
 		e->camera.loc.z += 1;
-	if (e->key.ctrl == 1)
+	if (e->key.ctrl)
 		e->camera.loc.z -= 1;
 	draw(e, (SDL_Rect){0, 0, e->x, e->y});
 }

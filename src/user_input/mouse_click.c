@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/12 15:51:20 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/28 22:04:34 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/29 01:01:32 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,41 @@ static void	reset_loc(t_env *e)
 {
 	size_t	index;
 
-	index = e->s_num;
+	index = e->prims;
 	while (index--)
-		e->selected[index]->loc = e->selected[index]->loc_bak;
+		if (e->prim[index]->s_bool)
+			e->prim[index]->loc = e->prim[index]->loc_bak;
 }
 
 static void	click_select(t_env *e)
 {
-	t_env	*mouse;
+	int	x;
+	int	y;
+//	t_env	*mouse;
 
-	mouse = copy_env(e);
-	setup_camera_plane(mouse, &e->click.ray_cam);
-	SDL_GetMouseState(&e->click.mouse_x, &e->click.mouse_y);
-	get_ray_dir(mouse, &e->click.ray_cam, e->click.mouse_x, e->click.mouse_y);
-	intersect_scene(mouse);
-	if (mouse->p_hit)
+//	mouse = copy_env(e);
+	SDL_GetMouseState(&x, &y);
+	get_ray_dir(e, x, y);
+	intersect_scene(e);
+	if (e->p_hit)
 	{
 		if (!e->key.shift)
 			deselect_all(e);
-		if (mouse->p_hit == e->selected[e->s_num])
-			e->selected[e->s_num] = 0;
-		else if (mouse->p_hit->s_bool == 0)
+		if (!e->p_hit->s_bool)
 		{
-			mouse->p_hit->s_bool = 1;
-			e->selected[e->s_num] = mouse->p_hit;
-			e->selected[e->s_num]->loc_bak = e->selected[e->s_num]->loc;
-			e->s_num++;
+			e->p_hit->s_bool = 1;
+			e->p_hit->loc_bak = e->p_hit->loc;
+			++e->s_num;
 		}
 		else
-			mouse->p_hit->s_bool = 0;
+		{
+			e->p_hit->s_bool = 0;
+			--e->s_num;
+		}
 	}
-	else if (!mouse->p_hit && e->s_num)
+	else
 		deselect_all(e);
-	free(mouse);
+//	free(mouse);
 }
 
 void		click_release(t_env *e, SDL_Event event)
