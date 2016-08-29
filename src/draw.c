@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/27 15:44:40 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/29 17:36:10 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static uint32_t	find_base_colour(t_env *e)
 
 	if (!e->hit_type)
 		return (0x7F7F7F);
-	c = prim_diffuse(e);
+	c = (e->hit_type == FACE) ? face_diffuse(e) : prim_diffuse(e);
 	return ((uint32_t)(
 	(unsigned int)(c.r * 255.0) << 16 |
 	(unsigned int)(c.g * 255.0) << 8 |
@@ -58,20 +58,21 @@ static uint32_t	find_base_colour(t_env *e)
 static void		*draw_chunk(void *q)
 {
 	t_chunk		*c;
+	uint32_t	*px;
 
 	c = (t_chunk *)q;
 	c->stopx = c->d.x + c->d.w;
 	c->stopy = c->d.y + c->d.h;
-	while (c->d.y < c->stopy && c->d.y < (int)c->e->y)
+	while (c->d.y < (int)c->e->y && c->d.y < c->stopy)
 	{
 		c->x = c->d.x;
-		while (c->x < c->stopx && c->x < (int)c->e->x)
+		px = &c->e->px[c->d.y * c->e->x + c->d.x];
+		while (c->x < (int)c->e->x && c->x < c->stopx)
 		{
 			c->e->p_hit = NULL;
-			get_ray_dir(c->e, &c->cr, (double)c->x, (double)c->d.y);
+			get_ray_dir(c->e, (double)c->x, (double)c->d.y);
 			intersect_scene(c->e);
-			c->e->px[c->d.y * c->e->x + c->x] = (c->e->p_hit &&
-				(c->e->p_hit->s_bool == 0) && (c->e->key.g == 0)) ?
+			*px++ = (c->e->p_hit && !c->e->p_hit->s_bool && !c->e->key.g) ?
 				find_colour(c->e) : find_base_colour(c->e);
 			++c->x;
 		}
@@ -91,7 +92,6 @@ static void		make_chunks(t_env *e, SDL_Rect *d)
 	m.tid = (pthread_t *)malloc(sizeof(pthread_t) * m.tids);
 	m.thread = 0;
 	m.chunk_y = 0;
-	setup_camera_plane(e, &m.cr);
 	while (m.chunk_y * 64 < (size_t)d->h)
 	{
 		m.chunk_x = 0;
@@ -100,15 +100,13 @@ static void		make_chunks(t_env *e, SDL_Rect *d)
 			m.c = (t_chunk *)malloc(sizeof(t_chunk));
 			m.c->e = copy_env(e);
 			m.c->d = (SDL_Rect){m.chunk_x * 64, m.chunk_y * 64, 64, 64};
-			m.c->cr = m.cr;
 			pthread_create(&m.tid[m.thread++], NULL, draw_chunk, (void *)m.c);
-			if (m.thread == 4)
-				while (m.thread)
-					pthread_join(m.tid[--m.thread], NULL);
 			++m.chunk_x;
 		}
 		++m.chunk_y;
 	}
+	while (m.thread--)
+		pthread_join(m.tid[m.thread], NULL);
 	free(m.tid);
 }
 
@@ -127,14 +125,15 @@ void			draw(t_env *e, SDL_Rect d)
 {
 	time_t	t;
 
-	if (e->s_num && !e->key.g)
+	if (!e->key.g)
 	{
 		half_bytes(e->img);
 		SDL_UpdateWindowSurface(e->win);
 	}
 	t = time(NULL);
+	setup_camera_plane(e);
 	make_chunks(e, &d);
-	if (!e->s_num)
+	if (!e->key.g)
 	{
 		t = time(NULL) - t;
 		ft_printf("Frame drawn in %d seconds\n", t);

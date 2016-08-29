@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/25 17:07:25 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/28 23:31:35 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,8 @@ int			in_shadow(t_env *e, t_light *light);
 /*
 ** src/camera_setup.c
 */
-void		setup_camera_plane(t_env *e, t_camera_ray *c);
-void		get_ray_dir(t_env *e, t_camera_ray *cr, double x, double y);
+void		setup_camera_plane(t_env *e);
+void		get_ray_dir(t_env *e, double x, double y);
 
 /*
 ** src/get_normal.c

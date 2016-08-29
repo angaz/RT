@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/11 19:48:22 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/12 19:44:44 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/29 21:20:49 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,35 @@ static void	make_box(t_object *o)
 	}
 }
 
+static void	read_vertex(t_object *o, t_split_string *values)
+{
+	o->v[o->verticies] = (t_vector *)malloc(sizeof(t_vector));
+	o->v[o->verticies]->x = ft_atod(values->strings[1]);
+	o->v[o->verticies]->y = ft_atod(values->strings[2]);
+	o->v[o->verticies]->z = ft_atod(values->strings[3]);
+	++o->verticies;
+}
+
+static void	read_vnormal(t_object *o, t_split_string *values)
+{
+	o->vn[o->vnormals] = (t_vector *)malloc(sizeof(t_vector));
+	o->vn[o->vnormals]->x = ft_atod(values->strings[1]);
+	o->vn[o->vnormals]->y = ft_atod(values->strings[2]);
+	o->vn[o->vnormals]->z = ft_atod(values->strings[3]);
+	++o->vnormals;
+}
+
+static void	read_face(t_object *o, t_split_string *values)
+{
+	o->face[o->faces] = (t_face *)malloc(sizeof(t_face));
+	o->face[o->faces]->v0 = o->v[ft_atoi(values->strings[1]) - 1];
+	o->face[o->faces]->v1 = o->v[ft_atoi(values->strings[2]) - 1];
+	o->face[o->faces]->v2 = o->v[ft_atoi(values->strings[3]) - 1];
+	o->face[o->faces]->n =\
+		o->vn[ft_atoi(ft_strrchr(values->strings[1], '/') + 1) - 1];
+	++o->faces;
+}
+
 void		read_obj(t_env *e, int fd)
 {
 	t_split_string	values;
@@ -50,35 +79,14 @@ void		read_obj(t_env *e, int fd)
 		{
 			values = ft_nstrsplit(line, ' ');
 			if (!ft_strcmp(values.strings[0], "v") && values.words == 4)
-			{
-				o->v[o->verticies] = (t_vector *)malloc(sizeof(t_vector));
-				o->v[o->verticies]->x = ft_atod(values.strings[1]);
-				o->v[o->verticies]->y = ft_atod(values.strings[2]);
-				o->v[o->verticies]->z = ft_atod(values.strings[3]);
-				++o->verticies;
-			}
+				read_vertex(o, &values);
 			if (!ft_strcmp(values.strings[0], "vn") && values.words == 4)
-			{
-				o->vn[o->vnormals] = (t_vector *)malloc(sizeof(t_vector));
-				o->vn[o->vnormals]->x = ft_atod(values.strings[1]);
-				o->vn[o->vnormals]->y = ft_atod(values.strings[2]);
-				o->vn[o->vnormals]->z = ft_atod(values.strings[3]);
-				++o->vnormals;
-			}
+				read_vnormal(o, &values);
 			if (!ft_strcmp(values.strings[0], "f") && values.words == 4)
-			{
-				o->face[o->faces] = (t_face *)malloc(sizeof(t_face));
-				o->face[o->faces]->v0 = o->v[ft_atoi(values.strings[1]) - 1];
-				o->face[o->faces]->v1 = o->v[ft_atoi(values.strings[2]) - 1];
-				o->face[o->faces]->v2 = o->v[ft_atoi(values.strings[3]) - 1];
-				o->face[o->faces]->n =\
-					o->vn[ft_atoi(ft_strrchr(values.strings[1], '/') + 1) - 1];
-				++o->faces;
-			}
+				read_face(o, &values);
 			ft_free_split(&values);
 		}
 		ft_strdel(&line);
 	}
 	make_box(o);
 }
-

@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/27 14:04:56 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/28 23:54:01 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,11 @@ typedef struct	s_camera
 	t_vector	loc;
 	t_vector	dir;
 	t_vector	up;
+	t_vector	u;
+	t_vector	v;
+	t_vector	l;
+	double		stepx;
+	double		stepy;
 }				t_camera;
 
 typedef struct	s_light
@@ -109,20 +114,6 @@ typedef struct	s_light
 	double		lm;
 	double		half;
 }				t_light;
-
-typedef struct	s_camera_ray
-{
-	t_vector	n;
-	t_vector	u;
-	t_vector	v;
-	t_vector	l;
-	t_vector	c;
-	double		d;
-	double		w;
-	double		h;
-	double		stepx;
-	double		stepy;
-}				t_camera_ray;
 
 /*
 ** KEYBOARD HANDLER & MOUSE STRUCTURE
@@ -144,13 +135,6 @@ typedef struct	s_key
 	int		mid_click;
 }				t_key;
 
-typedef struct	s_click
-{
-	int				mouse_x;
-	int				mouse_y;
-	t_camera_ray	ray_cam;
-}				t_click;
-
 /*
 ** ENVIRNMENT STRUCTURE
 */
@@ -166,7 +150,6 @@ typedef struct	s_env
 	t_ray			ray;
 	t_camera		camera;
 	t_prim			*p_hit;
-	t_prim			**selected;
 	size_t			s_num;
 	int				s_all;
 	size_t			hit_type;
@@ -183,11 +166,9 @@ typedef struct	s_env
 	double			t;
 	int				maxdepth;
 	t_key			key;
-	t_click			click;
-//
-	t_camera_ray	ray_cam_test;
 	size_t			x;
 	size_t			y;
+	size_t			threads;
 }				t_env;
 
 typedef struct	s_quadratic

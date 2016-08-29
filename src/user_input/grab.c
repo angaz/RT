@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 17:07:36 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/28 15:11:26 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/29 21:35:11 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	m_wheel(t_env *e, SDL_Event event)
 
 	if (e->s_num)
 	{
-		index = e->s_num;
+		index = e->prims;
 		while (index--)
-		{
-			e->selected[index]->loc.y -= (double)event.wheel.y * 0.05;
-			draw(e, (SDL_Rect){0, 0, e->x, e->y});
-		}
+			if (e->prim[index]->s_bool)
+				e->prim[index]->loc.y -= (double)event.wheel.y * 0.5;
+		SDL_FlushEvent(SDL_MOUSEWHEEL);
+		draw(e, (SDL_Rect){0, 0, e->x, e->y});
 	}
 }
 
@@ -32,41 +32,43 @@ void	grab(t_env *e, SDL_Event event)
 	size_t	index;
 
 	SDL_SetRelativeMouseMode(1);
+	SDL_SetWindowGrab(e->win, SDL_TRUE);
 	if (e->s_num)
 	{
-		index = e->s_num;
+		index = e->prims;
 		while (index--)
-		{
-			e->selected[index]->loc.x += (double)event.motion.xrel * 0.015;
-			e->selected[index]->loc.z -= (double)event.motion.yrel * 0.015;
-			SDL_FlushEvent(SDL_MOUSEMOTION);
-		}
+			if (e->prim[index]->s_bool)
+			{
+				e->prim[index]->loc.x += (double)event.motion.xrel * 0.015;
+				e->prim[index]->loc.z -= (double)event.motion.yrel * 0.015;
+			}
+		SDL_FlushEvent(SDL_MOUSEMOTION);
 		draw(e, (SDL_Rect){0, 0, e->x, e->y});
 	}
 }
 
 void	deselect_all(t_env *e)
 {
-	if (e->s_num > 0)
+	size_t	index;
+
+	if (e->s_num)
 	{
-		while (e->s_num--)
-		{
-			e->selected[e->s_num]->s_bool = 0;
-			e->selected[e->s_num]->loc_bak = (t_vector){0.0, 0.0, 0.0};
-			e->selected[e->s_num] = NULL;
-		}
+		index = e->prims;
+		while (index--)
+			e->prim[index]->s_bool = 0;
 	}
+	e->s_num = 0;
 }
 
 void	select_all(t_env *e)
 {
-	deselect_all(e);
-	e->s_num = e->prims;
-	while (e->s_num--)
+	size_t	index;
+
+	index = e->prims;
+	while (index--)
 	{
-		e->selected[e->s_num] = e->prim[e->s_num];
-		e->selected[e->s_num]->s_bool = 1;
-		e->selected[e->s_num]->loc_bak = e->selected[e->s_num]->loc;
+		e->prim[index]->s_bool = 1;
+		e->prim[index]->loc_bak = e->prim[index]->loc;
 	}
 	e->s_num = e->prims;
 }
