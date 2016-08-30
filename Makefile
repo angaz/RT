@@ -6,17 +6,19 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/27 15:12:42 by adippena         ###   ########.fr        #
+#    Updated: 2016/08/30 10:12:09 by arnovan-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	RT
-LIBFT		=	-I libft/include -L libft -lft
-SDL2		=	$(shell sdl2-config --cflags --libs)
-INCLUDE		=	-I include
-LIBS		=	-lm
-CFLAGS		=	-Wall -Wextra -Werror -pthread -Ofast -g $(INCLUDE) $(SDL2) $(LIBFT) $(LIBS)
-LFLAGS		=	-pthread $(INCLUDE) $(SDL2) $(LIBFT) $(LIBS)
+LIBFTI		=	-I libft/include
+LIBFTL		=	-L libft -lft
+SDL2I		=	$(shell sdl2-config --cflags)
+SDL2L		=	$(shell sdl2-config --libs)
+INCLUDE		=	-I include $(SDL2I) $(LIBFTI)
+LIBS		=	-lm $(SDL2L) $(LIBFTL) 
+CFLAGS		=	-Wall -Wextra -Werror -pthread -Ofast -g $(INCLUDE)
+LFLAGS		=	$(INCLUDE) $(LIBS)
 CC			=	gcc
 LD			=	gcc
 
