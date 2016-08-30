@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 11:59:15 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/22 21:29:33 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/30 22:36:10 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,13 @@ void		save(t_env *e)
 	int		fd;
 	char	*temp;
 
+	ft_putstr("Saving file... ");
 	temp = NULL;
 	if ((fd = open(e->file_name, O_WRONLY | O_TRUNC)) == -1)
-		err(FILE_OPEN_ERROR, "save", e);
+		err(FILE_OPEN_ERROR, "Could not save teh file", e);
 	ft_putstr_fd("# SCENE RT\n", fd);
 	ft_putstr_fd("	MAXDEPTH	", fd);
-	temp = ft_dtoa(e->maxdepth, 6);
+	temp = ft_itoa(e->maxdepth);
 	ft_putendl_fd(temp, fd);
 	ft_strdel(&temp);
 	save_render(e, fd);
@@ -63,4 +64,5 @@ void		save(t_env *e)
 	save_prims(e->prim, e->material, e->prims, fd);
 	save_objects(e->object, e->objects, e->material, fd);
 	close(fd);
+	ft_putstr("Done\n");
 }

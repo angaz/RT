@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/13 13:55:24 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/25 13:11:15 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/30 23:36:23 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void		diffuse_colour(t_env *e, t_diffuse *d)
 {
+	t_vector	temp_colour;
+
 	if (!in_shadow(e, d->light))
 	{
 		d->l = vsub(d->light->loc, d->p);
@@ -28,7 +30,12 @@ static void		diffuse_colour(t_env *e, t_diffuse *d)
 		d->ls = vmult(vmult(colour_to_vector(d->mat->spec),
 			d->mat->spec.intensity), d->intensity *
 			pow(MAX(0, vdot(d->n, d->h)), 50.0));
-		d->colour = vadd(d->colour, vadd(d->ld, d->ls));
+		temp_colour = vadd(d->ld, d->ls);
+		temp_colour = (t_vector){
+			temp_colour.x * d->light->colour.r,
+			temp_colour.y * d->light->colour.g,
+			temp_colour.z * d->light->colour.b};
+		d->colour = vadd(d->colour, temp_colour);
 	}
 }
 

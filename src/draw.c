@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/30 12:04:34 by arnovan-         ###   ########.fr       */
+/*   Updated: 2016/08/30 21:57:10 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ static void		*draw_chunk(void *q)
 	uint32_t	*px;
 
 	c = (t_chunk *)q;
-	c->stopx = c->d.x + c->d.w;
-	c->stopy = c->d.y + c->d.h;
-	while (c->d.y < (int)c->e->y && c->d.y < c->stopy)
+	c->stopx = MIN(c->d.x + c->d.w, (int)c->e->x);
+	c->stopy = MIN(c->d.y + c->d.h, (int)c->e->y);
+	while (c->d.y < c->stopy)
 	{
 		c->x = c->d.x;
 		px = &c->e->px[c->d.y * c->e->x + c->d.x];
-		while (c->x < (int)c->e->x && c->x < c->stopx)
+		while (c->x < c->stopx)
 		{
 			c->e->p_hit = NULL;
 			get_ray_dir(c->e, (double)c->x, (double)c->d.y);
@@ -77,6 +77,8 @@ static void		*draw_chunk(void *q)
 			++c->x;
 		}
 		++c->d.y;
+		if (!(c->d.y % 8))
+			SDL_UpdateWindowSurface(c->e->win);
 	}
 	free(c->e);
 	free(c);
@@ -107,7 +109,6 @@ static void		make_chunks(t_env *e, SDL_Rect *d)
 	while (m.thread--)
 	{
 		pthread_join(m.tid[m.thread], NULL);
-		SDL_UpdateWindowSurface(e->win);
 	}
 	free(m.tid);
 }
