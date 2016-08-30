@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/29 17:36:10 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/30 12:04:34 by arnovan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ static void		*draw_chunk(void *q)
 		}
 		++c->d.y;
 	}
-	SDL_UpdateWindowSurface(c->e->win);
 	free(c->e);
 	free(c);
 	pthread_exit(0);
@@ -106,7 +105,10 @@ static void		make_chunks(t_env *e, SDL_Rect *d)
 		++m.chunk_y;
 	}
 	while (m.thread--)
+	{
 		pthread_join(m.tid[m.thread], NULL);
+		SDL_UpdateWindowSurface(e->win);
+	}
 	free(m.tid);
 }
 
@@ -133,6 +135,7 @@ void			draw(t_env *e, SDL_Rect d)
 	t = time(NULL);
 	setup_camera_plane(e);
 	make_chunks(e, &d);
+	SDL_UpdateWindowSurface(e->win);
 	if (!e->key.g)
 	{
 		t = time(NULL) - t;
