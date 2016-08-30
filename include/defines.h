@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:13 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/28 23:46:22 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/30 21:50:33 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define DEFINES_H
 
 # define MAX(a, b)			((a > b) ? a : b)
+# define MIN(a, b)			((a < b) ? a : b)
 # define EPSILON			0.00001
 # define ARBITRARY_NUMBER	2.175
 
