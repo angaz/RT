@@ -1,14 +1,14 @@
 # SCENE RT
-	MAXDEPTH	5
+	MAXDEPTH	75
 
 	CAMERA
-		LOC	0 -20 0
+		LOC	0 -10 5
 		DIR	0 0 0
 		UP	0 0 1
 
 	LIGHT
 		LOC			12 -20 10
-		COLOUR		FFFFFF
+		COLOUR		7FFF7F
 		INTENSITY	5
 		HALF		30
 
@@ -16,7 +16,9 @@
 		NAME		refract
 		DIFFUSE		00F1F1 1.0
 		SPECULAR	FFFFFF 0.5
-		REFLECT		1.0
+		REFLECT		0.0
+		REFRACT		1.0
+		IOR			1.49
 
 	MATERIAL
 		NAME		red
@@ -32,18 +34,12 @@
 		NAME		blue
 		DIFFUSE		0000FF 1.0
 		SPECULAR	FFFFFF 0.5
-		REFLECT		0.0
-		REFRACT		0.0
+		REFRACT		0.75
 		IOR			1.52
 
 	MATERIAL
 		NAME		orange
-		DIFFUSE		FFA900 0.8
-
-	MATERIAL
-		NAME		purple
-		DIFUSE		BC00FF 0.8
-		SPECULAR	FFFFFF 0.5
+		DIFFUSE		FFA900 1.0
 
 	PRIMITIVE
 		TYPE		plane
@@ -57,32 +53,14 @@
 		NORMAL		0 -1 0
 		MATERIAL	red
 
-	PRIMITIVE
-		TYPE		sphere
-		LOC			0 0 0
-		RADIUS		1
-		MATERIAL	blue
-
-	PRIMITIVE
-		TYPE		sphere
-		LOC			-5 10 0
-		RADIUS		1.5
-		MATERIAL	refract
-
-	PRIMITIVE
-		TYPE		sphere
-		LOC			5 0 0
-		RADIUS		1.5
-		MATERIAL	orange
-
 	OBJECT
 		FILE		check01.obj
 		MATERIAL	green
 
 	OBJECT
 		FILE		check02.obj
-		MATERIAL	purple
+		MATERIAL	orange
 
 	OBJECT
 		FILE		suzanne.obj
-		MATERIAL	green
+		MATERIAL	blue
