@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/09 09:30:32 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/20 10:57:56 by rojones          ###   ########.fr       */
+/*   Updated: 2016/08/31 20:32:53 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,22 @@ static void	set_refract_ray_object(t_env *e, t_env *refract)
 	{
 		refract->ray.o_in = NULL;
 		refract->ray.ior = 1;
+		ior = (e->ray.ior / refract->ray.ior);
 	}
 	else
 	{
 		refract->ray.o_in = e->object_hit;
 		refract->ray.ior = e->material[e->object_hit->material]->ior;
+		ior = (1.0 / refract->ray.ior);
 	}
 	cos = vdot(vunit(vsub(e->ray.loc, refract->ray.loc)), n);
-	ior = (e->ray.ior / refract->ray.ior);
-	if ((check = 1 - pow(ior, 2) * (1 - pow(cos, 2))) < 0.0)
+	if ((check = 1 - pow(ior, 2) * (1 - pow(cos, 2))) < -EPSILON)
 		set_reflect_ray(e, refract);
 	else
 	refract->ray.dir = vunit(vadd(
 		vmult(e->ray.dir, ior), vmult(n, ((ior * cos) - sqrt(check)))));
+//printf("%lf, %lf, %lf\n", refract->ray.dir.x, refract->ray.dir.y, refract->ray.dir.z);
+
 }
 
 t_colour	refract(t_env *e, int depth, t_colour colour)
@@ -72,7 +75,7 @@ t_colour	refract(t_env *e, int depth, t_colour colour)
 		intersect_scene(refract_env);
 		colour = find_colour_struct(refract_env, depth);
 	}
-	if (e->hit_type == PRIMITIVE)
+	else if (e->hit_type == PRIMITIVE)
 	{
 		set_refract_ray_prim(e, refract_env);
 		intersect_scene(refract_env);

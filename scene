@@ -1,19 +1,19 @@
 # SCENE RT
-	MAXDEPTH	75
+	MAXDEPTH	5
 
 	CAMERA
-		LOC	0 -10 5
+		LOC	0 -10 2.5
 		DIR	0 0 0
 		UP	0 0 1
 
 	LIGHT
-		LOC			12 -20 10
-		COLOUR		7FFF7F
+		LOC			-12 -20 10
+		COLOUR		FFFFFF
 		INTENSITY	5
 		HALF		30
 
 	MATERIAL
-		NAME		refract
+		NAME		glass
 		DIFFUSE		00F1F1 1.0
 		SPECULAR	FFFFFF 0.5
 		REFLECT		0.0
@@ -33,9 +33,6 @@
 	MATERIAL
 		NAME		blue
 		DIFFUSE		0000FF 1.0
-		SPECULAR	FFFFFF 0.5
-		REFRACT		0.75
-		IOR			1.52
 
 	MATERIAL
 		NAME		orange
@@ -59,8 +56,8 @@
 
 	OBJECT
 		FILE		check02.obj
-		MATERIAL	orange
+		MATERIAL	blue
 
 	OBJECT
-		FILE		suzanne.obj
-		MATERIAL	blue
+		FILE		glass_pane.obj
+		MATERIAL	glass
