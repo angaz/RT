@@ -6,15 +6,15 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 11:42:21 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/25 16:30:42 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/31 11:48:12 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# define BUFF_SIZE	16
-# define ABS(x) (x < 0) ? x * -1 : x
+# define BUFF_SIZE	1
+# define ABS(x) 	(x < 0) ? x * -1 : x
 
 # include <string.h>
 # include <stdlib.h>
