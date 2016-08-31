@@ -6,7 +6,7 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/09 12:47:08 by adippena          #+#    #+#              #
-#    Updated: 2016/08/30 11:54:25 by arnovan-         ###   ########.fr        #
+#    Updated: 2016/08/31 21:02:09 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SDL2I		=	$(shell sdl2-config --cflags)
 SDL2L		=	$(shell sdl2-config --libs)
 INCLUDE		=	-I include $(SDL2I) $(LIBFTI)
 LIBS		=	-lm $(SDL2L) $(LIBFTL) 
-CFLAGS		=	-Wall -Wextra -Werror -pthread -Ofast -g $(INCLUDE)
+CFLAGS		=	-Wall -Wextra -Werror -Wno-unused-result -pthread -Ofast -g $(INCLUDE)
 LFLAGS		=	-lpthread $(INCLUDE) $(LIBS)
 CC			=	gcc
 LD			=	gcc

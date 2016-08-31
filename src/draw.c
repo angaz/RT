@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/30 21:57:10 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/31 12:40:20 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ static void		*draw_chunk(void *q)
 			++c->x;
 		}
 		++c->d.y;
-		if (!(c->d.y % 8))
-			SDL_UpdateWindowSurface(c->e->win);
+//		if (!(c->d.y % 8))
+//			SDL_UpdateWindowSurface(c->e->win);
 	}
 	free(c->e);
 	free(c);

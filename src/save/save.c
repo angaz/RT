@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 11:59:15 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/30 22:36:10 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/31 21:04:29 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		save(t_env *e)
 	ft_putstr("Saving file... ");
 	temp = NULL;
 	if ((fd = open(e->file_name, O_WRONLY | O_TRUNC)) == -1)
-		err(FILE_OPEN_ERROR, "Could not save teh file", e);
+		err(FILE_OPEN_ERROR, "Could not save the file", e);
 	ft_putstr_fd("# SCENE RT\n", fd);
 	ft_putstr_fd("	MAXDEPTH	", fd);
 	temp = ft_itoa(e->maxdepth);

@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:24 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/30 22:55:01 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/31 21:00:12 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	event_keydown(t_env *e, SDL_Event *event)
 		exit_rt(e, 0);
 	else if (event->key.keysym.sym == SDLK_d && !e->key.mid_click)
 		draw(e, (SDL_Rect){0, 0, e->x, e->y});
+	else if (event->key.keysym.sym == SDLK_e && !e->key.mid_click)
+		export(e);
 	else if (event->key.keysym.sym == SDLK_s && !e->key.mid_click)
 		save(e);
 	else if (!e->objects && e->key.mid_click)

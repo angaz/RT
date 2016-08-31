@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/28 23:31:35 by adippena         ###   ########.fr       */
+/*   Updated: 2016/08/31 20:58:33 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,5 +174,10 @@ void		deselect_all(t_env *e);
 */
 void		cam_rot(t_env *e, SDL_Event event);
 void		cam_move(t_env *e);
+
+/*
+** src/export.c
+*/
+void		export(t_env *e);
 
 #endif
