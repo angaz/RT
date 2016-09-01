@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/31 20:58:33 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 20:20:07 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,16 +149,16 @@ t_env		*copy_env(t_env *e);
 /*
 ** src/user_input/key_press.c
 */
-void		key_press(t_env *e, SDL_Event event);
-void		mkey_press(t_env *e, SDL_Event event);
-void		key_release(t_env *e, SDL_Event event);
+void		key_press(t_env *e, SDL_Keycode key);
+void		mkey_press(t_env *e, SDL_Keycode key);
+void		key_release(t_env *e, SDL_Keycode key);
 void		reset_keys(t_env *e);
 void		init_keys(t_env *e);
 
 /*
 ** src/user_input/mouse_click.c
 */
-void		mouse_click(t_env *e, SDL_Event event);
+void		mouse_click(t_env *e, uint8_t button);
 void		click_release(t_env *e, SDL_Event event);
 
 /*

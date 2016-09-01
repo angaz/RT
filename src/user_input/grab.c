@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 17:07:36 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/29 21:35:11 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 20:23:57 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	grab(t_env *e, SDL_Event event)
 	size_t	index;
 
 	SDL_SetRelativeMouseMode(1);
-	SDL_SetWindowGrab(e->win, SDL_TRUE);
 	if (e->s_num)
 	{
 		index = e->prims;

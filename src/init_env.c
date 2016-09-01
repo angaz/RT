@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:14 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/30 23:30:55 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 20:21:13 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void		initials(t_env *e)
 	e->maxdepth = 1;
 	e->x = 1600;
 	e->y = 900;
-	e->threads = 4;
+	e->keys = 0;
 }
 
 static void		nulls(t_env *e)

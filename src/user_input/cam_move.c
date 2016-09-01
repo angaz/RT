@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/20 11:12:18 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/30 22:54:28 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 20:23:49 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	cam_rot(t_env *e, SDL_Event event)
 {
 	SDL_SetRelativeMouseMode(1);
-	SDL_SetWindowGrab(e->win, SDL_TRUE);
 	e->camera.dir.x += (double)event.motion.xrel * 0.1;
 	e->camera.dir.z -= (double)event.motion.yrel * 0.1;
 	draw(e, (SDL_Rect){0, 0, e->x, e->y});
@@ -24,17 +23,17 @@ void	cam_rot(t_env *e, SDL_Event event)
 
 static void		cam_move_minus(t_env *e)
 {
-	if (e->key.a)
+	if (e->keys & KEY_A)
 	{
 		--e->camera.loc.x;
 		--e->camera.dir.x;
 	}
-	if (e->key.s)
+	if (e->keys & KEY_S)
 	{
 		--e->camera.loc.y;
 		--e->camera.dir.y;
 	}
-	if (e->key.ctrl)
+	if (e->keys & KEY_CTRL)
 	{
 		--e->camera.loc.z;
 		--e->camera.dir.z;
@@ -43,17 +42,17 @@ static void		cam_move_minus(t_env *e)
 
 static void		cam_move_plus(t_env *e)
 {
-	if (e->key.d)
+	if (e->keys & KEY_D)
 	{
 		++e->camera.loc.x;
 		++e->camera.dir.x;
 	}
-	if (e->key.w)
+	if (e->keys & KEY_W)
 	{
 		++e->camera.loc.y;
 		++e->camera.dir.y;
 	}
-	if (e->key.space)
+	if (e->keys & KEY_SPACE)
 	{
 		++e->camera.loc.z;
 		++e->camera.dir.z;

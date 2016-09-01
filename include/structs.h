@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/28 23:54:01 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 20:08:19 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,9 +166,9 @@ typedef struct	s_env
 	double			t;
 	int				maxdepth;
 	t_key			key;
+	size_t			keys;
 	size_t			x;
 	size_t			y;
-	size_t			threads;
 }				t_env;
 
 typedef struct	s_quadratic
