@@ -6,15 +6,15 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/01 09:55:11 by rojones           #+#    #+#             */
-/*   Updated: 2016/09/01 12:05:21 by rojones          ###   ########.fr       */
+/*   Updated: 2016/09/01 13:01:06 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static int  check_lim(t_ray *r, t_prim *o, double *t, double *t_test)
+static int	check_lim(t_ray *r, t_prim *o, double *t, double *t_test)
 {
-	t_vector    ph;
+	t_vector	ph;
 
 	ph = vadd(r->loc, vmult(r->dir, *t_test));
 	if (vdot(o->dir, vsub(ph, o->loc)) <= 0)
@@ -25,12 +25,12 @@ static int  check_lim(t_ray *r, t_prim *o, double *t, double *t_test)
 	return (0);
 }
 
-static int  find_t(t_quad *quad, double *t, t_prim *o, t_ray *r)
+static int	find_t(t_quad *quad, double *t, t_prim *o, t_ray *r)
 {
-	double  sqrt_discr;
-	double  t0;
-	double  t1;
-	double  tc;
+	double	sqrt_discr;
+	double	t0;
+	double	t1;
+	double	tc;
 
 	sqrt_discr = sqrt(quad->discr);
 	t0 = (-quad->b + sqrt_discr) / (2.0 * quad->a);

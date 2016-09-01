@@ -1,39 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.h                                             :+:      :+:    :+:   */
+/*   half_bytes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/17 11:01:32 by adippena          #+#    #+#             */
-/*   Updated: 2016/09/01 14:05:46 by adippena         ###   ########.fr       */
+/*   Created: 2016/09/01 13:17:39 by adippena          #+#    #+#             */
+/*   Updated: 2016/09/01 13:18:29 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DRAW_H
-# define DRAW_H
+#include "rt.h"
 
-# include "rt.h"
-# include <sys/time.h>
-
-typedef struct	s_chunk
+void		half_bytes(SDL_Surface *s)
 {
-	t_env			*e;
-	SDL_Rect		d;
-	size_t			pixel;
-	int				stopx;
-	int				stopy;
-	int				x;
-}				t_chunk;
+	size_t			index;
+	unsigned char	*px;
 
-typedef struct	s_make_chunks
-{
-	size_t			tids;
-	size_t			thread;
-	size_t			chunk_x;
-	size_t			chunk_y;
-	pthread_t		*tid;
-	t_chunk			*c;
-}				t_make_chunks;
-
-#endif
+	index = s->h * s->pitch;
+	px = (unsigned char *)(s->pixels + index - 1);
+	while (index--)
+		*px-- >>= 1;
+}
