@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 12:40:41 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/29 20:56:35 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 13:19:34 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static double	to_range(double value, double min, double max)
 	return (value);
 }
 
-static void	set_material_values(t_env *e, char *pt1, char *pt2)
+static void		set_material_values(t_env *e, char *pt1, char *pt2)
 {
 	t_split_string	values;
 
@@ -34,15 +34,17 @@ static void	set_material_values(t_env *e, char *pt1, char *pt2)
 	else if (!ft_strcmp(pt1, "SPECULAR"))
 		e->material[e->materials]->spec = get_colour(e, values);
 	else if (!ft_strcmp(pt1, "REFLECT"))
-		e->material[e->materials]->reflect = to_range(ft_atod(values.strings[0]), 0.0, 1.0);
+		e->material[e->materials]->reflect =
+			to_range(ft_atod(values.strings[0]), 0.0, 1.0);
 	else if (!ft_strcmp(pt1, "REFRACT"))
-		e->material[e->materials]->refract = to_range(ft_atod(values.strings[0]), 0.0, 1.0);
+		e->material[e->materials]->refract =
+			to_range(ft_atod(values.strings[0]), 0.0, 1.0);
 	else if (!ft_strcmp(pt1, "IOR"))
 		e->material[e->materials]->ior = ft_atod(values.strings[0]);
 	ft_free_split(&values);
 }
 
-void	init_material(t_material *m)
+void			init_material(t_material *m)
 {
 	m->name = ft_strdup("UNNAMED");
 	m->reflect = 0.0;
@@ -52,7 +54,7 @@ void	init_material(t_material *m)
 	m->spec = (t_colour){1.0, 1.0, 1.0, 0.5};
 }
 
-void		get_material_attributes(t_env *e, int fd)
+void			get_material_attributes(t_env *e, int fd)
 {
 	t_split_string	attr;
 	char			*temp_line;

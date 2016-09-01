@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/09 09:30:32 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/31 20:32:53 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 13:24:38 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,8 @@ static void	set_refract_ray_object(t_env *e, t_env *refract)
 	if ((check = 1 - pow(ior, 2) * (1 - pow(cos, 2))) < -EPSILON)
 		set_reflect_ray(e, refract);
 	else
-	refract->ray.dir = vunit(vadd(
-		vmult(e->ray.dir, ior), vmult(n, ((ior * cos) - sqrt(check)))));
-//printf("%lf, %lf, %lf\n", refract->ray.dir.x, refract->ray.dir.y, refract->ray.dir.z);
-
+		refract->ray.dir = vunit(vadd(
+			vmult(e->ray.dir, ior), vmult(n, ((ior * cos) - sqrt(check)))));
 }
 
 t_colour	refract(t_env *e, int depth, t_colour colour)

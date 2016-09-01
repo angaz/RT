@@ -6,13 +6,13 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/20 11:12:18 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/08/30 22:54:28 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 13:35:20 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	cam_rot(t_env *e, SDL_Event event)
+void			cam_rot(t_env *e, SDL_Event event)
 {
 	SDL_SetRelativeMouseMode(1);
 	SDL_SetWindowGrab(e->win, SDL_TRUE);
@@ -60,7 +60,7 @@ static void		cam_move_plus(t_env *e)
 	}
 }
 
-void	cam_move(t_env *e)
+void			cam_move(t_env *e)
 {
 	cam_move_plus(e);
 	cam_move_minus(e);

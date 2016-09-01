@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 15:05:07 by rojones           #+#    #+#             */
-/*   Updated: 2016/09/01 11:59:08 by rojones          ###   ########.fr       */
+/*   Updated: 2016/09/01 13:37:40 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	put_type(int type, int fd)
 
 static void	ft_putd_fd(double d, int fd)
 {
-	char    temp[20];
+	char	temp[20];
 
 	sprintf(temp, "%f\n", d);
 	ft_putstr_fd(temp, fd);

@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 11:42:21 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/31 11:48:12 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 13:45:29 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int				ft_atoi_hex(const char *nptr);
 t_split_string	ft_nstrsplit(const char *s, char c);
 double			ft_atod(const char *nptr);
 void			ft_free_split(t_split_string *split);
-char            *ft_dtoa(double n, int num_place);
+char			*ft_dtoa(double n, int num_place);
 char			*ft_itoa_base(int value, int base);
 void			ft_btrue(void *s, size_t n);
 
