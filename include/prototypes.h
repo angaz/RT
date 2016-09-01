@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/31 20:58:33 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 10:35:17 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void		free_prim(t_prim ***prim, size_t num_prim);
 */
 void		intersect_scene(t_env *e);
 int			intersect_sphere(t_ray *r, t_prim *s, double *t);
+int         intersect_hemi_sphere(t_ray *r, t_prim *o, double *t);
 int			intersect_plane(t_ray *r, t_prim *o, double *t);
 int			intersect_cylinder(t_ray *r, t_prim *o, double *t);
 int			intersect_cone(t_ray *r, t_prim *o, double *t);
