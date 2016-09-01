@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 15:05:07 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/30 22:39:21 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 11:59:08 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static void	put_type(int type, int fd)
 		temp = "sphere";
 	else if (type == PRIM_PLANE)
 		temp = "plane";
+	else if (type == PRIM_HEMI_SPHERE)
+		temp = "hemi_sphere";
 	else if (type == PRIM_CONE)
 		temp = "cone";
 	else if (type == PRIM_CYLINDER)
@@ -43,7 +45,8 @@ static void	ft_putd_fd(double d, int fd)
 
 static void	save_prim2(const t_prim *prim, t_material **mat, const int fd)
 {
-	if (prim->type == PRIM_SPHERE || prim->type == PRIM_CYLINDER)
+	if (prim->type == PRIM_SPHERE || prim->type == PRIM_CYLINDER ||
+			prim->type == PRIM_HEMI_SPHERE)
 	{
 		ft_putstr_fd("\t\tRADIUS\t\t", fd);
 		ft_putd_fd(prim->radius, fd);
@@ -65,6 +68,11 @@ static void	save_prim(const t_prim *prim, t_material **mat, const int fd)
 	put_type(prim->type, fd);
 	ft_putstr_fd("\t\tLOC\t\t\t", fd);
 	write_coord(prim->loc, fd);
+	if (prim->type == PRIM_HEMI_SPHERE)
+	{
+		ft_putstr_fd("\t\tDIR\t\t\t", fd);
+		write_coord(prim->dir, fd);
+	}
 	if (prim->type == PRIM_CONE || prim->type == PRIM_CYLINDER)
 	{
 		ft_putstr_fd("\t\tDIR\t\t\t", fd);

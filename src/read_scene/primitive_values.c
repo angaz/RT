@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prim_values.c                                    :+:      :+:    :+:   */
+/*   prim_values.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 09:54:48 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/29 20:57:08 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 11:49:09 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static int		get_type(char *type_str)
 		type = PRIM_SPHERE;
 	else if (!ft_strcmp(type_str, "plane"))
 		type = PRIM_PLANE;
+	else if (!ft_strcmp(type_str, "hemi_sphere"))
+		type = PRIM_HEMI_SPHERE;
 	else if (!ft_strcmp(type_str, "cone"))
 		type = PRIM_CONE;
 	else if (!ft_strcmp(type_str, "cylinder"))
@@ -76,8 +78,8 @@ static void		init_primitive(t_prim *p)
 	p->type = PRIM_SPHERE;
 	p->loc = (t_vector){0.0, 0.0, 0.0};
 	p->loc_bak = (t_vector){0.0, 0.0, 0.0};
-	p->dir = (t_vector){0.0, 0.0, 0.0};
-	p->normal = (t_vector){0.0, 0.0, 0.0};
+	p->dir = (t_vector){0.0, 0.0, 1.0};
+	p->normal = (t_vector){0.0, 0.0, 1.0};
 	p->radius = 1.0;
 	p->angle = 0.523599;
 	p->material = 0;

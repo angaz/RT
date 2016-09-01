@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/08 12:10:39 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/22 20:54:15 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 10:34:11 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_vector		get_normal(t_env *e, t_vector ray)
 		return ((vdot(*(e->o_hit->n), e->ray.dir) < 0) ?
 			vunit(*e->o_hit->n) :
 			vunit(vsub((t_vector){0, 0, 0}, *e->o_hit->n)));
-	else if (e->p_hit->type == PRIM_SPHERE)
+	else if (e->p_hit->type == PRIM_SPHERE || e->p_hit->type == PRIM_HEMI_SPHERE)
 		normal = (vunit(vdiv(vsub(ray, e->p_hit->loc), e->p_hit->radius)));
 	else if (e->p_hit->type == PRIM_PLANE || e->p_hit->type == PRIM_DISK)
 		return ((vdot(e->p_hit->normal, e->ray.dir) < 0) ?
