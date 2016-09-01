@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:38:20 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/22 20:50:02 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 09:54:56 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int			intersect_prim(t_env *e, t_ray *ray, size_t prim, double *t)
 {
 	if (e->prim[prim]->type == PRIM_SPHERE)
 		return (intersect_sphere(ray, e->prim[prim], t));
+	if (e->prim[prim]->type == PRIM_HEMI_SPHERE)
+		return (intersect_hemi_sphere(ray, e->prim[prim], t));
 	if (e->prim[prim]->type == PRIM_PLANE)
 		return (intersect_plane(ray, e->prim[prim], t));
 	if (e->prim[prim]->type == PRIM_CYLINDER)

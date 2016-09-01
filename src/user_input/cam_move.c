@@ -6,13 +6,13 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/20 11:12:18 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/09/01 20:23:49 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 22:52:51 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	cam_rot(t_env *e, SDL_Event event)
+void			cam_rot(t_env *e, SDL_Event event)
 {
 	SDL_SetRelativeMouseMode(1);
 	e->camera.dir.x += (double)event.motion.xrel * 0.1;
@@ -23,17 +23,17 @@ void	cam_rot(t_env *e, SDL_Event event)
 
 static void		cam_move_minus(t_env *e)
 {
-	if (e->keys & KEY_A)
+	if (e->flags & KEY_A)
 	{
 		--e->camera.loc.x;
 		--e->camera.dir.x;
 	}
-	if (e->keys & KEY_S)
+	if (e->flags & KEY_S)
 	{
 		--e->camera.loc.y;
 		--e->camera.dir.y;
 	}
-	if (e->keys & KEY_CTRL)
+	if (e->flags & KEY_CTRL)
 	{
 		--e->camera.loc.z;
 		--e->camera.dir.z;
@@ -42,24 +42,24 @@ static void		cam_move_minus(t_env *e)
 
 static void		cam_move_plus(t_env *e)
 {
-	if (e->keys & KEY_D)
+	if (e->flags & KEY_D)
 	{
 		++e->camera.loc.x;
 		++e->camera.dir.x;
 	}
-	if (e->keys & KEY_W)
+	if (e->flags & KEY_W)
 	{
 		++e->camera.loc.y;
 		++e->camera.dir.y;
 	}
-	if (e->keys & KEY_SPACE)
+	if (e->flags & KEY_SPACE)
 	{
 		++e->camera.loc.z;
 		++e->camera.dir.z;
 	}
 }
 
-void	cam_move(t_env *e)
+void			cam_move(t_env *e)
 {
 	cam_move_plus(e);
 	cam_move_minus(e);

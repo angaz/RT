@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 11:01:32 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/28 23:49:16 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 14:05:46 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define DRAW_H
 
 # include "rt.h"
+# include <sys/time.h>
 
 typedef struct	s_chunk
 {

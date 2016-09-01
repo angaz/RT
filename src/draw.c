@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/31 12:40:20 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 22:57:57 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,11 @@ static void		*draw_chunk(void *q)
 			c->e->p_hit = NULL;
 			get_ray_dir(c->e, (double)c->x, (double)c->d.y);
 			intersect_scene(c->e);
-			*px++ = (c->e->p_hit && !c->e->p_hit->s_bool && !c->e->key.g) ?
+			*px++ = (c->e->p_hit && !c->e->p_hit->s_bool && !(c->e->flags & KEY_G)) ?
 				find_colour(c->e) : find_base_colour(c->e);
 			++c->x;
 		}
 		++c->d.y;
-//		if (!(c->d.y % 8))
-//			SDL_UpdateWindowSurface(c->e->win);
 	}
 	free(c->e);
 	free(c);
@@ -109,37 +107,31 @@ static void		make_chunks(t_env *e, SDL_Rect *d)
 	while (m.thread--)
 	{
 		pthread_join(m.tid[m.thread], NULL);
+		SDL_UpdateWindowSurface(e->win);
 	}
 	free(m.tid);
 }
 
-static void		half_bytes(SDL_Surface *s)
-{
-	size_t			index;
-	unsigned char	*px;
-
-	index = s->h * s->pitch;
-	px = (unsigned char *)(s->pixels + index - 1);
-	while (index--)
-		*px-- >>= 1;
-}
-
 void			draw(t_env *e, SDL_Rect d)
 {
-	time_t	t;
+	struct timeval	tv;
+	struct timeval	tv2;
+	size_t			sec;
 
-	if (!e->key.g)
+	if (!(e->flags & KEY_G))
 	{
 		half_bytes(e->img);
 		SDL_UpdateWindowSurface(e->win);
 	}
-	t = time(NULL);
+	gettimeofday(&tv, NULL);
 	setup_camera_plane(e);
 	make_chunks(e, &d);
 	SDL_UpdateWindowSurface(e->win);
-	if (!e->key.g)
+	if (!(e->flags & KEY_G))
 	{
-		t = time(NULL) - t;
-		ft_printf("Frame drawn in %d seconds\n", t);
+		gettimeofday(&tv2, NULL);
+		sec = tv2.tv_sec * 1000000 - tv.tv_sec * 1000000;
+		sec += tv2.tv_usec - tv.tv_usec;
+		ft_printf("Frame drawn in %d.%d seconds\n", sec / 1000000, sec);
 	}
 }

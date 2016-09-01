@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:14 by adippena          #+#    #+#             */
-/*   Updated: 2016/09/01 20:21:13 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 22:58:24 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void		initials(t_env *e)
 	e->objects = 0;
 	e->lights = 0;
 	e->materials = 0;
-	e->px_pitch = 0;
 	e->hit_type = 0;
 	e->prims = 0;
 	e->objects = 0;
@@ -36,7 +35,7 @@ static void		initials(t_env *e)
 	e->maxdepth = 1;
 	e->x = 1600;
 	e->y = 900;
-	e->keys = 0;
+	e->flags = 0;
 }
 
 static void		nulls(t_env *e)
@@ -44,7 +43,6 @@ static void		nulls(t_env *e)
 	e->win = NULL;
 	e->img = NULL;
 	e->px = NULL;
-	e->dx = NULL;
 	e->p_hit = NULL;
 	e->prim = NULL;
 	e->o_hit = NULL;
@@ -59,7 +57,6 @@ void			nullify_pointers(t_env *e)
 {
 	initials(e);
 	nulls(e);
-	init_keys(e);
 	init_camera(e);
 }
 
@@ -70,7 +67,6 @@ void			init_env(t_env *e)
 	e->win = SDL_CreateWindow(e->file_name, SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, e->x, e->y, SDL_WINDOW_SHOWN);
 	e->img = SDL_GetWindowSurface(e->win);
-	e->depth = SDL_CreateRGBSurface(0, e->x, e->y, 32, 0, 0, 0, 0);
 	e->px = (uint32_t *)e->img->pixels;
 	ft_bzero(e->px, (e->x * 4) * e->y);
 	SDL_UpdateWindowSurface(e->win);

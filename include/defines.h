@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:13 by adippena          #+#    #+#             */
-/*   Updated: 2016/09/01 20:14:58 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 22:40:04 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define PRIM_CYLINDER		4
 # define PRIM_TRIANGLE		5
 # define PRIM_DISK			6
+# define PRIM_HEMI_SPHERE	7
 
 # define PRIMITIVE			1
 # define FACE				2
@@ -56,6 +57,5 @@
 # define KEY_CTRL			(1 << 10)
 # define KEY_SPACE			(1 << 11)
 # define KEY_MID_CLICK		(1 << 12)
-
 
 #endif

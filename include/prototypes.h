@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/09/01 20:20:07 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/01 22:54:12 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void		free_prim(t_prim ***prim, size_t num_prim);
 */
 void		intersect_scene(t_env *e);
 int			intersect_sphere(t_ray *r, t_prim *s, double *t);
+int			intersect_hemi_sphere(t_ray *r, t_prim *o, double *t);
 int			intersect_plane(t_ray *r, t_prim *o, double *t);
 int			intersect_cylinder(t_ray *r, t_prim *o, double *t);
 int			intersect_cone(t_ray *r, t_prim *o, double *t);
@@ -100,7 +101,7 @@ int			intersect_object(t_env *e, t_object *o, double *t);
 void		save(t_env *e);
 void		save_lights(t_light **lights, size_t num_light, int fd);
 void		save_materials(t_material **material, size_t materials, int fd);
-void		save_objects(t_object **obj, size_t objects, t_material **mat, int fd);
+void		save_objects(t_object **o, size_t objects, t_material **m, int fd);
 void		save_prims(t_prim **prim, t_material **mat, size_t prims, int fd);
 void		write_coord(t_vector v, int fd);
 
@@ -153,7 +154,6 @@ void		key_press(t_env *e, SDL_Keycode key);
 void		mkey_press(t_env *e, SDL_Keycode key);
 void		key_release(t_env *e, SDL_Keycode key);
 void		reset_keys(t_env *e);
-void		init_keys(t_env *e);
 
 /*
 ** src/user_input/mouse_click.c
@@ -179,5 +179,10 @@ void		cam_move(t_env *e);
 ** src/export.c
 */
 void		export(t_env *e);
+
+/*
+** src/half_bytes.c
+*/
+void		half_bytes(SDL_Surface *s);
 
 #endif
