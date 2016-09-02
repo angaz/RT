@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/08 12:10:39 by rojones           #+#    #+#             */
-/*   Updated: 2016/09/01 13:03:07 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/02 13:00:03 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,22 @@ t_vector		get_normal(t_env *e, t_vector ray)
 
 	normal = (t_vector){0.0, 0.0, 1.0};
 	if (e->hit_type == FACE)
-		return ((vdot(*(e->o_hit->n), e->ray.dir) < 0) ?
+		return ((vdot(*(e->o_hit->n), e->ray.dir) < 0.0) ?
 			vunit(*e->o_hit->n) :
-			vunit(vsub((t_vector){0, 0, 0}, *e->o_hit->n)));
+			vunit(vsub((t_vector){0.0, 0.0, 0.0}, *e->o_hit->n)));
 	else if (e->p_hit->type == PRIM_SPHERE ||
 		e->p_hit->type == PRIM_HEMI_SPHERE)
 		normal = (vunit(vdiv(vsub(ray, e->p_hit->loc), e->p_hit->radius)));
 	else if (e->p_hit->type == PRIM_PLANE || e->p_hit->type == PRIM_DISK)
-		return ((vdot(e->p_hit->normal, e->ray.dir) < 0) ?
+		return ((vdot(e->p_hit->normal, e->ray.dir) < 0.0) ?
 			vunit(e->p_hit->normal) :
-			vunit(vsub((t_vector){0, 0, 0}, e->p_hit->normal)));
+			vunit(vsub((t_vector){0.0, 0.0, 0.0}, e->p_hit->normal)));
 	else if (e->p_hit->type == PRIM_CYLINDER)
 		normal = (vunit(vsub(vsub(ray, e->p_hit->loc),
 			vproject(vsub(ray, e->p_hit->loc), e->p_hit->dir))));
 	else if (e->p_hit->type == PRIM_CONE)
 		normal = (vunit(get_con_normal(e, ray)));
 	if (e->ray.inter == 2)
-		normal = vsub((t_vector){0, 0, 0}, normal);
+		normal = vsub((t_vector){0.0, 0.0, 0.0}, normal);
 	return (normal);
 }

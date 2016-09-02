@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:13 by adippena          #+#    #+#             */
-/*   Updated: 2016/09/02 15:38:19 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/02 15:42:04 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@
 # define KEY_CTRL			(1 << 10)
 # define KEY_SPACE			(1 << 11)
 # define KEY_MID_CLICK		(1 << 12)
+# define RAY_INSIDE			(1 << 13)
 
 #endif
