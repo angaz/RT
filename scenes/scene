@@ -66,13 +66,14 @@
 		MATERIAL	red
 
 	OBJECT
-		FILE	check01.obj
+		FILE	./scenes/check01.obj
 		MATERIAL	green
 
 	OBJECT
-		FILE	check02.obj
+		FILE	./scenes/check02.obj
 		MATERIAL	blue
 
 	OBJECT
-		FILE	glass_pane.obj
+		FILE	./scenes/glass_pane.obj
 		MATERIAL	glass
+

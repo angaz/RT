@@ -6,11 +6,12 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/09 21:36:49 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/31 11:46:40 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/02 15:24:25 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include <libgen.h>
 
 static void		get_quantities(t_object *o, int fd)
 {
@@ -40,17 +41,22 @@ static void		get_quantities(t_object *o, int fd)
 static void		set_object_values(t_env *e, char *pt1, char *pt2)
 {
 	int		fd;
+	char	*file;
+	char	*temp;
 
 	if (!ft_strcmp(pt1, "FILE"))
 	{
-		if ((fd = open(pt2, O_RDONLY)) == -1)
-			err(FILE_OPEN_ERROR, pt2, e);
-		e->object[e->objects]->name = ft_strdup(pt2);
+		temp = dirname(e->file_name);
+		ft_sprintf(&file, "./%s/%s", temp, pt2);
+		if ((fd = open(file, O_RDONLY)) == -1)
+			err(FILE_OPEN_ERROR, file, e);
+		e->object[e->objects]->name = ft_strdup(file);
 		get_quantities(e->object[e->objects], fd);
 		close(fd);
-		if ((fd = open(pt2, O_RDONLY)) == -1)
-			err(FILE_OPEN_ERROR, pt2, e);
+		if ((fd = open(file, O_RDONLY)) == -1)
+			err(FILE_OPEN_ERROR, file, e);
 		read_obj(e, fd);
+		ft_strdel(&file);
 		close(fd);
 	}
 	else if (!ft_strcmp(pt1, "MATERIAL"))
