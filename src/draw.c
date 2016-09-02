@@ -6,7 +6,11 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 14:00:07 by adippena          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2016/09/01 22:57:57 by adippena         ###   ########.fr       */
+=======
+/*   Updated: 2016/09/01 14:35:22 by adippena         ###   ########.fr       */
+>>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +76,11 @@ static void		*draw_chunk(void *q)
 			c->e->p_hit = NULL;
 			get_ray_dir(c->e, (double)c->x, (double)c->d.y);
 			intersect_scene(c->e);
+<<<<<<< HEAD
 			*px++ = (c->e->p_hit && !c->e->p_hit->s_bool && !(c->e->flags & KEY_G)) ?
+=======
+			*px++ = (c->e->p_hit && !c->e->p_hit->s_bool && !c->e->key.g) ?
+>>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a
 				find_colour(c->e) : find_base_colour(c->e);
 			++c->x;
 		}
@@ -118,7 +126,11 @@ void			draw(t_env *e, SDL_Rect d)
 	struct timeval	tv2;
 	size_t			sec;
 
+<<<<<<< HEAD
 	if (!(e->flags & KEY_G))
+=======
+	if (!e->key.g)
+>>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a
 	{
 		half_bytes(e->img);
 		SDL_UpdateWindowSurface(e->win);
@@ -127,7 +139,11 @@ void			draw(t_env *e, SDL_Rect d)
 	setup_camera_plane(e);
 	make_chunks(e, &d);
 	SDL_UpdateWindowSurface(e->win);
+<<<<<<< HEAD
 	if (!(e->flags & KEY_G))
+=======
+	if (!e->key.g)
+>>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a
 	{
 		gettimeofday(&tv2, NULL);
 		sec = tv2.tv_sec * 1000000 - tv.tv_sec * 1000000;

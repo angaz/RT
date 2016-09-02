@@ -6,7 +6,11 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:13 by adippena          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2016/09/01 22:40:04 by adippena         ###   ########.fr       */
+=======
+/*   Updated: 2016/09/01 13:02:50 by adippena         ###   ########.fr       */
+>>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +19,11 @@
 
 # define MAX(a, b)			((a > b) ? a : b)
 # define MIN(a, b)			((a < b) ? a : b)
+<<<<<<< HEAD
 # define EPSILON			0.000001
+=======
+# define EPSILON			0.00001
+>>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a
 # define ARBITRARY_NUMBER	2.175
 
 /*
@@ -41,6 +49,7 @@
 # define FILE_FORMAT_ERROR	16
 # define USAGE_ERROR		32
 
+<<<<<<< HEAD
 /*
 ** KEYS
 */
@@ -58,4 +67,6 @@
 # define KEY_SPACE			(1 << 11)
 # define KEY_MID_CLICK		(1 << 12)
 
+=======
+>>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a
 #endif
