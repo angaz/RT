@@ -6,11 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 17:07:36 by arnovan-          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2016/09/01 20:23:57 by adippena         ###   ########.fr       */
-=======
-/*   Updated: 2016/08/29 21:35:11 by adippena         ###   ########.fr       */
->>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a
+/*   Updated: 2016/09/02 11:16:38 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +32,6 @@ void	grab(t_env *e, SDL_Event event)
 	size_t	index;
 
 	SDL_SetRelativeMouseMode(1);
-<<<<<<< HEAD
-=======
-	SDL_SetWindowGrab(e->win, SDL_TRUE);
->>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a
 	if (e->s_num)
 	{
 		index = e->prims;

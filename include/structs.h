@@ -6,11 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-<<<<<<< HEAD:include/structs.h
-/*   Updated: 2016/09/01 22:50:55 by adippena         ###   ########.fr       */
-=======
-/*   Updated: 2016/08/28 23:54:01 by adippena         ###   ########.fr       */
->>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a:include/structs.h
+/*   Updated: 2016/09/02 11:11:39 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,50 +116,18 @@ typedef struct	s_light
 }				t_light;
 
 /*
-** KEYBOARD HANDLER & MOUSE STRUCTURE
-*/
-typedef struct	s_key
-{
-	int		shift;
-	int		g;
-	int		r;
-	int		x;
-	int		y;
-	int		z;
-	int		w;
-	int		s;
-	int		a;
-	int		d;
-	int		ctrl;
-	int		space;
-	int		mid_click;
-}				t_key;
-
-/*
 ** ENVIRNMENT STRUCTURE
 */
 typedef struct	s_env
 {
 	SDL_Window		*win;
 	SDL_Surface		*img;
-<<<<<<< HEAD:include/structs.h
 	uint32_t		*px;
 	char			*file_name;
-=======
-	SDL_Surface		*depth;
-	uint32_t		*px;
-	uint32_t		*dx;
-	char			*file_name;
-	int				px_pitch;
->>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a:include/structs.h
 	t_ray			ray;
 	t_camera		camera;
 	t_prim			*p_hit;
 	size_t			s_num;
-<<<<<<< HEAD:include/structs.h
-=======
-	int				s_all;
->>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a:include/structs.h
 	size_t			hit_type;
 	t_prim			**prim;
 	size_t			prims;
@@ -177,16 +141,9 @@ typedef struct	s_env
 	size_t			materials;
 	double			t;
 	int				maxdepth;
-<<<<<<< HEAD:include/structs.h
 	size_t			flags;
 	size_t			x;
 	size_t			y;
-=======
-	t_key			key;
-	size_t			x;
-	size_t			y;
-	size_t			threads;
->>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a:include/structs.h
 }				t_env;
 
 typedef struct	s_quadratic

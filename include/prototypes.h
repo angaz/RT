@@ -6,11 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2016/09/01 22:54:12 by adippena         ###   ########.fr       */
-=======
-/*   Updated: 2016/09/01 13:43:33 by adippena         ###   ########.fr       */
->>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a
+/*   Updated: 2016/09/02 11:11:09 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,27 +150,15 @@ t_env		*copy_env(t_env *e);
 /*
 ** src/user_input/key_press.c
 */
-<<<<<<< HEAD
 void		key_press(t_env *e, SDL_Keycode key);
 void		mkey_press(t_env *e, SDL_Keycode key);
 void		key_release(t_env *e, SDL_Keycode key);
 void		reset_keys(t_env *e);
-=======
-void		key_press(t_env *e, SDL_Event event);
-void		mkey_press(t_env *e, SDL_Event event);
-void		key_release(t_env *e, SDL_Event event);
-void		reset_keys(t_env *e);
-void		init_keys(t_env *e);
->>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a
 
 /*
 ** src/user_input/mouse_click.c
 */
-<<<<<<< HEAD
 void		mouse_click(t_env *e, uint8_t button);
-=======
-void		mouse_click(t_env *e, SDL_Event event);
->>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a
 void		click_release(t_env *e, SDL_Event event);
 
 /*

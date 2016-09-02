@@ -6,11 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:14 by adippena          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2016/09/01 22:58:24 by adippena         ###   ########.fr       */
-=======
-/*   Updated: 2016/08/30 23:30:55 by adippena         ###   ########.fr       */
->>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a
+/*   Updated: 2016/09/02 11:13:34 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +26,6 @@ static void		initials(t_env *e)
 	e->objects = 0;
 	e->lights = 0;
 	e->materials = 0;
-<<<<<<< HEAD
-=======
-	e->px_pitch = 0;
->>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a
 	e->hit_type = 0;
 	e->prims = 0;
 	e->objects = 0;
@@ -43,11 +35,7 @@ static void		initials(t_env *e)
 	e->maxdepth = 1;
 	e->x = 1600;
 	e->y = 900;
-<<<<<<< HEAD
 	e->flags = 0;
-=======
-	e->threads = 4;
->>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a
 }
 
 static void		nulls(t_env *e)
@@ -55,10 +43,6 @@ static void		nulls(t_env *e)
 	e->win = NULL;
 	e->img = NULL;
 	e->px = NULL;
-<<<<<<< HEAD
-=======
-	e->dx = NULL;
->>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a
 	e->p_hit = NULL;
 	e->prim = NULL;
 	e->o_hit = NULL;
@@ -73,10 +57,6 @@ void			nullify_pointers(t_env *e)
 {
 	initials(e);
 	nulls(e);
-<<<<<<< HEAD
-=======
-	init_keys(e);
->>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a
 	init_camera(e);
 }
 
@@ -87,10 +67,6 @@ void			init_env(t_env *e)
 	e->win = SDL_CreateWindow(e->file_name, SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, e->x, e->y, SDL_WINDOW_SHOWN);
 	e->img = SDL_GetWindowSurface(e->win);
-<<<<<<< HEAD
-=======
-	e->depth = SDL_CreateRGBSurface(0, e->x, e->y, 32, 0, 0, 0, 0);
->>>>>>> 30a4314a13a467cafffd81c84ca3427de211883a
 	e->px = (uint32_t *)e->img->pixels;
 	ft_bzero(e->px, (e->x * 4) * e->y);
 	SDL_UpdateWindowSurface(e->win);
