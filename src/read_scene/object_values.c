@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/09 21:36:49 by adippena          #+#    #+#             */
-/*   Updated: 2016/09/02 15:24:25 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/02 15:51:23 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ static void		set_object_values(t_env *e, char *pt1, char *pt2)
 {
 	int		fd;
 	char	*file;
-	char	*temp;
 
 	if (!ft_strcmp(pt1, "FILE"))
 	{
-		temp = dirname(e->file_name);
-		ft_sprintf(&file, "./%s/%s", temp, pt2);
+		file = pt2;
+		if ((fd = open(file, O_RDONLY)) == -1)
+			ft_sprintf(&file, "./%s/%s", dirname(e->file_name), pt2);
 		if ((fd = open(file, O_RDONLY)) == -1)
 			err(FILE_OPEN_ERROR, file, e);
 		e->object[e->objects]->name = ft_strdup(file);
@@ -56,7 +56,8 @@ static void		set_object_values(t_env *e, char *pt1, char *pt2)
 		if ((fd = open(file, O_RDONLY)) == -1)
 			err(FILE_OPEN_ERROR, file, e);
 		read_obj(e, fd);
-		ft_strdel(&file);
+		if (file != pt2)
+			ft_strdel(&file);
 		close(fd);
 	}
 	else if (!ft_strcmp(pt1, "MATERIAL"))
