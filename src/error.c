@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 19:58:53 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/28 23:46:50 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/03 15:52:31 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	exit_rt(t_env *e, int code)
 			free(e->file_name);
 		if (e->img)
 			SDL_FreeSurface(e->img);
+		if (e->dof)
+			SDL_FreeSurface(e->dof);
 		if (e->win)
 			SDL_DestroyWindow(e->win);
 		free_light(e->light, e->lights);
@@ -45,7 +47,7 @@ void	err(int error_no, char *function, t_env *e)
 	else if (error_no == FILE_FORMAT_ERROR)
 		error = ft_strjoin(function, ": Invalid file format");
 	else if (error_no == USAGE_ERROR)
-		error = "Invalid Usage\n    ./RTv1 [SCENE FILE]";
+		error = "Invalid Usage\n    ./RT [SCENE FILE]";
 	if (error_no > 15)
 		ft_putendl(error);
 	else

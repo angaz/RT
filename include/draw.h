@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 11:01:32 by adippena          #+#    #+#             */
-/*   Updated: 2016/09/01 14:05:46 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/03 16:06:46 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct	s_chunk
 {
 	t_env			*e;
 	SDL_Rect		d;
+	uint32_t		*px;
 	size_t			pixel;
 	int				stopx;
 	int				stopy;
@@ -35,5 +36,13 @@ typedef struct	s_make_chunks
 	pthread_t		*tid;
 	t_chunk			*c;
 }				t_make_chunks;
+
+typedef struct	s_render
+{
+	size_t		i;
+	double		angle;
+	double		angle_step;
+	t_vector	cam_origin;
+}				t_render;
 
 #endif

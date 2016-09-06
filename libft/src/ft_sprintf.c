@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:52:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/07/17 12:56:07 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/05 12:07:50 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,24 @@ static char	*my_recognise_arg(char c, va_list ap)
 {
 	if (c == 's')
 		return (ft_strdup(va_arg(ap, char *)));
-	if (c == 'd' || c == 'i')
+	else if (c == 'd' || c == 'i')
 		return (ft_itoa(va_arg(ap, int)));
-	if (c == 'u')
+	else if (c == 'u')
 		return (ft_uitoa(va_arg(ap, unsigned int)));
-	if (c == 'o')
+	else if (c == 'o')
 		return (ft_uitoa_base(va_arg(ap, unsigned int), 8));
-	if (c == 'x')
+	else if (c == 'x')
 		return (ft_uitoa_base(va_arg(ap, unsigned int), 16));
-	if (c == 'X')
-		return (ft_strtoupper(ft_uitoa_base(va_arg(ap, unsigned int), 16)));
-	if (c == 'c')
+	else if (c == 'X')
+		return (ft_strto(ft_uitoa_base(va_arg(ap, unsigned int), 16),
+			ft_toupper));
+	else if (c == 'c')
 		return (my_char_to_str(va_arg(ap, int)));
-	if (c == 'p')
-		return (ft_strjoin("0x",
-			ft_uitoa_base((uintptr_t)va_arg(ap, void *), 16)));
+	else if (c == 'p')
+		return (ft_strto(ft_uitoa_base((uintptr_t)va_arg(ap, void *), 16),
+			ft_tolower));
+	else if (c == 'P')
+		return (ft_uitoa_base((uintptr_t)va_arg(ap, void *), 16));
 		return (NULL);
 }
 

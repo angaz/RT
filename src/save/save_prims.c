@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 15:05:07 by rojones           #+#    #+#             */
-/*   Updated: 2016/09/01 13:37:40 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/03 16:56:04 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ static void	save_prim2(const t_prim *prim, t_material **mat, const int fd)
 	}
 	ft_putstr_fd("\t\tMATERIAL\t", fd);
 	ft_putstr_fd(mat[prim->material]->name, fd);
-	ft_putstr_fd("\n\n", fd);
+	ft_putstr_fd("\n", fd);
 }
 
 static void	save_prim(const t_prim *prim, t_material **mat, const int fd)
 {
-	ft_putstr_fd("\tPRIMITIVE\n", fd);
+	ft_putstr_fd("\n\tPRIMITIVE\n", fd);
 	ft_putstr_fd("\t\tTYPE\t\t", fd);
 	put_type(prim->type, fd);
 	ft_putstr_fd("\t\tLOC\t\t\t", fd);

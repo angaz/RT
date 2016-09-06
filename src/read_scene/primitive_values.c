@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 09:54:48 by adippena          #+#    #+#             */
-/*   Updated: 2016/09/01 11:49:09 by rojones          ###   ########.fr       */
+/*   Updated: 2016/09/04 15:07:08 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void		set_primitive_values(t_env *e, char *pt1, char *pt2)
 	values = ft_nstrsplit(pt2, ' ');
 	if (!ft_strcmp(pt1, "TYPE"))
 		if ((e->prim[e->prims]->type = get_type(values.strings[0])) == -1)
-			err(FILE_FORMAT_ERROR, "set_prim_values", e);
+			err(FILE_FORMAT_ERROR, "Unknown primitive type", e);
 	if (!ft_strcmp(pt1, "LOC"))
 		e->prim[e->prims]->loc = get_vector(e, values);
 	else if (!ft_strcmp(pt1, "DIR"))
@@ -102,7 +102,7 @@ void			get_primitive_attributes(t_env *e, int fd)
 		attr = ft_nstrsplit(temp_line, '\t');
 		ft_strdel(&temp_line);
 		if (attr.words < 2)
-			err(FILE_FORMAT_ERROR, "get_primitive_attributes", e);
+			err(FILE_FORMAT_ERROR, "Primitive attributes", e);
 		set_primitive_values(e, attr.strings[0], attr.strings[1]);
 		ft_free_split(&attr);
 	}

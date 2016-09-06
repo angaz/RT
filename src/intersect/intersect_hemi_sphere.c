@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/01 09:55:11 by rojones           #+#    #+#             */
-/*   Updated: 2016/09/02 15:39:27 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/02 16:29:33 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,5 @@ int			intersect_hemi_sphere(t_ray *r, t_prim *o, double *t)
 	if (quad.discr < EPSILON)
 		return (0);
 	inter = find_t(&quad, t, o, r);
-//	if (inter)
-//		DISK
 	return (inter);
 }

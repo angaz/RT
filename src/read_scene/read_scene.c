@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:42 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/29 21:19:00 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/04 15:14:36 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	scene_attributes(t_env *e, char *line)
 
 	split = ft_nstrsplit(line, '\t');
 	if (split.strings[0][0] != '#' && split.words != 2)
-		err(FILE_FORMAT_ERROR, "scene_arrtibutes", e);
+		err(FILE_FORMAT_ERROR, "Scene arrtibutes", e);
 	if (!ft_strcmp(split.strings[0], "MAXDEPTH"))
 		e->maxdepth = MAX(ft_atoi(split.strings[1]), 1);
 	if (!ft_strcmp(split.strings[0], "RENDER"))
@@ -30,6 +30,8 @@ static void	scene_attributes(t_env *e, char *line)
 		e->x = ft_atoi(render.strings[0]);
 		e->y = ft_atoi(render.strings[1]);
 	}
+	if (!ft_strcmp(split.strings[0], "SUPER"))
+		e->super = MAX(ft_atoi(split.strings[1]), 0);
 	ft_free_split(&split);
 }
 
@@ -56,20 +58,21 @@ static void	get_quantities(t_env *e, int fd)
 {
 	char	*temp;
 	char	*line;
+	size_t	num;
 
 	temp = NULL;
-	while (ft_gnl(fd, &temp) || temp != NULL)
+	num = 1;
+	while ((ft_gnl(fd, &temp) || temp != NULL) && ++num)
 	{
+		if (temp[ft_strlen(temp) - 1] == '\t')
+			err(FILE_FORMAT_ERROR, ft_strjoin(ft_itoa(num),
+				" Line ends in a tab"), e);
 		line = ft_strtrim(temp);
 		ft_strdel(&temp);
-		if (!ft_strcmp(line, "LIGHT"))
-			++e->lights;
-		else if (!ft_strcmp(line, "MATERIAL"))
-			++e->materials;
-		else if (!ft_strcmp(line, "PRIMITIVE"))
-			++e->prims;
-		else if (!ft_strcmp(line, "OBJECT"))
-			++e->objects;
+		(!ft_strcmp(line, "LIGHT")) ? ++e->lights : 0;
+		(!ft_strcmp(line, "MATERIAL")) ? ++e->materials : 0;
+		(!ft_strcmp(line, "PRIMITIVE")) ? ++e->prims : 0;
+		(!ft_strcmp(line, "OBJECT")) ? ++e->objects : 0;
 		ft_strdel(&line);
 	}
 	ft_printf("%d:\tLIGHTS\n%d:\tMATERIALS\n%d:\tPRIMITIVES\n%d:\tOBJECTS\n",\
@@ -78,12 +81,12 @@ static void	get_quantities(t_env *e, int fd)
 	e->material = (t_material **)malloc(sizeof(t_material *) * ++e->materials);
 	e->prim = (t_prim **)malloc(sizeof(t_prim *) * e->prims);
 	e->object = (t_object **)malloc(sizeof(t_object *) * e->objects);
-	close(fd);
 }
 
 static void	init_read_scene(t_env *e, int fd)
 {
 	get_quantities(e, fd);
+	close(fd);
 	e->lights = 0;
 	e->materials = 0;
 	e->prims = 0;
@@ -102,13 +105,13 @@ void		read_scene(char *file, t_env *e)
 	char		*temp_line;
 
 	if ((fd = open(file, O_RDONLY)) == -1)
-		err(FILE_OPEN_ERROR, "read_scene", e);
+		err(FILE_OPEN_ERROR, "Scene file", e);
 	if ((ft_gnl(fd, &line) == -1) || (ft_strcmp(line, "# SCENE RT")))
-		err(FILE_FORMAT_ERROR, "read_scene", e);
+		err(FILE_FORMAT_ERROR, "Scene file must start with '# SCENE RT'", e);
 	ft_strdel(&line);
 	init_read_scene(e, fd);
 	if ((fd = open(file, O_RDONLY)) == -1)
-		err(FILE_OPEN_ERROR, "read_scene", e);
+		err(FILE_OPEN_ERROR, "Scene file", e);
 	while (ft_gnl(fd, &temp_line))
 	{
 		if (temp_line[0] == '\0')

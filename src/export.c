@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/31 20:35:15 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/31 22:47:07 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/04 12:12:13 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void			export(t_env *e)
 	char	*temp;
 
 	ft_putstr("Exporting rendered image... ");
-	temp = ft_strjoin(e->file_name, ".ppm");
+	temp = NULL;
+	ft_sprintf(&temp, "%s_%d.ppm", e->file_name, time(NULL));
 	if ((fd = open(temp, O_WRONLY | O_TRUNC | O_CREAT, 0666)) == -1)
 		err(FILE_OPEN_ERROR, "Could not export rendered image", e);
 	ft_strdel(&temp);

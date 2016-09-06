@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:14 by adippena          #+#    #+#             */
-/*   Updated: 2016/09/02 15:37:49 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/04 16:00:56 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void		init_camera(t_env *e)
 	e->camera.loc = (t_vector){0.0, -10.0, 0.0};
 	e->camera.dir = (t_vector){0.0, 0.0, 0.0};
 	e->camera.up = (t_vector){0.0, 0.0, 1.0};
+	e->camera.a = 0.1;
 }
 
 static void		initials(t_env *e)
@@ -36,6 +37,7 @@ static void		initials(t_env *e)
 	e->x = 1600;
 	e->y = 900;
 	e->flags = 0;
+	e->super = 0;
 }
 
 static void		nulls(t_env *e)
@@ -66,8 +68,12 @@ void			init_env(t_env *e)
 	read_scene(e->file_name, e);
 	e->win = SDL_CreateWindow(e->file_name, SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, e->x, e->y, SDL_WINDOW_SHOWN);
-	e->img = SDL_GetWindowSurface(e->win);
+	e->win_img = SDL_GetWindowSurface(e->win);
+	e->img = SDL_CreateRGBSurface(0, e->x, e->y, 32, 0, 0, 0, 0);
+	e->dof = SDL_CreateRGBSurface(0, e->x, e->y, 32, 0, 0, 0, 0);
 	e->px = (uint32_t *)e->img->pixels;
+	e->dx = (uint32_t *)e->dof->pixels;
 	ft_bzero(e->px, (e->x * 4) * e->y);
+	ft_bzero(e->dx, (e->x * 4) * e->y);
 	SDL_UpdateWindowSurface(e->win);
 }

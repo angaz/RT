@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 14:39:54 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/19 09:06:35 by rojones          ###   ########.fr       */
+/*   Updated: 2016/09/03 16:55:20 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	save_mat(t_material *mat, int fd)
 {
 	char	temp[20];
 
-	ft_putstr_fd("\tMATERIAL\n", fd);
+	ft_putstr_fd("\n\tMATERIAL\n", fd);
 	ft_putstr_fd("\t\tNAME\t\t", fd);
 	ft_putstr_fd(mat->name, fd);
 	ft_putchar_fd('\n', fd);
@@ -65,7 +65,7 @@ static void	save_mat(t_material *mat, int fd)
 	ft_putstr_fd(temp, fd);
 	ft_bzero(temp, 20);
 	ft_putstr_fd("\t\tIOR\t\t\t", fd);
-	sprintf(temp, "%f\n\n", mat->ior);
+	sprintf(temp, "%f\n", mat->ior);
 	ft_putstr_fd(temp, fd);
 }
 

@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/09 12:40:41 by adippena          #+#    #+#             */
-/*   Updated: 2016/09/01 13:19:34 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/04 15:06:05 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void			get_material_attributes(t_env *e, int fd)
 		attr = ft_nstrsplit(temp_line, '\t');
 		ft_strdel(&temp_line);
 		if (attr.words < 2)
-			err(FILE_FORMAT_ERROR, "get_material_attributes", e);
+			err(FILE_FORMAT_ERROR, "Material attributes", e);
 		set_material_values(e, attr.strings[0], attr.strings[1]);
 		ft_free_split(&attr);
 	}

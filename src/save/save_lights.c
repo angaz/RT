@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 13:52:36 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/16 09:49:44 by rojones          ###   ########.fr       */
+/*   Updated: 2016/09/03 16:55:06 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	save_light(t_light *light, int fd)
 {
 	char	doub[20];
 
-	ft_putstr_fd("\tLIGHT\n", fd);
+	ft_putstr_fd("\n\tLIGHT\n", fd);
 	ft_putstr_fd("\t\tLOC\t\t\t", fd);
 	write_coord(light->loc, fd);
 	ft_putstr_fd("\t\tCOLOUR\t\t", fd);
@@ -57,7 +57,7 @@ static void	save_light(t_light *light, int fd)
 	ft_putstr_fd(doub, fd);
 	ft_bzero(doub, 20);
 	ft_putstr_fd("\t\tHALF\t\t", fd);
-	sprintf(doub, "%f\n\n", light->half);
+	sprintf(doub, "%f\n", light->half);
 	ft_putstr_fd(doub, fd);
 	ft_bzero(doub, 20);
 }

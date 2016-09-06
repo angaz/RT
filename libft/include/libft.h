@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 11:42:21 by adippena          #+#    #+#             */
-/*   Updated: 2016/09/01 13:45:29 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/05 12:05:25 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void			ft_free_split(t_split_string *split);
 char			*ft_dtoa(double n, int num_place);
 char			*ft_itoa_base(int value, int base);
 void			ft_btrue(void *s, size_t n);
+void			ft_print_memory(const void *mem, size_t size);
 
 /*
 ** FT_(S)PRINTF
@@ -106,7 +107,7 @@ int				ft_sprintf(char **str, const char *format, ...);
 int				ft_printf(const char *format, ...);
 char			*ft_uitoa_base(size_t value, int base);
 char			*ft_uitoa(size_t n);
-char			*ft_strtoupper(char *str);
+char			*ft_strto(char *str, int (*f)(int));
 
 /*
 ** GET_NEXT_LINE

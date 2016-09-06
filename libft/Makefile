@@ -6,13 +6,13 @@
 #    By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/26 18:13:07 by adippena          #+#    #+#              #
-#    Updated: 2016/08/27 11:55:44 by adippena         ###   ########.fr        #
+#    Updated: 2016/09/06 12:02:28 by adippena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libft.a
 INCLUDE	=	-I include
-CFLAGS	=	-Wall -Wextra -Werror -Ofast -Wno-unused-result
+CFLAGS	=	-Wall -Wextra -Werror -Wno-unused-result
 
 INC		=	$(shell find include -name "*.h")
 SRC		=	$(shell find src -name "*.c")

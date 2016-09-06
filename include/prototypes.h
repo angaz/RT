@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:49:05 by adippena          #+#    #+#             */
-/*   Updated: 2016/09/02 15:38:12 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/03 15:17:26 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,10 @@ t_colour	prim_diffuse(t_env *e);
 t_colour	face_diffuse(t_env *e);
 
 /*
-** src/find_colour_struct.c
+** src/find_colour.c
 */
+uint32_t	find_colour(t_env *e);
+uint32_t	find_base_colour(t_env *e);
 t_colour	find_colour_struct(t_env *e, int depth);
 
 /*
@@ -164,8 +166,8 @@ void		click_release(t_env *e, SDL_Event event);
 /*
 ** src/user_input/grab.c
 */
-void		grab(t_env *e, SDL_Event event);
-void		m_wheel(t_env *e, SDL_Event event);
+void		grab(t_env *e, SDL_Event *event);
+void		m_wheel(t_env *e, SDL_Event *event);
 void		select_all(t_env *e);
 void		deselect_all(t_env *e);
 
@@ -184,5 +186,6 @@ void		export(t_env *e);
 ** src/half_bytes.c
 */
 void		half_bytes(SDL_Surface *s);
+void		blend(SDL_Surface *s1, SDL_Surface *s2);
 
 #endif

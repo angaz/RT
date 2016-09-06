@@ -1,6 +1,7 @@
 build
 libft/build
 *.a
+*.ppm
 RT
 .*.swp
 .DS_Store

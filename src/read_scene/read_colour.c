@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 15:54:07 by adippena          #+#    #+#             */
-/*   Updated: 2016/08/29 20:57:35 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/04 15:08:53 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_colour		get_colour(t_env *e, t_split_string values)
 	if (values.words == 1 || values.words == 2)
 	{
 		if (ft_strlen(values.strings[0]) != 6)
-			err(FILE_FORMAT_ERROR, "get_colour", e);
+			err(FILE_FORMAT_ERROR, "Colour has invalid format", e);
 		temp = ft_strnew(3);
 		temp = ft_strncpy(temp, values.strings[0], 2);
 		res.r = ft_atoi_hex(temp) / 255.0;
@@ -41,6 +41,6 @@ t_colour		get_colour(t_env *e, t_split_string values)
 	if (values.words == 2)
 		res.intensity = to_range(ft_atod(values.strings[1]), 0.0, 1.0);
 	if (values.words > 2)
-		err(FILE_FORMAT_ERROR, "get_colour", e);
+		err(FILE_FORMAT_ERROR, "Invalid colour", e);
 	return (res);
 }

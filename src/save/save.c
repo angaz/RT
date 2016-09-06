@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 11:59:15 by rojones           #+#    #+#             */
-/*   Updated: 2016/08/31 21:04:29 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/03 16:50:56 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 
 static void	save_camra(t_camera *cam, int fd)
 {
+	char	*temp;
+
+	temp = NULL;
 	ft_putstr_fd("	CAMERA\n", fd);
-	ft_putstr_fd("\t\tLOC\t", fd);
+	ft_putstr_fd("\t\tLOC\t\t\t", fd);
 	write_coord(cam->loc, fd);
-	ft_putstr_fd("\t\tDIR\t", fd);
+	ft_putstr_fd("\t\tDIR\t\t\t", fd);
 	write_coord(cam->dir, fd);
-	ft_putstr_fd("\t\tUP\t", fd);
+	ft_putstr_fd("\t\tUP\t\t\t", fd);
 	write_coord(cam->up, fd);
-	ft_putchar_fd('\n', fd);
+	ft_putstr_fd("\t\tAPERTURE\t", fd);
+	dprintf(fd, "%lf\n", cam->a);
 }
 
 static void	save_render(t_env *e, int fd)
@@ -30,7 +34,7 @@ static void	save_render(t_env *e, int fd)
 	char	*tempy;
 	char	*print;
 
-	ft_putstr_fd("	RENDER		", fd);
+	ft_putstr_fd("\tRENDER\t\t", fd);
 	tempx = ft_itoa(e->x);
 	tempy = ft_itoa(e->y);
 	print = ft_strjoin(tempx, " ");
@@ -38,6 +42,10 @@ static void	save_render(t_env *e, int fd)
 	tempx = print;
 	print = ft_strjoin(tempx, tempy);
 	ft_strdel(&tempy);
+	ft_putendl_fd(print, fd);
+	ft_strdel(&print);
+	ft_putstr_fd("\tSUPER\t\t", fd);
+	print = ft_itoa(e->super);
 	ft_putendl_fd(print, fd);
 	ft_strdel(&print);
 }

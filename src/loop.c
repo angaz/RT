@@ -6,7 +6,7 @@
 /*   By: adippena <angusdippenaar@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 20:00:24 by adippena          #+#    #+#             */
-/*   Updated: 2016/09/02 15:37:39 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/02 22:36:51 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ static void	event_poll(t_env *e)
 			(event.type == SDL_MOUSEMOTION) ? cam_rot(e, event) : 0;
 		(e->flags & KEY_MID_CLICK) ? cam_move(e) : 0;
 		if (e->flags & KEY_G && event.type == SDL_MOUSEMOTION)
-			grab(e, event);
+			grab(e, &event);
 		if (e->flags & KEY_G && event.type == SDL_MOUSEWHEEL)
-			m_wheel(e, event);
+			m_wheel(e, &event);
 	}
 }
 

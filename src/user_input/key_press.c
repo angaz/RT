@@ -6,7 +6,7 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/12 15:44:46 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/09/02 15:37:14 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/02 22:27:15 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,22 @@ static void	key_press_a(t_env *e)
 	draw(e, (SDL_Rect){0, 0, e->x, e->y});
 }
 
+static void	key_press_xyz(t_env *e, SDL_Keycode key)
+{
+	if (key == SDLK_x)
+		e->flags = (e->flags & KEY_SHIFT) ?
+			(e->flags & ~(KEY_X)) | KEY_Y | KEY_Z :
+			(e->flags & ~(KEY_Y | KEY_Z)) | KEY_X;
+	else if (key == SDLK_y)
+		e->flags = (e->flags & KEY_SHIFT) ?
+			(e->flags & ~(KEY_Y)) | KEY_X | KEY_Z :
+			(e->flags & ~(KEY_X | KEY_Z)) | KEY_Y;
+	else if (key == SDLK_z)
+		e->flags = (e->flags & KEY_SHIFT) ?
+			(e->flags & ~(KEY_Z)) | KEY_X | KEY_Y :
+			(e->flags & ~(KEY_X | KEY_Y)) | KEY_Z;
+}
+
 void		key_press(t_env *e, SDL_Keycode key)
 {
 	if (key == SDLK_LSHIFT)
@@ -61,12 +77,8 @@ void		key_press(t_env *e, SDL_Keycode key)
 		e->flags ^= KEY_S;
 	else if (key == SDLK_r)
 		e->flags ^= KEY_R;
-	else if (key == SDLK_x)
-		e->flags ^= KEY_X;
-	else if (key == SDLK_y)
-		e->flags ^= KEY_Y;
-	else if (key == SDLK_z)
-		e->flags ^= KEY_Z;
+	else
+		key_press_xyz(e, key);
 }
 
 void		mkey_press(t_env *e, SDL_Keycode key)

@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 14:48:30 by adippena          #+#    #+#             */
-/*   Updated: 2016/09/02 15:38:08 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/03 15:12:40 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct	s_camera
 	t_vector	l;
 	double		stepx;
 	double		stepy;
+	double		a;
 }				t_camera;
 
 typedef struct	s_light
@@ -121,8 +122,11 @@ typedef struct	s_light
 typedef struct	s_env
 {
 	SDL_Window		*win;
+	SDL_Surface		*win_img;
 	SDL_Surface		*img;
+	SDL_Surface		*dof;
 	uint32_t		*px;
+	uint32_t		*dx;
 	char			*file_name;
 	t_ray			ray;
 	t_camera		camera;
@@ -141,6 +145,7 @@ typedef struct	s_env
 	size_t			materials;
 	double			t;
 	int				maxdepth;
+	size_t			super;
 	size_t			flags;
 	size_t			x;
 	size_t			y;

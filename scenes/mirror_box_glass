@@ -1,9 +1,10 @@
 # SCENE RT
-	MAXDEPTH	50
-	RENDER		640 480
+	MAXDEPTH	1
+	RENDER		3240 1822
+#	SUPER		11
 
 	CAMERA
-		LOC	0 -31 0
+		LOC	0 -30 0
 		DIR	0 0 0
 		UP	0 0 1
 
@@ -74,6 +75,12 @@
 		TYPE		plane
 		LOC			0 5 0
 		NORMAL		0 -1 0
+		MATERIAL	mirror
+
+	PRIMITIVE
+		TYPE		plane
+		LOC			0 -35 0
+		NORMAL		0 1 0
 		MATERIAL	mirror
 
 	PRIMITIVE

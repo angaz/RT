@@ -6,13 +6,13 @@
 /*   By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/15 17:07:36 by arnovan-          #+#    #+#             */
-/*   Updated: 2016/09/02 15:37:31 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/02 22:48:19 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	m_wheel(t_env *e, SDL_Event event)
+void	m_wheel(t_env *e, SDL_Event *event)
 {
 	size_t index;
 
@@ -20,14 +20,14 @@ void	m_wheel(t_env *e, SDL_Event event)
 	{
 		index = e->prims;
 		while (index--)
-			if (e->prim[index]->s_bool)
-				e->prim[index]->loc.y -= (double)event.wheel.y * 0.5;
+			if ((e->flags & KEY_Y) && e->prim[index]->s_bool)
+				e->prim[index]->loc.y -= (double)event->wheel.y * 0.5;
 		SDL_FlushEvent(SDL_MOUSEWHEEL);
 		draw(e, (SDL_Rect){0, 0, e->x, e->y});
 	}
 }
 
-void	grab(t_env *e, SDL_Event event)
+void	grab(t_env *e, SDL_Event *event)
 {
 	size_t	index;
 
@@ -38,8 +38,10 @@ void	grab(t_env *e, SDL_Event event)
 		while (index--)
 			if (e->prim[index]->s_bool)
 			{
-				e->prim[index]->loc.x += (double)event.motion.xrel * 0.015;
-				e->prim[index]->loc.z -= (double)event.motion.yrel * 0.015;
+				if (e->flags & KEY_X)
+					e->prim[index]->loc.x += (double)event->motion.xrel * 0.015;
+				if (e->flags & KEY_Z)
+					e->prim[index]->loc.z -= (double)event->motion.yrel * 0.015;
 			}
 		SDL_FlushEvent(SDL_MOUSEMOTION);
 		draw(e, (SDL_Rect){0, 0, e->x, e->y});

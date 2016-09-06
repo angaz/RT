@@ -6,7 +6,7 @@
 /*   By: adippena <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 12:54:15 by adippena          #+#    #+#             */
-/*   Updated: 2016/09/02 15:39:01 by adippena         ###   ########.fr       */
+/*   Updated: 2016/09/05 12:10:04 by adippena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char		*ft_uitoa_base(size_t value, int base)
 		if (str)
 			while (*str)
 				*temp++ = *str++;
-		*temp++ = "0123456789ABCDEF"[value % base];
+		*temp++ = "0123456789abcdef"[value % base];
 		*temp = '\0';
 		ft_strdel(&str_backup);
 		str = new;
