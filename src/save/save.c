@@ -14,9 +14,6 @@
 
 static void	save_camra(t_camera *cam, int fd)
 {
-	char	*temp;
-
-	temp = NULL;
 	ft_putstr_fd("	CAMERA\n", fd);
 	ft_putstr_fd("\t\tLOC\t\t\t", fd);
 	write_coord(cam->loc, fd);

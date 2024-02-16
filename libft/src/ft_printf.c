@@ -42,6 +42,7 @@ static char	*my_recognise_arg(char c, va_list ap)
 		return (ft_uitoa_base((uintptr_t)va_arg(ap, void *), 16));
 	else if (c == 'P')
 		return (ft_uitoa_base((uintptr_t)va_arg(ap, void *), 16));
+	else
 		return (NULL);
 }
 
