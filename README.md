@@ -1,3 +1,31 @@
 # RT
 
-My 3rd project at school. Also done in C. Here we had to take a scene file, designed by us, and render it and also have the ability to render OBJ files as objects in the scene. It supports multiple light sources, different coloured lights, glossy and transparent objects, object colours and light intensity falloff
+![RT](/images/rt.png)
+
+Renders a scene file describing primitive shapes, and OBJ files.
+
+## Features
+
+- multiple light sources
+- different coloured lights
+- glossy and transparent objects
+- object colours
+- light intensity falloff
+- camera aperture (depth of field)
+
+![suzanne](/images/suzanne.png)
+![diamond](/images/diamond.png)
+![mirror_box_glass](/images/mirror_box_glass.png)
+![refract_sphere](/images/refract_sphere.png)
+
+## Blender Export
+
+Unchecked unless specified
+
+- Selected Only
+- Forward Axis: Y
+- Up Axis: Z
+- Apply Modifiers
+- Geometry
+  - Normals
+  - Triangulated Mesh
